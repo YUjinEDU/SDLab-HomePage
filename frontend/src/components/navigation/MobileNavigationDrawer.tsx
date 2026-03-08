@@ -46,6 +46,10 @@ const mobileNavConfig: MobileNavItem[] = [
     href: "/demos",
   },
   {
+    category: "News",
+    href: "/news",
+  },
+  {
     category: "Contact",
     href: "/contact",
   },

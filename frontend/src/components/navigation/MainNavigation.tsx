@@ -50,6 +50,10 @@ const navigationConfig: NavItem[] = [
     href: "/demos",
   },
   {
+    category: "News",
+    href: "/news",
+  },
+  {
     category: "Contact",
     href: "/contact",
   },
