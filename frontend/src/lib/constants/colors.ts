@@ -23,4 +23,5 @@ export const colors = {
     info: "#059669",
   },
   hero: "#F3F4F6", // very light gray for hero background
+  dark: "#022c22", // deep green for footer/contact dark sections
 } as const;

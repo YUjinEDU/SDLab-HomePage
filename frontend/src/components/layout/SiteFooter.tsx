@@ -11,7 +11,7 @@ const quickLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="bg-hero-bg text-white">
+    <footer className="bg-dark-bg text-white">
       <Container className="py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Lab info */}

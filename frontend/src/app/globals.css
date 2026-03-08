@@ -15,6 +15,7 @@
   --border: #e5e7eb;
   --text-secondary: #4b5563;
   --hero-bg: #f3f4f6;
+  --dark-bg: #022c22;
 }
 
 @theme inline {
@@ -30,6 +31,7 @@
   --color-border: var(--border);
   --color-text-secondary: var(--text-secondary);
   --color-hero-bg: var(--hero-bg);
+  --color-dark-bg: var(--dark-bg);
   --font-sans:
     "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont,
     system-ui, sans-serif;
@@ -113,7 +115,11 @@ html {
 
 /* Clean Text Gradient */
 .text-gradient {
-  background: linear-gradient(135deg, #047857 0%, #10b981 100%);
+  background: linear-gradient(
+    135deg,
+    var(--primary-dark) 0%,
+    var(--accent) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -123,8 +129,23 @@ html {
 .dot-pattern {
   background-image: radial-gradient(
     circle,
-    rgba(5, 150, 105, 0.1) 1px,
+    color-mix(in srgb, var(--primary) 10%, transparent) 1px,
     transparent 1px
   );
   background-size: 24px 24px;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up {
+    animation: none;
+  }
+
+  .card-hover {
+    transition: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
 }

@@ -3,7 +3,7 @@ import { Container } from "@/components/layout/Container";
 
 export function ContactSummarySection() {
   return (
-    <section className="py-20 bg-hero-bg text-white">
+    <section className="py-20 bg-dark-bg text-white">
       <Container>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <div>

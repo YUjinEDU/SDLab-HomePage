@@ -8,14 +8,7 @@ import { PageHero } from "@/components/shared/PageHero";
 import { ProfessorProfile } from "@/components/members/ProfessorProfile";
 import { MemberGroupTabs } from "@/components/members/MemberGroupTabs";
 import { MemberGrid } from "@/components/members/MemberGrid";
-
-const GROUP_LABELS: Record<MemberGroup, string> = {
-  professor: "교수",
-  phd: "박사",
-  ms: "석사",
-  undergraduate: "학부",
-  alumni: "졸업생",
-};
+import { groupLabelsShort } from "@/data/stats";
 
 const TAB_ORDER: (MemberGroup | "all")[] = [
   "all",
@@ -39,7 +32,7 @@ export default function MembersPage() {
 
   const tabs = presentGroups.map((g) => ({
     value: g,
-    label: g === "all" ? "전체" : GROUP_LABELS[g as MemberGroup],
+    label: g === "all" ? "전체" : (groupLabelsShort[g] ?? g),
     count:
       g === "all"
         ? students.length

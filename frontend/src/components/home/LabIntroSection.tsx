@@ -1,11 +1,5 @@
 import { Container } from "@/components/layout/Container";
-
-const stats = [
-  { value: "1996", label: "연구실 설립" },
-  { value: "3", label: "핵심 연구 분야" },
-  { value: "79+", label: "석박사 배출" },
-  { value: "14", label: "기술이전 건수" },
-];
+import { labStats } from "@/data/stats";
 
 export function LabIntroSection() {
   return (
@@ -27,7 +21,7 @@ export function LabIntroSection() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto">
-          {stats.map((stat) => (
+          {labStats.map((stat) => (
             <div
               key={stat.label}
               className="text-center bg-white rounded-xl p-6 border border-border"

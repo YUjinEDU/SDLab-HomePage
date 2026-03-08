@@ -1,17 +1,10 @@
 import type { Member, MemberGroup } from "@/types";
 import { TagBadge } from "@/components/shared/TagBadge";
 import { MemberContactLinks } from "./MemberContactLinks";
+import { groupLabels } from "@/data/stats";
 
 type Props = {
   member: Member;
-};
-
-const groupLabels: Record<MemberGroup, string> = {
-  professor: "지도교수",
-  phd: "박사과정",
-  ms: "석사과정",
-  undergraduate: "학부생",
-  alumni: "졸업생",
 };
 
 function InitialsAvatar({ name, group }: { name: string; group: MemberGroup }) {

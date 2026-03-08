@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-// Define the full navigation structure, minus Seminar
 const navigationConfig = [
   {
     category: "Members",
@@ -32,28 +31,8 @@ const navigationConfig = [
     ],
   },
   {
-    category: "Board",
-    href: "/board",
-    subLinks: [
-      { label: "News", href: "/board/news" },
-      { label: "Album", href: "/board/album" },
-    ],
-  },
-  {
-    category: "Live Demo",
-    href: "/live-demo",
-  },
-  {
-    category: "Resource",
-    href: "/resource",
-  },
-  {
     category: "Contact",
     href: "/contact",
-    subLinks: [
-      { label: "Apply", href: "/contact/apply" },
-      { label: "FAQ", href: "/contact/faq" },
-    ],
   },
 ];
 
@@ -61,7 +40,6 @@ export function MainNavigation() {
   const pathname = usePathname();
   const [isHovering, setIsHovering] = useState(false);
 
-  // We only show the mega menu if at least one category has subLinks
   const hasSubLinks = navigationConfig.some((item) => item.subLinks?.length);
 
   return (
@@ -94,7 +72,6 @@ export function MainNavigation() {
         })}
       </ul>
 
-      {/* Full Width Mega Menu Wrapper */}
       {hasSubLinks && (
         <div
           className={`absolute top-full left-1/2 -translate-x-1/2 w-screen max-w-[1200px] bg-white border-t border-b border-border shadow-md transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex justify-center z-40 ${
@@ -104,7 +81,6 @@ export function MainNavigation() {
           }`}
         >
           <div className="flex gap-6 lg:gap-8 w-full px-4 sm:px-6 lg:px-8 max-w-7xl justify-end">
-            {/* We offset the grid to align roughly with the nav items above, or we just display a clean grid */}
             <div className="flex gap-12 lg:gap-16">
               {navigationConfig.map((item) => {
                 if (!item.subLinks || item.subLinks.length === 0) return null;

@@ -1,14 +1,7 @@
 import Link from "next/link";
 import { members } from "@/data/members";
 import { Container } from "@/components/layout/Container";
-
-const groupLabel: Record<string, string> = {
-  phd: "박사과정",
-  ms: "석사과정",
-  combined: "석박통합과정",
-  undergraduate: "학부연구생",
-  alumni: "졸업생",
-};
+import { groupLabels } from "@/data/stats";
 
 export function MembersSnapshotSection() {
   const others = members.filter((m) => m.group !== "professor");
@@ -19,7 +12,7 @@ export function MembersSnapshotSection() {
   }, {});
 
   const summary = Object.entries(groupCounts)
-    .map(([group, count]) => `${groupLabel[group] ?? group} ${count}명`)
+    .map(([group, count]) => `${groupLabels[group] ?? group} ${count}명`)
     .join(", ");
 
   return (
