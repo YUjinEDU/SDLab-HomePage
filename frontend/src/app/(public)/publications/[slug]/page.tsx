@@ -7,6 +7,8 @@ import { PublicationExternalLinks } from "@/components/publications/PublicationE
 import { BibtexCopyButton } from "@/components/publications/BibtexCopyButton";
 import { publications } from "@/data/publications";
 import { projects } from "@/data/projects";
+import { members } from "@/data/members";
+import { researchAreas } from "@/data/research-areas";
 
 const TYPE_LABELS: Record<string, string> = {
   journal: "저널",
@@ -53,6 +55,12 @@ export default async function PublicationDetailPage({ params }: Props) {
   const relatedProjects = projects.filter((proj) =>
     pub.projectIds.includes(proj.id),
   );
+  const relatedAreas = researchAreas.filter((area) =>
+    pub.researchAreaIds.includes(area.id),
+  );
+  const authorMembers = pub.authorMemberIds
+    .map((id) => members.find((m) => m.id === id))
+    .filter(Boolean);
 
   const typeLabel = TYPE_LABELS[pub.type] ?? pub.type;
   const typeStyle =
@@ -119,7 +127,26 @@ export default async function PublicationDetailPage({ params }: Props) {
 
           {/* Authors */}
           <p className="text-base text-text-secondary mb-2">
-            {pub.authors.join(", ")}
+            {pub.authors.map((author, idx) => {
+              const memberMatch = authorMembers.find(
+                (m) => m!.nameEn === author || m!.nameKo === author,
+              );
+              return (
+                <span key={author}>
+                  {idx > 0 && ", "}
+                  {memberMatch ? (
+                    <Link
+                      href={`/members/${memberMatch.slug}`}
+                      className="text-primary hover:text-primary-dark transition-colors font-medium"
+                    >
+                      {author}
+                    </Link>
+                  ) : (
+                    author
+                  )}
+                </span>
+              );
+            })}
           </p>
 
           {/* Venue */}
@@ -166,6 +193,26 @@ export default async function PublicationDetailPage({ params }: Props) {
               {pub.bibtex ?? generateBibtexPreview(pub)}
             </pre>
           </section>
+
+          {/* Related research areas */}
+          {relatedAreas.length > 0 && (
+            <section className="mb-8">
+              <h2 className="text-lg font-semibold text-foreground mb-3">
+                연구 분야
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {relatedAreas.map((area) => (
+                  <Link
+                    key={area.id}
+                    href={`/research`}
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-surface hover:border-primary/40 hover:bg-primary-muted/30 transition-colors text-sm font-medium text-foreground"
+                  >
+                    {area.title}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Related projects */}
           {relatedProjects.length > 0 && (

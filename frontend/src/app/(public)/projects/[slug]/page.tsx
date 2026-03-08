@@ -7,6 +7,7 @@ import { TagBadge } from "@/components/shared/TagBadge";
 import { projects } from "@/data/projects";
 import { members } from "@/data/members";
 import { publications } from "@/data/publications";
+import { researchAreas } from "@/data/research-areas";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -47,6 +48,9 @@ export default async function ProjectDetailPage({ params }: Props) {
   );
   const relatedPublications = publications.filter((pub) =>
     project.publicationIds.includes(pub.id),
+  );
+  const relatedAreas = researchAreas.filter((area) =>
+    project.researchAreaIds.includes(area.id),
   );
 
   return (
@@ -180,6 +184,26 @@ export default async function ProjectDetailPage({ params }: Props) {
                 </svg>
               </a>
             </div>
+          )}
+
+          {/* Related research areas */}
+          {relatedAreas.length > 0 && (
+            <section className="mb-8">
+              <h2 className="text-lg font-semibold text-foreground mb-3">
+                연구 분야
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {relatedAreas.map((area) => (
+                  <Link
+                    key={area.id}
+                    href="/research"
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-surface hover:border-primary/40 hover:bg-primary-muted/30 transition-colors text-sm font-medium text-foreground"
+                  >
+                    {area.title}
+                  </Link>
+                ))}
+              </div>
+            </section>
           )}
 
           {/* Related members */}

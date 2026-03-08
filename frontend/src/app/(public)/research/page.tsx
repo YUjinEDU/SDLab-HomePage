@@ -5,6 +5,7 @@ import { RelatedContentPreview } from "@/components/research/RelatedContentPrevi
 import { researchAreas } from "@/data/research-areas";
 import { publications } from "@/data/publications";
 import { projects } from "@/data/projects";
+import { members } from "@/data/members";
 
 export const metadata = {
   title: "연구 분야 | 스마트데이터연구실",
@@ -33,6 +34,7 @@ export default function ResearchPage() {
                   areaId={area.id}
                   publications={publications}
                   projects={projects}
+                  members={members}
                 />
               </ResearchAreaDetailCard>
             ))}
