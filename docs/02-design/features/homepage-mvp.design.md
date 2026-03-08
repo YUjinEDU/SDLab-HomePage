@@ -3,10 +3,10 @@
 > **Summary**: 스마트데이터연구실 공개 포털 MVP - 6개 페이지 + 공통 컴포넌트 상세 설계
 >
 > **Project**: SD Lab Homepage
-> **Version**: 0.1.0
+> **Version**: 0.2.0
 > **Author**: Claude Code
 > **Date**: 2026-03-08
-> **Status**: Draft
+> **Status**: Implemented
 > **Planning Doc**: [homepage-mvp.plan.md](../../01-plan/features/homepage-mvp.plan.md)
 
 ---
@@ -229,6 +229,7 @@ frontend/src/data/
   projects.ts       -> Project[] (샘플 3~4개)
   news.ts           -> NewsItem[] (샘플 3~4개)
   contact.ts        -> ContactInfo (실제 데이터)
+  stats.ts          -> labStats (연구실 통계), groupLabels/groupLabelsShort (그룹명 매핑)
 ```
 
 ---
@@ -239,17 +240,19 @@ frontend/src/data/
 
 #### Colors (Tailwind @theme inline)
 
-| Token                | Value     | Usage                            |
-| -------------------- | --------- | -------------------------------- |
-| `primary`            | `#2D6A4F` | 메인 그린 - CTA, 활성 메뉴, 강조 |
-| `primary-foreground` | `#FFFFFF` | 그린 배경 위 텍스트              |
-| `primary-muted`      | `#D8F3DC` | 연한 그린 틴트 - 카드 배경, 태그 |
-| `accent`             | `#95D5B2` | 세이지 - 보조 강조, 호버         |
-| `background`         | `#FAFAF8` | 오프화이트 전체 배경             |
-| `surface`            | `#FFFFFF` | 카드, 패널 배경                  |
-| `border`             | `#D1D5C8` | 그레이-그린 경계선               |
-| `foreground`         | `#1B2A3D` | 딥 네이비 본문                   |
-| `text-secondary`     | `#4A5568` | 슬레이트 보조 텍스트             |
+| Token                | Value     | Usage                                |
+| -------------------- | --------- | ------------------------------------ |
+| `primary`            | `#059669` | 에메랄드 그린 - CTA, 활성 메뉴, 강조 |
+| `primary-foreground` | `#FFFFFF` | 그린 배경 위 텍스트                  |
+| `primary-muted`      | `#ecfdf5` | 연한 그린 틴트 - 카드 배경, 태그     |
+| `accent`             | `#10b981` | 에메랄드 - 보조 강조, 호버           |
+| `background`         | `#ffffff` | 화이트 전체 배경                     |
+| `surface`            | `#f9fafb` | 카드, 패널 배경                      |
+| `border`             | `#e5e7eb` | 그레이 경계선                        |
+| `foreground`         | `#111827` | 다크 그레이 본문                     |
+| `text-secondary`     | `#4b5563` | 그레이 보조 텍스트                   |
+| `dark-bg`            | `#022c22` | 다크 그린 배경 (푸터 등)             |
+| `hero-bg`            | `#f3f4f6` | 히어로 섹션 배경                     |
 
 #### Typography
 
@@ -314,41 +317,40 @@ frontend/src/data/
 
 ```
 ┌─────────────────────────────────────────────────┐
-│ [Hero]                                           │
+│ [HomeHeroSection + NetworkBackground]             │
 │  연구실명 (h1)                                    │
 │  한 줄 소개                                       │
 │  키워드 배지 x 5                                  │
 │  [연구 분야 보기] [연락하기]                        │
 ├─────────────────────────────────────────────────┤
-│ [Research Areas] - 3 cards (1x3 grid)            │
+│ [LabIntroSection] - 연구실 소개 텍스트             │
+├─────────────────────────────────────────────────┤
+│ [ResearchAreasSection] - 3 cards (1x3 grid)      │
 │  ┌──────┐ ┌──────┐ ┌──────┐                     │
 │  │ icon │ │ icon │ │ icon │                     │
 │  │title │ │title │ │title │                     │
 │  │desc  │ │desc  │ │desc  │                     │
 │  └──────┘ └──────┘ └──────┘                     │
 ├─────────────────────────────────────────────────┤
-│ [Stats Bar] - 숫자 강조 블록                      │
-│  1996년 설립 | 석사 60명 | 박사 19명 | 기술이전 14건│
+│ [FeaturedPublicationsSection] - 3 cards           │
 ├─────────────────────────────────────────────────┤
-│ [Featured Publications] - 3 cards                │
+│ [FeaturedProjectsSection] - 3 cards               │
 ├─────────────────────────────────────────────────┤
-│ [Featured Projects] - 3 cards                    │
+│ [MembersSnapshotSection] - 교수님 + 핵심 멤버      │
 ├─────────────────────────────────────────────────┤
-│ [Members Snapshot] - 교수님 + 핵심 멤버            │
+│ [LatestNewsSection] - 3~4 list items              │
 ├─────────────────────────────────────────────────┤
-│ [Latest News] - 3~4 list items                   │
-├─────────────────────────────────────────────────┤
-│ [Contact Summary] - 위치 + 이메일 + 연락처         │
+│ [ContactSummarySection] - 위치 + 이메일 + 연락처   │
 └─────────────────────────────────────────────────┘
+
+Note: StatsBarSection 컴포넌트는 존재하지만 현재 홈 페이지에서는 사용되지 않음.
 ```
 
-#### Members `/members`
+#### Members (Professor) `/members`
 
 ```
 ┌─────────────────────────────────────────────────┐
-│ [PageHero] Members                               │
-├─────────────────────────────────────────────────┤
-│ [GroupTabs] Professor | Ph.D | M.S. | UG | Alumni│
+│ [PageHero] 지도교수                               │
 ├─────────────────────────────────────────────────┤
 │ [Professor Section] - full-width profile         │
 │  ┌──────────────────────────────────────────┐   │
@@ -359,11 +361,34 @@ frontend/src/data/
 │  │      | 주요 경력 타임라인                   │   │
 │  │      | 주요 수상                           │   │
 │  └──────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────┘
+```
+
+#### Members (Students) `/members/students`
+
+```
+┌─────────────────────────────────────────────────┐
+│ [PageHero] 연구실 구성원                          │
+├─────────────────────────────────────────────────┤
+│ [GroupTabs] Ph.D | M.S. | 석박통합 | UG | Alumni │
 ├─────────────────────────────────────────────────┤
 │ [Member Grid] - 3 col cards                      │
 │  ┌────┐ ┌────┐ ┌────┐                           │
 │  │card│ │card│ │card│                           │
 │  └────┘ └────┘ └────┘                           │
+└─────────────────────────────────────────────────┘
+```
+
+#### Member Detail `/members/[slug]`
+
+```
+┌─────────────────────────────────────────────────┐
+│ [MemberDetailPage]                               │
+│  이름, 직위, 소속                                │
+│  연구 키워드 배지                                │
+│  bio, 학력, 경력                                 │
+│  관련 논문 크로스 링크                             │
+│  관련 프로젝트 크로스 링크                         │
 └─────────────────────────────────────────────────┘
 ```
 
@@ -466,8 +491,8 @@ frontend/src/data/
 | `SiteHeader`             | `components/layout/SiteHeader.tsx`                 | -                      | 로고 + 네비게이션 + 모바일 메뉴 |
 | `SiteFooter`             | `components/layout/SiteFooter.tsx`                 | -                      | 연구실 정보 + 퀵링크 + 저작권   |
 | `Container`              | `components/layout/Container.tsx`                  | `children, className?` | max-w-7xl 래퍼                  |
-| `MainNavigation`         | `components/navigation/MainNavigation.tsx`         | `currentPath`          | 데스크톱 GNB                    |
-| `MobileNavigationDrawer` | `components/navigation/MobileNavigationDrawer.tsx` | `isOpen, onClose`      | 모바일 사이드 메뉴              |
+| `MainNavigation`         | `components/navigation/MainNavigation.tsx`         | `currentPath`          | 데스크톱 GNB (mega menu + subLinks) |
+| `MobileNavigationDrawer` | `components/navigation/MobileNavigationDrawer.tsx` | `isOpen, onClose`      | 모바일 사이드 메뉴 (Professor/Students 분리 링크) |
 | `PageHero`               | `components/shared/PageHero.tsx`                   | `title, description?`  | 페이지 상단 타이틀 영역         |
 
 ### 5.2 Shared Components
@@ -491,16 +516,18 @@ frontend/src/data/
 
 #### Home (`components/home/`)
 
-| Component                     | Props                                  | Client? |
-| ----------------------------- | -------------------------------------- | ------- |
-| `HomeHeroSection`             | `labInfo, keywords, ctaLinks`          | No      |
-| `ResearchAreasSection`        | `areas: ResearchArea[]`                | No      |
-| `StatsBarSection`             | `stats: StatItem[]`                    | No      |
-| `FeaturedPublicationsSection` | `publications: Publication[]`          | No      |
-| `FeaturedProjectsSection`     | `projects: Project[]`                  | No      |
-| `MembersSnapshotSection`      | `professor: Member, members: Member[]` | No      |
-| `LatestNewsSection`           | `news: NewsItem[]`                     | No      |
-| `ContactSummarySection`       | `contact: ContactInfo`                 | No      |
+| Component                     | Props                                  | Client? | Note                     |
+| ----------------------------- | -------------------------------------- | ------- | ------------------------ |
+| `HomeHeroSection`             | `labInfo, keywords, ctaLinks`          | No      | NetworkBackground 포함    |
+| `NetworkBackground`           | -                                      | Yes     | 히어로 배경 애니메이션    |
+| `LabIntroSection`             | -                                      | No      | 연구실 소개 텍스트        |
+| `ResearchAreasSection`        | `areas: ResearchArea[]`                | No      |                          |
+| `StatsBarSection`             | `stats: StatItem[]`                    | No      | 존재하나 홈 페이지 미사용 |
+| `FeaturedPublicationsSection` | `publications: Publication[]`          | No      |                          |
+| `FeaturedProjectsSection`     | `projects: Project[]`                  | No      |                          |
+| `MembersSnapshotSection`      | `professor: Member, members: Member[]` | No      |                          |
+| `LatestNewsSection`           | `news: NewsItem[]`                     | No      |                          |
+| `ContactSummarySection`       | `contact: ContactInfo`                 | No      |                          |
 
 #### Members (`components/members/`)
 
@@ -560,31 +587,39 @@ frontend/src/app/
     layout.tsx          -> PublicLayout (SiteHeader + Footer)
     page.tsx            -> HomePage
     members/
-      page.tsx          -> MembersPage
+      page.tsx          -> MembersPage (교수님 전용 프로필)
+      students/
+        page.tsx        -> StudentsPage (학생 목록 + GroupTabs)
+      [slug]/
+        page.tsx        -> MemberDetailPage (크로스 링크 포함)
     research/
       page.tsx          -> ResearchPage
     publications/
       page.tsx          -> PublicationsPage
       [slug]/
-        page.tsx        -> PublicationDetailPage
+        page.tsx        -> PublicationDetailPage (크로스 링크 포함)
     projects/
       page.tsx          -> ProjectsPage
       [slug]/
-        page.tsx        -> ProjectDetailPage
+        page.tsx        -> ProjectDetailPage (크로스 링크 포함)
     contact/
       page.tsx          -> ContactPage
 ```
 
 ### 6.2 Page Data Flow
 
-| Page         | Data Source (MVP)                                                                                                          | Server/Client                   |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
-| Home         | `data/members.ts`, `data/research-areas.ts`, `data/publications.ts`, `data/projects.ts`, `data/news.ts`, `data/contact.ts` | Server                          |
-| Members      | `data/members.ts`                                                                                                          | Server + Client (tab switching) |
-| Research     | `data/research-areas.ts`, `data/projects.ts`, `data/publications.ts`                                                       | Server                          |
-| Publications | `data/publications.ts`                                                                                                     | Server + Client (filter/search) |
-| Projects     | `data/projects.ts`                                                                                                         | Server + Client (filter)        |
-| Contact      | `data/contact.ts`                                                                                                          | Server                          |
+| Page              | Data Source (MVP)                                                                                                                        | Server/Client                   |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| Home              | `data/members.ts`, `data/research-areas.ts`, `data/publications.ts`, `data/projects.ts`, `data/news.ts`, `data/contact.ts`, `data/stats.ts` | Server                          |
+| Members (Prof)    | `data/members.ts`                                                                                                                        | Server                          |
+| Members (Students)| `data/members.ts`, `data/stats.ts`                                                                                                       | Server + Client (tab switching) |
+| Member Detail     | `data/members.ts`, `data/publications.ts`, `data/projects.ts`                                                                            | Server (크로스 링크)             |
+| Research          | `data/research-areas.ts`, `data/projects.ts`, `data/publications.ts`                                                                     | Server                          |
+| Publications      | `data/publications.ts`                                                                                                                   | Server + Client (filter/search) |
+| Publication Detail| `data/publications.ts`, `data/members.ts`, `data/projects.ts`                                                                            | Server (크로스 링크)             |
+| Projects          | `data/projects.ts`                                                                                                                       | Server + Client (filter)        |
+| Project Detail    | `data/projects.ts`, `data/members.ts`, `data/publications.ts`                                                                            | Server (크로스 링크)             |
+| Contact           | `data/contact.ts`                                                                                                                        | Server                          |
 
 ---
 
@@ -652,16 +687,16 @@ import type { Member } from "@/types/member";
 Priority: CRITICAL
 Estimated files: ~10
 
-1. [ ] types/ - 모든 타입 정의 (member, research, publication, project, news, contact)
-2. [ ] data/ - 정적 데이터 파일 6개 (실제 연구실 정보 기반)
-3. [ ] components/layout/Container.tsx
-4. [ ] components/layout/SiteHeader.tsx
-5. [ ] components/navigation/MainNavigation.tsx
-6. [ ] components/navigation/MobileNavigationDrawer.tsx
-7. [ ] components/layout/SiteFooter.tsx
-8. [ ] app/(public)/layout.tsx - PublicLayout 조합
-9. [ ] components/shared/PageHero.tsx
-10.[ ] components/shared/SectionHeader.tsx
+1. [x] types/ - 모든 타입 정의 (member, research, publication, project, news, contact)
+2. [x] data/ - 정적 데이터 파일 7개 (실제 연구실 정보 기반, stats.ts 추가)
+3. [x] components/layout/Container.tsx
+4. [x] components/layout/SiteHeader.tsx
+5. [x] components/navigation/MainNavigation.tsx (mega menu + subLinks)
+6. [x] components/navigation/MobileNavigationDrawer.tsx (Professor/Students 분리)
+7. [x] components/layout/SiteFooter.tsx
+8. [x] app/(public)/layout.tsx - PublicLayout 조합
+9. [x] components/shared/PageHero.tsx
+10.[x] components/shared/SectionHeader.tsx
 ```
 
 ### 9.2 Phase 2: Shared UI Components
@@ -670,18 +705,18 @@ Estimated files: ~10
 Priority: HIGH
 Estimated files: ~12
 
-1. [ ] components/shared/TagBadge.tsx
-2. [ ] components/shared/StatusBadge.tsx
-3. [ ] components/shared/CategoryBadge.tsx
-4. [ ] components/shared/StatCard.tsx
-5. [ ] components/shared/SearchInput.tsx (client)
-6. [ ] components/shared/FilterBar.tsx (client)
-7. [ ] components/shared/FilterChips.tsx (client)
-8. [ ] components/shared/Pagination.tsx (client)
-9. [ ] components/shared/EmptyState.tsx
-10.[ ] components/shared/ExternalLinkButton.tsx
-11.[ ] components/shared/CopyButton.tsx (client)
-12.[ ] app/(public)/not-found.tsx
+1. [x] components/shared/TagBadge.tsx
+2. [x] components/shared/StatusBadge.tsx
+3. [x] components/shared/CategoryBadge.tsx
+4. [x] components/shared/StatCard.tsx
+5. [x] components/shared/SearchInput.tsx (client)
+6. [x] components/shared/FilterBar.tsx (client)
+7. [x] components/shared/FilterChips.tsx (client)
+8. [x] components/shared/Pagination.tsx (client)
+9. [x] components/shared/EmptyState.tsx
+10.[x] components/shared/ExternalLinkButton.tsx
+11.[x] components/shared/CopyButton.tsx (client)
+12.[x] app/(public)/not-found.tsx
 ```
 
 ### 9.3 Phase 3: Home Page
@@ -690,15 +725,16 @@ Estimated files: ~12
 Priority: HIGH
 Estimated files: ~9
 
-1. [ ] components/home/HomeHeroSection.tsx
-2. [ ] components/home/ResearchAreasSection.tsx
-3. [ ] components/home/StatsBarSection.tsx
-4. [ ] components/home/FeaturedPublicationsSection.tsx
-5. [ ] components/home/FeaturedProjectsSection.tsx
-6. [ ] components/home/MembersSnapshotSection.tsx
-7. [ ] components/home/LatestNewsSection.tsx
-8. [ ] components/home/ContactSummarySection.tsx
-9. [ ] app/(public)/page.tsx - 홈페이지 조합
+1. [x] components/home/HomeHeroSection.tsx (NetworkBackground 포함)
+2. [x] components/home/LabIntroSection.tsx (신규 추가)
+3. [x] components/home/ResearchAreasSection.tsx
+4. [x] components/home/StatsBarSection.tsx (컴포넌트 존재, 홈 페이지 미사용)
+5. [x] components/home/FeaturedPublicationsSection.tsx
+6. [x] components/home/FeaturedProjectsSection.tsx
+7. [x] components/home/MembersSnapshotSection.tsx
+8. [x] components/home/LatestNewsSection.tsx
+9. [x] components/home/ContactSummarySection.tsx
+10.[x] app/(public)/page.tsx - 홈페이지 조합
 ```
 
 ### 9.4 Phase 4: Members Page
@@ -707,14 +743,16 @@ Estimated files: ~9
 Priority: HIGH
 Estimated files: ~8
 
-1. [ ] components/members/ProfessorProfile.tsx
-2. [ ] components/members/MemberCard.tsx
-3. [ ] components/members/MemberGrid.tsx
-4. [ ] components/members/MemberGroupTabs.tsx (client)
-5. [ ] components/members/MemberEducationTimeline.tsx
-6. [ ] components/members/MemberCareerTimeline.tsx
-7. [ ] components/members/MemberContactLinks.tsx
-8. [ ] app/(public)/members/page.tsx
+1. [x] components/members/ProfessorProfile.tsx
+2. [x] components/members/MemberCard.tsx
+3. [x] components/members/MemberGrid.tsx
+4. [x] components/members/MemberGroupTabs.tsx (client)
+5. [x] components/members/MemberEducationTimeline.tsx
+6. [x] components/members/MemberCareerTimeline.tsx
+7. [x] components/members/MemberContactLinks.tsx
+8. [x] app/(public)/members/page.tsx (교수님 전용)
+9. [x] app/(public)/members/students/page.tsx (학생 목록 + GroupTabs, 신규)
+10.[x] app/(public)/members/[slug]/page.tsx (상세 + 크로스 링크, 신규)
 ```
 
 ### 9.5 Phase 5: Research Page
@@ -723,10 +761,10 @@ Estimated files: ~8
 Priority: HIGH
 Estimated files: ~4
 
-1. [ ] components/research/ResearchAreaDetailCard.tsx
-2. [ ] components/research/RelatedContentPreview.tsx
-3. [ ] app/(public)/research/page.tsx
-4. [ ] (ResearchAreaCard는 home/에서 재사용)
+1. [x] components/research/ResearchAreaDetailCard.tsx
+2. [x] components/research/RelatedContentPreview.tsx
+3. [x] app/(public)/research/page.tsx
+4. [x] (ResearchAreaCard는 home/에서 재사용)
 ```
 
 ### 9.6 Phase 6: Publications Page
@@ -735,14 +773,14 @@ Estimated files: ~4
 Priority: HIGH
 Estimated files: ~8
 
-1. [ ] components/publications/PublicationCard.tsx
-2. [ ] components/publications/PublicationList.tsx
-3. [ ] components/publications/PublicationFilters.tsx (client)
-4. [ ] components/publications/PublicationStatsPanel.tsx
-5. [ ] components/publications/PublicationExternalLinks.tsx
-6. [ ] components/publications/BibtexCopyButton.tsx (client)
-7. [ ] app/(public)/publications/page.tsx
-8. [ ] app/(public)/publications/[slug]/page.tsx
+1. [x] components/publications/PublicationCard.tsx
+2. [x] components/publications/PublicationList.tsx
+3. [x] components/publications/PublicationFilters.tsx (client)
+4. [x] components/publications/PublicationStatsPanel.tsx
+5. [x] components/publications/PublicationExternalLinks.tsx
+6. [x] components/publications/BibtexCopyButton.tsx (client)
+7. [x] app/(public)/publications/page.tsx
+8. [x] app/(public)/publications/[slug]/page.tsx (크로스 링크 포함)
 ```
 
 ### 9.7 Phase 7: Projects Page
@@ -751,11 +789,11 @@ Estimated files: ~8
 Priority: HIGH
 Estimated files: ~5
 
-1. [ ] components/projects/ProjectCard.tsx
-2. [ ] components/projects/ProjectGrid.tsx
-3. [ ] components/projects/ProjectFilters.tsx (client)
-4. [ ] app/(public)/projects/page.tsx
-5. [ ] app/(public)/projects/[slug]/page.tsx
+1. [x] components/projects/ProjectCard.tsx
+2. [x] components/projects/ProjectGrid.tsx
+3. [x] components/projects/ProjectFilters.tsx (client)
+4. [x] app/(public)/projects/page.tsx
+5. [x] app/(public)/projects/[slug]/page.tsx (크로스 링크 포함)
 ```
 
 ### 9.8 Phase 8: Contact Page
@@ -764,10 +802,10 @@ Estimated files: ~5
 Priority: MEDIUM
 Estimated files: ~4
 
-1. [ ] components/contact/ContactInfoCard.tsx
-2. [ ] components/contact/MapSection.tsx
-3. [ ] components/contact/DirectionsSection.tsx
-4. [ ] app/(public)/contact/page.tsx
+1. [x] components/contact/ContactInfoCard.tsx
+2. [x] components/contact/MapSection.tsx
+3. [x] components/contact/DirectionsSection.tsx
+4. [x] app/(public)/contact/page.tsx
 ```
 
 ### 9.9 Phase 9: Integration & Polish
@@ -776,9 +814,9 @@ Estimated files: ~4
 Priority: MEDIUM
 Estimated files: ~3
 
-1. [ ] 페이지 간 크로스 링크 확인 및 보완
-2. [ ] app/(public)/loading.tsx (전체 스켈레톤)
-3. [ ] 반응형 최종 확인 (모바일/태블릿/데스크톱)
+1. [x] 페이지 간 크로스 링크 확인 및 보완 (detail 페이지들에 크로스 링크 구현 완료)
+2. [x] app/(public)/loading.tsx (전체 스켈레톤)
+3. [x] 반응형 최종 확인 (모바일/태블릿/데스크톱)
 ```
 
 ### Total Estimated Files: ~63
@@ -818,3 +856,4 @@ Estimated files: ~3
 | Version | Date       | Changes                                              | Author      |
 | ------- | ---------- | ---------------------------------------------------- | ----------- |
 | 0.1     | 2026-03-08 | Initial draft - Plan 문서 + 기획 문서 기반 상세 설계 | Claude Code |
+| 0.2     | 2026-03-08 | Updated to reflect actual implementation - members split (professor/students), detail pages ([slug] with cross-links), design tokens updated, data/stats.ts added, home page sections revised (LabIntroSection/NetworkBackground added, StatsBarSection unused), navigation mega menu | Claude Code |

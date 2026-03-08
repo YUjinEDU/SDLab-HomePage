@@ -48,11 +48,16 @@ export default async function MemberDetailPage({ params }: Props) {
     .join("")
     .slice(0, 2);
 
+  const backHref =
+    member.group === "professor" ? "/members" : "/members/students";
+  const backLabel =
+    member.group === "professor" ? "지도교수 페이지로" : "연구원 목록으로";
+
   return (
     <div className="py-12">
       <Container>
         <Link
-          href="/members"
+          href={backHref}
           className="inline-flex items-center gap-1.5 text-sm text-text-secondary hover:text-primary transition-colors mb-8"
         >
           <svg
@@ -69,7 +74,7 @@ export default async function MemberDetailPage({ params }: Props) {
           >
             <path d="m15 18-6-6 6-6" />
           </svg>
-          구성원 목록으로
+          {backLabel}
         </Link>
 
         <div className="max-w-3xl">

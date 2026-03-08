@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Member, MemberGroup } from "@/types";
 import { TagBadge } from "@/components/shared/TagBadge";
 import { MemberContactLinks } from "./MemberContactLinks";
@@ -41,7 +42,7 @@ export function MemberCard({ member }: Props) {
             </span>
           </div>
           <h3 className="text-[1.15rem] font-bold text-foreground leading-tight mb-1 group-hover:text-primary transition-colors">
-            {member.nameKo}
+            <Link href={`/members/${member.slug}`}>{member.nameKo}</Link>
           </h3>
           <p className="text-[13px] font-medium text-text-secondary/80 font-mono tracking-tight">
             {member.nameEn}

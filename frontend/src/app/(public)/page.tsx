@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 };
 import { LabIntroSection } from "@/components/home/LabIntroSection";
 import { ResearchAreasSection } from "@/components/home/ResearchAreasSection";
+import { StatsBarSection } from "@/components/home/StatsBarSection";
 import { FeaturedPublicationsSection } from "@/components/home/FeaturedPublicationsSection";
 import { FeaturedProjectsSection } from "@/components/home/FeaturedProjectsSection";
 import { MembersSnapshotSection } from "@/components/home/MembersSnapshotSection";
@@ -20,6 +21,7 @@ export default function HomePage() {
       <HomeHeroSection />
       <LabIntroSection />
       <ResearchAreasSection />
+      <StatsBarSection />
       <FeaturedPublicationsSection />
       <FeaturedProjectsSection />
       <MembersSnapshotSection />
