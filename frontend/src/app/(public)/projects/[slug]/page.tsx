@@ -4,22 +4,20 @@ import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { StatusBadge } from "@/components/shared/StatusBadge";
 import { TagBadge } from "@/components/shared/TagBadge";
-import { projects } from "@/data/projects";
-import { members } from "@/data/members";
-import { publications } from "@/data/publications";
-import { researchAreas } from "@/data/research-areas";
+import {
+  getProjectBySlug,
+  getMembers,
+  getPublications,
+  getResearchAreas,
+} from "@/lib/queries";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = await getProjectBySlug(slug);
   if (!project) return {};
   return {
     title: `${project.title} | 스마트데이터연구실`,
@@ -39,7 +37,12 @@ function formatPeriod(startDate: string, endDate: string | null): string {
 
 export default async function ProjectDetailPage({ params }: Props) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const [project, members, publications, researchAreas] = await Promise.all([
+    getProjectBySlug(slug),
+    getMembers(),
+    getPublications(),
+    getResearchAreas(),
+  ]);
 
   if (!project) notFound();
 

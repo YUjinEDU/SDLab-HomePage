@@ -2,32 +2,52 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
-const navigationConfig = [
+type SubLink = {
+  label: string;
+  href: string;
+  description?: string;
+};
+
+type NavItem = {
+  category: string;
+  href: string;
+  subLinks?: SubLink[];
+};
+
+const navigationConfig: NavItem[] = [
   {
     category: "Members",
     href: "/members",
     subLinks: [
-      { label: "Professor", href: "/members" },
-      { label: "Students", href: "/members/students" },
+      { label: "Professor", href: "/members", description: "Faculty Profile" },
+      {
+        label: "Students",
+        href: "/members/students",
+        description: "M.S. / Ph.D. / Alumni",
+      },
     ],
   },
   {
     category: "Research",
     href: "/research",
-    subLinks: [
-      { label: "Research Areas", href: "/research" },
-      { label: "Projects", href: "/projects" },
-    ],
+  },
+  {
+    category: "Projects",
+    href: "/projects",
   },
   {
     category: "Publications",
     href: "/publications",
-    subLinks: [
-      { label: "Selected Paper", href: "/publications?filter=featured" },
-      { label: "Publications", href: "/publications" },
-    ],
+  },
+  {
+    category: "Patents",
+    href: "/patents",
+  },
+  {
+    category: "Demo",
+    href: "/demos",
   },
   {
     category: "Contact",
@@ -37,81 +57,131 @@ const navigationConfig = [
 
 export function MainNavigation() {
   const pathname = usePathname();
-  const [isHovering, setIsHovering] = useState(false);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navRef = useRef<HTMLElement>(null);
 
-  const hasSubLinks = navigationConfig.some((item) => item.subLinks?.length);
+  function handleMouseEnter(index: number) {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setOpenIndex(index);
+  }
+
+  function handleMouseLeave() {
+    timeoutRef.current = setTimeout(() => setOpenIndex(null), 150);
+  }
+
+  // Close on route change
+  useEffect(() => {
+    setOpenIndex(null);
+  }, [pathname]);
+
+  // Close on click outside
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenIndex(null);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
-    <nav
-      className="hidden md:flex items-center h-full group/nav relative"
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-    >
-      <ul className="flex items-center gap-6 lg:gap-8 h-full relative z-50">
-        {navigationConfig.map((item) => {
-          const isActive = pathname.startsWith(item.href);
+    <nav ref={navRef} className="hidden md:flex items-center h-full">
+      <ul className="flex items-center gap-1 lg:gap-2 h-full">
+        {navigationConfig.map((item, index) => {
+          const isActive =
+            pathname === item.href ||
+            pathname.startsWith(item.href + "/") ||
+            item.subLinks?.some(
+              (sub) =>
+                pathname === sub.href || pathname.startsWith(sub.href + "/"),
+            );
+
+          const hasDropdown = item.subLinks && item.subLinks.length > 0;
+          const isOpen = openIndex === index;
 
           return (
-            <li key={item.category} className="h-full flex items-center">
+            <li
+              key={item.category}
+              className="relative h-full flex items-center"
+              onMouseEnter={() => hasDropdown && handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
+            >
               <Link
                 href={item.href}
-                className={`relative h-full flex items-center px-2 text-[15px] font-medium transition-colors ${
+                className={`relative h-full flex items-center gap-1 px-3 lg:px-4 text-[14px] font-medium transition-colors ${
                   isActive
                     ? "text-primary font-semibold"
                     : "text-text-secondary hover:text-foreground"
                 }`}
               >
                 {item.category}
+                {hasDropdown && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                    aria-hidden="true"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                )}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
+                  <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-primary rounded-full" />
                 )}
               </Link>
+
+              {/* Dropdown */}
+              {hasDropdown && (
+                <div
+                  className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-200 ${
+                    isOpen
+                      ? "opacity-100 translate-y-0 pointer-events-auto"
+                      : "opacity-0 -translate-y-1 pointer-events-none"
+                  }`}
+                >
+                  <div className="bg-white rounded-xl border border-border shadow-lg shadow-black/5 py-2 min-w-[200px]">
+                    {item.subLinks!.map((sub) => {
+                      const isSubActive =
+                        pathname === sub.href ||
+                        pathname.startsWith(sub.href + "/");
+
+                      return (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          className={`flex flex-col px-4 py-2.5 transition-colors ${
+                            isSubActive
+                              ? "bg-primary-muted text-primary"
+                              : "text-foreground hover:bg-surface hover:text-primary"
+                          }`}
+                        >
+                          <span className="text-[13px] font-semibold">
+                            {sub.label}
+                          </span>
+                          {sub.description && (
+                            <span className="text-[11px] text-text-secondary mt-0.5">
+                              {sub.description}
+                            </span>
+                          )}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </li>
           );
         })}
       </ul>
-
-      {hasSubLinks && (
-        <div
-          className={`absolute top-full left-1/2 -translate-x-1/2 w-screen max-w-[1200px] bg-white border-t border-b border-border shadow-md transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex justify-center z-40 ${
-            isHovering
-              ? "max-h-[400px] opacity-100 py-8"
-              : "max-h-0 opacity-0 py-0 border-y-0"
-          }`}
-        >
-          <div className="flex gap-6 lg:gap-8 w-full px-4 sm:px-6 lg:px-8 max-w-7xl justify-center">
-            <div className="flex gap-12 lg:gap-24">
-              {navigationConfig.map((item) => {
-                if (!item.subLinks || item.subLinks.length === 0) return null;
-
-                return (
-                  <div
-                    key={item.category}
-                    className="flex flex-col min-w-[120px]"
-                  >
-                    <h3 className="text-sm font-bold text-foreground mb-4 border-b border-border pb-2 inline-block">
-                      {item.category}
-                    </h3>
-                    <ul className="flex flex-col gap-3">
-                      {item.subLinks.map((sub) => (
-                        <li key={sub.label}>
-                          <Link
-                            href={sub.href}
-                            className="text-[14px] text-text-secondary hover:text-primary transition-colors flex items-center"
-                          >
-                            <span className="w-1 h-1 rounded-full bg-border mr-2 group-hover:bg-primary transition-colors"></span>
-                            {sub.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      )}
     </nav>
   );
 }

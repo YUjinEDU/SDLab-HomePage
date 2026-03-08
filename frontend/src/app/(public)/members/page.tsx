@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { members } from "@/data/members";
+import { getProfessor } from "@/lib/queries";
 import { Container } from "@/components/layout/Container";
 import { PageHero } from "@/components/shared/PageHero";
 import { ProfessorProfile } from "@/components/members/ProfessorProfile";
@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   description: "스마트데이터연구실 지도교수 소개",
 };
 
-export default function MembersPage() {
-  const professor = members.find((m) => m.group === "professor") ?? null;
+export default async function MembersPage() {
+  const professor = await getProfessor();
 
   return (
     <>

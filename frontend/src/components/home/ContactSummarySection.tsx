@@ -1,7 +1,14 @@
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
+import type { ContactInfo } from "@/types";
 
-export function ContactSummarySection() {
+type ContactSummarySectionProps = {
+  contactInfo: ContactInfo;
+};
+
+export function ContactSummarySection({
+  contactInfo,
+}: ContactSummarySectionProps) {
   return (
     <section className="py-20 bg-dark-bg text-white">
       <Container>
@@ -11,17 +18,18 @@ export function ContactSummarySection() {
               Contact Us
             </h2>
             <p className="text-sm text-white/50 leading-relaxed">
-              충남대학교 공대 5호관 532호 (연구실) / 516호 (교수 연구실)
+              {contactInfo.location.building} {contactInfo.location.lab}{" "}
+              (연구실) / {contactInfo.location.professorOffice} (교수 연구실)
             </p>
             <div className="flex flex-wrap gap-x-5 gap-y-1 mt-2 text-sm text-white/50">
               <a
-                href="mailto:ykim@cnu.ac.kr"
+                href={`mailto:${contactInfo.professor.email}`}
                 className="text-primary-light hover:text-white transition-colors"
               >
-                ykim@cnu.ac.kr
+                {contactInfo.professor.email}
               </a>
-              <span>042-821-7441 (연구실)</span>
-              <span>042-821-5450 (교수 연구실)</span>
+              <span>{contactInfo.location.labPhone} (연구실)</span>
+              <span>{contactInfo.location.professorPhone} (교수 연구실)</span>
             </div>
           </div>
           <Link

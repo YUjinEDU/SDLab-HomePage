@@ -1,10 +1,16 @@
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
-import { publications } from "@/data/publications";
+import type { Publication, Member } from "@/types";
 
-const featured = publications.filter((p) => p.isFeatured).slice(0, 3);
+type FeaturedPublicationsSectionProps = {
+  publications: Publication[];
+  members: Member[];
+};
 
-export function FeaturedPublicationsSection() {
+export function FeaturedPublicationsSection({
+  publications: featured,
+  members,
+}: FeaturedPublicationsSectionProps) {
   return (
     <section className="py-24 lg:py-32 bg-surface">
       <Container>
@@ -27,9 +33,8 @@ export function FeaturedPublicationsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {featured.map((pub) => (
-            <Link
+            <div
               key={pub.id}
-              href={`/publications/${pub.slug}`}
               className="card-hover block rounded-2xl border border-border bg-white p-8 shadow-sm"
             >
               <div className="flex items-center gap-3 mb-3">
@@ -39,12 +44,37 @@ export function FeaturedPublicationsSection() {
                 <span className="text-xs text-text-secondary">{pub.year}</span>
               </div>
               <h3 className="text-base font-bold text-foreground leading-snug mb-2">
-                {pub.title}
+                <Link
+                  href={`/publications/${pub.slug}`}
+                  className="hover:text-primary transition-colors"
+                >
+                  {pub.title}
+                </Link>
               </h3>
               <p className="text-sm text-text-secondary">
-                {pub.authors.join(", ")} — {pub.venue}
+                {pub.authors.map((author, i) => {
+                  const memberMatch = members.find(
+                    (m) => m.nameEn === author || m.nameKo === author,
+                  );
+                  return (
+                    <span key={i}>
+                      {i > 0 && ", "}
+                      {memberMatch ? (
+                        <Link
+                          href={`/members/${memberMatch.slug}`}
+                          className="text-primary hover:text-primary-dark transition-colors font-medium"
+                        >
+                          {author}
+                        </Link>
+                      ) : (
+                        author
+                      )}
+                    </span>
+                  );
+                })}{" "}
+                — {pub.venue}
               </p>
-            </Link>
+            </div>
           ))}
         </div>
       </Container>

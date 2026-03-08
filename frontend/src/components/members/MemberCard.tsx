@@ -3,8 +3,6 @@ import type { Member, MemberGroup } from "@/types";
 import { TagBadge } from "@/components/shared/TagBadge";
 import { MemberContactLinks } from "./MemberContactLinks";
 import { groupLabels } from "@/data/stats";
-import { publications } from "@/data/publications";
-import { projects } from "@/data/projects";
 
 type Props = {
   member: Member;
@@ -34,7 +32,15 @@ export function MemberCard({ member }: Props) {
     <article className="rounded-2xl border border-border bg-white p-6 flex flex-col gap-5 card-hover group h-full">
       {/* Header: avatar + name/position */}
       <div className="flex items-start gap-4 sm:gap-5">
-        <InitialsAvatar name={member.nameKo} group={member.group} />
+        {member.image ? (
+          <img
+            src={member.image}
+            alt={member.nameKo}
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover shrink-0 shadow-sm border border-border"
+          />
+        ) : (
+          <InitialsAvatar name={member.nameKo} group={member.group} />
+        )}
         <div className="flex-1 min-w-0 pt-1">
           <div className="flex items-center gap-2 flex-wrap mb-1.5">
             <span
@@ -64,25 +70,6 @@ export function MemberCard({ member }: Props) {
             ))}
           </div>
         )}
-        {/* Activity summary */}
-        {(() => {
-          const pubCount = publications.filter((p) =>
-            p.authorMemberIds.includes(member.id),
-          ).length;
-          const projCount = projects.filter((p) =>
-            p.memberIds.includes(member.id),
-          ).length;
-          if (pubCount === 0 && projCount === 0) return null;
-          return (
-            <p className="text-xs text-text-secondary mt-3">
-              {pubCount > 0 && <span>논문 {pubCount}편</span>}
-              {pubCount > 0 && projCount > 0 && (
-                <span className="mx-1.5 opacity-40">·</span>
-              )}
-              {projCount > 0 && <span>프로젝트 {projCount}건</span>}
-            </p>
-          );
-        })()}
       </div>
 
       {/* Links */}

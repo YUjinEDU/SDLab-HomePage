@@ -1,9 +1,15 @@
 import Link from "next/link";
-import { members } from "@/data/members";
 import { Container } from "@/components/layout/Container";
 import { groupLabels } from "@/data/stats";
+import type { Member } from "@/types";
 
-export function MembersSnapshotSection() {
+type MembersSnapshotSectionProps = {
+  members: Member[];
+};
+
+export function MembersSnapshotSection({
+  members,
+}: MembersSnapshotSectionProps) {
   const others = members.filter((m) => m.group !== "professor");
 
   const groupCounts = others.reduce<Record<string, number>>((acc, m) => {

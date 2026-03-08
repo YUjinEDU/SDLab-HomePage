@@ -5,10 +5,13 @@ import { Container } from "@/components/layout/Container";
 import { TagBadge } from "@/components/shared/TagBadge";
 import { PublicationExternalLinks } from "@/components/publications/PublicationExternalLinks";
 import { BibtexCopyButton } from "@/components/publications/BibtexCopyButton";
-import { publications } from "@/data/publications";
-import { projects } from "@/data/projects";
-import { members } from "@/data/members";
-import { researchAreas } from "@/data/research-areas";
+import {
+  getPublicationBySlug,
+  getMembers,
+  getProjects,
+  getResearchAreas,
+} from "@/lib/queries";
+import type { Publication } from "@/types";
 
 const TYPE_LABELS: Record<string, string> = {
   journal: "저널",
@@ -34,7 +37,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const pub = publications.find((p) => p.slug === slug);
+  const pub = await getPublicationBySlug(slug);
   if (!pub) return { title: "논문을 찾을 수 없습니다" };
   return {
     title: `${pub.title} | 스마트데이터연구실`,
@@ -42,13 +45,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export function generateStaticParams() {
-  return publications.map((p) => ({ slug: p.slug }));
-}
-
 export default async function PublicationDetailPage({ params }: Props) {
   const { slug } = await params;
-  const pub = publications.find((p) => p.slug === slug);
+  const [pub, members, projects, researchAreas] = await Promise.all([
+    getPublicationBySlug(slug),
+    getMembers(),
+    getProjects(),
+    getResearchAreas(),
+  ]);
 
   if (!pub) notFound();
 
@@ -281,7 +285,7 @@ export default async function PublicationDetailPage({ params }: Props) {
   );
 }
 
-function generateBibtexPreview(pub: (typeof publications)[number]): string {
+function generateBibtexPreview(pub: Publication): string {
   const key = `${pub.authors[0]?.split(" ").pop() ?? "Author"}${pub.year}`;
   const entryType = pub.type === "journal" ? "article" : "inproceedings";
   const authorsFormatted = pub.authors.join(" and ");

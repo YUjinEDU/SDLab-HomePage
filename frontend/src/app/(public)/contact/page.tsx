@@ -3,14 +3,16 @@ import { Container } from "@/components/layout/Container";
 import { ContactInfoCard } from "@/components/contact/ContactInfoCard";
 import { MapSection } from "@/components/contact/MapSection";
 import { DirectionsSection } from "@/components/contact/DirectionsSection";
-import { contactInfo } from "@/data/contact";
+import { getContactInfo } from "@/lib/queries";
 
 export const metadata = {
   title: "연락처 | 스마트데이터연구실",
   description: "충남대학교 스마트데이터연구실 위치 및 연락처 안내",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const contactInfo = await getContactInfo();
+
   return (
     <>
       <PageHero

@@ -1,0 +1,163 @@
+import { createClient } from "@/lib/db/supabase-server";
+import type { Publication } from "@/types";
+
+type PubRow = Record<string, unknown> & {
+  publication_authors?: { member_id: string; author_order: number }[];
+  publication_research_areas?: { research_area_id: string }[];
+  publication_projects?: { project_id: string }[];
+};
+
+function toPublication(row: PubRow): Publication {
+  const authorMemberIds = (row.publication_authors ?? [])
+    .sort((a, b) => a.author_order - b.author_order)
+    .map((a) => a.member_id);
+
+  const researchAreaIds = (row.publication_research_areas ?? []).map(
+    (r) => r.research_area_id,
+  );
+
+  const projectIds = (row.publication_projects ?? []).map((p) => p.project_id);
+
+  return {
+    id: row.id as string,
+    slug: row.slug as string,
+    title: row.title as string,
+    authors: (row.authors as string[]) ?? [],
+    authorMemberIds,
+    type: row.type as Publication["type"],
+    venue: row.venue as string,
+    year: row.year as number,
+    month: (row.month as number) ?? null,
+    doi: (row.doi as string) ?? null,
+    pdfUrl: (row.pdf_url as string) ?? null,
+    abstract: (row.abstract as string) ?? null,
+    keywords: (row.keywords as string[]) ?? [],
+    bibtex: (row.bibtex as string) ?? null,
+    researchAreaIds,
+    projectIds,
+    isFeatured: (row.is_featured as boolean) ?? false,
+  };
+}
+
+const PUB_SELECT = `
+  *,
+  publication_authors(member_id, author_order),
+  publication_research_areas(research_area_id),
+  publication_projects(project_id)
+`;
+
+export async function getPublications(): Promise<Publication[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("publications")
+    .select(PUB_SELECT)
+    .neq("type", "patent")
+    .order("year", { ascending: false })
+    .order("month", { ascending: false });
+
+  if (error) throw error;
+  return (data ?? []).map(toPublication);
+}
+
+export async function getPublicationBySlug(
+  slug: string,
+): Promise<Publication | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("publications")
+    .select(PUB_SELECT)
+    .eq("slug", slug)
+    .single();
+
+  if (error) return null;
+  return toPublication(data);
+}
+
+export async function getFeaturedPublications(): Promise<Publication[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("publications")
+    .select(PUB_SELECT)
+    .eq("is_featured", true)
+    .neq("type", "patent")
+    .order("year", { ascending: false })
+    .limit(3);
+
+  if (error) throw error;
+  return (data ?? []).map(toPublication);
+}
+
+export async function getPatents(): Promise<Publication[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("publications")
+    .select(PUB_SELECT)
+    .eq("type", "patent")
+    .order("year", { ascending: false });
+
+  if (error) throw error;
+  return (data ?? []).map(toPublication);
+}
+
+export async function getPatentBySlug(
+  slug: string,
+): Promise<Publication | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("publications")
+    .select(PUB_SELECT)
+    .eq("slug", slug)
+    .eq("type", "patent")
+    .single();
+
+  if (error) return null;
+  return toPublication(data);
+}
+
+export async function getAllPublications(): Promise<Publication[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("publications")
+    .select(PUB_SELECT)
+    .order("year", { ascending: false })
+    .order("month", { ascending: false });
+
+  if (error) throw error;
+  return (data ?? []).map(toPublication);
+}
+
+export async function getPublicationById(
+  id: string,
+): Promise<Publication | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("publications")
+    .select(PUB_SELECT)
+    .eq("id", id)
+    .single();
+
+  if (error) return null;
+  return toPublication(data);
+}
+
+export async function getPublicationsByMember(
+  memberId: string,
+): Promise<Publication[]> {
+  const supabase = await createClient();
+  const { data: authorRows } = await supabase
+    .from("publication_authors")
+    .select("publication_id")
+    .eq("member_id", memberId);
+
+  if (!authorRows?.length) return [];
+
+  const pubIds = authorRows.map((r) => r.publication_id);
+  const { data, error } = await supabase
+    .from("publications")
+    .select(PUB_SELECT)
+    .in("id", pubIds)
+    .order("year", { ascending: false });
+
+  if (error) throw error;
+  return (data ?? []).map(toPublication);
+}

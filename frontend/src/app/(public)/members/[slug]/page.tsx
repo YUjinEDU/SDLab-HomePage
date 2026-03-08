@@ -6,22 +6,23 @@ import { TagBadge } from "@/components/shared/TagBadge";
 import { MemberContactLinks } from "@/components/members/MemberContactLinks";
 import { MemberEducationTimeline } from "@/components/members/MemberEducationTimeline";
 import { MemberCareerTimeline } from "@/components/members/MemberCareerTimeline";
-import { members } from "@/data/members";
-import { publications } from "@/data/publications";
-import { projects } from "@/data/projects";
+import {
+  getMembers,
+  getMemberBySlug,
+  getPublicationsByMember,
+  getProjectsByMember,
+} from "@/lib/queries";
 import { groupLabels } from "@/data/stats";
+
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return members.map((m) => ({ slug: m.slug }));
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const member = members.find((m) => m.slug === slug);
+  const member = await getMemberBySlug(slug);
   if (!member) return { title: "구성원을 찾을 수 없습니다" };
   return {
     title: `${member.nameKo} | 스마트데이터연구실`,
@@ -31,16 +32,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function MemberDetailPage({ params }: Props) {
   const { slug } = await params;
-  const member = members.find((m) => m.slug === slug);
+  const member = await getMemberBySlug(slug);
 
   if (!member) notFound();
 
-  const memberPubs = publications.filter((p) =>
-    p.authorMemberIds.includes(member.id),
-  );
-  const memberProjects = projects.filter((p) =>
-    p.memberIds.includes(member.id),
-  );
+  const [allMemberPubs, memberProjects] = await Promise.all([
+    getPublicationsByMember(member.id),
+    getProjectsByMember(member.id),
+  ]);
+
+  const memberPubs = allMemberPubs.filter((p) => p.type !== "patent");
+  const memberPatents = allMemberPubs.filter((p) => p.type === "patent");
 
   const initials = member.nameKo
     .split("")
@@ -200,7 +202,7 @@ export default async function MemberDetailPage({ params }: Props) {
 
           {/* Projects by this member */}
           {memberProjects.length > 0 && (
-            <section>
+            <section className="mb-8">
               <h2 className="text-lg font-semibold text-foreground mb-4">
                 프로젝트 ({memberProjects.length})
               </h2>
@@ -216,6 +218,32 @@ export default async function MemberDetailPage({ params }: Props) {
                       </p>
                       <p className="text-xs text-text-secondary mt-1.5">
                         {proj.shortDescription}
+                      </p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {/* Patents by this member */}
+          {memberPatents.length > 0 && (
+            <section>
+              <h2 className="text-lg font-semibold text-foreground mb-4">
+                특허 ({memberPatents.length})
+              </h2>
+              <ul className="flex flex-col gap-3">
+                {memberPatents.map((patent) => (
+                  <li key={patent.id}>
+                    <Link
+                      href={`/patents/${patent.slug}`}
+                      className="block rounded-lg border border-border bg-surface p-4 hover:border-primary/40 hover:bg-primary-muted/20 transition-colors"
+                    >
+                      <p className="text-sm font-medium text-foreground leading-snug">
+                        {patent.title}
+                      </p>
+                      <p className="text-xs text-text-secondary mt-1.5">
+                        {patent.venue} · {patent.year}
                       </p>
                     </Link>
                   </li>

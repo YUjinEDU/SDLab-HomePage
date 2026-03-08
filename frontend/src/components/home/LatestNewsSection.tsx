@@ -1,21 +1,26 @@
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
-import { newsItems } from "@/data/news";
-import { publications } from "@/data/publications";
-import { projects } from "@/data/projects";
+import type { NewsItem, Publication, Project } from "@/types";
 
 const categoryLabel: Record<string, string> = {
+  notice: "공지",
   acceptance: "논문 게재",
   award: "수상",
   recruitment: "모집",
   event: "행사",
 };
 
-const latestNews = [...newsItems]
-  .sort((a, b) => b.date.localeCompare(a.date))
-  .slice(0, 4);
+type LatestNewsSectionProps = {
+  news: NewsItem[];
+  publications: Publication[];
+  projects: Project[];
+};
 
-export function LatestNewsSection() {
+export function LatestNewsSection({
+  news: latestNews,
+  publications,
+  projects,
+}: LatestNewsSectionProps) {
   return (
     <section className="py-24 lg:py-32 bg-surface">
       <Container>
@@ -55,9 +60,11 @@ export function LatestNewsSection() {
                     </span>
                   )}
                 </div>
-                <h3 className="text-base font-bold text-foreground leading-snug mb-2">
-                  {item.title}
-                </h3>
+                <Link href={`/news/${item.slug}`}>
+                  <h3 className="text-base font-bold text-foreground leading-snug mb-2 hover:text-primary transition-colors">
+                    {item.title}
+                  </h3>
+                </Link>
                 <p className="text-sm text-text-secondary leading-relaxed">
                   {item.summary}
                 </p>

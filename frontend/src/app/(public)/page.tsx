@@ -1,11 +1,5 @@
 import type { Metadata } from "next";
 import { HomeHeroSection } from "@/components/home/HomeHeroSection";
-
-export const metadata: Metadata = {
-  title: "Smart Data Lab | 충남대학교 스마트데이터연구실",
-  description:
-    "충남대학교 컴퓨터융합학부 스마트데이터연구실. 실시간 스마트 컴퓨팅, 바이오AI융합, 환경IT융합 연구를 수행합니다.",
-};
 import { LabIntroSection } from "@/components/home/LabIntroSection";
 import { ResearchAreasSection } from "@/components/home/ResearchAreasSection";
 import { StatsBarSection } from "@/components/home/StatsBarSection";
@@ -15,8 +9,38 @@ import { MembersSnapshotSection } from "@/components/home/MembersSnapshotSection
 import { LatestNewsSection } from "@/components/home/LatestNewsSection";
 import { ContactSummarySection } from "@/components/home/ContactSummarySection";
 import { AnimateOnScroll } from "@/components/shared/AnimateOnScroll";
+import {
+  getMembers,
+  getFeaturedPublications,
+  getLatestNews,
+  getPublications,
+  getProjects,
+  getContactInfo,
+} from "@/lib/queries";
 
-export default function HomePage() {
+export const metadata: Metadata = {
+  title: "Smart Data Lab | 충남대학교 스마트데이터연구실",
+  description:
+    "충남대학교 컴퓨터융합학부 스마트데이터연구실. 실시간 스마트 컴퓨팅, 바이오AI융합, 환경IT융합 연구를 수행합니다.",
+};
+
+export default async function HomePage() {
+  const [
+    members,
+    featuredPublications,
+    latestNews,
+    publications,
+    projects,
+    contactInfo,
+  ] = await Promise.all([
+    getMembers(),
+    getFeaturedPublications(),
+    getLatestNews(),
+    getPublications(),
+    getProjects(),
+    getContactInfo(),
+  ]);
+
   return (
     <main>
       <HomeHeroSection />
@@ -30,19 +54,26 @@ export default function HomePage() {
         <StatsBarSection />
       </AnimateOnScroll>
       <AnimateOnScroll>
-        <FeaturedPublicationsSection />
+        <FeaturedPublicationsSection
+          publications={featuredPublications}
+          members={members}
+        />
       </AnimateOnScroll>
       <AnimateOnScroll>
         <FeaturedProjectsSection />
       </AnimateOnScroll>
       <AnimateOnScroll>
-        <MembersSnapshotSection />
+        <MembersSnapshotSection members={members} />
       </AnimateOnScroll>
       <AnimateOnScroll>
-        <LatestNewsSection />
+        <LatestNewsSection
+          news={latestNews}
+          publications={publications}
+          projects={projects}
+        />
       </AnimateOnScroll>
       <AnimateOnScroll>
-        <ContactSummarySection />
+        <ContactSummarySection contactInfo={contactInfo} />
       </AnimateOnScroll>
     </main>
   );
