@@ -9,9 +9,8 @@ const navigationConfig = [
     category: "Members",
     href: "/members",
     subLinks: [
-      { label: "Professor", href: "/members#professor" },
-      { label: "Students", href: "/members#students" },
-      { label: "Alumni", href: "/members#alumni" },
+      { label: "Professor", href: "/members" },
+      { label: "Students", href: "/members/students" },
     ],
   },
   {
@@ -80,8 +79,8 @@ export function MainNavigation() {
               : "max-h-0 opacity-0 py-0 border-y-0"
           }`}
         >
-          <div className="flex gap-6 lg:gap-8 w-full px-4 sm:px-6 lg:px-8 max-w-7xl justify-end">
-            <div className="flex gap-12 lg:gap-16">
+          <div className="flex gap-6 lg:gap-8 w-full px-4 sm:px-6 lg:px-8 max-w-7xl justify-center">
+            <div className="flex gap-12 lg:gap-24">
               {navigationConfig.map((item) => {
                 if (!item.subLinks || item.subLinks.length === 0) return null;
 

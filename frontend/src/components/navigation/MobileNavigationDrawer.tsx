@@ -5,7 +5,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { href: "/members", label: "Members" },
+  { href: "/members", label: "Professor" },
+  { href: "/members/students", label: "Students" },
   { href: "/research", label: "Research" },
   { href: "/publications", label: "Publications" },
   { href: "/projects", label: "Projects" },

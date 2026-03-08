@@ -30,12 +30,31 @@ export function MembersSnapshotSection() {
             <span className="text-foreground font-semibold">{summary}</span>으로
             구성되어 있습니다.
           </p>
-          <div className="mt-8">
+          <div className="mt-8 flex flex-wrap gap-6">
             <Link
               href="/members"
               className="inline-flex items-center gap-2.5 text-sm font-bold text-primary hover:text-primary-dark transition-colors"
             >
-              구성원 전체 보기
+              지도교수 소개
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </Link>
+            <Link
+              href="/members/students"
+              className="inline-flex items-center gap-2.5 text-sm font-bold text-primary hover:text-primary-dark transition-colors"
+            >
+              연구원 보기
               <svg
                 width="16"
                 height="16"
