@@ -18,22 +18,20 @@ export function HomeHeroSection() {
             className="mb-8 opacity-90"
           />
 
-          <h1 className="text-[2.25rem] sm:text-[3.25rem] lg:text-[4rem] font-extrabold leading-[1.25] mb-3 tracking-tight text-foreground">
-            문제 정의부터
-            <br />
-            실제 가치 창출까지
-          </h1>
-          <h1 className="text-[2.25rem] sm:text-[3.25rem] lg:text-[4.25rem] font-extrabold leading-[1.1] mb-8 tracking-tight">
+          <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.25rem] font-extrabold leading-[1.1] mb-4 tracking-tight">
             <span className="text-gradient">스마트데이터연구실</span>
           </h1>
+          <h2 className="text-[1.5rem] sm:text-[1.75rem] lg:text-[2rem] font-bold leading-tight mb-8 tracking-tight text-foreground/80">
+            문제 정의부터 실제 가치 창출까지
+          </h2>
 
-          <p className="text-[16px] sm:text-[18px] text-text-secondary font-medium leading-[1.7] mb-12 max-w-[36rem]">
-            알고리즘 개선과 모델 고도화를 넘어,{" "}
+          <p className="text-[16px] sm:text-[18px] text-text-secondary font-medium leading-[1.7] mb-12 max-w-xl">
+            이론적 모델 고도화를 넘어, 현장에서 마주하는 문제를 제대로 정의하고
+            각 도메인에 합리적으로 AI를 적용하여{" "}
             <strong className="text-foreground font-semibold">
-              철저한 문제 정의
+              실질적인 가치
             </strong>
-            를 바탕으로 각 도메인에 AI를 적용합니다. 현실 세계의 문제를 해결하고
-            틈새 가치를 창출하는 실용적인 연구를 지향합니다.
+            를 창출하는 실용적 연구를 지향합니다.
           </p>
 
           <div className="flex flex-wrap gap-4">

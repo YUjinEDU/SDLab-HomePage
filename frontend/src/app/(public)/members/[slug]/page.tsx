@@ -56,6 +56,22 @@ export default async function MemberDetailPage({ params }: Props) {
   return (
     <div className="py-12">
       <Container>
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-1.5 text-xs text-text-secondary mb-6 font-medium">
+          <Link href="/" className="hover:text-primary transition-colors">
+            홈
+          </Link>
+          <span className="opacity-40">/</span>
+          <Link
+            href={backHref}
+            className="hover:text-primary transition-colors"
+          >
+            {member.group === "professor" ? "지도교수" : "연구원"}
+          </Link>
+          <span className="opacity-40">/</span>
+          <span className="text-foreground">{member.nameKo}</span>
+        </nav>
+
         <Link
           href={backHref}
           className="inline-flex items-center gap-1.5 text-sm text-text-secondary hover:text-primary transition-colors mb-8"

@@ -94,6 +94,30 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {project.shortDescription}
       </p>
 
+      {project.memberIds.length > 0 && (
+        <p className="text-xs text-text-secondary mb-3 flex items-center gap-1.5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="opacity-60"
+            aria-hidden="true"
+          >
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          참여 연구원 {project.memberIds.length}명
+        </p>
+      )}
+
       {project.tags.length > 0 && (
         <div className="flex flex-wrap gap-1.5 mt-auto relative z-10">
           {project.tags.map((tag) => (

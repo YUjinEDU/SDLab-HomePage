@@ -486,14 +486,14 @@ Note: StatsBarSection 컴포넌트는 존재하지만 현재 홈 페이지에서
 
 ### 5.1 Layout Components
 
-| Component                | File                                               | Props                  | Responsibility                  |
-| ------------------------ | -------------------------------------------------- | ---------------------- | ------------------------------- |
-| `SiteHeader`             | `components/layout/SiteHeader.tsx`                 | -                      | 로고 + 네비게이션 + 모바일 메뉴 |
-| `SiteFooter`             | `components/layout/SiteFooter.tsx`                 | -                      | 연구실 정보 + 퀵링크 + 저작권   |
-| `Container`              | `components/layout/Container.tsx`                  | `children, className?` | max-w-7xl 래퍼                  |
-| `MainNavigation`         | `components/navigation/MainNavigation.tsx`         | `currentPath`          | 데스크톱 GNB (mega menu + subLinks) |
+| Component                | File                                               | Props                  | Responsibility                                    |
+| ------------------------ | -------------------------------------------------- | ---------------------- | ------------------------------------------------- |
+| `SiteHeader`             | `components/layout/SiteHeader.tsx`                 | -                      | 로고 + 네비게이션 + 모바일 메뉴                   |
+| `SiteFooter`             | `components/layout/SiteFooter.tsx`                 | -                      | 연구실 정보 + 퀵링크 + 저작권                     |
+| `Container`              | `components/layout/Container.tsx`                  | `children, className?` | max-w-7xl 래퍼                                    |
+| `MainNavigation`         | `components/navigation/MainNavigation.tsx`         | `currentPath`          | 데스크톱 GNB (mega menu + subLinks)               |
 | `MobileNavigationDrawer` | `components/navigation/MobileNavigationDrawer.tsx` | `isOpen, onClose`      | 모바일 사이드 메뉴 (Professor/Students 분리 링크) |
-| `PageHero`               | `components/shared/PageHero.tsx`                   | `title, description?`  | 페이지 상단 타이틀 영역         |
+| `PageHero`               | `components/shared/PageHero.tsx`                   | `title, description?`  | 페이지 상단 타이틀 영역                           |
 
 ### 5.2 Shared Components
 
@@ -516,18 +516,18 @@ Note: StatsBarSection 컴포넌트는 존재하지만 현재 홈 페이지에서
 
 #### Home (`components/home/`)
 
-| Component                     | Props                                  | Client? | Note                     |
-| ----------------------------- | -------------------------------------- | ------- | ------------------------ |
+| Component                     | Props                                  | Client? | Note                      |
+| ----------------------------- | -------------------------------------- | ------- | ------------------------- |
 | `HomeHeroSection`             | `labInfo, keywords, ctaLinks`          | No      | NetworkBackground 포함    |
 | `NetworkBackground`           | -                                      | Yes     | 히어로 배경 애니메이션    |
 | `LabIntroSection`             | -                                      | No      | 연구실 소개 텍스트        |
-| `ResearchAreasSection`        | `areas: ResearchArea[]`                | No      |                          |
+| `ResearchAreasSection`        | `areas: ResearchArea[]`                | No      |                           |
 | `StatsBarSection`             | `stats: StatItem[]`                    | No      | 존재하나 홈 페이지 미사용 |
-| `FeaturedPublicationsSection` | `publications: Publication[]`          | No      |                          |
-| `FeaturedProjectsSection`     | `projects: Project[]`                  | No      |                          |
-| `MembersSnapshotSection`      | `professor: Member, members: Member[]` | No      |                          |
-| `LatestNewsSection`           | `news: NewsItem[]`                     | No      |                          |
-| `ContactSummarySection`       | `contact: ContactInfo`                 | No      |                          |
+| `FeaturedPublicationsSection` | `publications: Publication[]`          | No      |                           |
+| `FeaturedProjectsSection`     | `projects: Project[]`                  | No      |                           |
+| `MembersSnapshotSection`      | `professor: Member, members: Member[]` | No      |                           |
+| `LatestNewsSection`           | `news: NewsItem[]`                     | No      |                           |
+| `ContactSummarySection`       | `contact: ContactInfo`                 | No      |                           |
 
 #### Members (`components/members/`)
 
@@ -608,18 +608,18 @@ frontend/src/app/
 
 ### 6.2 Page Data Flow
 
-| Page              | Data Source (MVP)                                                                                                                        | Server/Client                   |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
-| Home              | `data/members.ts`, `data/research-areas.ts`, `data/publications.ts`, `data/projects.ts`, `data/news.ts`, `data/contact.ts`, `data/stats.ts` | Server                          |
-| Members (Prof)    | `data/members.ts`                                                                                                                        | Server                          |
-| Members (Students)| `data/members.ts`, `data/stats.ts`                                                                                                       | Server + Client (tab switching) |
-| Member Detail     | `data/members.ts`, `data/publications.ts`, `data/projects.ts`                                                                            | Server (크로스 링크)             |
-| Research          | `data/research-areas.ts`, `data/projects.ts`, `data/publications.ts`                                                                     | Server                          |
-| Publications      | `data/publications.ts`                                                                                                                   | Server + Client (filter/search) |
-| Publication Detail| `data/publications.ts`, `data/members.ts`, `data/projects.ts`                                                                            | Server (크로스 링크)             |
-| Projects          | `data/projects.ts`                                                                                                                       | Server + Client (filter)        |
-| Project Detail    | `data/projects.ts`, `data/members.ts`, `data/publications.ts`                                                                            | Server (크로스 링크)             |
-| Contact           | `data/contact.ts`                                                                                                                        | Server                          |
+| Page               | Data Source (MVP)                                                                                                                           | Server/Client                   |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| Home               | `data/members.ts`, `data/research-areas.ts`, `data/publications.ts`, `data/projects.ts`, `data/news.ts`, `data/contact.ts`, `data/stats.ts` | Server                          |
+| Members (Prof)     | `data/members.ts`                                                                                                                           | Server                          |
+| Members (Students) | `data/members.ts`, `data/stats.ts`                                                                                                          | Server + Client (tab switching) |
+| Member Detail      | `data/members.ts`, `data/publications.ts`, `data/projects.ts`                                                                               | Server (크로스 링크)            |
+| Research           | `data/research-areas.ts`, `data/projects.ts`, `data/publications.ts`                                                                        | Server                          |
+| Publications       | `data/publications.ts`                                                                                                                      | Server + Client (filter/search) |
+| Publication Detail | `data/publications.ts`, `data/members.ts`, `data/projects.ts`                                                                               | Server (크로스 링크)            |
+| Projects           | `data/projects.ts`                                                                                                                          | Server + Client (filter)        |
+| Project Detail     | `data/projects.ts`, `data/members.ts`, `data/publications.ts`                                                                               | Server (크로스 링크)            |
+| Contact            | `data/contact.ts`                                                                                                                           | Server                          |
 
 ---
 
@@ -853,7 +853,7 @@ Estimated files: ~3
 
 ## Version History
 
-| Version | Date       | Changes                                              | Author      |
-| ------- | ---------- | ---------------------------------------------------- | ----------- |
-| 0.1     | 2026-03-08 | Initial draft - Plan 문서 + 기획 문서 기반 상세 설계 | Claude Code |
+| Version | Date       | Changes                                                                                                                                                                                                                                                                               | Author      |
+| ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| 0.1     | 2026-03-08 | Initial draft - Plan 문서 + 기획 문서 기반 상세 설계                                                                                                                                                                                                                                  | Claude Code |
 | 0.2     | 2026-03-08 | Updated to reflect actual implementation - members split (professor/students), detail pages ([slug] with cross-links), design tokens updated, data/stats.ts added, home page sections revised (LabIntroSection/NetworkBackground added, StatsBarSection unused), navigation mega menu | Claude Code |

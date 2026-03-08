@@ -46,6 +46,7 @@ export default function StudentsPage() {
       <PageHero
         title="연구원"
         description="스마트데이터연구실의 연구원을 소개합니다"
+        breadcrumb="연구원"
       />
 
       <Container className="py-14">

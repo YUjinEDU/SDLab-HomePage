@@ -18,6 +18,7 @@ export default function MembersPage() {
       <PageHero
         title="지도교수"
         description="스마트데이터연구실을 이끌고 있는 지도교수를 소개합니다"
+        breadcrumb="지도교수"
       />
 
       <Container className="py-14">

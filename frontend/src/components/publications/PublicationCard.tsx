@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Publication } from "@/types";
 import { TagBadge } from "@/components/shared/TagBadge";
+import { members } from "@/data/members";
 
 const TYPE_LABELS: Record<string, string> = {
   journal: "국제 저널",
@@ -104,7 +105,28 @@ export function PublicationCard({ publication }: PublicationCardProps) {
             <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
             <path d="M16 3.13a4 4 0 0 1 0 7.75" />
           </svg>
-          <span className="truncate">{authors.join(", ")}</span>
+          <span className="truncate">
+            {authors.map((author, idx) => {
+              const matchedMember = members.find(
+                (m) => m.nameEn === author || m.nameKo === author,
+              );
+              return (
+                <span key={idx}>
+                  {idx > 0 && ", "}
+                  {matchedMember ? (
+                    <Link
+                      href={`/members/${matchedMember.slug}`}
+                      className="text-primary hover:text-primary-dark transition-colors relative z-10"
+                    >
+                      {author}
+                    </Link>
+                  ) : (
+                    author
+                  )}
+                </span>
+              );
+            })}
+          </span>
         </p>
 
         <p className="text-[13px] text-text-secondary font-medium mb-5 flex items-center gap-2">

@@ -40,6 +40,7 @@ export default function ProjectsPage() {
       <PageHero
         title="프로젝트"
         description="스마트데이터연구실의 연구 프로젝트"
+        breadcrumb="프로젝트"
       />
 
       <section className="py-12">

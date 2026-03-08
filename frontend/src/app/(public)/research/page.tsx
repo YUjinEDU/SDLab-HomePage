@@ -23,6 +23,7 @@ export default function ResearchPage() {
       <PageHero
         title="연구 분야"
         description="스마트데이터연구실의 3대 핵심 연구 분야를 소개합니다"
+        breadcrumb="연구 분야"
       />
 
       <section className="py-16">

@@ -14,19 +14,36 @@ import { FeaturedProjectsSection } from "@/components/home/FeaturedProjectsSecti
 import { MembersSnapshotSection } from "@/components/home/MembersSnapshotSection";
 import { LatestNewsSection } from "@/components/home/LatestNewsSection";
 import { ContactSummarySection } from "@/components/home/ContactSummarySection";
+import { AnimateOnScroll } from "@/components/shared/AnimateOnScroll";
 
 export default function HomePage() {
   return (
     <main>
       <HomeHeroSection />
-      <LabIntroSection />
-      <ResearchAreasSection />
-      <StatsBarSection />
-      <FeaturedPublicationsSection />
-      <FeaturedProjectsSection />
-      <MembersSnapshotSection />
-      <LatestNewsSection />
-      <ContactSummarySection />
+      <AnimateOnScroll>
+        <LabIntroSection />
+      </AnimateOnScroll>
+      <AnimateOnScroll>
+        <ResearchAreasSection />
+      </AnimateOnScroll>
+      <AnimateOnScroll>
+        <StatsBarSection />
+      </AnimateOnScroll>
+      <AnimateOnScroll>
+        <FeaturedPublicationsSection />
+      </AnimateOnScroll>
+      <AnimateOnScroll>
+        <FeaturedProjectsSection />
+      </AnimateOnScroll>
+      <AnimateOnScroll>
+        <MembersSnapshotSection />
+      </AnimateOnScroll>
+      <AnimateOnScroll>
+        <LatestNewsSection />
+      </AnimateOnScroll>
+      <AnimateOnScroll>
+        <ContactSummarySection />
+      </AnimateOnScroll>
     </main>
   );
 }

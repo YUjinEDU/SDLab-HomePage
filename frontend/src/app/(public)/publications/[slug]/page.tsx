@@ -73,6 +73,24 @@ export default async function PublicationDetailPage({ params }: Props) {
   return (
     <div className="py-12">
       <Container>
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-1.5 text-xs text-text-secondary mb-6 font-medium">
+          <Link href="/" className="hover:text-primary transition-colors">
+            홈
+          </Link>
+          <span className="opacity-40">/</span>
+          <Link
+            href="/publications"
+            className="hover:text-primary transition-colors"
+          >
+            논문
+          </Link>
+          <span className="opacity-40">/</span>
+          <span className="text-foreground truncate max-w-[300px]">
+            {pub.title}
+          </span>
+        </nav>
+
         {/* Back link */}
         <Link
           href="/publications"

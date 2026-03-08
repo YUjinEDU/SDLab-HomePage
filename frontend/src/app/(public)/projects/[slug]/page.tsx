@@ -57,6 +57,24 @@ export default async function ProjectDetailPage({ params }: Props) {
     <div className="py-12">
       <Container>
         <div className="max-w-4xl mx-auto">
+          {/* Breadcrumb */}
+          <nav className="flex items-center gap-1.5 text-xs text-text-secondary mb-6 font-medium">
+            <Link href="/" className="hover:text-primary transition-colors">
+              홈
+            </Link>
+            <span className="opacity-40">/</span>
+            <Link
+              href="/projects"
+              className="hover:text-primary transition-colors"
+            >
+              프로젝트
+            </Link>
+            <span className="opacity-40">/</span>
+            <span className="text-foreground truncate max-w-[300px]">
+              {project.title}
+            </span>
+          </nav>
+
           {/* Back link */}
           <Link
             href="/projects"

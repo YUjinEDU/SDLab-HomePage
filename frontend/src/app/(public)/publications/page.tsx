@@ -62,6 +62,7 @@ export default function PublicationsPage() {
       <PageHero
         title="논문"
         description="스마트데이터연구실의 연구 논문 목록"
+        breadcrumb="논문"
       />
 
       <section className="py-12">

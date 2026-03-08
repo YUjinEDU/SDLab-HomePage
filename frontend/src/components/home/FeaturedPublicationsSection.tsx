@@ -8,7 +8,7 @@ export function FeaturedPublicationsSection() {
   return (
     <section className="py-24 lg:py-32 bg-surface">
       <Container>
-        <div className="max-w-4xl mx-auto mb-14">
+        <div className="max-w-5xl mx-auto mb-14">
           <p className="font-display text-xs font-bold tracking-[0.2em] text-primary uppercase mb-4">
             Publications
           </p>
@@ -25,7 +25,7 @@ export function FeaturedPublicationsSection() {
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {featured.map((pub) => (
             <Link
               key={pub.id}

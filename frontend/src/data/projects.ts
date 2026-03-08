@@ -4,7 +4,7 @@ export const projects: Project[] = [
   {
     id: "proj-1",
     slug: "ai-convergence-research-center",
-    title: "AI융합연구센터지원사업",
+    title: "[샘플] AI융합연구센터지원사업",
     status: "active",
     category: "국가연구개발",
     shortDescription:
@@ -27,7 +27,7 @@ export const projects: Project[] = [
   {
     id: "proj-2",
     slug: "ai-convergence-talent-development",
-    title: "AI융합혁신인재양성사업",
+    title: "[샘플] AI융합혁신인재양성사업",
     status: "active",
     category: "교육부사업",
     shortDescription:
@@ -50,7 +50,7 @@ export const projects: Project[] = [
   {
     id: "proj-3",
     slug: "environmental-iot-monitoring",
-    title: "환경 IoT 기반 수질 및 대기 모니터링 시스템",
+    title: "[샘플] 환경 IoT 기반 수질 및 대기 모니터링 시스템",
     status: "active",
     category: "국가연구개발",
     shortDescription:
@@ -73,7 +73,7 @@ export const projects: Project[] = [
   {
     id: "proj-4",
     slug: "smart-factory-recommendation",
-    title: "스마트팩토리 상황인지 추천시스템",
+    title: "[샘플] 스마트팩토리 상황인지 추천시스템",
     status: "completed",
     category: "산학협력",
     shortDescription:

@@ -3,6 +3,8 @@ import type { Member, MemberGroup } from "@/types";
 import { TagBadge } from "@/components/shared/TagBadge";
 import { MemberContactLinks } from "./MemberContactLinks";
 import { groupLabels } from "@/data/stats";
+import { publications } from "@/data/publications";
+import { projects } from "@/data/projects";
 
 type Props = {
   member: Member;
@@ -62,6 +64,25 @@ export function MemberCard({ member }: Props) {
             ))}
           </div>
         )}
+        {/* Activity summary */}
+        {(() => {
+          const pubCount = publications.filter((p) =>
+            p.authorMemberIds.includes(member.id),
+          ).length;
+          const projCount = projects.filter((p) =>
+            p.memberIds.includes(member.id),
+          ).length;
+          if (pubCount === 0 && projCount === 0) return null;
+          return (
+            <p className="text-xs text-text-secondary mt-3">
+              {pubCount > 0 && <span>논문 {pubCount}편</span>}
+              {pubCount > 0 && projCount > 0 && (
+                <span className="mx-1.5 opacity-40">·</span>
+              )}
+              {projCount > 0 && <span>프로젝트 {projCount}건</span>}
+            </p>
+          );
+        })()}
       </div>
 
       {/* Links */}

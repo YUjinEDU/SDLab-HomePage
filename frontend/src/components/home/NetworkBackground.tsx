@@ -54,10 +54,10 @@ export function NetworkBackground() {
         this.vy = (Math.random() - 0.5) * 0.4;
         this.type = NODE_TYPES[Math.floor(Math.random() * NODE_TYPES.length)];
 
-        if (this.type === "human") this.size = 11;
-        else if (this.type === "database") this.size = 12;
-        else if (this.type === "ai") this.size = 9;
-        else this.size = 4;
+        if (this.type === "human") this.size = 14;
+        else if (this.type === "database") this.size = 16;
+        else if (this.type === "ai") this.size = 13;
+        else this.size = 4.5;
       }
 
       update() {
@@ -133,9 +133,61 @@ export function NetworkBackground() {
       }
     }
 
+    class Packet {
+      startNode: Particle;
+      endNode: Particle;
+      progress: number;
+      speed: number;
+
+      constructor(start: Particle, end: Particle) {
+        this.startNode = start;
+        this.endNode = end;
+        this.progress = 0;
+        this.speed = Math.random() * 0.008 + 0.004; // smooth traveling speed
+      }
+
+      update() {
+        this.progress += this.speed;
+      }
+
+      draw() {
+        if (!ctx) return;
+        const dx = this.endNode.x - this.startNode.x;
+        const dy = this.endNode.y - this.startNode.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        // If nodes move too far apart, terminate early
+        if (dist > CONNECTION_DISTANCE * 1.5) {
+          this.progress = 1;
+          return;
+        }
+
+        const x = this.startNode.x + dx * this.progress;
+        const y = this.startNode.y + dy * this.progress;
+
+        // Peak opacity at the middle of the journey
+        const alpha = Math.sin(this.progress * Math.PI);
+
+        // Draw glowing data packet
+        ctx.beginPath();
+        ctx.arc(x, y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${EMERALD_RGB}, ${alpha})`;
+        ctx.fill();
+
+        // Outer glow
+        ctx.beginPath();
+        ctx.arc(x, y, 6, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${EMERALD_RGB}, ${alpha * 0.25})`;
+        ctx.fill();
+      }
+    }
+
     let particles: Particle[] = [];
+    let packets: Packet[] = [];
+
     const initParticles = () => {
       particles = [];
+      packets = [];
       const particleCount = Math.floor((canvas.width * canvas.height) / 20000);
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
@@ -162,9 +214,9 @@ export function NetworkBackground() {
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Phase 1: Update positions and draw connection lines
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
-        particles[i].draw();
 
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -180,6 +232,14 @@ export function NetworkBackground() {
             ctx.strokeStyle = `rgba(${EMERALD_RGB}, ${opacity})`;
             ctx.lineWidth = 1.5;
             ctx.stroke();
+
+            // Randomly spawn a data packet between actively connected nodes
+            // Probability depends on frame rate, 0.2% per connection is a good balance
+            if (Math.random() < 0.002) {
+              if (Math.random() > 0.5)
+                packets.push(new Packet(particles[i], particles[j]));
+              else packets.push(new Packet(particles[j], particles[i]));
+            }
           }
         }
 
@@ -196,9 +256,37 @@ export function NetworkBackground() {
           ctx.lineWidth = 1.5;
           ctx.stroke();
 
+          // Organic pulling effect towards mouse
           particles[i].x += dxMouse * 0.012;
           particles[i].y += dyMouse * 0.012;
+
+          // Occasionally send packets to the mouse position (treated as a virtual node)
+          if (Math.random() < 0.005) {
+            // Create a dummy particle for the mouse to allow packet to travel
+            const mouseParticle = new Particle();
+            mouseParticle.x = mouse.x;
+            mouseParticle.y = mouse.y;
+            mouseParticle.update = () => {
+              mouseParticle.x = mouse.x;
+              mouseParticle.y = mouse.y;
+            };
+            packets.push(new Packet(particles[i], mouseParticle));
+          }
         }
+      }
+
+      // Phase 2: Update and draw flowing packets (underneath nodes)
+      for (let p = packets.length - 1; p >= 0; p--) {
+        packets[p].update();
+        packets[p].draw();
+        if (packets[p].progress >= 1) {
+          packets.splice(p, 1);
+        }
+      }
+
+      // Phase 3: Draw solid nodes on top of all lines and packets
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].draw();
       }
 
       animationFrameId = requestAnimationFrame(animate);

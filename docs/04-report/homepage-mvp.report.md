@@ -843,6 +843,7 @@ The homepage-mvp feature has successfully completed the full PDCA cycle with 96%
 
 ## Version History
 
-| Version | Date       | Changes                                                               | Author                         |
-| ------- | ---------- | --------------------------------------------------------------------- | ------------------------------ |
-| 1.0     | 2026-03-08 | Initial completion report - Iteration 0 to 1 improvements (88% → 96%) | Claude Code (report-generator) |
+| Version | Date       | Changes                                                                                                                                                                                         | Author                         |
+| ------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| 1.0     | 2026-03-08 | Initial completion report - Iteration 0 to 1 improvements (88% → 96%)                                                                                                                           | Claude Code (report-generator) |
+| 1.1     | 2026-03-08 | UI/UX improvements: AnimateOnScroll, breadcrumbs, data cross-links, dummy data [샘플] prefix, EmptyState SVG, author-member links, FeaturedPublications grid layout, MemberCard activity counts | Claude Code                    |

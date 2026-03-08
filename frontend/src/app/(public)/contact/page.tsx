@@ -16,6 +16,7 @@ export default function ContactPage() {
       <PageHero
         title="연락처"
         description="스마트데이터연구실 위치 및 연락처 안내"
+        breadcrumb="연락처"
       />
 
       <section className="py-16">
