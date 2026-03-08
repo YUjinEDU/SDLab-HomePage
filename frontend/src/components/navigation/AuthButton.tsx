@@ -8,14 +8,23 @@ import type { User } from "@supabase/supabase-js";
 
 export function AuthButton() {
   const [user, setUser] = useState<User | null>(null);
+  const [role, setRole] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
   const supabase = createClient();
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
+    supabase.auth.getUser().then(async ({ data }) => {
       setUser(data.user);
+      if (data.user) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", data.user.id)
+          .single();
+        setRole(profile?.role ?? null);
+      }
       setLoading(false);
     });
 
@@ -78,12 +87,21 @@ export function AuthButton() {
               </p>
             </div>
             <Link
-              href="/professor"
+              href="/internal"
               onClick={() => setMenuOpen(false)}
               className="block px-4 py-2 text-[13px] text-foreground hover:bg-surface hover:text-primary transition-colors"
             >
-              관리 페이지
+              내부 포털
             </Link>
+            {(role === "professor" || role === "admin") && (
+              <Link
+                href="/professor"
+                onClick={() => setMenuOpen(false)}
+                className="block px-4 py-2 text-[13px] text-foreground hover:bg-surface hover:text-primary transition-colors"
+              >
+                관리 페이지
+              </Link>
+            )}
             <button
               onClick={handleLogout}
               className="w-full text-left px-4 py-2 text-[13px] text-red-600 hover:bg-red-50 transition-colors"
