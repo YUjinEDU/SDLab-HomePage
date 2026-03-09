@@ -98,11 +98,19 @@ export default async function MemberDetailPage({ params }: Props) {
         <div className="max-w-3xl">
           {/* Profile header */}
           <div className="flex items-start gap-5 mb-8">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary-muted to-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-              <span className="text-2xl font-black text-primary">
-                {initials}
-              </span>
-            </div>
+            {member.image ? (
+              <img
+                src={member.image}
+                alt={member.nameKo}
+                className="w-20 h-20 rounded-2xl object-cover shrink-0 shadow-sm border border-border"
+              />
+            ) : (
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary-muted to-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                <span className="text-2xl font-black text-primary">
+                  {initials}
+                </span>
+              </div>
+            )}
             <div>
               <span className="text-xs font-bold text-primary bg-primary-muted px-2.5 py-0.5 rounded-full uppercase">
                 {groupLabels[member.group] ?? member.group}
