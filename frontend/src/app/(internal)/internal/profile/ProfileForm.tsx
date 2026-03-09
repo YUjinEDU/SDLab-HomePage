@@ -115,17 +115,8 @@ export function ProfileForm({ member }: Props) {
             </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              이메일
-            </label>
-            <div className="w-full rounded-lg border border-gray-200 bg-gray-100 px-3 py-2 text-sm text-gray-700">
-              {member.email ?? "-"}
-            </div>
-          </div>
-
           <p className="text-xs text-gray-500">
-            이름, 소속, 직위, 이메일 변경은 관리자에게 요청하세요.
+            이름, 소속, 직위 변경은 관리자에게 요청하세요.
           </p>
         </fieldset>
 
@@ -134,6 +125,23 @@ export function ProfileForm({ member }: Props) {
           <legend className="text-sm font-semibold text-gray-700 px-2">
             프로필 편집
           </legend>
+
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              이메일
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="example@email.com"
+              defaultValue={member.email ?? ""}
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+            />
+          </div>
 
           <div>
             <label

@@ -51,6 +51,7 @@ export async function updateMyProfile(formData: FormData) {
     return { error: "연결된 멤버 정보가 없습니다." };
   }
 
+  const email = (formData.get("email") as string)?.trim() || null;
   const image = (formData.get("image") as string) || null;
   const bio = (formData.get("bio") as string) || null;
 
@@ -69,6 +70,7 @@ export async function updateMyProfile(formData: FormData) {
   const { error } = await supabase
     .from("members")
     .update({
+      email,
       image,
       bio,
       research_keywords: researchKeywords,
