@@ -117,6 +117,27 @@ const navItems: NavItem[] = [
     ),
   },
   {
+    href: "/internal/profile",
+    label: "내 프로필",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" />
+        <path d="M6.168 18.849A4 4 0 0 1 10 16h4a4 4 0 0 1 3.834 2.855" />
+      </svg>
+    ),
+  },
+  {
     href: "/internal/account",
     label: "계정 관리",
     icon: (
