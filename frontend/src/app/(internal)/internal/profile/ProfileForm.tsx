@@ -9,11 +9,25 @@ type Props = {
   member: Member;
 };
 
+type EducationEntry = {
+  degree: string;
+  institution: string;
+  field: string;
+  year: string;
+};
+type CareerEntry = { period: string; role: string; organization: string };
+
 export function ProfileForm({ member }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [educationList, setEducationList] = useState<EducationEntry[]>(
+    member.education?.length ? member.education : [],
+  );
+  const [careerList, setCareerList] = useState<CareerEntry[]>(
+    member.career?.length ? member.career : [],
+  );
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -30,13 +44,6 @@ export function ProfileForm({ member }: Props) {
       }
     });
   }
-
-  const educationDefault = member.education?.length
-    ? JSON.stringify(member.education, null, 2)
-    : "";
-  const careerDefault = member.career?.length
-    ? JSON.stringify(member.career, null, 2)
-    : "";
 
   const GROUP_LABELS: Record<string, string> = {
     professor: "지도교수",
@@ -227,55 +234,272 @@ export function ProfileForm({ member }: Props) {
           </div>
         </fieldset>
 
-        {/* Section 4: Education & Career */}
+        {/* Hidden inputs to serialize education/career as JSON */}
+        <input
+          type="hidden"
+          name="education"
+          value={JSON.stringify(educationList)}
+        />
+        <input type="hidden" name="career" value={JSON.stringify(careerList)} />
+
+        {/* Section 4: Education */}
         <fieldset className="rounded-xl border border-gray-200 bg-white p-6 space-y-4">
           <legend className="text-sm font-semibold text-gray-700 px-2">
-            학력 &amp; 경력 (선택)
+            학력 (선택)
           </legend>
 
-          <div>
-            <label
-              htmlFor="education"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              학력 정보 (JSON)
-            </label>
-            <textarea
-              id="education"
-              name="education"
-              rows={5}
-              defaultValue={educationDefault}
-              placeholder={`[
-  { "degree": "박사", "institution": "서울대학교", "field": "컴퓨터공학", "year": "2020" }
-]`}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm font-mono focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none resize-y"
-            />
-            <p className="mt-1 text-xs text-gray-500">
-              JSON 배열 형식. 각 항목: degree, institution, field, year
-            </p>
-          </div>
+          {educationList.length === 0 && (
+            <p className="text-sm text-gray-400">등록된 학력이 없습니다.</p>
+          )}
 
-          <div>
-            <label
-              htmlFor="career"
-              className="block text-sm font-medium text-gray-700 mb-1"
+          {educationList.map((entry, idx) => (
+            <div
+              key={idx}
+              className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_1fr_auto] gap-3 items-end border-b border-gray-100 pb-4 last:border-0"
             >
-              경력 정보 (JSON)
-            </label>
-            <textarea
-              id="career"
-              name="career"
-              rows={5}
-              defaultValue={careerDefault}
-              placeholder={`[
-  { "period": "2020-2023", "role": "연구원", "organization": "KAIST" }
-]`}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm font-mono focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none resize-y"
-            />
-            <p className="mt-1 text-xs text-gray-500">
-              JSON 배열 형식. 각 항목: period, role, organization
-            </p>
-          </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  학위
+                </label>
+                <input
+                  type="text"
+                  value={entry.degree}
+                  onChange={(e) => {
+                    const next = [...educationList];
+                    next[idx] = { ...next[idx], degree: e.target.value };
+                    setEducationList(next);
+                  }}
+                  placeholder="학사 / 석사 / 박사"
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  학교
+                </label>
+                <input
+                  type="text"
+                  value={entry.institution}
+                  onChange={(e) => {
+                    const next = [...educationList];
+                    next[idx] = { ...next[idx], institution: e.target.value };
+                    setEducationList(next);
+                  }}
+                  placeholder="충남대학교"
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  전공
+                </label>
+                <input
+                  type="text"
+                  value={entry.field}
+                  onChange={(e) => {
+                    const next = [...educationList];
+                    next[idx] = { ...next[idx], field: e.target.value };
+                    setEducationList(next);
+                  }}
+                  placeholder="컴퓨터공학"
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                />
+              </div>
+              <div className="sm:col-span-1">
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  기간
+                </label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={entry.year}
+                    onChange={(e) => {
+                      const next = [...educationList];
+                      next[idx] = { ...next[idx], year: e.target.value };
+                      setEducationList(next);
+                    }}
+                    placeholder="2020 - 2024"
+                    className="w-full min-w-[120px] rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setEducationList(
+                        educationList.filter((_, i) => i !== idx),
+                      )
+                    }
+                    className="shrink-0 p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    aria-label="삭제"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M3 6h18" />
+                      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <button
+            type="button"
+            onClick={() =>
+              setEducationList([
+                ...educationList,
+                { degree: "", institution: "", field: "", year: "" },
+              ])
+            }
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-slate-800 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M8 12h8" />
+              <path d="M12 8v8" />
+            </svg>
+            학력 추가
+          </button>
+        </fieldset>
+
+        {/* Section 5: Career */}
+        <fieldset className="rounded-xl border border-gray-200 bg-white p-6 space-y-4">
+          <legend className="text-sm font-semibold text-gray-700 px-2">
+            경력 (선택)
+          </legend>
+
+          {careerList.length === 0 && (
+            <p className="text-sm text-gray-400">등록된 경력이 없습니다.</p>
+          )}
+
+          {careerList.map((entry, idx) => (
+            <div
+              key={idx}
+              className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-3 items-end border-b border-gray-100 pb-4 last:border-0"
+            >
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  직책/역할
+                </label>
+                <input
+                  type="text"
+                  value={entry.role}
+                  onChange={(e) => {
+                    const next = [...careerList];
+                    next[idx] = { ...next[idx], role: e.target.value };
+                    setCareerList(next);
+                  }}
+                  placeholder="연구원"
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  소속
+                </label>
+                <input
+                  type="text"
+                  value={entry.organization}
+                  onChange={(e) => {
+                    const next = [...careerList];
+                    next[idx] = { ...next[idx], organization: e.target.value };
+                    setCareerList(next);
+                  }}
+                  placeholder="KAIST"
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  기간
+                </label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={entry.period}
+                    onChange={(e) => {
+                      const next = [...careerList];
+                      next[idx] = { ...next[idx], period: e.target.value };
+                      setCareerList(next);
+                    }}
+                    placeholder="2020 - 2023"
+                    className="w-full min-w-[120px] rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setCareerList(careerList.filter((_, i) => i !== idx))
+                    }
+                    className="shrink-0 p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    aria-label="삭제"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M3 6h18" />
+                      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <button
+            type="button"
+            onClick={() =>
+              setCareerList([
+                ...careerList,
+                { period: "", role: "", organization: "" },
+              ])
+            }
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-slate-800 transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M8 12h8" />
+              <path d="M12 8v8" />
+            </svg>
+            경력 추가
+          </button>
         </fieldset>
 
         {/* Actions */}
