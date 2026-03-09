@@ -8,7 +8,7 @@ export const members: Member[] = [
     nameEn: "Young-Kuk Kim",
     group: "professor",
     position: "교수",
-    department: "컴퓨터융합학부",
+    department: "컴퓨터인공지능학부",
     image: null,
     email: "ykim@cnu.ac.kr",
     links: {
@@ -22,7 +22,7 @@ export const members: Member[] = [
       "IoT",
       "바이오 빅데이터",
     ],
-    bio: "충남대학교 컴퓨터융합학부 교수로서 스마트데이터연구실을 이끌고 있습니다. 실시간 스마트 컴퓨팅, 바이오AI융합, 환경IT융합 분야의 연구를 수행하고 있습니다.",
+    bio: "충남대학교 컴퓨터인공지능학부 교수로서 스마트데이터연구실을 이끌고 있습니다. 실시간 스마트 컴퓨팅, 바이오AI융합, 환경IT융합 분야의 연구를 수행하고 있습니다.",
     education: [
       {
         degree: "학사",
@@ -47,7 +47,7 @@ export const members: Member[] = [
       {
         period: "2002 - 현재",
         role: "교수",
-        organization: "충남대학교 컴퓨터융합학부",
+        organization: "충남대학교 컴퓨터인공지능학부",
       },
       {
         period: "2018 - 2024",
@@ -79,7 +79,7 @@ export const members: Member[] = [
     nameEn: "Gildong Hong",
     group: "phd",
     position: "박사과정",
-    department: "컴퓨터융합학부",
+    department: "컴퓨터인공지능학부",
     image: null,
     email: null,
     links: {
@@ -111,7 +111,7 @@ export const members: Member[] = [
     nameEn: "Sample Kim",
     group: "ms",
     position: "석사과정",
-    department: "컴퓨터융합학부",
+    department: "컴퓨터인공지능학부",
     image: null,
     email: null,
     links: {},
@@ -135,7 +135,7 @@ export const members: Member[] = [
     nameEn: "Test Lee",
     group: "ms",
     position: "석사과정",
-    department: "컴퓨터융합학부",
+    department: "컴퓨터인공지능학부",
     image: null,
     email: null,
     links: {},
@@ -159,7 +159,7 @@ export const members: Member[] = [
     nameEn: "Alumni Park",
     group: "alumni",
     position: "석사 졸업",
-    department: "컴퓨터융합학부",
+    department: "컴퓨터인공지능학부",
     image: null,
     email: null,
     links: {},
@@ -195,7 +195,7 @@ export const members: Member[] = [
     nameEn: "Alumni Choi",
     group: "alumni",
     position: "박사 졸업",
-    department: "컴퓨터융합학부",
+    department: "컴퓨터인공지능학부",
     image: null,
     email: null,
     links: {},

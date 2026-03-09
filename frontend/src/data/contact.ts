@@ -17,7 +17,7 @@ export const contactInfo: ContactInfo = {
     professorPhone: "821-5450",
     labPhone: "821-7441",
   },
-  department: "공과대학 컴퓨터융합학부",
+  department: "공과대학 컴퓨터인공지능학부",
   university: "충남대학교",
   address: "대전광역시 유성구 대학로 99 충남대학교 공대 5호관",
   mapEmbedUrl: null,

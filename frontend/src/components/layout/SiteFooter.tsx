@@ -20,7 +20,7 @@ export function SiteFooter() {
               Smart Data Lab
             </h3>
             <p className="text-sm text-white/50 leading-relaxed">
-              충남대학교 컴퓨터융합학부
+              충남대학교 컴퓨터인공지능학부
               <br />
               스마트데이터연구실
             </p>
@@ -71,7 +71,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-white/10 text-center text-xs text-white/30">
-          &copy; 2026 Smart Data Lab, 충남대학교 컴퓨터융합학부
+          &copy; 2026 Smart Data Lab, 충남대학교 컴퓨터인공지능학부
         </div>
       </Container>
     </footer>

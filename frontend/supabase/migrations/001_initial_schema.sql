@@ -39,7 +39,7 @@ CREATE TABLE members (
   name_en TEXT NOT NULL,
   "group" member_group NOT NULL,
   position TEXT NOT NULL,
-  department TEXT NOT NULL DEFAULT '컴퓨터융합학부',
+  department TEXT NOT NULL DEFAULT '컴퓨터인공지능학부',
   image TEXT,
   email TEXT,
   links JSONB NOT NULL DEFAULT '{}',

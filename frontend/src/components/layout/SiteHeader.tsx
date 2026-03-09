@@ -26,7 +26,7 @@ export function SiteHeader() {
             <span className="hidden sm:block text-[11px] text-text-secondary leading-tight border-l border-border pl-3 font-medium">
               충남대학교
               <br />
-              컴퓨터융합학부
+              컴퓨터인공지능학부
             </span>
           </Link>
 

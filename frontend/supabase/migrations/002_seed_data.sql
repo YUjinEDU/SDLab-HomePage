@@ -7,15 +7,15 @@
 -- ============================================================
 
 INSERT INTO members (id, slug, name_ko, name_en, "group", position, department, image, email, links, research_keywords, bio, education, career, display_order) VALUES
-('m-1', 'young-kuk-kim', '김영국', 'Young-Kuk Kim', 'professor', '교수', '컴퓨터융합학부', NULL, 'ykim@cnu.ac.kr',
+('m-1', 'young-kuk-kim', '김영국', 'Young-Kuk Kim', 'professor', '교수', '컴퓨터인공지능학부', NULL, 'ykim@cnu.ac.kr',
   '{"scholar": "https://scholar.google.co.kr/citations?user=PLACEHOLDER", "homepage": "https://sdlab.cnu.ac.kr"}',
   ARRAY['추천시스템', '실시간 스트림 데이터 처리', '상황인지 컴퓨팅', 'IoT', '바이오 빅데이터'],
-  '충남대학교 컴퓨터융합학부 교수로서 스마트데이터연구실을 이끌고 있습니다. 실시간 스마트 컴퓨팅, 바이오AI융합, 환경IT융합 분야의 연구를 수행하고 있습니다.',
+  '충남대학교 컴퓨터인공지능학부 교수로서 스마트데이터연구실을 이끌고 있습니다. 실시간 스마트 컴퓨팅, 바이오AI융합, 환경IT융합 분야의 연구를 수행하고 있습니다.',
   '[{"degree":"학사","institution":"서울대학교","field":"계산통계학과","year":"1988"},{"degree":"석사","institution":"서울대학교","field":"계산통계학과","year":"1990"},{"degree":"박사","institution":"University of Virginia","field":"Computer Science","year":"2000"}]',
-  '[{"period":"2002 - 현재","role":"교수","organization":"충남대학교 컴퓨터융합학부"},{"period":"2018 - 2024","role":"AI융합연구센터장","organization":"충남대학교"},{"period":"2015 - 2017","role":"컴퓨터공학과 학과장","organization":"충남대학교"},{"period":"2000 - 2002","role":"선임연구원","organization":"한국전자통신연구원(ETRI)"},{"period":"1990 - 1995","role":"연구원","organization":"LG전자 중앙연구소"}]',
+  '[{"period":"2002 - 현재","role":"교수","organization":"충남대학교 컴퓨터인공지능학부"},{"period":"2018 - 2024","role":"AI융합연구센터장","organization":"충남대학교"},{"period":"2015 - 2017","role":"컴퓨터공학과 학과장","organization":"충남대학교"},{"period":"2000 - 2002","role":"선임연구원","organization":"한국전자통신연구원(ETRI)"},{"period":"1990 - 1995","role":"연구원","organization":"LG전자 중앙연구소"}]',
   1),
 
-('m-2', 'gildong-hong', '홍길동', 'Gildong Hong', 'phd', '박사과정', '컴퓨터융합학부', NULL, NULL,
+('m-2', 'gildong-hong', '홍길동', 'Gildong Hong', 'phd', '박사과정', '컴퓨터인공지능학부', NULL, NULL,
   '{"github": "https://github.com/placeholder"}',
   ARRAY['추천시스템', '딥러닝', '실시간 데이터 처리'],
   NULL,
@@ -23,7 +23,7 @@ INSERT INTO members (id, slug, name_ko, name_en, "group", position, department, 
   '[]',
   2),
 
-('m-3', 'sample-kim', '김샘플', 'Sample Kim', 'ms', '석사과정', '컴퓨터융합학부', NULL, NULL,
+('m-3', 'sample-kim', '김샘플', 'Sample Kim', 'ms', '석사과정', '컴퓨터인공지능학부', NULL, NULL,
   '{}',
   ARRAY['바이오 빅데이터', '머신러닝'],
   NULL,
@@ -31,7 +31,7 @@ INSERT INTO members (id, slug, name_ko, name_en, "group", position, department, 
   '[]',
   3),
 
-('m-4', 'test-lee', '이테스트', 'Test Lee', 'ms', '석사과정', '컴퓨터융합학부', NULL, NULL,
+('m-4', 'test-lee', '이테스트', 'Test Lee', 'ms', '석사과정', '컴퓨터인공지능학부', NULL, NULL,
   '{}',
   ARRAY['IoT', '환경 모니터링', '데이터 분석'],
   NULL,
@@ -39,7 +39,7 @@ INSERT INTO members (id, slug, name_ko, name_en, "group", position, department, 
   '[]',
   4),
 
-('m-5', 'alumni-park', '[샘플] 박졸업', 'Alumni Park', 'alumni', '석사 졸업', '컴퓨터융합학부', NULL, NULL,
+('m-5', 'alumni-park', '[샘플] 박졸업', 'Alumni Park', 'alumni', '석사 졸업', '컴퓨터인공지능학부', NULL, NULL,
   '{}',
   ARRAY['추천시스템', '데이터마이닝'],
   NULL,
@@ -47,7 +47,7 @@ INSERT INTO members (id, slug, name_ko, name_en, "group", position, department, 
   '[{"period":"2020 - 현재","role":"연구원","organization":"한국전자통신연구원(ETRI)"}]',
   5),
 
-('m-6', 'alumni-choi', '[샘플] 최졸업', 'Alumni Choi', 'alumni', '박사 졸업', '컴퓨터융합학부', NULL, NULL,
+('m-6', 'alumni-choi', '[샘플] 최졸업', 'Alumni Choi', 'alumni', '박사 졸업', '컴퓨터인공지능학부', NULL, NULL,
   '{}',
   ARRAY['IoT', '스마트팩토리', '실시간 처리'],
   NULL,
@@ -223,7 +223,7 @@ INSERT INTO news (id, slug, title, summary, category, date, is_pinned) VALUES
 INSERT INTO contact_info (id, lab_name_ko, lab_name_en, professor_name, professor_title, professor_email, building, professor_office, lab_room, professor_phone, lab_phone, department, university, address, map_embed_url) VALUES
 ('main', '스마트데이터연구실', 'Smart Data Lab', '김영국', '교수', 'ykim@cnu.ac.kr',
   '공대 5호관', '516호', '532호', '821-5450', '821-7441',
-  '공과대학 컴퓨터융합학부', '충남대학교',
+  '공과대학 컴퓨터인공지능학부', '충남대학교',
   '대전광역시 유성구 대학로 99 충남대학교 공대 5호관', NULL);
 
 -- ============================================================
