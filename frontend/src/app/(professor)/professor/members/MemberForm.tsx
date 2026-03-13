@@ -20,13 +20,8 @@ const GROUP_OPTIONS: { value: MemberGroup; label: string }[] = [
   { value: "alumni", label: "졸업생" },
 ];
 
-type EducationEntry = {
-  degree: string;
-  institution: string;
-  field: string;
-  year: string;
-};
-type CareerEntry = { period: string; role: string; organization: string };
+type EducationEntry = Member["education"][number];
+type CareerEntry = Member["career"][number];
 
 export function MemberForm({ member, action, title }: Props) {
   const router = useRouter();
@@ -445,8 +440,48 @@ export function MemberForm({ member, action, title }: Props) {
           {careerList.map((entry, idx) => (
             <div
               key={idx}
-              className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-3 items-end border-b border-gray-100 pb-4 last:border-0"
+              className="grid grid-cols-1 sm:grid-cols-[120px_1fr_1fr_1fr_auto] gap-3 items-end border-b border-gray-100 pb-4 last:border-0"
             >
+              {/* 구분 */}
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  구분
+                </label>
+                <select
+                  value={entry.category ?? "career"}
+                  onChange={(e) => {
+                    const next = [...careerList];
+                    next[idx] = {
+                      ...next[idx],
+                      category: e.target.value as CareerEntry["category"],
+                    };
+                    setCareerList(next);
+                  }}
+                  className="w-full rounded-lg border border-gray-300 px-2 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none bg-white"
+                >
+                  <option value="career">경력</option>
+                  <option value="award">수상</option>
+                  <option value="academic_service">학술활동</option>
+                </select>
+              </div>
+              {/* 기간 */}
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">
+                  기간
+                </label>
+                <input
+                  type="text"
+                  value={entry.period}
+                  onChange={(e) => {
+                    const next = [...careerList];
+                    next[idx] = { ...next[idx], period: e.target.value };
+                    setCareerList(next);
+                  }}
+                  placeholder="2020 - 2023"
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                />
+              </div>
+              {/* 직책/역할 */}
               <div>
                 <label className="block text-xs font-medium text-gray-500 mb-1">
                   직책/역할
@@ -463,6 +498,7 @@ export function MemberForm({ member, action, title }: Props) {
                   className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
                 />
               </div>
+              {/* 소속 */}
               <div>
                 <label className="block text-xs font-medium text-gray-500 mb-1">
                   소속
@@ -475,51 +511,39 @@ export function MemberForm({ member, action, title }: Props) {
                     next[idx] = { ...next[idx], organization: e.target.value };
                     setCareerList(next);
                   }}
-                  placeholder="KAIST"
+                  placeholder="충남대학교"
                   className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
                 />
               </div>
+              {/* 삭제 */}
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">
-                  기간
+                <label className="block text-xs font-medium text-gray-500 mb-1 invisible">
+                  삭제
                 </label>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="text"
-                    value={entry.period}
-                    onChange={(e) => {
-                      const next = [...careerList];
-                      next[idx] = { ...next[idx], period: e.target.value };
-                      setCareerList(next);
-                    }}
-                    placeholder="2020 - 2023"
-                    className="w-full min-w-[120px] rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
-                  />
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setCareerList(careerList.filter((_, i) => i !== idx))
-                    }
-                    className="shrink-0 p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                    aria-label="삭제"
+                <button
+                  type="button"
+                  onClick={() =>
+                    setCareerList(careerList.filter((_, i) => i !== idx))
+                  }
+                  className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                  aria-label="삭제"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M3 6h18" />
-                      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-                    </svg>
-                  </button>
-                </div>
+                    <path d="M3 6h18" />
+                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                  </svg>
+                </button>
               </div>
             </div>
           ))}

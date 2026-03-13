@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { HomeHeroSection } from "@/components/home/HomeHeroSection";
 import { LabIntroSection } from "@/components/home/LabIntroSection";
 import { ResearchAreasSection } from "@/components/home/ResearchAreasSection";
-import { StatsBarSection } from "@/components/home/StatsBarSection";
 import { FeaturedPublicationsSection } from "@/components/home/FeaturedPublicationsSection";
 import { FeaturedProjectsSection } from "@/components/home/FeaturedProjectsSection";
 import { MembersSnapshotSection } from "@/components/home/MembersSnapshotSection";
@@ -51,7 +50,11 @@ export default async function HomePage() {
         <ResearchAreasSection />
       </AnimateOnScroll>
       <AnimateOnScroll>
-        <StatsBarSection />
+        <LatestNewsSection
+          news={latestNews}
+          publications={publications}
+          projects={projects}
+        />
       </AnimateOnScroll>
       <AnimateOnScroll>
         <FeaturedPublicationsSection
@@ -64,13 +67,6 @@ export default async function HomePage() {
       </AnimateOnScroll>
       <AnimateOnScroll>
         <MembersSnapshotSection members={members} />
-      </AnimateOnScroll>
-      <AnimateOnScroll>
-        <LatestNewsSection
-          news={latestNews}
-          publications={publications}
-          projects={projects}
-        />
       </AnimateOnScroll>
       <AnimateOnScroll>
         <ContactSummarySection contactInfo={contactInfo} />

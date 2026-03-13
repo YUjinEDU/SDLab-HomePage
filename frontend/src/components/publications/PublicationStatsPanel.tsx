@@ -8,9 +8,17 @@ export function PublicationStatsPanel({
   publications,
 }: PublicationStatsPanelProps) {
   const total = publications.length;
-  const journalCount = publications.filter((p) => p.type === "journal").length;
-  const conferenceCount = publications.filter(
-    (p) => p.type === "conference",
+  const intlJournal = publications.filter(
+    (p) => p.type === "journal" && p.isInternational,
+  ).length;
+  const domJournal = publications.filter(
+    (p) => p.type === "journal" && !p.isInternational,
+  ).length;
+  const intlConf = publications.filter(
+    (p) => p.type === "conference" && p.isInternational,
+  ).length;
+  const domConf = publications.filter(
+    (p) => p.type === "conference" && !p.isInternational,
   ).length;
 
   const years = publications.map((p) => p.year);
@@ -24,9 +32,11 @@ export function PublicationStatsPanel({
       : "-";
 
   const stats = [
-    { label: "전체 논문", value: total },
-    { label: "저널", value: journalCount },
-    { label: "학술대회", value: conferenceCount },
+    { label: "전체", value: total },
+    { label: "국제 저널", value: intlJournal },
+    { label: "국내 저널", value: domJournal },
+    { label: "국제 학술대회", value: intlConf },
+    { label: "국내 학술대회", value: domConf },
     { label: "연구 기간", value: yearRange },
   ];
 

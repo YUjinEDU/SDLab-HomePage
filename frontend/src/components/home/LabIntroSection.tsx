@@ -1,7 +1,16 @@
 import { Container } from "@/components/layout/Container";
 import { labStats } from "@/data/stats";
+import { getAlumniCount } from "@/lib/queries";
 
-export function LabIntroSection() {
+export async function LabIntroSection() {
+  const alumniCount = await getAlumniCount();
+
+  const stats = [
+    ...labStats.slice(0, 1),
+    { value: `${alumniCount}+`, label: "석박사 배출" },
+    ...labStats.slice(1),
+  ];
+
   return (
     <section className="py-24 lg:py-32 relative">
       <Container>
@@ -20,8 +29,8 @@ export function LabIntroSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto">
-          {labStats.map((stat) => (
+        <div className="grid grid-cols-3 gap-6 mt-16 max-w-2xl mx-auto">
+          {stats.map((stat) => (
             <div
               key={stat.label}
               className="text-center bg-white rounded-xl p-6 border border-border"

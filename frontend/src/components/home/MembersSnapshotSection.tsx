@@ -57,7 +57,7 @@ export function MembersSnapshotSection({
               </svg>
             </Link>
             <Link
-              href="/members/students"
+              href="/members"
               className="inline-flex items-center gap-2.5 text-sm font-bold text-primary hover:text-primary-dark transition-colors"
             >
               연구원 보기

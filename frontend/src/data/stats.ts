@@ -1,7 +1,5 @@
 export const labStats = [
   { value: "1996", label: "연구실 설립" },
-  { value: "3", label: "핵심 연구 분야" },
-  { value: "79+", label: "석박사 배출" },
   { value: "14", label: "기술이전 건수" },
 ];
 

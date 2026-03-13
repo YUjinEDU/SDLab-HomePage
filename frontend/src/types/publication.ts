@@ -12,6 +12,7 @@ export type Publication = {
   authors: string[];
   authorMemberIds: string[];
   type: PublicationType;
+  isInternational: boolean;
   venue: string;
   year: number;
   month: number | null;

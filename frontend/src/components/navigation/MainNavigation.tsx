@@ -21,11 +21,10 @@ const navigationConfig: NavItem[] = [
     category: "Members",
     href: "/members",
     subLinks: [
-      { label: "Professor", href: "/members", description: "Faculty Profile" },
       {
-        label: "Students",
-        href: "/members/students",
-        description: "M.S. / Ph.D. / Alumni",
+        label: "Members",
+        href: "/members",
+        description: "Professor & Researchers",
       },
     ],
   },

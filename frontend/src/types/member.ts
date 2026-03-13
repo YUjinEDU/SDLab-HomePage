@@ -30,6 +30,11 @@ export type Member = {
     field: string;
     year: string;
   }[];
-  career: { period: string; role: string; organization: string }[];
+  career: {
+    period: string;
+    role: string;
+    organization: string;
+    category?: "career" | "award" | "academic_service";
+  }[];
   displayOrder: number;
 };

@@ -25,6 +25,7 @@ function toPublication(row: PubRow): Publication {
     authors: (row.authors as string[]) ?? [],
     authorMemberIds,
     type: row.type as Publication["type"],
+    isInternational: (row.is_international as boolean) ?? true,
     venue: row.venue as string,
     year: row.year as number,
     month: (row.month as number) ?? null,

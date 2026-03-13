@@ -20,10 +20,7 @@ const mobileNavConfig: MobileNavItem[] = [
   {
     category: "Members",
     href: "/members",
-    subLinks: [
-      { label: "Professor", href: "/members" },
-      { label: "Students", href: "/members/students" },
-    ],
+    subLinks: [{ label: "Members", href: "/members" }],
   },
   {
     category: "Research",

@@ -70,6 +70,35 @@ export async function getProfessor(): Promise<Member | null> {
   return toMember(data);
 }
 
+export async function getAlumniCount(): Promise<number> {
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from("members")
+    .select("*", { count: "exact", head: true })
+    .eq("group", "alumni");
+
+  if (error) return 0;
+  return count ?? 0;
+}
+
+export async function getMemberStubs(): Promise<
+  Pick<Member, "id" | "nameKo" | "nameEn" | "slug">[]
+> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("members")
+    .select("id, name_ko, name_en, slug")
+    .order("display_order");
+
+  if (error) throw error;
+  return (data ?? []).map((r) => ({
+    id: r.id as string,
+    nameKo: r.name_ko as string,
+    nameEn: r.name_en as string,
+    slug: r.slug as string,
+  }));
+}
+
 export async function getStudents(): Promise<Member[]> {
   const supabase = await createClient();
   const { data, error } = await supabase

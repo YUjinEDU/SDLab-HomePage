@@ -7,7 +7,6 @@ import { MemberContactLinks } from "@/components/members/MemberContactLinks";
 import { MemberEducationTimeline } from "@/components/members/MemberEducationTimeline";
 import { MemberCareerTimeline } from "@/components/members/MemberCareerTimeline";
 import {
-  getMembers,
   getMemberBySlug,
   getPublicationsByMember,
   getProjectsByMember,
@@ -36,10 +35,13 @@ export default async function MemberDetailPage({ params }: Props) {
 
   if (!member) notFound();
 
-  const [allMemberPubs, memberProjects] = await Promise.all([
-    getPublicationsByMember(member.id),
-    getProjectsByMember(member.id),
-  ]);
+  const isProfessor = member.group === "professor";
+  const [allMemberPubs, memberProjects] = isProfessor
+    ? [[], []]
+    : await Promise.all([
+        getPublicationsByMember(member.id),
+        getProjectsByMember(member.id),
+      ]);
 
   const memberPubs = allMemberPubs.filter((p) => p.type !== "patent");
   const memberPatents = allMemberPubs.filter((p) => p.type === "patent");
@@ -49,11 +51,6 @@ export default async function MemberDetailPage({ params }: Props) {
     .filter((_, i) => i === 0 || i === member.nameKo.length - 1)
     .join("")
     .slice(0, 2);
-
-  const backHref =
-    member.group === "professor" ? "/members" : "/members/students";
-  const backLabel =
-    member.group === "professor" ? "지도교수 페이지로" : "연구원 목록으로";
 
   return (
     <div className="py-12">
@@ -65,17 +62,17 @@ export default async function MemberDetailPage({ params }: Props) {
           </Link>
           <span className="opacity-40">/</span>
           <Link
-            href={backHref}
+            href="/members"
             className="hover:text-primary transition-colors"
           >
-            {member.group === "professor" ? "지도교수" : "연구원"}
+            구성원
           </Link>
           <span className="opacity-40">/</span>
           <span className="text-foreground">{member.nameKo}</span>
         </nav>
 
         <Link
-          href={backHref}
+          href="/members"
           className="inline-flex items-center gap-1.5 text-sm text-text-secondary hover:text-primary transition-colors mb-8"
         >
           <svg
@@ -92,173 +89,244 @@ export default async function MemberDetailPage({ params }: Props) {
           >
             <path d="m15 18-6-6 6-6" />
           </svg>
-          {backLabel}
+          구성원 목록으로
         </Link>
 
-        <div className="max-w-3xl">
-          {/* Profile header */}
-          <div className="flex items-start gap-5 mb-8">
-            {member.image ? (
-              <img
-                src={member.image}
-                alt={member.nameKo}
-                className="w-20 h-20 rounded-2xl object-cover shrink-0 shadow-sm border border-border"
-              />
-            ) : (
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary-muted to-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                <span className="text-2xl font-black text-primary">
-                  {initials}
-                </span>
+        {/* ── 공통 사이드바 레이아웃 ── */}
+        <div className="lg:grid lg:grid-cols-[280px_1fr] lg:gap-12 lg:items-start">
+          {/* ── 좌측 사이드바 (스티키) ── */}
+          <aside className="lg:sticky lg:top-24 mb-10 lg:mb-0">
+            {/* 사진 */}
+            <div className="mb-5">
+              {member.image ? (
+                <img
+                  src={member.image}
+                  alt={member.nameKo}
+                  className="w-56 h-56 rounded-2xl object-cover shadow-sm border border-border"
+                />
+              ) : (
+                <div className="w-56 h-56 rounded-2xl bg-gradient-to-br from-primary-muted to-primary/10 border border-primary/20 flex items-center justify-center">
+                  <span className="text-6xl font-black text-primary">
+                    {initials}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* 이름 / 직위 */}
+            <span className="text-xs font-bold text-primary bg-primary-muted px-2.5 py-0.5 rounded-full uppercase">
+              {groupLabels[member.group] ?? member.group}
+            </span>
+            <h1 className="text-2xl font-bold text-foreground mt-2 mb-0.5">
+              {member.nameKo}
+            </h1>
+            <p className="text-sm text-text-secondary font-mono">
+              {member.nameEn}
+            </p>
+            <p className="text-sm text-text-secondary mt-1 mb-4">
+              {member.position} · {member.department}
+            </p>
+
+            {/* 연락처 */}
+            {(member.email || Object.values(member.links).some(Boolean)) && (
+              <div className="mb-5">
+                <MemberContactLinks email={member.email} links={member.links} />
               </div>
             )}
-            <div>
-              <span className="text-xs font-bold text-primary bg-primary-muted px-2.5 py-0.5 rounded-full uppercase">
-                {groupLabels[member.group] ?? member.group}
-              </span>
-              <h1 className="text-2xl sm:text-3xl font-bold text-foreground mt-2">
-                {member.nameKo}
-              </h1>
-              <p className="text-sm text-text-secondary font-mono mt-1">
-                {member.nameEn}
-              </p>
-              <p className="text-sm text-text-secondary mt-1">
-                {member.position} · {member.department}
-              </p>
-            </div>
-          </div>
 
-          {/* Contact links */}
-          {(member.email || Object.values(member.links).some(Boolean)) && (
-            <div className="mb-8">
-              <MemberContactLinks email={member.email} links={member.links} />
-            </div>
-          )}
-
-          {/* Bio */}
-          {member.bio && (
-            <section className="mb-8">
-              <h2 className="text-lg font-semibold text-foreground mb-3">
-                소개
-              </h2>
-              <p className="text-text-secondary leading-relaxed">
-                {member.bio}
-              </p>
-            </section>
-          )}
-
-          {/* Research keywords */}
-          {member.researchKeywords.length > 0 && (
-            <section className="mb-8">
-              <h2 className="text-lg font-semibold text-foreground mb-3">
-                연구 키워드
-              </h2>
-              <div className="flex flex-wrap gap-2">
-                {member.researchKeywords.map((kw) => (
-                  <TagBadge key={kw} label={kw} variant="primary" />
-                ))}
+            {/* 연구 키워드 */}
+            {member.researchKeywords.length > 0 && (
+              <div className="mb-5">
+                <p className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
+                  연구 키워드
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {member.researchKeywords.map((kw) => (
+                    <TagBadge key={kw} label={kw} variant="primary" />
+                  ))}
+                </div>
               </div>
-            </section>
-          )}
+            )}
 
-          {/* Education */}
-          {member.education.length > 0 && (
-            <section className="mb-8">
-              <h2 className="text-lg font-semibold text-foreground mb-3">
-                학력
-              </h2>
-              <MemberEducationTimeline education={member.education} />
-            </section>
-          )}
+            {/* 학력 */}
+            {member.education.length > 0 && (
+              <div>
+                <p className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-3">
+                  학력
+                </p>
+                <MemberEducationTimeline education={member.education} />
+              </div>
+            )}
+          </aside>
 
-          {/* Career */}
-          {member.career.length > 0 && (
-            <section className="mb-8">
-              <h2 className="text-lg font-semibold text-foreground mb-3">
-                경력
-              </h2>
-              <MemberCareerTimeline career={member.career} />
-            </section>
-          )}
+          {/* ── 우측 메인 콘텐츠 ── */}
+          <div className="min-w-0">
+            {/* Bio */}
+            {member.bio && (
+              <section className="mb-8 pb-8 border-b border-border">
+                <h2 className="text-lg font-semibold text-foreground mb-3">
+                  소개
+                </h2>
+                <p className="text-text-secondary leading-relaxed">
+                  {member.bio}
+                </p>
+              </section>
+            )}
 
-          <hr className="border-border my-8" />
-
-          {/* Publications by this member */}
-          {memberPubs.length > 0 && (
-            <section className="mb-8">
-              <h2 className="text-lg font-semibold text-foreground mb-4">
-                논문 ({memberPubs.length})
-              </h2>
-              <ul className="flex flex-col gap-3">
-                {memberPubs.map((pub) => (
-                  <li key={pub.id}>
-                    <Link
-                      href={`/publications/${pub.slug}`}
-                      className="block rounded-lg border border-border bg-surface p-4 hover:border-primary/40 hover:bg-primary-muted/20 transition-colors"
+            {isProfessor ? (
+              /* ── 교수님: 경력 / 수상 / 학술활동 ── */
+              (() => {
+                const careerGroups = {
+                  career: member.career.filter(
+                    (c) => !c.category || c.category === "career",
+                  ),
+                  award: member.career.filter((c) => c.category === "award"),
+                  academic_service: member.career.filter(
+                    (c) => c.category === "academic_service",
+                  ),
+                };
+                const renderCareerList = (
+                  entries: typeof member.career,
+                  title: string,
+                  last = false,
+                ) =>
+                  entries.length > 0 ? (
+                    <section
+                      className={`mb-8${last ? "" : " pb-8 border-b border-border"}`}
                     >
-                      <p className="text-sm font-medium text-foreground leading-snug">
-                        {pub.title}
-                      </p>
-                      <p className="text-xs text-text-secondary mt-1.5">
-                        {pub.venue} · {pub.year}
-                      </p>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
+                      <h2 className="text-lg font-semibold text-foreground mb-4">
+                        {title}
+                      </h2>
+                      <ul className="flex flex-col gap-3">
+                        {entries.map((entry, i) => (
+                          <li
+                            key={i}
+                            className="flex items-start gap-4 py-3 border-b border-border last:border-0"
+                          >
+                            <span className="text-xs font-mono text-text-secondary bg-surface px-2 py-1 rounded shrink-0 mt-0.5">
+                              {entry.period}
+                            </span>
+                            <div>
+                              <p className="text-sm font-semibold text-foreground">
+                                {entry.role}
+                              </p>
+                              <p className="text-xs text-text-secondary mt-0.5">
+                                {entry.organization}
+                              </p>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+                  ) : null;
+                return (
+                  <>
+                    {careerGroups.career.length > 0 && (
+                      <section className="mb-8 pb-8 border-b border-border">
+                        <h2 className="text-lg font-semibold text-foreground mb-4">
+                          경력
+                        </h2>
+                        <MemberCareerTimeline career={careerGroups.career} />
+                      </section>
+                    )}
+                    {renderCareerList(careerGroups.award, "수상 경력")}
+                    {renderCareerList(
+                      careerGroups.academic_service,
+                      "학술 활동",
+                      true,
+                    )}
+                  </>
+                );
+              })()
+            ) : (
+              /* ── 일반 멤버: 경력 + 논문/프로젝트/특허 ── */
+              <>
+                {member.career.length > 0 && (
+                  <section className="mb-8 pb-8 border-b border-border">
+                    <h2 className="text-lg font-semibold text-foreground mb-4">
+                      경력
+                    </h2>
+                    <MemberCareerTimeline career={member.career} />
+                  </section>
+                )}
 
-          {/* Projects by this member */}
-          {memberProjects.length > 0 && (
-            <section className="mb-8">
-              <h2 className="text-lg font-semibold text-foreground mb-4">
-                프로젝트 ({memberProjects.length})
-              </h2>
-              <ul className="flex flex-col gap-3">
-                {memberProjects.map((proj) => (
-                  <li key={proj.id}>
-                    <Link
-                      href={`/projects/${proj.slug}`}
-                      className="block rounded-lg border border-border bg-surface p-4 hover:border-primary/40 hover:bg-primary-muted/20 transition-colors"
-                    >
-                      <p className="text-sm font-medium text-foreground leading-snug">
-                        {proj.title}
-                      </p>
-                      <p className="text-xs text-text-secondary mt-1.5">
-                        {proj.shortDescription}
-                      </p>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
+                {memberPubs.length > 0 && (
+                  <section className="mb-8 pb-8 border-b border-border">
+                    <h2 className="text-lg font-semibold text-foreground mb-4">
+                      논문 ({memberPubs.length})
+                    </h2>
+                    <ul className="flex flex-col gap-3">
+                      {memberPubs.map((pub) => (
+                        <li key={pub.id}>
+                          <Link
+                            href={`/publications/${pub.slug}`}
+                            className="block rounded-lg border border-border bg-surface p-4 hover:border-primary/40 hover:bg-primary-muted/20 transition-colors"
+                          >
+                            <p className="text-sm font-medium text-foreground leading-snug">
+                              {pub.title}
+                            </p>
+                            <p className="text-xs text-text-secondary mt-1.5">
+                              {pub.venue} · {pub.year}
+                            </p>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
 
-          {/* Patents by this member */}
-          {memberPatents.length > 0 && (
-            <section>
-              <h2 className="text-lg font-semibold text-foreground mb-4">
-                특허 ({memberPatents.length})
-              </h2>
-              <ul className="flex flex-col gap-3">
-                {memberPatents.map((patent) => (
-                  <li key={patent.id}>
-                    <Link
-                      href={`/patents/${patent.slug}`}
-                      className="block rounded-lg border border-border bg-surface p-4 hover:border-primary/40 hover:bg-primary-muted/20 transition-colors"
-                    >
-                      <p className="text-sm font-medium text-foreground leading-snug">
-                        {patent.title}
-                      </p>
-                      <p className="text-xs text-text-secondary mt-1.5">
-                        {patent.venue} · {patent.year}
-                      </p>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
+                {memberProjects.length > 0 && (
+                  <section className="mb-8 pb-8 border-b border-border">
+                    <h2 className="text-lg font-semibold text-foreground mb-4">
+                      프로젝트 ({memberProjects.length})
+                    </h2>
+                    <ul className="flex flex-col gap-3">
+                      {memberProjects.map((proj) => (
+                        <li key={proj.id}>
+                          <Link
+                            href={`/projects/${proj.slug}`}
+                            className="block rounded-lg border border-border bg-surface p-4 hover:border-primary/40 hover:bg-primary-muted/20 transition-colors"
+                          >
+                            <p className="text-sm font-medium text-foreground leading-snug">
+                              {proj.title}
+                            </p>
+                            <p className="text-xs text-text-secondary mt-1.5">
+                              {proj.shortDescription}
+                            </p>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+
+                {memberPatents.length > 0 && (
+                  <section className="mb-8">
+                    <h2 className="text-lg font-semibold text-foreground mb-4">
+                      특허 ({memberPatents.length})
+                    </h2>
+                    <ul className="flex flex-col gap-3">
+                      {memberPatents.map((patent) => (
+                        <li key={patent.id}>
+                          <Link
+                            href={`/patents/${patent.slug}`}
+                            className="block rounded-lg border border-border bg-surface p-4 hover:border-primary/40 hover:bg-primary-muted/20 transition-colors"
+                          >
+                            <p className="text-sm font-medium text-foreground leading-snug">
+                              {patent.title}
+                            </p>
+                            <p className="text-xs text-text-secondary mt-1.5">
+                              {patent.venue} · {patent.year}
+                            </p>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </Container>
     </div>

@@ -7,7 +7,7 @@ import { Pagination } from "@/components/shared/Pagination";
 import { PublicationStatsPanel } from "@/components/publications/PublicationStatsPanel";
 import { PublicationFilters } from "@/components/publications/PublicationFilters";
 import { PublicationList } from "@/components/publications/PublicationList";
-import type { Publication, PublicationType } from "@/types";
+import type { Publication, PublicationType, Member } from "@/types";
 
 const PER_PAGE = 10;
 
@@ -19,9 +19,10 @@ type FilterState = {
 
 type Props = {
   publications: Publication[];
+  members: Pick<Member, "nameKo" | "nameEn" | "slug">[];
 };
 
-export function PublicationsPageClient({ publications }: Props) {
+export function PublicationsPageClient({ publications, members }: Props) {
   const [filters, setFilters] = useState<FilterState>({});
   const [page, setPage] = useState(1);
 
@@ -82,6 +83,7 @@ export function PublicationsPageClient({ publications }: Props) {
 
             <PublicationList
               publications={paginated}
+              members={members}
               emptyMessage={
                 Object.keys(filters).some(
                   (k) =>

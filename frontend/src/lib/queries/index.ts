@@ -1,8 +1,10 @@
 export {
   getMembers,
   getMemberBySlug,
+  getMemberStubs,
   getProfessor,
   getStudents,
+  getAlumniCount,
 } from "./members";
 
 export {

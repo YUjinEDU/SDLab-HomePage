@@ -126,12 +126,9 @@ export async function updateMember(id: string, formData: FormData) {
   const education = parseJsonField(formData.get("education") as string);
   const career = parseJsonField(formData.get("career") as string);
 
-  const slug = generateSlug(nameEn);
-
   const { error } = await supabase
     .from("members")
     .update({
-      slug,
       name_ko: nameKo,
       name_en: nameEn,
       group,

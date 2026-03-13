@@ -1,4 +1,4 @@
-import { getPublications } from "@/lib/queries";
+import { getPublications, getMemberStubs } from "@/lib/queries";
 import { PublicationsPageClient } from "./PublicationsPageClient";
 
 export const metadata = {
@@ -7,6 +7,11 @@ export const metadata = {
 };
 
 export default async function PublicationsPage() {
-  const publications = await getPublications();
-  return <PublicationsPageClient publications={publications} />;
+  const [publications, members] = await Promise.all([
+    getPublications(),
+    getMemberStubs(),
+  ]);
+  return (
+    <PublicationsPageClient publications={publications} members={members} />
+  );
 }

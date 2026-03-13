@@ -1,36 +1,52 @@
 import Link from "next/link";
 import type { Publication } from "@/types";
+import type { Member } from "@/types";
 import { TagBadge } from "@/components/shared/TagBadge";
-import { members } from "@/data/members";
 
-const TYPE_LABELS: Record<string, string> = {
-  journal: "국제 저널",
-  conference: "국제 학술대회",
-  workshop: "워크샵",
-  patent: "특허",
-  thesis: "학위논문",
-  report: "보고서",
-};
+function getTypeLabel(type: string, isInternational: boolean): string {
+  if (type === "journal") return isInternational ? "국제 저널" : "국내 저널";
+  if (type === "conference")
+    return isInternational ? "국제 학술대회" : "국내 학술대회";
+  const labels: Record<string, string> = {
+    patent: "특허",
+    thesis: "학위논문",
+    report: "보고서",
+  };
+  return labels[type] ?? type;
+}
 
-const TYPE_STYLES: Record<string, string> = {
-  journal: "bg-blue-50 text-blue-700 border border-blue-200",
-  conference: "bg-indigo-50 text-indigo-700 border border-indigo-200",
-  workshop: "bg-purple-50 text-purple-700 border border-purple-200",
-  patent: "bg-amber-50 text-amber-700 border border-amber-200",
-  thesis: "bg-rose-50 text-rose-700 border border-rose-200",
-  report: "bg-slate-100 text-slate-700 border border-slate-200",
-};
+function getTypeStyle(type: string, isInternational: boolean): string {
+  if (type === "journal")
+    return isInternational
+      ? "bg-blue-50 text-blue-700 border border-blue-200"
+      : "bg-sky-50 text-sky-700 border border-sky-200";
+  if (type === "conference")
+    return isInternational
+      ? "bg-indigo-50 text-indigo-700 border border-indigo-200"
+      : "bg-violet-50 text-violet-700 border border-violet-200";
+  const styles: Record<string, string> = {
+    patent: "bg-amber-50 text-amber-700 border border-amber-200",
+    thesis: "bg-rose-50 text-rose-700 border border-rose-200",
+    report: "bg-slate-100 text-slate-700 border border-slate-200",
+  };
+  return styles[type] ?? "bg-slate-100 text-slate-700 border border-slate-200";
+}
 
 type PublicationCardProps = {
   publication: Publication;
+  members?: Pick<Member, "nameKo" | "nameEn" | "slug">[];
 };
 
-export function PublicationCard({ publication }: PublicationCardProps) {
+export function PublicationCard({
+  publication,
+  members = [],
+}: PublicationCardProps) {
   const {
     slug,
     title,
     authors,
     type,
+    isInternational,
     venue,
     year,
     month,
@@ -38,14 +54,10 @@ export function PublicationCard({ publication }: PublicationCardProps) {
     isFeatured,
   } = publication;
 
-  const typeLabel = TYPE_LABELS[type] ?? type;
-  const typeStyle =
-    TYPE_STYLES[type] ?? "bg-slate-100 text-slate-700 border border-slate-200";
-
-  const monthStr = month != null ? `${month}월` : null;
-  const venueDate = monthStr
-    ? `${venue}, ${year}.${month}`
-    : `${venue}, ${year}`;
+  const typeLabel = getTypeLabel(type, isInternational);
+  const typeStyle = getTypeStyle(type, isInternational);
+  const venueDate =
+    month != null ? `${venue}, ${year}.${month}` : `${venue}, ${year}`;
 
   return (
     <article className="rounded-xl border border-border bg-white p-6 card-hover group flex flex-col h-full">
@@ -107,15 +119,15 @@ export function PublicationCard({ publication }: PublicationCardProps) {
           </svg>
           <span className="truncate">
             {authors.map((author, idx) => {
-              const matchedMember = members.find(
-                (m) => m.nameEn === author || m.nameKo === author,
+              const matched = members.find(
+                (m) => m.nameKo === author || m.nameEn === author,
               );
               return (
                 <span key={idx}>
                   {idx > 0 && ", "}
-                  {matchedMember ? (
+                  {matched ? (
                     <Link
-                      href={`/members/${matchedMember.slug}`}
+                      href={`/members/${matched.slug}`}
                       className="text-primary hover:text-primary-dark transition-colors relative z-10"
                     >
                       {author}
