@@ -13,9 +13,9 @@
 
 ### DB Schema & RLS
 
-- [ ] **DB-01**: 논문(`publications`), 특허(`patents`), 과제(`projects`) 테이블에 `is_public BOOLEAN DEFAULT true` 컬럼 추가 (Migration 004)
-- [ ] **DB-02**: `is_public = true`인 행만 anon 역할에 노출하는 Supabase RLS 정책 추가 — 앱 레이어 필터만으로는 불충분
-- [ ] **DB-03**: `updatePublication`, `updateProject` join table 업데이트를 Supabase RPC(PostgreSQL 함수)로 래핑 — 비트랜잭션 데이터 손실 방지
+- [x] **DB-01**: 논문(`publications`), 특허(`patents`), 과제(`projects`) 테이블에 `is_public BOOLEAN DEFAULT true` 컬럼 추가 (Migration 004)
+- [x] **DB-02**: `is_public = true`인 행만 anon 역할에 노출하는 Supabase RLS 정책 추가 — 앱 레이어 필터만으로는 불충분
+- [x] **DB-03**: `updatePublication`, `updateProject` join table 업데이트를 Supabase RPC(PostgreSQL 함수)로 래핑 — 비트랜잭션 데이터 손실 방지
 
 ### Content Visibility (is_public)
 
@@ -64,22 +64,22 @@
 
 ## Traceability
 
-| Requirement | Phase   | Status  |
-| ----------- | ------- | ------- |
-| SEC-01      | Phase 1 | Pending |
-| SEC-02      | Phase 1 | Pending |
-| SEC-03      | Phase 1 | Pending |
-| DB-01       | Phase 1 | Pending |
-| DB-02       | Phase 1 | Pending |
-| DB-03       | Phase 1 | Pending |
-| VIS-01      | Phase 2 | Pending |
-| VIS-02      | Phase 2 | Pending |
-| VIS-03      | Phase 4 | Pending |
-| LINK-01     | Phase 3 | Pending |
-| LINK-02     | Phase 3 | Pending |
-| LINK-03     | Phase 3 | Pending |
-| MOB-01      | Phase 3 | Pending |
-| MOB-02      | Phase 3 | Pending |
+| Requirement | Phase   | Status   |
+| ----------- | ------- | -------- |
+| SEC-01      | Phase 1 | Pending  |
+| SEC-02      | Phase 1 | Pending  |
+| SEC-03      | Phase 1 | Pending  |
+| DB-01       | Phase 1 | Complete |
+| DB-02       | Phase 1 | Complete |
+| DB-03       | Phase 1 | Complete |
+| VIS-01      | Phase 2 | Pending  |
+| VIS-02      | Phase 2 | Pending  |
+| VIS-03      | Phase 4 | Pending  |
+| LINK-01     | Phase 3 | Pending  |
+| LINK-02     | Phase 3 | Pending  |
+| LINK-03     | Phase 3 | Pending  |
+| MOB-01      | Phase 3 | Pending  |
+| MOB-02      | Phase 3 | Pending  |
 
 **Coverage:**
 

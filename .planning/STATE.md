@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 ## Current Position
 
 Phase: 1 of 4 (Security Foundation)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-03-15 — Roadmap created
+Plan: 2 of 4 in current phase
+Status: In progress
+Last activity: 2026-03-15 — Completed 01-02 (is_public migration)
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [██░░░░░░░░] 20%
 
 ## Performance Metrics
 
@@ -42,7 +42,12 @@ Progress: [░░░░░░░░░░] 0%
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
-- All pending: 과제→결과물 연결 방식, SW 실적 위치, 공개/비공개 경계, lib/permissions/ 구현 방식 모두 미확정
+- **01-01**: assertRole returns null|{error:'unauthorized'} — inline conditional checks in Server Actions
+- **01-01**: requireRole throws Error('unauthorized') — callers handle redirect/AccessDenied in try/catch
+- **01-01**: Role as string literal union (not enum); ROLE_HIERARCHY numeric map: member=0, professor=1, admin=2
+- **01-02**: publications default is_public=true, projects default is_public=false (공개/비공개 경계 확정)
+- **01-02**: RPC signature uses `venue` not `journal/volume/issue/pages` (actual schema alignment)
+- **01-02**: update_publication_with_relations preserves author_order via generate_subscripts()
 
 ### Pending Todos
 
@@ -57,5 +62,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-15
-Stopped at: Roadmap created, STATE.md initialized
+Stopped at: Completed 01-02-PLAN.md (is_public migration + RLS + RPC)
 Resume file: None
