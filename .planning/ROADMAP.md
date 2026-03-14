@@ -25,7 +25,15 @@
 3. `publications`, `patents`, `projects` 테이블에 `is_public` 컬럼이 존재하고 기본값이 true다
 4. Supabase anon 키로 직접 REST API를 호출해도 `is_public = false` 행이 반환되지 않는다
 5. Next.js CVE-2025-29927 패치가 적용되어 `x-middleware-subrequest` 헤더로 미들웨어를 우회할 수 없다
-   **Plans**: TBD
+
+**Plans**: 4 plans
+
+Plans:
+
+- [ ] 01-01-PLAN.md — lib/permissions assertRole/requireRole (TDD)
+- [ ] 01-02-PLAN.md — Migration 004: is_public columns + RLS policies + RPC function
+- [ ] 01-03-PLAN.md — Apply assertRole to all professor/admin Server Actions + professor layout
+- [ ] 01-04-PLAN.md — CVE-2025-29927 middleware patch + human verification
 
 ### Phase 2: Content Visibility
 
@@ -68,7 +76,7 @@
 
 | Phase                     | Plans Complete | Status      | Completed |
 | ------------------------- | -------------- | ----------- | --------- |
-| 1. Security Foundation    | 0/TBD          | Not started | -         |
+| 1. Security Foundation    | 0/4            | Not started | -         |
 | 2. Content Visibility     | 0/TBD          | Not started | -         |
 | 3. Project–Output Linking | 0/TBD          | Not started | -         |
 | 4. Professor Portal UX    | 0/TBD          | Not started | -         |
@@ -76,3 +84,4 @@
 ---
 
 _Roadmap created: 2026-03-15_
+_Phase 1 planned: 2026-03-15_
