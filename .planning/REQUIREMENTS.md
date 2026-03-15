@@ -106,30 +106,30 @@ Deferred to future milestone. Tracked but not in current roadmap.
 
 Which phases cover which requirements. Updated during roadmap creation.
 
-| Requirement | Phase | Status  |
-| ----------- | ----- | ------- |
-| SCHEMA-01   | —     | Pending |
-| SCHEMA-02   | —     | Pending |
-| SCHEMA-03   | —     | Pending |
-| SCHEMA-04   | —     | Pending |
-| DATA-01     | —     | Pending |
-| DATA-02     | —     | Pending |
-| PUB-01      | —     | Pending |
-| PUB-02      | —     | Pending |
-| PUB-03      | —     | Pending |
-| PUB-04      | —     | Pending |
-| PUB-05      | —     | Pending |
-| PAT-01      | —     | Pending |
-| PAT-02      | —     | Pending |
-| PAT-03      | —     | Pending |
+| Requirement | Phase   | Status  |
+| ----------- | ------- | ------- |
+| SCHEMA-01   | Phase 5 | Pending |
+| SCHEMA-02   | Phase 5 | Pending |
+| SCHEMA-03   | Phase 5 | Pending |
+| SCHEMA-04   | Phase 5 | Pending |
+| DATA-01     | Phase 6 | Pending |
+| DATA-02     | Phase 6 | Pending |
+| PUB-01      | Phase 7 | Pending |
+| PUB-02      | Phase 7 | Pending |
+| PUB-03      | Phase 7 | Pending |
+| PUB-04      | Phase 7 | Pending |
+| PUB-05      | Phase 7 | Pending |
+| PAT-01      | Phase 8 | Pending |
+| PAT-02      | Phase 8 | Pending |
+| PAT-03      | Phase 8 | Pending |
 
 **Coverage:**
 
 - v1.1 requirements: 14 total
-- Mapped to phases: 0
-- Unmapped: 14 ⚠️
+- Mapped to phases: 14
+- Unmapped: 0 ✓
 
 ---
 
 _Requirements defined: 2026-03-15 (v1.0), 2026-03-16 (v1.1)_
-_Last updated: 2026-03-16 after v1.1 requirements definition_
+_Last updated: 2026-03-16 after v1.1 roadmap creation_
