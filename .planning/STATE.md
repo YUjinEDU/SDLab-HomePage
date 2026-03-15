@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: "Completed 03-02-PLAN.md — mobile overflow fix (human-verify approved; ready for 03-03)"
-last_updated: "2026-03-15T10:01:02.325Z"
-last_activity: 2026-03-15 — Completed 03-02 mobile overflow fix on PublicationCard, PatentCard, ProjectCard
+stopped_at: "Completed 03-03-PLAN.md tasks 1-2 — awaiting human-verify checkpoint for cross-link UI"
+last_updated: "2026-03-15T10:30:00.000Z"
+last_activity: 2026-03-15 — Completed 03-03 ProjectOutputsSection, ProjectBacklink, AccessDenied removal
 progress:
   total_phases: 4
   completed_phases: 2
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 ## Current Position
 
 Phase: 3 of 4 (Project Output Linking) — IN PROGRESS
-Plan: 2 of 3 in current phase — COMPLETE (human-verify approved)
-Status: 03-01 getProjectOutputs query done; 03-02 mobile overflow cards fixed (approved); 03-03 pending.
-Last activity: 2026-03-15 — Completed 03-02 mobile overflow fix on PublicationCard, PatentCard, ProjectCard
+Plan: 3 of 3 in current phase — AWAITING HUMAN VERIFY
+Status: 03-01 done; 03-02 done; 03-03 tasks 1-2 done, checkpoint:human-verify pending.
+Last activity: 2026-03-15 — Completed 03-03 cross-link UI components and page wiring
 
 Progress: [█████████░] 90%
 
@@ -71,6 +71,8 @@ Recent decisions affecting current work:
 - **02-01**: order() mock returns thenable (Object.assign Promise + chain) to handle both chained and terminal query patterns
 - **02-03**: @ts-expect-error on revalidateTag calls — Next.js 16 type requires 2 args but runtime accepts 1; test contract expects single-arg call
 - **03-02**: min-w-0 on h3 (flex child) prevents overflow without wrapper div; break-words on title, truncate on single-line metadata (venue, org)
+- **03-03**: ProjectBacklink accepts pre-translated label string (not t fn) — keeps component reusable across publications and patents namespaces
+- **03-03**: AccessDenied gate removed from /projects and /projects/[slug]; is_public DB filter provides visibility control
 
 ### Pending Todos
 
@@ -85,5 +87,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-15
-Stopped at: Completed 03-02-PLAN.md — mobile overflow fix (human-verify approved; ready for 03-03)
+Stopped at: 03-03-PLAN.md checkpoint:human-verify — ProjectOutputsSection + ProjectBacklink wired, awaiting visual confirmation
 Resume file: None
