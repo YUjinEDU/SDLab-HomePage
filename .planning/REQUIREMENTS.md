@@ -106,22 +106,22 @@ Deferred to future milestone. Tracked but not in current roadmap.
 
 Which phases cover which requirements. Updated during roadmap creation.
 
-| Requirement | Phase   | Status  |
-| ----------- | ------- | ------- |
+| Requirement | Phase   | Status   |
+| ----------- | ------- | -------- |
 | SCHEMA-01   | Phase 5 | Complete |
 | SCHEMA-02   | Phase 5 | Complete |
 | SCHEMA-03   | Phase 5 | Complete |
 | SCHEMA-04   | Phase 5 | Complete |
-| DATA-01     | Phase 6 | Pending |
-| DATA-02     | Phase 6 | Pending |
-| PUB-01      | Phase 7 | Pending |
-| PUB-02      | Phase 7 | Pending |
-| PUB-03      | Phase 7 | Pending |
-| PUB-04      | Phase 7 | Pending |
-| PUB-05      | Phase 7 | Pending |
-| PAT-01      | Phase 8 | Pending |
-| PAT-02      | Phase 8 | Pending |
-| PAT-03      | Phase 8 | Pending |
+| DATA-01     | Phase 6 | Pending  |
+| DATA-02     | Phase 6 | Pending  |
+| PUB-01      | Phase 7 | Pending  |
+| PUB-02      | Phase 7 | Pending  |
+| PUB-03      | Phase 7 | Pending  |
+| PUB-04      | Phase 7 | Pending  |
+| PUB-05      | Phase 7 | Pending  |
+| PAT-01      | Phase 8 | Pending  |
+| PAT-02      | Phase 8 | Pending  |
+| PAT-03      | Phase 8 | Pending  |
 
 **Coverage:**
 

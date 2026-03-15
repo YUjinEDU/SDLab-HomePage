@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: 실적 데이터 등록 및 표시 개선
-status: in-progress
-stopped_at: "Completed 05-01-PLAN.md"
-last_updated: "2026-03-16"
-last_activity: 2026-03-16 — Completed Phase 5 Plan 01 (DB Schema — patents table split)
+status: executing
+stopped_at: Completed 05-01-PLAN.md — Phase 5 DB Schema complete
+last_updated: "2026-03-15T23:30:58.633Z"
+last_activity: 2026-03-16 — Completed 05-01 DB Schema (patents table + publications columns)
 progress:
-  total_phases: 4
-  completed_phases: 0
-  total_plans: 7
-  completed_plans: 1
-  percent: 14
+  total_phases: 8
+  completed_phases: 5
+  total_plans: 13
+  completed_plans: 13
+  percent: 57
 ---
 
 # Project State
