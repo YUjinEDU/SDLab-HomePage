@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: in_progress
-stopped_at: Completed 04-01-PLAN.md — VIS-03 visibility Server Actions (TDD), types verified, getAllProjects confirmed.
-last_updated: "2026-03-15T19:50:00.000Z"
-last_activity: 2026-03-15 — Completed 04-01 TDD visibility actions, 9 tests passing
+status: completed
+stopped_at: Completed 04-02-PLAN.md — VisibilityToggleButton wired into professor publications/patents/projects pages. Awaiting human verify checkpoint.
+last_updated: "2026-03-15T20:20:00.000Z"
+last_activity: 2026-03-15 — Completed 04-02 visibility toggle UI
 progress:
   total_phases: 4
-  completed_phases: 3
-  total_plans: 13
-  completed_plans: 11
-  percent: 85
+  completed_phases: 4
+  total_plans: 12
+  completed_plans: 12
+  percent: 100
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 ## Current Position
 
 Phase: 4 of 4 (Professor Portal UX) — IN PROGRESS
-Plan: 1 of 3 in current phase — COMPLETE
-Status: 04-01 done (VIS-03 visibility actions TDD, 9 tests passing). Ready for 04-02.
-Last activity: 2026-03-15 — Completed 04-01 TDD visibility Server Actions
+Plan: 2 of 3 in current phase — COMPLETE (awaiting human verify checkpoint)
+Status: 04-02 done (VisibilityToggleButton + professor list pages). Ready for human verify then 04-03.
+Last activity: 2026-03-15 — Completed 04-02 visibility toggle UI
 
-Progress: [█████████░] 85%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -74,6 +74,8 @@ Recent decisions affecting current work:
 - **03-03**: ProjectBacklink accepts pre-translated label string (not t fn) — keeps component reusable across publications and patents namespaces
 - **03-03**: AccessDenied gate removed from /projects and /projects/[slug]; is_public DB filter provides visibility control
 - **04-01**: @ts-expect-error on revalidateTag confirmed pattern; assertRole null|{error} guard inline in visibility actions
+- [Phase 04-professor-portal-ux]: 04-02: Patents professor page uses getAllPublications filtered by type='patent' client-side — no getAllPatents needed
+- [Phase 04-professor-portal-ux]: 04-02: No router.refresh() in VisibilityToggleButton — revalidateTag in Server Action handles cache invalidation
 
 ### Pending Todos
 
@@ -88,5 +90,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-15
-Stopped at: Completed 04-01-PLAN.md — VIS-03 visibility Server Actions TDD complete. Ready for 04-02.
+Stopped at: Completed 04-02-PLAN.md — VisibilityToggleButton wired. Checkpoint:human-verify pending before 04-03.
 Resume file: None
