@@ -26,13 +26,13 @@
 ### Project–Output Cross-Linking
 
 - [ ] **LINK-01**: `getProjectOutputs(projectId)` 쿼리 함수 구현 — 과제에 연결된 논문·특허 목록 반환 (`publication_projects` 조인 테이블 활용, 이미 존재)
-- [ ] **LINK-02**: 과제 상세 페이지에 `ProjectOutputsSection` 컴포넌트 추가 — 연결된 논문/특허 카드 표시
-- [ ] **LINK-03**: 논문/특허 상세 페이지에 연계 과제 역참조 링크(`ProjectBacklink`) 표시
+- [x] **LINK-02**: 과제 상세 페이지에 `ProjectOutputsSection` 컴포넌트 추가 — 연결된 논문/특허 카드 표시
+- [x] **LINK-03**: 논문/특허 상세 페이지에 연계 과제 역참조 링크(`ProjectBacklink`) 표시
 
 ### Mobile Responsiveness
 
 - [x] **MOB-01**: 실적 카드(PublicationCard, PatentCard, ProjectCard) 모바일 레이아웃 검토 및 개선
-- [ ] **MOB-02**: 과제 상세 페이지의 결과물 섹션 모바일 반응형 적용
+- [x] **MOB-02**: 과제 상세 페이지의 결과물 섹션 모바일 반응형 적용
 
 ## v2 Requirements
 
@@ -76,10 +76,10 @@
 | VIS-02      | Phase 2 | Complete |
 | VIS-03      | Phase 4 | Pending  |
 | LINK-01     | Phase 3 | Pending  |
-| LINK-02     | Phase 3 | Pending  |
-| LINK-03     | Phase 3 | Pending  |
+| LINK-02     | Phase 3 | Complete |
+| LINK-03     | Phase 3 | Complete |
 | MOB-01      | Phase 3 | Complete |
-| MOB-02      | Phase 3 | Pending  |
+| MOB-02      | Phase 3 | Complete |
 
 **Coverage:**
 
