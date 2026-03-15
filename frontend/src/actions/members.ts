@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/db/supabase-server";
 import { revalidatePath } from "next/cache";
+import { assertRole } from "@/lib/permissions";
 
 function extractLinks(formData: FormData) {
   const links: Record<string, string> = {};
@@ -41,6 +42,9 @@ function generateSlug(nameEn: string): string {
 }
 
 export async function createMember(formData: FormData) {
+  const authError = await assertRole("professor");
+  if (authError) return authError;
+
   const supabase = await createClient();
 
   const nameKo = formData.get("nameKo") as string;
@@ -99,6 +103,9 @@ export async function createMember(formData: FormData) {
 }
 
 export async function updateMember(id: string, formData: FormData) {
+  const authError = await assertRole("professor");
+  if (authError) return authError;
+
   const supabase = await createClient();
 
   const nameKo = formData.get("nameKo") as string;
@@ -155,6 +162,9 @@ export async function updateMember(id: string, formData: FormData) {
 }
 
 export async function deleteMember(id: string) {
+  const authError = await assertRole("professor");
+  if (authError) return authError;
+
   const supabase = await createClient();
 
   const { error } = await supabase.from("members").delete().eq("id", id);

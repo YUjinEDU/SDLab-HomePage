@@ -2,8 +2,12 @@
 
 import { createClient } from "@/lib/db/supabase-server";
 import { revalidatePath } from "next/cache";
+import { assertRole } from "@/lib/permissions";
 
 export async function updateContact(formData: FormData) {
+  const authError = await assertRole("professor");
+  if (authError) return authError;
+
   const supabase = await createClient();
 
   const { error } = await supabase

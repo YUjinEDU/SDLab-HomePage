@@ -3,8 +3,12 @@
 import { createClient } from "@/lib/db/supabase-server";
 import { generateSlug } from "@/lib/utils/slug";
 import { revalidatePath } from "next/cache";
+import { assertRole } from "@/lib/permissions";
 
 export async function createPublication(formData: FormData) {
+  const authError = await assertRole("professor");
+  if (authError) return authError;
+
   const supabase = await createClient();
 
   const title = formData.get("title") as string;
@@ -95,6 +99,9 @@ export async function createPublication(formData: FormData) {
 }
 
 export async function updatePublication(id: string, formData: FormData) {
+  const authError = await assertRole("professor");
+  if (authError) return authError;
+
   const supabase = await createClient();
 
   const title = formData.get("title") as string;
@@ -193,6 +200,9 @@ export async function updatePublication(id: string, formData: FormData) {
 }
 
 export async function deletePublication(id: string) {
+  const authError = await assertRole("professor");
+  if (authError) return authError;
+
   const supabase = await createClient();
 
   await supabase.from("publication_authors").delete().eq("publication_id", id);

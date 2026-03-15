@@ -3,8 +3,12 @@
 import { createClient } from "@/lib/db/supabase-server";
 import { generateSlug } from "@/lib/utils/slug";
 import { revalidatePath } from "next/cache";
+import { assertRole } from "@/lib/permissions";
 
 export async function createNews(formData: FormData) {
+  const authError = await assertRole("professor");
+  if (authError) return authError;
+
   const supabase = await createClient();
 
   const title = formData.get("title") as string;
@@ -55,6 +59,9 @@ export async function createNews(formData: FormData) {
 }
 
 export async function updateNews(id: string, formData: FormData) {
+  const authError = await assertRole("professor");
+  if (authError) return authError;
+
   const supabase = await createClient();
 
   const title = formData.get("title") as string;
@@ -105,6 +112,9 @@ export async function updateNews(id: string, formData: FormData) {
 }
 
 export async function deleteNews(id: string) {
+  const authError = await assertRole("professor");
+  if (authError) return authError;
+
   const supabase = await createClient();
 
   await supabase.from("news_projects").delete().eq("news_id", id);
