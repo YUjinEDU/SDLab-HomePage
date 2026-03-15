@@ -73,7 +73,7 @@ export function PublicationCard({
     month != null ? `${venue}, ${year}.${month}` : `${venue}, ${year}`;
 
   return (
-    <article className="rounded-xl border border-border bg-white p-4 sm:p-6 card-hover group flex flex-col h-full">
+    <article className="relative rounded-xl border border-border bg-white p-4 sm:p-6 card-hover group flex flex-col h-full">
       <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
         <div className="flex items-center gap-2 flex-wrap">
           <span
