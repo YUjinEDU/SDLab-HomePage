@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-stopped_at: Completed 02-01-PLAN.md — VIS-01/VIS-02 test scaffold (RED state)
-last_updated: "2026-03-15T01:51:00.000Z"
-last_activity: 2026-03-15 — Completed 02-01 test scaffold (13 failing tests, 11 passing)
+stopped_at: Completed 02-03-PLAN.md — VIS-02 revalidateTag cache invalidation
+last_updated: "2026-03-15T01:42:45Z"
+last_activity: 2026-03-15 — Completed 02-03 revalidateTag for publications and projects
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 7
-  completed_plans: 5
-  percent: 71
+  completed_plans: 6
+  percent: 86
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 ## Current Position
 
 Phase: 2 of 4 (Content Visibility) — IN PROGRESS
-Plan: 1 of 3 in current phase — COMPLETE
-Status: 02-01 test scaffold done (RED). Ready for 02-02 (query filters) and 02-03 (revalidateTag).
-Last activity: 2026-03-15 — Completed 02-01 VIS-01/VIS-02 test scaffold
+Plan: 3 of 3 in current phase — COMPLETE
+Status: All Phase 2 plans complete (02-01 test scaffold, 02-02 query filters, 02-03 revalidateTag).
+Last activity: 2026-03-15 — Completed 02-03 revalidateTag cache invalidation
 
-Progress: [███████░░░] 71%
+Progress: [████████░░] 86%
 
 ## Performance Metrics
 
@@ -69,6 +69,7 @@ Recent decisions affecting current work:
 - **01-04**: CVE-2025-29927 manual patch applied as defense-in-depth; redirect to /login on x-middleware-subrequest header
 - **02-01**: vi.hoisted() required for mockChain in vitest — vi.mock factory hoisted above const declarations
 - **02-01**: order() mock returns thenable (Object.assign Promise + chain) to handle both chained and terminal query patterns
+- **02-03**: @ts-expect-error on revalidateTag calls — Next.js 16 type requires 2 args but runtime accepts 1; test contract expects single-arg call
 
 ### Pending Todos
 

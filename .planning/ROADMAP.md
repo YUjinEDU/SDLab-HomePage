@@ -7,7 +7,7 @@
 ## Phases
 
 - [x] **Phase 1: Security Foundation** - 권한 유틸 구현 + DB 스키마(is_public + RLS) + CVE 패치
-- [ ] **Phase 2: Content Visibility** - 공개 쿼리에 is_public 필터 적용 + 캐시 무효화
+- [x] **Phase 2: Content Visibility** - 공개 쿼리에 is_public 필터 적용 + 캐시 무효화 (completed 2026-03-15)
 - [ ] **Phase 3: Project–Output Linking** - 과제-결과물 양방향 연결 UI + 모바일 반응형
 - [ ] **Phase 4: Professor Portal UX** - 교수 포털 is_public 토글 UI + CRUD 권한 검증
 
@@ -84,7 +84,7 @@ Plans:
 | Phase                     | Plans Complete | Status      | Completed  |
 | ------------------------- | -------------- | ----------- | ---------- |
 | 1. Security Foundation    | 4/4            | Complete    | 2026-03-15 |
-| 2. Content Visibility     | 1/3 | In Progress|  |
+| 2. Content Visibility     | 3/3 | Complete   | 2026-03-15 |
 | 3. Project–Output Linking | 0/TBD          | Not started | -          |
 | 4. Professor Portal UX    | 0/TBD          | Not started | -          |
 
