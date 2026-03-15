@@ -84,7 +84,7 @@ Plans:
 | Phase                     | Plans Complete | Status      | Completed  |
 | ------------------------- | -------------- | ----------- | ---------- |
 | 1. Security Foundation    | 4/4            | Complete    | 2026-03-15 |
-| 2. Content Visibility     | 0/3            | Not started | -          |
+| 2. Content Visibility     | 1/3 | In Progress|  |
 | 3. Project–Output Linking | 0/TBD          | Not started | -          |
 | 4. Professor Portal UX    | 0/TBD          | Not started | -          |
 

@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Completed 01-04-PLAN.md — Phase 1 Security Foundation fully complete
-last_updated: "2026-03-15T00:37:23.886Z"
-last_activity: 2026-03-15 — Completed 01-04 human-verify checkpoint (CVE bypass confirmed blocked)
+status: in_progress
+stopped_at: Completed 02-01-PLAN.md — VIS-01/VIS-02 test scaffold (RED state)
+last_updated: "2026-03-15T01:51:00.000Z"
+last_activity: 2026-03-15 — Completed 02-01 test scaffold (13 failing tests, 11 passing)
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 4
-  completed_plans: 4
-  percent: 35
+  total_plans: 7
+  completed_plans: 5
+  percent: 71
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-14)
 
 **Core value:** 방문자가 "이 연구실이 어떤 과제를 수행했고, 그 결과로 무엇을 만들었는지"를 한눈에 파악할 수 있어야 한다
-**Current focus:** Phase 1 — Security Foundation
+**Current focus:** Phase 2 — Content Visibility
 
 ## Current Position
 
-Phase: 1 of 4 (Security Foundation) — COMPLETE
-Plan: 4 of 4 in current phase — COMPLETE
-Status: Phase 1 complete. Ready for Phase 2 (Content Visibility).
-Last activity: 2026-03-15 — Completed 01-04 human-verify checkpoint (CVE bypass confirmed blocked)
+Phase: 2 of 4 (Content Visibility) — IN PROGRESS
+Plan: 1 of 3 in current phase — COMPLETE
+Status: 02-01 test scaffold done (RED). Ready for 02-02 (query filters) and 02-03 (revalidateTag).
+Last activity: 2026-03-15 — Completed 02-01 VIS-01/VIS-02 test scaffold
 
-Progress: [███░░░░░░░] 35%
+Progress: [███████░░░] 71%
 
 ## Performance Metrics
 
@@ -67,6 +67,8 @@ Recent decisions affecting current work:
 - **01-03**: contact.ts updateContact guarded with assertRole('professor') — writes lab info, professor-only
 - **01-03**: Professor layout uses requireRole + redirect('/login') over AccessDenied (i18n context unavailable)
 - **01-04**: CVE-2025-29927 manual patch applied as defense-in-depth; redirect to /login on x-middleware-subrequest header
+- **02-01**: vi.hoisted() required for mockChain in vitest — vi.mock factory hoisted above const declarations
+- **02-01**: order() mock returns thenable (Object.assign Promise + chain) to handle both chained and terminal query patterns
 
 ### Pending Todos
 
@@ -81,5 +83,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-15
-Stopped at: Completed 01-04-PLAN.md — Phase 1 Security Foundation fully complete
+Stopped at: Completed 02-01-PLAN.md — VIS-01/VIS-02 test scaffold (RED state)
 Resume file: None
