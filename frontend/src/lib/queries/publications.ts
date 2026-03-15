@@ -137,6 +137,32 @@ export const getPatentBySlug = unstable_cache(
   { tags: ["publications"] },
 );
 
+export const getProjectOutputs = (projectId: string) =>
+  unstable_cache(
+    async (): Promise<Publication[]> => {
+      const supabase = await createClient();
+      const { data: joinRows } = await supabase
+        .from("publication_projects")
+        .select("publication_id")
+        .eq("project_id", projectId);
+
+      if (!joinRows?.length) return [];
+
+      const pubIds = joinRows.map((r) => r.publication_id);
+      const { data, error } = await supabase
+        .from("publications")
+        .select(PUB_SELECT)
+        .eq("is_public", true)
+        .in("id", pubIds)
+        .order("year", { ascending: false });
+
+      if (error) throw error;
+      return (data ?? []).map(toPublication);
+    },
+    ["project-outputs", projectId],
+    { tags: ["projects", "publications"] },
+  )();
+
 export async function getAllPublications(): Promise<Publication[]> {
   const supabase = await createClient();
   const { data, error } = await supabase
