@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { createClient } from "@/lib/db/supabase-server";
 import type { Publication } from "@/types";
 
@@ -47,73 +48,94 @@ const PUB_SELECT = `
   publication_projects(project_id)
 `;
 
-export async function getPublications(): Promise<Publication[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("publications")
-    .select(PUB_SELECT)
-    .neq("type", "patent")
-    .order("year", { ascending: false })
-    .order("month", { ascending: false });
+export const getPublications = unstable_cache(
+  async (): Promise<Publication[]> => {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("publications")
+      .select(PUB_SELECT)
+      .eq("is_public", true)
+      .neq("type", "patent")
+      .order("year", { ascending: false })
+      .order("month", { ascending: false });
 
-  if (error) throw error;
-  return (data ?? []).map(toPublication);
-}
+    if (error) throw error;
+    return (data ?? []).map(toPublication);
+  },
+  ["publications-public"],
+  { tags: ["publications"] },
+);
 
-export async function getPublicationBySlug(
-  slug: string,
-): Promise<Publication | null> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("publications")
-    .select(PUB_SELECT)
-    .eq("slug", slug)
-    .single();
+export const getPublicationBySlug = unstable_cache(
+  async (slug: string): Promise<Publication | null> => {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("publications")
+      .select(PUB_SELECT)
+      .eq("is_public", true)
+      .eq("slug", slug)
+      .single();
 
-  if (error) return null;
-  return toPublication(data);
-}
+    if (error) return null;
+    return toPublication(data);
+  },
+  ["publication-slug"],
+  { tags: ["publications"] },
+);
 
-export async function getFeaturedPublications(): Promise<Publication[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("publications")
-    .select(PUB_SELECT)
-    .eq("is_featured", true)
-    .neq("type", "patent")
-    .order("year", { ascending: false })
-    .limit(3);
+export const getFeaturedPublications = unstable_cache(
+  async (): Promise<Publication[]> => {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("publications")
+      .select(PUB_SELECT)
+      .eq("is_public", true)
+      .eq("is_featured", true)
+      .neq("type", "patent")
+      .order("year", { ascending: false })
+      .limit(3);
 
-  if (error) throw error;
-  return (data ?? []).map(toPublication);
-}
+    if (error) throw error;
+    return (data ?? []).map(toPublication);
+  },
+  ["publications-featured"],
+  { tags: ["publications"] },
+);
 
-export async function getPatents(): Promise<Publication[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("publications")
-    .select(PUB_SELECT)
-    .eq("type", "patent")
-    .order("year", { ascending: false });
+export const getPatents = unstable_cache(
+  async (): Promise<Publication[]> => {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("publications")
+      .select(PUB_SELECT)
+      .eq("is_public", true)
+      .eq("type", "patent")
+      .order("year", { ascending: false });
 
-  if (error) throw error;
-  return (data ?? []).map(toPublication);
-}
+    if (error) throw error;
+    return (data ?? []).map(toPublication);
+  },
+  ["patents-public"],
+  { tags: ["publications"] },
+);
 
-export async function getPatentBySlug(
-  slug: string,
-): Promise<Publication | null> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("publications")
-    .select(PUB_SELECT)
-    .eq("slug", slug)
-    .eq("type", "patent")
-    .single();
+export const getPatentBySlug = unstable_cache(
+  async (slug: string): Promise<Publication | null> => {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("publications")
+      .select(PUB_SELECT)
+      .eq("is_public", true)
+      .eq("slug", slug)
+      .eq("type", "patent")
+      .single();
 
-  if (error) return null;
-  return toPublication(data);
-}
+    if (error) return null;
+    return toPublication(data);
+  },
+  ["patent-slug"],
+  { tags: ["publications"] },
+);
 
 export async function getAllPublications(): Promise<Publication[]> {
   const supabase = await createClient();
@@ -156,6 +178,7 @@ export async function getPublicationsByMember(
   const { data, error } = await supabase
     .from("publications")
     .select(PUB_SELECT)
+    .eq("is_public", true)
     .in("id", pubIds)
     .order("year", { ascending: false });
 
