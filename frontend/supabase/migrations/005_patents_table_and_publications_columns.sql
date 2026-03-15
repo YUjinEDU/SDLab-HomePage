@@ -33,7 +33,7 @@ CREATE INDEX IF NOT EXISTS idx_patents_status ON patents (status);
 CREATE TRIGGER update_patents_updated_at
   BEFORE UPDATE ON patents
   FOR EACH ROW
-  EXECUTE FUNCTION update_updated_at_column();
+  EXECUTE FUNCTION update_updated_at();
 
 -- ============================================================
 -- SECTION 2: RLS for patents table
