@@ -21,7 +21,7 @@
 
 - [x] **VIS-01**: 공개 쿼리 함수(`lib/queries/`)에 `is_public = true` 필터 적용 — 비로그인 방문자에게 비공개 콘텐츠 미노출
 - [x] **VIS-02**: `next/cache` `revalidateTag()` 태그 기반 캐시 무효화 — write action 후 is_public 변경이 즉시 반영되도록
-- [ ] **VIS-03**: 교수 포털에서 각 항목의 `is_public` 토글 UI 제공 (논문, 특허, 과제)
+- [x] **VIS-03**: 교수 포털에서 각 항목의 `is_public` 토글 UI 제공 (논문, 특허, 과제)
 
 ### Project–Output Cross-Linking
 
@@ -74,7 +74,7 @@
 | DB-03       | Phase 1 | Complete |
 | VIS-01      | Phase 2 | Complete |
 | VIS-02      | Phase 2 | Complete |
-| VIS-03      | Phase 4 | Pending  |
+| VIS-03      | Phase 4 | Complete |
 | LINK-01     | Phase 3 | Pending  |
 | LINK-02     | Phase 3 | Complete |
 | LINK-03     | Phase 3 | Complete |

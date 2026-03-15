@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Completed 03-03-PLAN.md — Phase 3 Project Output Linking complete. Ready for Phase 4.
-last_updated: "2026-03-15T10:16:02.061Z"
-last_activity: 2026-03-15 — Completed 03-03 cross-link UI components, page wiring, human-verify approved
+status: in_progress
+stopped_at: Completed 04-01-PLAN.md — VIS-03 visibility Server Actions (TDD), types verified, getAllProjects confirmed.
+last_updated: "2026-03-15T19:50:00.000Z"
+last_activity: 2026-03-15 — Completed 04-01 TDD visibility actions, 9 tests passing
 progress:
   total_phases: 4
   completed_phases: 3
-  total_plans: 10
-  completed_plans: 10
-  percent: 100
+  total_plans: 13
+  completed_plans: 11
+  percent: 85
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-14)
 
 **Core value:** 방문자가 "이 연구실이 어떤 과제를 수행했고, 그 결과로 무엇을 만들었는지"를 한눈에 파악할 수 있어야 한다
-**Current focus:** Phase 3 — Project Output Linking
+**Current focus:** Phase 4 — Professor Portal UX
 
 ## Current Position
 
-Phase: 3 of 4 (Project Output Linking) — COMPLETE
-Plan: 3 of 3 in current phase — COMPLETE
-Status: 03-01 done; 03-02 done; 03-03 done (human-verify approved). Phase 3 fully complete.
-Last activity: 2026-03-15 — Completed 03-03 cross-link UI components, page wiring, human-verify approved
+Phase: 4 of 4 (Professor Portal UX) — IN PROGRESS
+Plan: 1 of 3 in current phase — COMPLETE
+Status: 04-01 done (VIS-03 visibility actions TDD, 9 tests passing). Ready for 04-02.
+Last activity: 2026-03-15 — Completed 04-01 TDD visibility Server Actions
 
-Progress: [██████████] 100%
+Progress: [█████████░] 85%
 
 ## Performance Metrics
 
@@ -73,6 +73,7 @@ Recent decisions affecting current work:
 - **03-02**: min-w-0 on h3 (flex child) prevents overflow without wrapper div; break-words on title, truncate on single-line metadata (venue, org)
 - **03-03**: ProjectBacklink accepts pre-translated label string (not t fn) — keeps component reusable across publications and patents namespaces
 - **03-03**: AccessDenied gate removed from /projects and /projects/[slug]; is_public DB filter provides visibility control
+- **04-01**: @ts-expect-error on revalidateTag confirmed pattern; assertRole null|{error} guard inline in visibility actions
 
 ### Pending Todos
 
@@ -87,5 +88,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-15
-Stopped at: Completed 03-03-PLAN.md — Phase 3 Project Output Linking complete. Ready for Phase 4.
+Stopped at: Completed 04-01-PLAN.md — VIS-03 visibility Server Actions TDD complete. Ready for 04-02.
 Resume file: None

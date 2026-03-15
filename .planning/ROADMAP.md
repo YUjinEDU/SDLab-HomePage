@@ -99,7 +99,7 @@ Plans:
 | 1. Security Foundation    | 4/4            | Complete    | 2026-03-15 |
 | 2. Content Visibility     | 3/3            | Complete    | 2026-03-15 |
 | 3. Project–Output Linking | 3/3            | Complete    | 2026-03-15 |
-| 4. Professor Portal UX    | 0/2            | Not started | -          |
+| 4. Professor Portal UX    | 1/2 | In Progress|  |
 
 ---
 
