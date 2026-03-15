@@ -1,19 +1,10 @@
-import Link from "next/link";
+"use client";
+
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import type { Publication } from "@/types";
 import type { Member } from "@/types";
 import { TagBadge } from "@/components/shared/TagBadge";
-
-function getTypeLabel(type: string, isInternational: boolean): string {
-  if (type === "journal") return isInternational ? "국제 저널" : "국내 저널";
-  if (type === "conference")
-    return isInternational ? "국제 학술대회" : "국내 학술대회";
-  const labels: Record<string, string> = {
-    patent: "특허",
-    thesis: "학위논문",
-    report: "보고서",
-  };
-  return labels[type] ?? type;
-}
 
 function getTypeStyle(type: string, isInternational: boolean): string {
   if (type === "journal")
@@ -26,6 +17,7 @@ function getTypeStyle(type: string, isInternational: boolean): string {
       : "bg-violet-50 text-violet-700 border border-violet-200";
   const styles: Record<string, string> = {
     patent: "bg-amber-50 text-amber-700 border border-amber-200",
+    sw_registration: "bg-teal-50 text-teal-700 border border-teal-200",
     thesis: "bg-rose-50 text-rose-700 border border-rose-200",
     report: "bg-slate-100 text-slate-700 border border-slate-200",
   };
@@ -41,6 +33,8 @@ export function PublicationCard({
   publication,
   members = [],
 }: PublicationCardProps) {
+  const t = useTranslations("publications");
+
   const {
     slug,
     title,
@@ -50,9 +44,28 @@ export function PublicationCard({
     venue,
     year,
     month,
+    doi,
     keywords,
     isFeatured,
   } = publication;
+
+  function getTypeLabel(pubType: string, intl: boolean): string {
+    if (pubType === "journal")
+      return intl
+        ? `${t("typeJournal")} (Intl.)`
+        : `${t("typeJournal")} (Dom.)`;
+    if (pubType === "conference")
+      return intl
+        ? `${t("typeConference")} (Intl.)`
+        : `${t("typeConference")} (Dom.)`;
+    const map: Record<string, string> = {
+      patent: t("typePatent"),
+      sw_registration: t("typeSW"),
+      thesis: t("typeThesis"),
+      report: t("typeReport"),
+    };
+    return map[pubType] ?? pubType;
+  }
 
   const typeLabel = getTypeLabel(type, isInternational);
   const typeStyle = getTypeStyle(type, isInternational);
@@ -60,7 +73,7 @@ export function PublicationCard({
     month != null ? `${venue}, ${year}.${month}` : `${venue}, ${year}`;
 
   return (
-    <article className="rounded-xl border border-border bg-white p-6 card-hover group flex flex-col h-full">
+    <article className="rounded-xl border border-border bg-white p-4 sm:p-6 card-hover group flex flex-col h-full">
       <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
         <div className="flex items-center gap-2 flex-wrap">
           <span
@@ -89,17 +102,21 @@ export function PublicationCard({
         </span>
       </div>
 
-      <h3 className="text-[1.05rem] font-bold text-foreground leading-snug mb-3 pr-4 group-hover:text-primary transition-colors">
-        <Link
-          href={`/publications/${slug}`}
-          className="before:absolute before:inset-0"
-        >
-          {title}
-        </Link>
+      <h3 className="text-[1.05rem] font-bold text-foreground leading-snug mb-3 pr-4 group-hover:text-primary transition-colors break-words min-w-0">
+        {type === "sw_registration" ? (
+          title
+        ) : (
+          <Link
+            href={`/publications/${slug}`}
+            className="before:absolute before:inset-0"
+          >
+            {title}
+          </Link>
+        )}
       </h3>
 
       <div className="mt-auto pt-2">
-        <p className="text-[13px] text-text-secondary font-medium leading-relaxed mb-1.5 flex items-center gap-2">
+        <p className="text-[13px] text-text-secondary font-medium leading-relaxed mb-1.5 flex items-center gap-2 min-w-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="14"
@@ -110,14 +127,14 @@ export function PublicationCard({
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="opacity-70"
+            className="shrink-0 opacity-70"
           >
             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
             <circle cx="9" cy="7" r="4" />
             <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
             <path d="M16 3.13a4 4 0 0 1 0 7.75" />
           </svg>
-          <span className="truncate">
+          <span className="truncate min-w-0">
             {authors.map((author, idx) => {
               const matched = members.find(
                 (m) => m.nameKo === author || m.nameEn === author,
@@ -141,7 +158,7 @@ export function PublicationCard({
           </span>
         </p>
 
-        <p className="text-[13px] text-text-secondary font-medium mb-5 flex items-center gap-2">
+        <p className="text-[13px] text-text-secondary font-medium mb-5 flex items-center gap-2 min-w-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="14"
@@ -152,13 +169,19 @@ export function PublicationCard({
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="opacity-70"
+            className="shrink-0 opacity-70"
           >
             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
           </svg>
-          {venueDate}
+          <span className="truncate min-w-0">{venueDate}</span>
         </p>
+
+        {type === "sw_registration" && doi && (
+          <p className="text-[12px] text-text-secondary font-mono mb-3">
+            {t("typeSW")}: {doi}
+          </p>
+        )}
 
         {keywords.length > 0 && (
           <div className="flex flex-wrap gap-1.5 relative z-10">
