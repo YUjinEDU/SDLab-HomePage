@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 ## Current Position
 
 Phase: 1 of 4 (Security Foundation)
-Plan: 2 of 4 in current phase
+Plan: 3 of 4 in current phase
 Status: In progress
-Last activity: 2026-03-15 — Completed 01-02 (is_public migration)
+Last activity: 2026-03-15 — Completed 01-03 (professor action role guards)
 
-Progress: [██░░░░░░░░] 20%
+Progress: [███░░░░░░░] 30%
 
 ## Performance Metrics
 
@@ -48,6 +48,8 @@ Recent decisions affecting current work:
 - **01-02**: publications default is_public=true, projects default is_public=false (공개/비공개 경계 확정)
 - **01-02**: RPC signature uses `venue` not `journal/volume/issue/pages` (actual schema alignment)
 - **01-02**: update_publication_with_relations preserves author_order via generate_subscripts()
+- **01-03**: contact.ts updateContact guarded with assertRole('professor') — writes lab info, professor-only
+- **01-03**: Professor layout uses requireRole + redirect('/login') over AccessDenied (i18n context unavailable)
 
 ### Pending Todos
 
@@ -62,5 +64,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-15
-Stopped at: Completed 01-01-PLAN.md (permissions role guard: assertRole + requireRole)
+Stopped at: Completed 01-03-PLAN.md (professor action role guards + layout gate)
 Resume file: None
