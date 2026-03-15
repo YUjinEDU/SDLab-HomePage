@@ -41,6 +41,7 @@ function toProject(row: ProjRow): Project {
     ),
     demoUrl: (row.demo_url as string) ?? null,
     isFeatured: (row.is_featured as boolean) ?? false,
+    isPublic: (row.is_public as boolean) ?? false,
   };
 }
 
@@ -139,6 +140,17 @@ export async function getProjectById(id: string): Promise<Project | null> {
 
   if (error) return null;
   return toProject(data);
+}
+
+export async function getAllProjects(): Promise<Project[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("projects")
+    .select(PROJ_SELECT)
+    .order("start_date", { ascending: false });
+
+  if (error) throw error;
+  return (data ?? []).map(toProject);
 }
 
 export async function getProjectsByMember(
