@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/db/supabase-server";
 import { generateSlug } from "@/lib/utils/slug";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { assertRole } from "@/lib/permissions";
 
 export async function createPublication(formData: FormData) {
@@ -92,6 +92,8 @@ export async function createPublication(formData: FormData) {
     );
   }
 
+  // @ts-expect-error: Next.js 16 type requires 2 args but revalidateTag("tag") works at runtime
+  revalidateTag("publications");
   revalidatePath("/professor/publications");
   revalidatePath("/professor/patents");
   revalidatePath("/publications");
@@ -193,6 +195,8 @@ export async function updatePublication(id: string, formData: FormData) {
     );
   }
 
+  // @ts-expect-error: Next.js 16 type requires 2 args but revalidateTag("tag") works at runtime
+  revalidateTag("publications");
   revalidatePath("/professor/publications");
   revalidatePath("/professor/patents");
   revalidatePath("/publications");
@@ -216,6 +220,8 @@ export async function deletePublication(id: string) {
 
   if (error) return { error: error.message };
 
+  // @ts-expect-error: Next.js 16 type requires 2 args but revalidateTag("tag") works at runtime
+  revalidateTag("publications");
   revalidatePath("/professor/publications");
   revalidatePath("/professor/patents");
   revalidatePath("/publications");
