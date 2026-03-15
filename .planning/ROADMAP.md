@@ -64,7 +64,14 @@ Plans:
 1. 과제 상세 페이지에 연결된 논문과 특허 카드가 섹션으로 표시된다
 2. 논문/특허 상세 페이지에 "연계 과제" 링크가 표시되고 클릭하면 해당 과제 상세로 이동한다
 3. 모바일(375px)에서 실적 카드 목록이 가로 넘침 없이 정상 렌더링된다
-   **Plans**: TBD
+
+**Plans**: 3 plans
+
+Plans:
+
+- [ ] 03-01-PLAN.md — getProjectOutputs query function (TDD)
+- [ ] 03-02-PLAN.md — Mobile overflow fixes: PublicationCard, PatentCard, ProjectCard
+- [ ] 03-03-PLAN.md — ProjectOutputsSection + ProjectBacklink components + page wiring + remove AccessDenied gate
 
 ### Phase 4: Professor Portal UX
 
@@ -85,7 +92,7 @@ Plans:
 | ------------------------- | -------------- | ----------- | ---------- |
 | 1. Security Foundation    | 4/4            | Complete    | 2026-03-15 |
 | 2. Content Visibility     | 3/3            | Complete    | 2026-03-15 |
-| 3. Project–Output Linking | 0/TBD          | Not started | -          |
+| 3. Project–Output Linking | 0/3            | Not started | -          |
 | 4. Professor Portal UX    | 0/TBD          | Not started | -          |
 
 ---
@@ -93,3 +100,4 @@ Plans:
 _Roadmap created: 2026-03-15_
 _Phase 1 planned: 2026-03-15_
 _Phase 2 planned: 2026-03-15_
+_Phase 3 planned: 2026-03-15_
