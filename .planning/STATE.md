@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 ## Current Position
 
 Phase: 1 of 4 (Security Foundation)
-Plan: 3 of 4 in current phase
-Status: In progress
-Last activity: 2026-03-15 — Completed 01-03 (professor action role guards)
+Plan: 4 of 4 in current phase
+Status: In progress (checkpoint: human-verify pending)
+Last activity: 2026-03-15 — Completed 01-04 Task 1 (CVE-2025-29927 middleware patch)
 
 Progress: [███░░░░░░░] 30%
 
@@ -50,6 +50,7 @@ Recent decisions affecting current work:
 - **01-02**: update_publication_with_relations preserves author_order via generate_subscripts()
 - **01-03**: contact.ts updateContact guarded with assertRole('professor') — writes lab info, professor-only
 - **01-03**: Professor layout uses requireRole + redirect('/login') over AccessDenied (i18n context unavailable)
+- **01-04**: CVE-2025-29927 manual patch applied as defense-in-depth; redirect to /login on x-middleware-subrequest header
 
 ### Pending Todos
 
@@ -64,5 +65,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-15
-Stopped at: Completed 01-03-PLAN.md (professor action role guards + layout gate)
+Stopped at: 01-04 checkpoint:human-verify — awaiting curl test confirmation of CVE-2025-29927 bypass block
 Resume file: None
