@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { createClient } from "@/lib/db/supabase-server";
 import type { Project } from "@/types";
 
@@ -42,53 +43,90 @@ function toProject(row: ProjRow): Project {
   };
 }
 
-export async function getProjects(): Promise<Project[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("projects")
-    .select(PROJ_SELECT)
-    .order("start_date", { ascending: false });
+export const getProjects = unstable_cache(
+  async (): Promise<Project[]> => {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("projects")
+      .select(PROJ_SELECT)
+      .eq("is_public", true)
+      .order("start_date", { ascending: false });
 
-  if (error) throw error;
-  return (data ?? []).map(toProject);
-}
+    if (error) throw error;
+    return (data ?? []).map(toProject);
+  },
+  ["projects-public"],
+  { tags: ["projects"] },
+);
 
-export async function getProjectBySlug(slug: string): Promise<Project | null> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("projects")
-    .select(PROJ_SELECT)
-    .eq("slug", slug)
-    .single();
+export const getProjectBySlug = unstable_cache(
+  async (slug: string): Promise<Project | null> => {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("projects")
+      .select(PROJ_SELECT)
+      .eq("is_public", true)
+      .eq("slug", slug)
+      .single();
 
-  if (error) return null;
-  return toProject(data);
-}
+    if (error) return null;
+    return toProject(data);
+  },
+  ["project-slug"],
+  { tags: ["projects"] },
+);
 
-export async function getFeaturedProjects(): Promise<Project[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("projects")
-    .select(PROJ_SELECT)
-    .eq("is_featured", true)
-    .order("start_date", { ascending: false })
-    .limit(3);
+export const getFeaturedProjects = unstable_cache(
+  async (): Promise<Project[]> => {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("projects")
+      .select(PROJ_SELECT)
+      .eq("is_public", true)
+      .eq("is_featured", true)
+      .order("start_date", { ascending: false })
+      .limit(3);
 
-  if (error) throw error;
-  return (data ?? []).map(toProject);
-}
+    if (error) throw error;
+    return (data ?? []).map(toProject);
+  },
+  ["projects-featured"],
+  { tags: ["projects"] },
+);
 
-export async function getActiveProjects(): Promise<Project[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("projects")
-    .select(PROJ_SELECT)
-    .eq("status", "active")
-    .order("start_date", { ascending: false });
+export const getActiveProjects = unstable_cache(
+  async (): Promise<Project[]> => {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("projects")
+      .select(PROJ_SELECT)
+      .eq("is_public", true)
+      .eq("status", "active")
+      .order("start_date", { ascending: false });
 
-  if (error) throw error;
-  return (data ?? []).map(toProject);
-}
+    if (error) throw error;
+    return (data ?? []).map(toProject);
+  },
+  ["projects-active"],
+  { tags: ["projects"] },
+);
+
+export const getDemoProjects = unstable_cache(
+  async (): Promise<Project[]> => {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("projects")
+      .select(PROJ_SELECT)
+      .eq("is_public", true)
+      .not("demo_url", "is", null)
+      .order("is_featured", { ascending: false });
+
+    if (error) throw error;
+    return (data ?? []).map(toProject);
+  },
+  ["projects-demos"],
+  { tags: ["projects"] },
+);
 
 export async function getProjectById(id: string): Promise<Project | null> {
   const supabase = await createClient();
@@ -100,18 +138,6 @@ export async function getProjectById(id: string): Promise<Project | null> {
 
   if (error) return null;
   return toProject(data);
-}
-
-export async function getDemoProjects(): Promise<Project[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("projects")
-    .select(PROJ_SELECT)
-    .not("demo_url", "is", null)
-    .order("is_featured", { ascending: false });
-
-  if (error) throw error;
-  return (data ?? []).map(toProject);
 }
 
 export async function getProjectsByMember(
@@ -129,6 +155,7 @@ export async function getProjectsByMember(
   const { data, error } = await supabase
     .from("projects")
     .select(PROJ_SELECT)
+    .eq("is_public", true)
     .in("id", projIds)
     .order("start_date", { ascending: false });
 
