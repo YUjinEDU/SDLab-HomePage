@@ -12,11 +12,23 @@
 방문자가 "이 연구실이 어떤 과제를 수행했고, 그 결과로 무엇을 만들었는지"를
 한눈에 파악할 수 있어야 한다.
 
+## Current Milestone: v1.1 실적 데이터 등록 및 표시 개선
+
+**Goal:** 연구실적 문서의 논문/특허 데이터를 구조화하여 DB에 등록하고, 홈페이지에서 인덱스·저자·수록정보 등을 체계적으로 표시한다.
+
+**Target features:**
+
+- patents 별도 테이블 생성 (publications에서 분리)
+- publications에 index_type, volume_info 컬럼 추가
+- 연구실적 문서 파싱 → DB 자동 삽입 스크립트
+- 논문 표시 개선 (인덱스 badge, 탭 필터, 상세 수록정보)
+- 특허 표시 개선 (등록/출원 구분, 특허번호, 발명자)
+
 ## Requirements
 
 ### Validated
 
-<!-- 이미 구현된 기능들 -->
+<!-- v1.0에서 구현 완료 -->
 
 - ✓ 공개 포털 라우트 구조 — `(public)/[locale]/` 기반 i18n 적용
 - ✓ Publications 페이지 — 논문 목록, 검색/필터, 상세 페이지
@@ -26,25 +38,28 @@
 - ✓ Auth 시스템 — Supabase Auth, member/professor/admin 역할 구분
 - ✓ 내부 포털 — `(internal)` 라우트 그룹, 로그인 필요
 - ✓ 교수 관리 포털 — `(professor)` 라우트 그룹, 데이터 CRUD
+- ✓ 권한 유틸 (assertRole/requireRole) + Server Actions 권한 검사 — v1.0 Phase 1
+- ✓ is_public 컬럼 + RLS 정책 + 캐시 무효화 — v1.0 Phase 1-2
+- ✓ 과제-결과물 양방향 연결 UI + 모바일 반응형 — v1.0 Phase 3
+- ✓ 교수 포털 공개/비공개 토글 — v1.0 Phase 4
 
 ### Active
 
-<!-- 이번 작업에서 구현할 것들 -->
+<!-- v1.1에서 구현할 것들 -->
 
-- [ ] 과제(Project) 상세 페이지에서 연결된 논문·특허·SW 결과물 표시
-- [ ] 논문/특허 상세 페이지에서 연계 과제 역참조 링크
-- [ ] 공개/비공개 콘텐츠 경계 설계 (교수님 피드백 반영)
-  - [ ] 공개 여부 필드(`is_public`) DB 스키마 추가
-  - [ ] 비공개 콘텐츠는 내부 포털에서만 노출
-- [ ] 모바일 레이아웃 개선 — 실적 카드/목록의 반응형 최적화
-- [ ] SW 실적 위치 확정 (Projects 탭 유지 또는 별도 분리)
-- [ ] `lib/permissions/` 구현 — 역할 기반 접근 제어 유틸 생성
-- [ ] Server Actions 권한 검사 추가 (현재 누락)
+- [ ] patents 별도 테이블 생성 (publications 테이블에서 분리)
+- [ ] publications 테이블에 index_type, volume_info 컬럼 추가
+- [ ] 연구실적 문서 파싱 스크립트 (논문 4개 카테고리 + 특허)
+- [ ] 논문 데이터 DB 삽입 (국제저널/국제학회/국내저널/국내학회)
+- [ ] 특허 데이터 DB 삽입 (등록/출원)
+- [ ] 논문 페이지 UI 개선 (인덱스 badge, 탭 필터, 수록정보 표시)
+- [ ] 특허 페이지 UI 개선 (등록/출원 탭, 특허번호, 발명자)
 
 ### Out of Scope
 
 - 완전한 i18n 번역 완성 — 별도 작업으로 분리
-- 새로운 콘텐츠 타입 추가 (이번은 기존 타입 재구조화)
+- 교수 포털에서 논문/특허 수동 추가/편집 — 이번은 데이터 일괄 등록이 우선
+- 홈페이지 메인 페이지 섹션 업데이트 — 데이터 등록 후 별도 작업
 - 디자인 시스템 전면 개편 — 현재 스타일 유지
 
 ## Context
@@ -72,13 +87,16 @@
 
 ## Key Decisions
 
-| Decision                     | Rationale                                     | Outcome   |
-| ---------------------------- | --------------------------------------------- | --------- |
-| 과제 → 결과물 연결 방식      | 방문자가 연구 흐름을 이해하는 데 가장 직관적  | — Pending |
-| SW 실적 위치                 | Projects 탭 vs 독립 분리 — 교수님 피드백 필요 | — Pending |
-| 공개/비공개 경계             | 콘텐츠별 `is_public` 필드로 관리              | — Pending |
-| `lib/permissions/` 구현 방식 | 역할 검사 중앙화 vs 각 action 인라인          | — Pending |
+| Decision                     | Rationale                                      | Outcome    |
+| ---------------------------- | ---------------------------------------------- | ---------- |
+| 과제 → 결과물 연결 방식      | 방문자가 연구 흐름을 이해하는 데 가장 직관적   | ✓ Good     |
+| SW 실적 위치                 | Projects 탭 유지 — 교수님 피드백 대기 중       | ⚠️ Revisit |
+| 공개/비공개 경계             | 콘텐츠별 `is_public` 필드로 관리               | ✓ Good     |
+| `lib/permissions/` 구현 방식 | assertRole/requireRole 중앙화                  | ✓ Good     |
+| patents 별도 테이블 분리     | 특허는 논문과 필드 구조가 다름 (등록번호/상태) | — Pending  |
+| publications index_type 추가 | SCI/SCIE/SCOPUS 등 인덱스 표시 필요            | — Pending  |
+| 데이터 입력 방식             | 실적 문서 파싱 스크립트로 자동 삽입            | — Pending  |
 
 ---
 
-_Last updated: 2026-03-14 after initialization_
+_Last updated: 2026-03-15 after v1.1 milestone start_
