@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Completed 02-01-PLAN.md — VIS-01/VIS-02 test scaffold (RED state)
-last_updated: "2026-03-15T04:26:31.260Z"
-last_activity: 2026-03-15 — Completed 02-03 revalidateTag cache invalidation
+status: in_progress
+stopped_at: Completed 03-02-PLAN.md — mobile overflow fix (checkpoint:human-verify pending)
+last_updated: "2026-03-15T05:00:00.000Z"
+last_activity: 2026-03-15 — Completed 03-02 mobile overflow fix on PublicationCard, PatentCard, ProjectCard
 progress:
   total_phases: 4
   completed_phases: 2
-  total_plans: 7
-  completed_plans: 7
-  percent: 86
+  total_plans: 9
+  completed_plans: 9
+  percent: 90
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-14)
 
 **Core value:** 방문자가 "이 연구실이 어떤 과제를 수행했고, 그 결과로 무엇을 만들었는지"를 한눈에 파악할 수 있어야 한다
-**Current focus:** Phase 2 — Content Visibility
+**Current focus:** Phase 3 — Project Output Linking
 
 ## Current Position
 
-Phase: 2 of 4 (Content Visibility) — IN PROGRESS
-Plan: 3 of 3 in current phase — COMPLETE
-Status: All Phase 2 plans complete (02-01 test scaffold, 02-02 query filters, 02-03 revalidateTag).
-Last activity: 2026-03-15 — Completed 02-03 revalidateTag cache invalidation
+Phase: 3 of 4 (Project Output Linking) — IN PROGRESS
+Plan: 2 of 3 in current phase — COMPLETE (checkpoint:human-verify pending)
+Status: 03-01 getProjectOutputs query done; 03-02 mobile overflow cards fixed; 03-03 pending.
+Last activity: 2026-03-15 — Completed 03-02 mobile overflow fix on PublicationCard, PatentCard, ProjectCard
 
-Progress: [████████░░] 86%
+Progress: [█████████░] 90%
 
 ## Performance Metrics
 
@@ -70,6 +70,7 @@ Recent decisions affecting current work:
 - **02-01**: vi.hoisted() required for mockChain in vitest — vi.mock factory hoisted above const declarations
 - **02-01**: order() mock returns thenable (Object.assign Promise + chain) to handle both chained and terminal query patterns
 - **02-03**: @ts-expect-error on revalidateTag calls — Next.js 16 type requires 2 args but runtime accepts 1; test contract expects single-arg call
+- **03-02**: min-w-0 on h3 (flex child) prevents overflow without wrapper div; break-words on title, truncate on single-line metadata (venue, org)
 
 ### Pending Todos
 
@@ -84,5 +85,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-15
-Stopped at: Completed 02-01-PLAN.md — VIS-01/VIS-02 test scaffold (RED state)
+Stopped at: Completed 03-02-PLAN.md — mobile overflow fix (checkpoint:human-verify pending)
 Resume file: None

@@ -31,7 +31,7 @@
 
 ### Mobile Responsiveness
 
-- [ ] **MOB-01**: 실적 카드(PublicationCard, PatentCard, ProjectCard) 모바일 레이아웃 검토 및 개선
+- [x] **MOB-01**: 실적 카드(PublicationCard, PatentCard, ProjectCard) 모바일 레이아웃 검토 및 개선
 - [ ] **MOB-02**: 과제 상세 페이지의 결과물 섹션 모바일 반응형 적용
 
 ## v2 Requirements
@@ -78,7 +78,7 @@
 | LINK-01     | Phase 3 | Pending  |
 | LINK-02     | Phase 3 | Pending  |
 | LINK-03     | Phase 3 | Pending  |
-| MOB-01      | Phase 3 | Pending  |
+| MOB-01      | Phase 3 | Complete |
 | MOB-02      | Phase 3 | Pending  |
 
 **Coverage:**
