@@ -9,6 +9,7 @@ vi.mock("@/lib/permissions", () => ({
 // Mock next/cache to avoid server-only errors in test environment
 vi.mock("next/cache", () => ({
   revalidatePath: vi.fn(),
+  revalidateTag: vi.fn(),
 }));
 
 // Mock Supabase server client — should not be reached when guard fires first
@@ -28,6 +29,7 @@ vi.mock("@/lib/utils/slug", () => ({
   generateSlug: vi.fn().mockReturnValue("test-slug"),
 }));
 
+import { revalidateTag } from "next/cache";
 import {
   createPublication,
   updatePublication,
@@ -149,6 +151,72 @@ describe("Professor Server Actions — role guard", () => {
         makeFormData({ labNameKo: "Test Lab" }),
       );
       expect(result).toEqual({ error: "unauthorized" });
+    });
+  });
+});
+
+describe("VIS-02 — revalidateTag cache invalidation on mutation", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    // Allow actions to proceed past the role guard
+    vi.mocked(permissions.assertRole).mockResolvedValue(null);
+  });
+
+  describe("publications cache tag", () => {
+    it("createPublication() must call revalidateTag('publications')", async () => {
+      await createPublication(
+        makeFormData({ title: "Test", year: "2024", type: "journal" }),
+      );
+      expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("publications");
+    });
+
+    it("updatePublication() must call revalidateTag('publications')", async () => {
+      await updatePublication(
+        "some-id",
+        makeFormData({ title: "Test", year: "2024", type: "journal" }),
+      );
+      expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("publications");
+    });
+
+    it("deletePublication() must call revalidateTag('publications')", async () => {
+      await deletePublication("some-id");
+      expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("publications");
+    });
+  });
+
+  describe("projects cache tag", () => {
+    it("createProject() must call revalidateTag('projects')", async () => {
+      await createProject(
+        makeFormData({
+          title: "Test Project",
+          status: "active",
+          category: "research",
+          shortDescription: "desc",
+          organization: "org",
+          startDate: "2024-01-01",
+        }),
+      );
+      expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("projects");
+    });
+
+    it("updateProject() must call revalidateTag('projects')", async () => {
+      await updateProject(
+        "some-id",
+        makeFormData({
+          title: "Test Project",
+          status: "active",
+          category: "research",
+          shortDescription: "desc",
+          organization: "org",
+          startDate: "2024-01-01",
+        }),
+      );
+      expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("projects");
+    });
+
+    it("deleteProject() must call revalidateTag('projects')", async () => {
+      await deleteProject("some-id");
+      expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("projects");
     });
   });
 });
