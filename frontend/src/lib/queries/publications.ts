@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { createClient } from "@/lib/db/supabase-server";
+import { createStaticClient } from "@/lib/db/supabase-static";
 import type { Publication } from "@/types";
 
 type PubRow = Record<string, unknown> & {
@@ -50,7 +51,7 @@ const PUB_SELECT = `
 
 export const getPublications = unstable_cache(
   async (): Promise<Publication[]> => {
-    const supabase = await createClient();
+    const supabase = createStaticClient();
     const { data, error } = await supabase
       .from("publications")
       .select(PUB_SELECT)
@@ -68,7 +69,7 @@ export const getPublications = unstable_cache(
 
 export const getPublicationBySlug = unstable_cache(
   async (slug: string): Promise<Publication | null> => {
-    const supabase = await createClient();
+    const supabase = createStaticClient();
     const { data, error } = await supabase
       .from("publications")
       .select(PUB_SELECT)
@@ -85,7 +86,7 @@ export const getPublicationBySlug = unstable_cache(
 
 export const getFeaturedPublications = unstable_cache(
   async (): Promise<Publication[]> => {
-    const supabase = await createClient();
+    const supabase = createStaticClient();
     const { data, error } = await supabase
       .from("publications")
       .select(PUB_SELECT)
@@ -104,7 +105,7 @@ export const getFeaturedPublications = unstable_cache(
 
 export const getPatents = unstable_cache(
   async (): Promise<Publication[]> => {
-    const supabase = await createClient();
+    const supabase = createStaticClient();
     const { data, error } = await supabase
       .from("publications")
       .select(PUB_SELECT)
@@ -121,7 +122,7 @@ export const getPatents = unstable_cache(
 
 export const getPatentBySlug = unstable_cache(
   async (slug: string): Promise<Publication | null> => {
-    const supabase = await createClient();
+    const supabase = createStaticClient();
     const { data, error } = await supabase
       .from("publications")
       .select(PUB_SELECT)
@@ -140,7 +141,7 @@ export const getPatentBySlug = unstable_cache(
 export const getProjectOutputs = (projectId: string) =>
   unstable_cache(
     async (): Promise<Publication[]> => {
-      const supabase = await createClient();
+      const supabase = createStaticClient();
       const { data: joinRows } = await supabase
         .from("publication_projects")
         .select("publication_id")
@@ -192,7 +193,7 @@ export async function getPublicationById(
 export async function getPublicationsByMember(
   memberId: string,
 ): Promise<Publication[]> {
-  const supabase = await createClient();
+  const supabase = createStaticClient();
   const { data: authorRows } = await supabase
     .from("publication_authors")
     .select("publication_id")
