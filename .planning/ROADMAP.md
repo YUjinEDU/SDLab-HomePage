@@ -45,7 +45,14 @@ Plans:
 1. 로그인하지 않은 방문자가 논문/특허/과제 목록을 열면 `is_public = false` 항목이 보이지 않는다
 2. 교수 포털에서 항목을 비공개로 변경한 직후 공개 페이지를 새로고침하면 해당 항목이 사라진다
 3. 내부 포털에서는 is_public 여부와 관계없이 모든 항목이 표시된다
-   **Plans**: TBD
+
+**Plans**: 3 plans
+
+Plans:
+
+- [ ] 02-01-PLAN.md — VIS-01/VIS-02 test scaffold (TDD RED phase)
+- [ ] 02-02-PLAN.md — lib/queries is_public filter + unstable_cache; open /publications and /patents pages
+- [ ] 02-03-PLAN.md — actions revalidateTag cache invalidation
 
 ### Phase 3: Project–Output Linking
 
@@ -74,14 +81,15 @@ Plans:
 
 **Execution Order:** 1 → 2 → 3 → 4
 
-| Phase                     | Plans Complete | Status      | Completed |
-| ------------------------- | -------------- | ----------- | --------- |
-| 1. Security Foundation    | 4/4 | Complete   | 2026-03-15 |
-| 2. Content Visibility     | 0/TBD          | Not started | -         |
-| 3. Project–Output Linking | 0/TBD          | Not started | -         |
-| 4. Professor Portal UX    | 0/TBD          | Not started | -         |
+| Phase                     | Plans Complete | Status      | Completed  |
+| ------------------------- | -------------- | ----------- | ---------- |
+| 1. Security Foundation    | 4/4            | Complete    | 2026-03-15 |
+| 2. Content Visibility     | 0/3            | Not started | -          |
+| 3. Project–Output Linking | 0/TBD          | Not started | -          |
+| 4. Professor Portal UX    | 0/TBD          | Not started | -          |
 
 ---
 
 _Roadmap created: 2026-03-15_
 _Phase 1 planned: 2026-03-15_
+_Phase 2 planned: 2026-03-15_
