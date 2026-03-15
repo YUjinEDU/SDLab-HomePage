@@ -2,14 +2,7 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/layout/Container";
-import { TagBadge } from "@/components/shared/TagBadge";
-import { ProjectBacklink } from "@/components/shared/ProjectBacklink";
-import {
-  getPatentBySlug,
-  getMembers,
-  getProjects,
-  getResearchAreas,
-} from "@/lib/queries";
+import { getPatentBySlug, getMembers } from "@/lib/queries";
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -21,36 +14,23 @@ export async function generateMetadata({ params }: Props) {
   if (!patent) return { title: "Patent Not Found" };
   return {
     title: `${patent.title} | SD Lab`,
-    description: patent.abstract ?? `${patent.venue}, ${patent.year}`,
+    description: patent.note ?? patent.title,
   };
 }
 
 export default async function PatentDetailPage({ params }: Props) {
   const { slug, locale } = await params;
-  const [patent, members, projects, researchAreas, t] = await Promise.all([
+  const [patent, members, t] = await Promise.all([
     getPatentBySlug(slug),
     getMembers(),
-    getProjects(),
-    getResearchAreas(),
     getTranslations({ locale, namespace: "patents" }),
   ]);
 
   if (!patent) notFound();
 
-  const relatedProjects = projects.filter((proj) =>
-    patent.projectIds.includes(proj.id),
-  );
-  const relatedAreas = researchAreas.filter((area) =>
-    patent.researchAreaIds.includes(area.id),
-  );
-  const authorMembers = patent.authorMemberIds
-    .map((id) => members.find((m) => m.id === id))
+  const authorMembers = patent.inventors
+    .map((name) => members.find((m) => m.nameEn === name || m.nameKo === name))
     .filter(Boolean);
-
-  const venueDate =
-    patent.month != null
-      ? `${patent.venue}, ${patent.year}.${patent.month}`
-      : `${patent.venue}, ${patent.year}`;
 
   return (
     <div className="py-12">
@@ -110,84 +90,56 @@ export default async function PatentDetailPage({ params }: Props) {
 
           {/* Inventors */}
           <p className="text-base text-text-secondary mb-2">
-            {patent.authors.map((author, idx) => {
+            {patent.inventors.map((inventor, idx) => {
               const memberMatch = authorMembers.find(
-                (m) => m!.nameEn === author || m!.nameKo === author,
+                (m) => m!.nameEn === inventor || m!.nameKo === inventor,
               );
               return (
-                <span key={author}>
+                <span key={inventor}>
                   {idx > 0 && ", "}
                   {memberMatch ? (
                     <Link
                       href={`/members/${memberMatch.slug}`}
                       className="text-primary hover:text-primary-dark transition-colors font-medium"
                     >
-                      {author}
+                      {inventor}
                     </Link>
                   ) : (
-                    author
+                    inventor
                   )}
                 </span>
               );
             })}
           </p>
 
-          {/* Venue */}
-          <p className="text-sm text-text-secondary italic mb-6">{venueDate}</p>
+          {/* Date and patent number */}
+          {patent.date && (
+            <p className="text-sm text-text-secondary italic mb-2">
+              {patent.date}
+            </p>
+          )}
+          {patent.patentNumber && (
+            <p className="text-sm text-text-secondary font-mono mb-6">
+              {patent.status === "등록"
+                ? t("labelRegistrationNo")
+                : t("labelApplicationNo")}
+              : {patent.patentNumber}
+            </p>
+          )}
 
           <hr className="border-border my-8" />
 
-          {/* Abstract */}
-          {patent.abstract && (
+          {/* Note */}
+          {patent.note && (
             <section className="mb-8">
               <h2 className="text-lg font-semibold text-foreground mb-3">
                 {t("sectionAbstract")}
               </h2>
               <p className="text-sm leading-relaxed text-text-secondary">
-                {patent.abstract}
+                {patent.note}
               </p>
             </section>
           )}
-
-          {/* Keywords */}
-          {patent.keywords.length > 0 && (
-            <section className="mb-8">
-              <h2 className="text-lg font-semibold text-foreground mb-3">
-                {t("sectionKeywords")}
-              </h2>
-              <div className="flex flex-wrap gap-2">
-                {patent.keywords.map((kw) => (
-                  <TagBadge key={kw} label={kw} variant="primary" />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Related research areas */}
-          {relatedAreas.length > 0 && (
-            <section className="mb-8">
-              <h2 className="text-lg font-semibold text-foreground mb-3">
-                {t("sectionResearchAreas")}
-              </h2>
-              <div className="flex flex-wrap gap-2">
-                {relatedAreas.map((area) => (
-                  <Link
-                    key={area.id}
-                    href="/research"
-                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-surface hover:border-primary/40 hover:bg-primary-muted/30 transition-colors text-sm font-medium text-foreground"
-                  >
-                    {area.title}
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Related projects */}
-          <ProjectBacklink
-            projects={relatedProjects}
-            label={t("sectionRelatedProjects")}
-          />
         </div>
       </Container>
     </div>

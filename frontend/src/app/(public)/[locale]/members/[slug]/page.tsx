@@ -1,0 +1,347 @@
+import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import { Container } from "@/components/layout/Container";
+import { TagBadge } from "@/components/shared/TagBadge";
+import { MemberContactLinks } from "@/components/members/MemberContactLinks";
+import { MemberEducationTimeline } from "@/components/members/MemberEducationTimeline";
+import { MemberCareerTimeline } from "@/components/members/MemberCareerTimeline";
+import {
+  getMemberBySlug,
+  getPublicationsByMember,
+  getProjectsByMember,
+} from "@/lib/queries";
+
+export const dynamic = "force-dynamic";
+
+type Props = {
+  params: Promise<{ slug: string; locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
+  const member = await getMemberBySlug(slug);
+  if (!member) return { title: "Member Not Found" };
+  return {
+    title: `${member.nameKo} | SD Lab`,
+    description: member.bio ?? `${member.nameKo} — ${member.position}`,
+  };
+}
+
+export default async function MemberDetailPage({ params }: Props) {
+  const { slug, locale } = await params;
+  const [member, t] = await Promise.all([
+    getMemberBySlug(slug),
+    getTranslations({ locale, namespace: "members" }),
+  ]);
+
+  if (!member) notFound();
+
+  const groupLabelMap: Record<string, string> = {
+    professor: t("groupProfessor"),
+    phd: t("groupPhd"),
+    ms: t("groupMs"),
+    combined: t("groupCombined"),
+    undergraduate: t("groupUndergraduate"),
+    alumni: t("groupAlumni"),
+  };
+
+  const isProfessor = member.group === "professor";
+  const [allMemberPubs, memberProjects] = isProfessor
+    ? [[], []]
+    : await Promise.all([
+        getPublicationsByMember(member.id),
+        getProjectsByMember(member.id),
+      ]);
+
+  // TODO: Phase 8 will add patent data from the separate patents table (Migration 005).
+  // All publications are now non-patent; patent filter removed.
+  const memberPubs = allMemberPubs;
+  const memberPatents: typeof allMemberPubs = [];
+
+  const initials = member.nameKo
+    .split("")
+    .filter((_, i) => i === 0 || i === member.nameKo.length - 1)
+    .join("")
+    .slice(0, 2);
+
+  return (
+    <div className="py-12">
+      <Container>
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-1.5 text-xs text-text-secondary mb-6 font-medium">
+          <Link href="/" className="hover:text-primary transition-colors">
+            {t("pageTitle")}
+          </Link>
+          <span className="opacity-40">/</span>
+          <Link
+            href="/members"
+            className="hover:text-primary transition-colors"
+          >
+            {t("pageTitle")}
+          </Link>
+          <span className="opacity-40">/</span>
+          <span className="text-foreground">{member.nameKo}</span>
+        </nav>
+
+        <Link
+          href="/members"
+          className="inline-flex items-center gap-1.5 text-sm text-text-secondary hover:text-primary transition-colors mb-8"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+          {t("backToList")}
+        </Link>
+
+        {/* ── 공통 사이드바 레이아웃 ── */}
+        <div className="lg:grid lg:grid-cols-[280px_1fr] lg:gap-12 lg:items-start">
+          {/* ── 좌측 사이드바 (스티키) ── */}
+          <aside className="lg:sticky lg:top-24 mb-10 lg:mb-0">
+            {/* 사진 */}
+            <div className="mb-5">
+              {member.image ? (
+                <img
+                  src={member.image}
+                  alt={member.nameKo}
+                  className="w-40 h-40 sm:w-56 sm:h-56 rounded-2xl object-cover shadow-sm border border-border"
+                />
+              ) : (
+                <div className="w-40 h-40 sm:w-56 sm:h-56 rounded-2xl bg-gradient-to-br from-primary-muted to-primary/10 border border-primary/20 flex items-center justify-center">
+                  <span className="text-6xl font-black text-primary">
+                    {initials}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* 이름 / 직위 */}
+            <span className="text-xs font-bold text-primary bg-primary-muted px-2.5 py-0.5 rounded-full uppercase">
+              {groupLabelMap[member.group] ?? member.group}
+            </span>
+            <h1 className="text-2xl font-bold text-foreground mt-2 mb-0.5">
+              {member.nameKo}
+            </h1>
+            <p className="text-sm text-text-secondary font-mono">
+              {member.nameEn}
+            </p>
+            <p className="text-sm text-text-secondary mt-1 mb-4">
+              {member.position} · {member.department}
+            </p>
+
+            {/* 연락처 */}
+            {(member.email || Object.values(member.links).some(Boolean)) && (
+              <div className="mb-5">
+                <MemberContactLinks email={member.email} links={member.links} />
+              </div>
+            )}
+
+            {/* 연구 키워드 */}
+            {member.researchKeywords.length > 0 && (
+              <div className="mb-5">
+                <p className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
+                  {t("sectionResearchKeywords")}
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {member.researchKeywords.map((kw) => (
+                    <TagBadge key={kw} label={kw} variant="primary" />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* 학력 */}
+            {member.education.length > 0 && (
+              <div>
+                <p className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-3">
+                  {t("sectionEducation")}
+                </p>
+                <MemberEducationTimeline education={member.education} />
+              </div>
+            )}
+          </aside>
+
+          {/* ── 우측 메인 콘텐츠 ── */}
+          <div className="min-w-0">
+            {/* Bio */}
+            {member.bio && (
+              <section className="mb-8 pb-8 border-b border-border">
+                <h2 className="text-lg font-semibold text-foreground mb-3">
+                  {t("sectionBio")}
+                </h2>
+                <p className="text-text-secondary leading-relaxed">
+                  {member.bio}
+                </p>
+              </section>
+            )}
+
+            {isProfessor ? (
+              /* ── 교수님: 경력 / 수상 / 학술활동 ── */
+              (() => {
+                const careerGroups = {
+                  career: member.career.filter(
+                    (c) => !c.category || c.category === "career",
+                  ),
+                  award: member.career.filter((c) => c.category === "award"),
+                  academic_service: member.career.filter(
+                    (c) => c.category === "academic_service",
+                  ),
+                };
+                const renderCareerList = (
+                  entries: typeof member.career,
+                  title: string,
+                  last = false,
+                ) =>
+                  entries.length > 0 ? (
+                    <section
+                      className={`mb-8${last ? "" : " pb-8 border-b border-border"}`}
+                    >
+                      <h2 className="text-lg font-semibold text-foreground mb-4">
+                        {title}
+                      </h2>
+                      <ul className="flex flex-col gap-3">
+                        {entries.map((entry, i) => (
+                          <li
+                            key={i}
+                            className="flex items-start gap-4 py-3 border-b border-border last:border-0"
+                          >
+                            <span className="text-xs font-mono text-text-secondary bg-surface px-2 py-1 rounded shrink-0 mt-0.5">
+                              {entry.period}
+                            </span>
+                            <div>
+                              <p className="text-sm font-semibold text-foreground">
+                                {entry.role}
+                              </p>
+                              <p className="text-xs text-text-secondary mt-0.5">
+                                {entry.organization}
+                              </p>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+                  ) : null;
+                return (
+                  <>
+                    {careerGroups.career.length > 0 && (
+                      <section className="mb-8 pb-8 border-b border-border">
+                        <h2 className="text-lg font-semibold text-foreground mb-4">
+                          {t("sectionCareer")}
+                        </h2>
+                        <MemberCareerTimeline career={careerGroups.career} />
+                      </section>
+                    )}
+                    {renderCareerList(careerGroups.award, t("sectionAwards"))}
+                    {renderCareerList(
+                      careerGroups.academic_service,
+                      t("sectionAcademicService"),
+                      true,
+                    )}
+                  </>
+                );
+              })()
+            ) : (
+              /* ── 일반 멤버: 경력 + 논문/프로젝트/특허 ── */
+              <>
+                {member.career.length > 0 && (
+                  <section className="mb-8 pb-8 border-b border-border">
+                    <h2 className="text-lg font-semibold text-foreground mb-4">
+                      {t("sectionCareer")}
+                    </h2>
+                    <MemberCareerTimeline career={member.career} />
+                  </section>
+                )}
+
+                {memberPubs.length > 0 && (
+                  <section className="mb-8 pb-8 border-b border-border">
+                    <h2 className="text-lg font-semibold text-foreground mb-4">
+                      {t("sectionPublications")} ({memberPubs.length})
+                    </h2>
+                    <ul className="flex flex-col gap-3">
+                      {memberPubs.map((pub) => (
+                        <li key={pub.id}>
+                          <Link
+                            href={`/publications/${pub.slug}`}
+                            className="block rounded-lg border border-border bg-surface p-4 hover:border-primary/40 hover:bg-primary-muted/20 transition-colors"
+                          >
+                            <p className="text-sm font-medium text-foreground leading-snug">
+                              {pub.title}
+                            </p>
+                            <p className="text-xs text-text-secondary mt-1.5">
+                              {pub.venue} · {pub.year}
+                            </p>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+
+                {memberProjects.length > 0 && (
+                  <section className="mb-8 pb-8 border-b border-border">
+                    <h2 className="text-lg font-semibold text-foreground mb-4">
+                      {t("sectionProjects")} ({memberProjects.length})
+                    </h2>
+                    <ul className="flex flex-col gap-3">
+                      {memberProjects.map((proj) => (
+                        <li key={proj.id}>
+                          <Link
+                            href={`/projects/${proj.slug}`}
+                            className="block rounded-lg border border-border bg-surface p-4 hover:border-primary/40 hover:bg-primary-muted/20 transition-colors"
+                          >
+                            <p className="text-sm font-medium text-foreground leading-snug">
+                              {proj.title}
+                            </p>
+                            <p className="text-xs text-text-secondary mt-1.5">
+                              {proj.shortDescription}
+                            </p>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+
+                {memberPatents.length > 0 && (
+                  <section className="mb-8">
+                    <h2 className="text-lg font-semibold text-foreground mb-4">
+                      {t("sectionPatents")} ({memberPatents.length})
+                    </h2>
+                    <ul className="flex flex-col gap-3">
+                      {memberPatents.map((patent) => (
+                        <li key={patent.id}>
+                          <Link
+                            href={`/patents/${patent.slug}`}
+                            className="block rounded-lg border border-border bg-surface p-4 hover:border-primary/40 hover:bg-primary-muted/20 transition-colors"
+                          >
+                            <p className="text-sm font-medium text-foreground leading-snug">
+                              {patent.title}
+                            </p>
+                            <p className="text-xs text-text-secondary mt-1.5">
+                              {patent.venue} · {patent.year}
+                            </p>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      </Container>
+    </div>
+  );
+}

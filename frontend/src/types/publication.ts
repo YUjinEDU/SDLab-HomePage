@@ -1,7 +1,6 @@
 export type PublicationType =
   | "journal"
   | "conference"
-  | "patent"
   | "sw_registration"
   | "report"
   | "thesis";
@@ -26,4 +25,6 @@ export type Publication = {
   projectIds: string[];
   isFeatured: boolean;
   isPublic: boolean;
+  indexType: string | null;
+  volumeInfo: string | null;
 };

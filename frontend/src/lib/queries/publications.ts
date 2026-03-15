@@ -1,7 +1,7 @@
 import { unstable_cache } from "next/cache";
 import { createClient } from "@/lib/db/supabase-server";
 import { createStaticClient } from "@/lib/db/supabase-static";
-import type { Publication } from "@/types";
+import type { Publication, Patent } from "@/types";
 
 type PubRow = Record<string, unknown> & {
   publication_authors?: { member_id: string; author_order: number }[];
@@ -39,6 +39,9 @@ function toPublication(row: PubRow): Publication {
     researchAreaIds,
     projectIds,
     isFeatured: (row.is_featured as boolean) ?? false,
+    isPublic: (row.is_public as boolean) ?? true,
+    indexType: (row.index_type as string) ?? null,
+    volumeInfo: (row.volume_info as string) ?? null,
   };
 }
 
@@ -56,7 +59,6 @@ export const getPublications = unstable_cache(
       .from("publications")
       .select(PUB_SELECT)
       .eq("is_public", true)
-      .neq("type", "patent")
       .order("year", { ascending: false })
       .order("month", { ascending: false });
 
@@ -92,7 +94,6 @@ export const getFeaturedPublications = unstable_cache(
       .select(PUB_SELECT)
       .eq("is_public", true)
       .eq("is_featured", true)
-      .neq("type", "patent")
       .order("year", { ascending: false })
       .limit(3);
 
@@ -103,40 +104,13 @@ export const getFeaturedPublications = unstable_cache(
   { tags: ["publications"] },
 );
 
-export const getPatents = unstable_cache(
-  async (): Promise<Publication[]> => {
-    const supabase = createStaticClient();
-    const { data, error } = await supabase
-      .from("publications")
-      .select(PUB_SELECT)
-      .eq("is_public", true)
-      .eq("type", "patent")
-      .order("year", { ascending: false });
+// TODO: Phase 8 will replace these stubs with real queries against the new patents table.
+// Migration 005 moved patents out of publications into a dedicated patents table.
+// These stubs return empty data to prevent runtime breakage in patent pages.
+export const getPatents = async (): Promise<Patent[]> => [];
 
-    if (error) throw error;
-    return (data ?? []).map(toPublication);
-  },
-  ["patents-public"],
-  { tags: ["publications"] },
-);
-
-export const getPatentBySlug = unstable_cache(
-  async (slug: string): Promise<Publication | null> => {
-    const supabase = createStaticClient();
-    const { data, error } = await supabase
-      .from("publications")
-      .select(PUB_SELECT)
-      .eq("is_public", true)
-      .eq("slug", slug)
-      .eq("type", "patent")
-      .single();
-
-    if (error) return null;
-    return toPublication(data);
-  },
-  ["patent-slug"],
-  { tags: ["publications"] },
-);
+export const getPatentBySlug = async (_slug: string): Promise<Patent | null> =>
+  null;
 
 export const getProjectOutputs = (projectId: string) =>
   unstable_cache(

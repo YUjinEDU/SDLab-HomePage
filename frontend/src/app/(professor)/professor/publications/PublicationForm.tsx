@@ -18,10 +18,11 @@ type PublicationFormProps = {
   redirectPath?: string;
 };
 
+// NOTE: "patent" removed — patents are now managed in a separate table (Migration 005).
+// Patent management will be restored in Phase 8.
 const PUBLICATION_TYPES: { value: PublicationType; label: string }[] = [
   { value: "journal", label: "저널" },
   { value: "conference", label: "학회" },
-  { value: "patent", label: "특허" },
   { value: "report", label: "보고서" },
   { value: "thesis", label: "학위논문" },
 ];
@@ -293,7 +294,7 @@ export default function PublicationForm({
             <p className="mb-2 text-sm font-medium text-gray-700">
               연구실 저자 (멤버)
             </p>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
               {members.map((m) => (
                 <label key={m.id} className="flex items-center gap-2 text-sm">
                   <input
@@ -314,7 +315,7 @@ export default function PublicationForm({
 
           <div>
             <p className="mb-2 text-sm font-medium text-gray-700">연구 분야</p>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
               {researchAreas.map((area) => (
                 <label
                   key={area.id}
@@ -344,7 +345,7 @@ export default function PublicationForm({
             <p className="mb-2 text-sm font-medium text-gray-700">
               관련 프로젝트
             </p>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
               {projects.map((proj) => (
                 <label
                   key={proj.id}
@@ -371,7 +372,7 @@ export default function PublicationForm({
       </section>
 
       {/* 버튼 */}
-      <div className="flex items-center justify-end gap-3">
+      <div className="flex flex-col sm:flex-row sm:justify-end gap-2 sm:gap-3">
         <button
           type="button"
           onClick={() => router.push(redirectPath)}

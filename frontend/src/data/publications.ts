@@ -22,6 +22,9 @@ export const publications: Publication[] = [
     researchAreaIds: ["ra-1"],
     projectIds: ["proj-1"],
     isFeatured: true,
+    isPublic: true,
+    indexType: null,
+    volumeInfo: null,
   },
   {
     id: "pub-2",
@@ -44,6 +47,9 @@ export const publications: Publication[] = [
     researchAreaIds: ["ra-3"],
     projectIds: ["proj-3"],
     isFeatured: true,
+    isPublic: true,
+    indexType: null,
+    volumeInfo: null,
   },
   {
     id: "pub-3",
@@ -66,6 +72,9 @@ export const publications: Publication[] = [
     researchAreaIds: ["ra-2"],
     projectIds: ["proj-2"],
     isFeatured: false,
+    isPublic: true,
+    indexType: null,
+    volumeInfo: null,
   },
   {
     id: "pub-4",
@@ -88,6 +97,9 @@ export const publications: Publication[] = [
     researchAreaIds: ["ra-1"],
     projectIds: ["proj-1"],
     isFeatured: false,
+    isPublic: true,
+    indexType: null,
+    volumeInfo: null,
   },
   {
     id: "pub-5",
@@ -110,5 +122,8 @@ export const publications: Publication[] = [
     researchAreaIds: ["ra-3"],
     projectIds: ["proj-3"],
     isFeatured: true,
+    isPublic: true,
+    indexType: null,
+    volumeInfo: null,
   },
 ];
