@@ -82,7 +82,13 @@ Plans:
 
 1. 교수 포털 논문/특허/과제 목록에 is_public 토글이 표시되고 클릭 한 번으로 전환된다
 2. 토글 변경 후 공개 페이지에 즉시 반영된다 (캐시 무효화 연동)
-   **Plans**: TBD
+
+**Plans**: 2 plans
+
+Plans:
+
+- [ ] 04-01-PLAN.md — Type extension (isPublic) + getAllProjects + visibility Server Actions (TDD)
+- [ ] 04-02-PLAN.md — VisibilityToggleButton component + wire into professor publications/patents/projects pages
 
 ## Progress
 
@@ -93,7 +99,7 @@ Plans:
 | 1. Security Foundation    | 4/4            | Complete    | 2026-03-15 |
 | 2. Content Visibility     | 3/3            | Complete    | 2026-03-15 |
 | 3. Project–Output Linking | 3/3            | Complete    | 2026-03-15 |
-| 4. Professor Portal UX    | 0/TBD          | Not started | -          |
+| 4. Professor Portal UX    | 0/2            | Not started | -          |
 
 ---
 
@@ -101,3 +107,4 @@ _Roadmap created: 2026-03-15_
 _Phase 1 planned: 2026-03-15_
 _Phase 2 planned: 2026-03-15_
 _Phase 3 planned: 2026-03-15_
+_Phase 4 planned: 2026-03-15_
