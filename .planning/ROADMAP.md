@@ -107,11 +107,11 @@ Plans:
 3. `publications` 테이블에 `volume_info` 컬럼이 존재하여 권호·페이지 정보를 저장할 수 있다
 4. 기존 `publications` 테이블의 `type='patent'` 데이터가 제거되어 publications 테이블에 논문 데이터만 남는다
 
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
 
-- [ ] 05-01-PLAN.md — Migration: patents 테이블 생성 + publications index_type/volume_info 컬럼 추가 + patent 데이터 정리
+- [ ] 05-01-PLAN.md — patents table + publications columns (index_type, volume_info) + patent data cleanup + TS types + query updates
 
 ### Phase 6: Data Pipeline
 
