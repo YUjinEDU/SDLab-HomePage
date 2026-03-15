@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { createClient } from "@/lib/db/supabase-server";
+import { createStaticClient } from "@/lib/db/supabase-static";
 import type { Project } from "@/types";
 
 type ProjRow = Record<string, unknown> & {
@@ -45,7 +46,7 @@ function toProject(row: ProjRow): Project {
 
 export const getProjects = unstable_cache(
   async (): Promise<Project[]> => {
-    const supabase = await createClient();
+    const supabase = createStaticClient();
     const { data, error } = await supabase
       .from("projects")
       .select(PROJ_SELECT)
@@ -61,7 +62,7 @@ export const getProjects = unstable_cache(
 
 export const getProjectBySlug = unstable_cache(
   async (slug: string): Promise<Project | null> => {
-    const supabase = await createClient();
+    const supabase = createStaticClient();
     const { data, error } = await supabase
       .from("projects")
       .select(PROJ_SELECT)
@@ -78,7 +79,7 @@ export const getProjectBySlug = unstable_cache(
 
 export const getFeaturedProjects = unstable_cache(
   async (): Promise<Project[]> => {
-    const supabase = await createClient();
+    const supabase = createStaticClient();
     const { data, error } = await supabase
       .from("projects")
       .select(PROJ_SELECT)
@@ -96,7 +97,7 @@ export const getFeaturedProjects = unstable_cache(
 
 export const getActiveProjects = unstable_cache(
   async (): Promise<Project[]> => {
-    const supabase = await createClient();
+    const supabase = createStaticClient();
     const { data, error } = await supabase
       .from("projects")
       .select(PROJ_SELECT)
@@ -113,7 +114,7 @@ export const getActiveProjects = unstable_cache(
 
 export const getDemoProjects = unstable_cache(
   async (): Promise<Project[]> => {
-    const supabase = await createClient();
+    const supabase = createStaticClient();
     const { data, error } = await supabase
       .from("projects")
       .select(PROJ_SELECT)
@@ -143,7 +144,7 @@ export async function getProjectById(id: string): Promise<Project | null> {
 export async function getProjectsByMember(
   memberId: string,
 ): Promise<Project[]> {
-  const supabase = await createClient();
+  const supabase = createStaticClient();
   const { data: memberRows } = await supabase
     .from("project_members")
     .select("project_id")
