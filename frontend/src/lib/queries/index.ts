@@ -20,6 +20,7 @@ export {
 
 export {
   getProjects,
+  getAllProjects,
   getProjectById,
   getProjectBySlug,
   getFeaturedProjects,
