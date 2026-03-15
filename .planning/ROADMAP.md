@@ -6,7 +6,7 @@
 
 ## Phases
 
-- [ ] **Phase 1: Security Foundation** - 권한 유틸 구현 + DB 스키마(is_public + RLS) + CVE 패치
+- [x] **Phase 1: Security Foundation** - 권한 유틸 구현 + DB 스키마(is_public + RLS) + CVE 패치
 - [ ] **Phase 2: Content Visibility** - 공개 쿼리에 is_public 필터 적용 + 캐시 무효화
 - [ ] **Phase 3: Project–Output Linking** - 과제-결과물 양방향 연결 UI + 모바일 반응형
 - [ ] **Phase 4: Professor Portal UX** - 교수 포털 is_public 토글 UI + CRUD 권한 검증
@@ -30,10 +30,10 @@
 
 Plans:
 
-- [ ] 01-01-PLAN.md — lib/permissions assertRole/requireRole (TDD)
-- [ ] 01-02-PLAN.md — Migration 004: is_public columns + RLS policies + RPC function
-- [ ] 01-03-PLAN.md — Apply assertRole to all professor/admin Server Actions + professor layout
-- [ ] 01-04-PLAN.md — CVE-2025-29927 middleware patch + human verification
+- [x] 01-01-PLAN.md — lib/permissions assertRole/requireRole (TDD)
+- [x] 01-02-PLAN.md — Migration 004: is_public columns + RLS policies + RPC function
+- [x] 01-03-PLAN.md — Apply assertRole to all professor/admin Server Actions + professor layout
+- [x] 01-04-PLAN.md — CVE-2025-29927 middleware patch + human verification
 
 ### Phase 2: Content Visibility
 
@@ -76,7 +76,7 @@ Plans:
 
 | Phase                     | Plans Complete | Status      | Completed |
 | ------------------------- | -------------- | ----------- | --------- |
-| 1. Security Foundation    | 3/4 | In Progress|  |
+| 1. Security Foundation    | 4/4 | Complete   | 2026-03-15 |
 | 2. Content Visibility     | 0/TBD          | Not started | -         |
 | 3. Project–Output Linking | 0/TBD          | Not started | -         |
 | 4. Professor Portal UX    | 0/TBD          | Not started | -         |

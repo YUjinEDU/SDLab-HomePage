@@ -48,7 +48,7 @@ completed: 2026-03-15
 - **Duration:** ~10 min
 - **Started:** 2026-03-15T00:00:00Z
 - **Completed:** 2026-03-15
-- **Tasks:** 1 of 1 auto tasks complete (checkpoint pending human verify)
+- **Tasks:** 2 of 2 (auto task + human-verify checkpoint — approved)
 - **Files modified:** 1
 
 ## Accomplishments
@@ -85,8 +85,8 @@ None - no external service configuration required.
 ## Next Phase Readiness
 
 - CVE-2025-29927 mitigation is in place
-- Human must verify bypass is blocked via curl test (see checkpoint below)
-- After verification, Phase 1 Security Foundation is complete
+- Human verified: curl with x-middleware-subrequest header returned HTTP 307 redirect to /login
+- Phase 1 Security Foundation is complete
 
 ---
 

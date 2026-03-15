@@ -9,7 +9,7 @@
 
 - [x] **SEC-01**: `lib/permissions/index.ts` 구현 — `assertRole()` (Server Actions용), `requireRole()` (레이아웃용) 유틸 export
 - [x] **SEC-02**: 모든 professor/admin Server Actions(`publications`, `projects`, `members`, `news`, `patents`)에 `assertRole` 역할 검사 추가
-- [ ] **SEC-03**: Next.js 15.2.3+ 업그레이드 또는 CVE-2025-29927 미들웨어 취약점 패치 적용
+- [x] **SEC-03**: Next.js 15.2.3+ 업그레이드 또는 CVE-2025-29927 미들웨어 취약점 패치 적용
 
 ### DB Schema & RLS
 
@@ -68,7 +68,7 @@
 | ----------- | ------- | -------- |
 | SEC-01      | Phase 1 | Complete |
 | SEC-02      | Phase 1 | Complete |
-| SEC-03      | Phase 1 | Pending  |
+| SEC-03      | Phase 1 | Complete |
 | DB-01       | Phase 1 | Complete |
 | DB-02       | Phase 1 | Complete |
 | DB-03       | Phase 1 | Complete |
