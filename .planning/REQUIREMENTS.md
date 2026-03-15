@@ -40,10 +40,10 @@ Requirements for milestone v1.1. Each maps to roadmap phases.
 
 ### DB Schema
 
-- [ ] **SCHEMA-01**: patents 별도 테이블 생성 (id, title, title_en, inventors[], status, patent_number, date, note, is_public)
-- [ ] **SCHEMA-02**: publications에 index_type TEXT 컬럼 추가 (SCI/SCIE/SCOPUS/KCI/기타)
-- [ ] **SCHEMA-03**: publications에 volume_info TEXT 컬럼 추가 (권호·페이지 정보)
-- [ ] **SCHEMA-04**: 기존 publications에서 type='patent' 데이터 정리/제거
+- [x] **SCHEMA-01**: patents 별도 테이블 생성 (id, title, title_en, inventors[], status, patent_number, date, note, is_public)
+- [x] **SCHEMA-02**: publications에 index_type TEXT 컬럼 추가 (SCI/SCIE/SCOPUS/KCI/기타)
+- [x] **SCHEMA-03**: publications에 volume_info TEXT 컬럼 추가 (권호·페이지 정보)
+- [x] **SCHEMA-04**: 기존 publications에서 type='patent' 데이터 정리/제거
 
 ### Data Pipeline
 
@@ -108,10 +108,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase   | Status  |
 | ----------- | ------- | ------- |
-| SCHEMA-01   | Phase 5 | Pending |
-| SCHEMA-02   | Phase 5 | Pending |
-| SCHEMA-03   | Phase 5 | Pending |
-| SCHEMA-04   | Phase 5 | Pending |
+| SCHEMA-01   | Phase 5 | Complete |
+| SCHEMA-02   | Phase 5 | Complete |
+| SCHEMA-03   | Phase 5 | Complete |
+| SCHEMA-04   | Phase 5 | Complete |
 | DATA-01     | Phase 6 | Pending |
 | DATA-02     | Phase 6 | Pending |
 | PUB-01      | Phase 7 | Pending |

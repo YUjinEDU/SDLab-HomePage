@@ -180,7 +180,7 @@ Plans:
 | 2. Content Visibility     | v1.0      | 3/3            | Complete    | 2026-03-15 |
 | 3. Project–Output Linking | v1.0      | 3/3            | Complete    | 2026-03-15 |
 | 4. Professor Portal UX    | v1.0      | 2/2            | Complete    | 2026-03-15 |
-| 5. DB Schema              | v1.1      | 0/1            | Not started | -          |
+| 5. DB Schema              | 1/1 | Complete   | 2026-03-15 | -          |
 | 6. Data Pipeline          | v1.1      | 0/2            | Not started | -          |
 | 7. Publications UI        | v1.1      | 0/2            | Not started | -          |
 | 8. Patents UI             | v1.1      | 0/2            | Not started | -          |
