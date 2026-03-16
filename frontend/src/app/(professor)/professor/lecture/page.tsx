@@ -18,7 +18,7 @@ export default function LecturePage() {
         <h2 className="text-lg font-semibold text-gray-900 mb-4">
           입력 데이터
         </h2>
-        <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 flex flex-col items-center justify-center text-gray-400">
+        <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 sm:p-12 flex flex-col items-center justify-center text-gray-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="40"
@@ -81,16 +81,16 @@ export default function LecturePage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200">
-                <th className="text-left py-3 px-4 font-medium text-gray-500">
+                <th className="text-left py-2 sm:py-3 px-2 sm:px-4 font-medium text-gray-500">
                   날짜
                 </th>
-                <th className="text-left py-3 px-4 font-medium text-gray-500">
+                <th className="text-left py-2 sm:py-3 px-2 sm:px-4 font-medium text-gray-500">
                   작업 유형
                 </th>
-                <th className="text-left py-3 px-4 font-medium text-gray-500">
+                <th className="text-left py-2 sm:py-3 px-2 sm:px-4 font-medium text-gray-500">
                   상태
                 </th>
-                <th className="text-left py-3 px-4 font-medium text-gray-500">
+                <th className="text-left py-2 sm:py-3 px-2 sm:px-4 font-medium text-gray-500">
                   결과
                 </th>
               </tr>

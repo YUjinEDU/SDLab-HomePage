@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import type { Publication } from "@/types/publication";
 import type { Project } from "@/types/project";
 import type { Member } from "@/types/member";
@@ -10,12 +11,15 @@ type Props = {
   members?: Member[];
 };
 
-export function RelatedContentPreview({
+export async function RelatedContentPreview({
   areaId,
   publications,
   projects,
   members,
 }: Props) {
+  const t = await getTranslations("research");
+  const tMembers = await getTranslations("members");
+
   const relatedPublications = publications.filter((p) =>
     p.researchAreaIds.includes(areaId),
   );
@@ -42,7 +46,7 @@ export function RelatedContentPreview({
   }
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
       {relatedPublications.length > 0 && (
         <Link
           href={`/publications?area=${areaId}`}
@@ -51,7 +55,9 @@ export function RelatedContentPreview({
           <span className="text-2xl font-bold text-primary">
             {relatedPublications.length}
           </span>
-          <span className="text-xs text-text-secondary">관련 논문</span>
+          <span className="text-xs text-text-secondary">
+            {t("relatedPapers")}
+          </span>
         </Link>
       )}
       {relatedProjects.length > 0 && (
@@ -62,7 +68,9 @@ export function RelatedContentPreview({
           <span className="text-2xl font-bold text-primary">
             {relatedProjects.length}
           </span>
-          <span className="text-xs text-text-secondary">관련 프로젝트</span>
+          <span className="text-xs text-text-secondary">
+            {t("relatedProjects")}
+          </span>
         </Link>
       )}
       {relatedMembers.length > 0 && (
@@ -73,7 +81,9 @@ export function RelatedContentPreview({
           <span className="text-2xl font-bold text-primary">
             {relatedMembers.length}
           </span>
-          <span className="text-xs text-text-secondary">참여 연구원</span>
+          <span className="text-xs text-text-secondary">
+            {tMembers("pageTitle")}
+          </span>
         </Link>
       )}
     </div>

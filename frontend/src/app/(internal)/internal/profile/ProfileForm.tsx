@@ -263,7 +263,7 @@ export function ProfileForm({ member }: Props) {
           {educationList.map((entry, idx) => (
             <div
               key={idx}
-              className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_1fr_auto] gap-3 items-end border-b border-gray-100 pb-4 last:border-0"
+              className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] gap-3 items-end border-b border-gray-100 pb-4 last:border-0"
             >
               <div>
                 <label className="block text-xs font-medium text-gray-500 mb-1">
@@ -402,7 +402,7 @@ export function ProfileForm({ member }: Props) {
           {careerList.map((entry, idx) => (
             <div
               key={idx}
-              className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-3 items-end border-b border-gray-100 pb-4 last:border-0"
+              className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-3 items-end border-b border-gray-100 pb-4 last:border-0"
             >
               <div>
                 <label className="block text-xs font-medium text-gray-500 mb-1">

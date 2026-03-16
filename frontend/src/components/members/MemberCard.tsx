@@ -1,8 +1,10 @@
-import Link from "next/link";
+"use client";
+
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import type { Member, MemberGroup } from "@/types";
 import { TagBadge } from "@/components/shared/TagBadge";
 import { MemberContactLinks } from "./MemberContactLinks";
-import { groupLabels } from "@/data/stats";
 
 type Props = {
   member: Member;
@@ -28,10 +30,23 @@ function InitialsAvatar({ name, group }: { name: string; group: MemberGroup }) {
 }
 
 export function MemberCard({ member }: Props) {
+  const t = useTranslations("members");
+
+  const groupLabelMap: Record<string, string> = {
+    professor: t("groupProfessor"),
+    phd: t("groupPhd"),
+    ms: t("groupMs"),
+    combined: t("groupCombined"),
+    undergraduate: t("groupUndergraduate"),
+    alumni: t("groupAlumni"),
+  };
+
+  const groupLabel = groupLabelMap[member.group] ?? member.group;
+
   return (
     <article className="rounded-2xl border border-border bg-white p-6 flex flex-col gap-5 card-hover group h-full">
       {/* Header: avatar + name/position */}
-      <div className="flex items-start gap-4 sm:gap-5">
+      <div className="flex items-start gap-3 sm:gap-5">
         {member.image ? (
           <img
             src={member.image}
@@ -46,7 +61,7 @@ export function MemberCard({ member }: Props) {
             <span
               className={`text-[11px] px-2.5 py-0.5 rounded-full font-bold tracking-wide uppercase ${member.group === "alumni" ? "bg-slate-100 text-slate-500" : "bg-primary/10 text-primary"}`}
             >
-              {groupLabels[member.group]}
+              {groupLabel}
             </span>
           </div>
           <h3 className="text-[1.15rem] font-bold text-foreground leading-tight mb-1 group-hover:text-primary transition-colors">

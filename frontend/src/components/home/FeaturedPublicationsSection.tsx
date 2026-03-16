@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/layout/Container";
 import type { Publication, Member } from "@/types";
 
@@ -7,26 +8,31 @@ type FeaturedPublicationsSectionProps = {
   members: Member[];
 };
 
-export function FeaturedPublicationsSection({
+export async function FeaturedPublicationsSection({
   publications: featured,
   members,
 }: FeaturedPublicationsSectionProps) {
+  const t = await getTranslations("featured");
+
   return (
     <section className="py-24 lg:py-32 bg-surface">
       <Container>
         <div className="max-w-5xl mx-auto mb-14">
           <p className="font-display text-xs font-bold tracking-[0.2em] text-primary uppercase mb-4">
-            Publications
+            {t("publicationsLabel")}
           </p>
           <div className="flex items-end justify-between">
             <h2 className="font-display text-3xl sm:text-[2.5rem] font-extrabold text-foreground leading-tight">
-              대표 <span className="text-gradient">논문</span>
+              {t("publicationsHeading")}{" "}
+              <span className="text-gradient">
+                {t("publicationsHeadingHighlight")}
+              </span>
             </h2>
             <Link
               href="/publications"
               className="text-sm font-bold text-primary hover:text-primary-dark transition-colors"
             >
-              전체 보기
+              {t("viewAllPublications")}
             </Link>
           </div>
         </div>

@@ -1,7 +1,10 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { NetworkBackground } from "./NetworkBackground";
 
-export function HomeHeroSection() {
+export async function HomeHeroSection() {
+  const t = await getTranslations("hero");
+
   return (
     <section className="relative bg-[#fafdfb] text-foreground overflow-hidden min-h-[640px] flex items-center border-b border-border">
       {/* Interactive Node/Network Pattern mapping to "AI in various domains" */}
@@ -19,27 +22,26 @@ export function HomeHeroSection() {
           />
 
           <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.25rem] font-extrabold leading-[1.1] mb-4 tracking-tight">
-            <span className="text-gradient">스마트데이터연구실</span>
+            <span className="text-gradient">{t("labName")}</span>
           </h1>
           <h2 className="text-[1.5rem] sm:text-[1.75rem] lg:text-[2rem] font-bold leading-tight mb-8 tracking-tight text-foreground/80">
-            문제 정의부터 실제 가치 창출까지
+            {t("subtitle")}
           </h2>
 
           <p className="text-[16px] sm:text-[18px] text-text-secondary font-medium leading-[1.7] mb-12 max-w-xl">
-            이론적 모델 고도화를 넘어, 현장에서 마주하는 문제를 제대로 정의하고
-            각 도메인에 합리적으로 AI를 적용하여{" "}
+            {t("description")}{" "}
             <strong className="text-foreground font-semibold">
-              실질적인 가치
+              {t("highlight")}
             </strong>
-            를 창출하는 실용적 연구를 지향합니다.
+            {t("descriptionEnd")}
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/research"
               className="inline-flex items-center px-7 py-3.5 rounded-lg bg-primary text-white text-[15px] font-bold hover:bg-primary-dark transition-all duration-200 shadow-md shadow-primary/20"
             >
-              우리의 연구 분야
+              {t("btnResearch")}
               <svg
                 className="ml-2 opacity-90"
                 width="16"
@@ -59,7 +61,7 @@ export function HomeHeroSection() {
               href="/members"
               className="inline-flex items-center px-7 py-3.5 rounded-lg border border-border bg-white text-foreground text-[15px] font-semibold hover:border-primary/50 hover:bg-primary-muted transition-all duration-200 shadow-sm"
             >
-              연구진 소개
+              {t("btnMembers")}
             </Link>
           </div>
         </div>

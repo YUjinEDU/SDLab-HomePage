@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/layout/Container";
 import type { NewsItem, Publication, Project } from "@/types";
 
@@ -16,20 +17,25 @@ type LatestNewsSectionProps = {
   projects: Project[];
 };
 
-export function LatestNewsSection({
+export async function LatestNewsSection({
   news: latestNews,
   publications,
   projects,
 }: LatestNewsSectionProps) {
+  const t = await getTranslations("news");
+
   return (
     <section className="py-24 lg:py-32 bg-surface">
       <Container>
         <div className="max-w-4xl mx-auto mb-14">
           <p className="font-display text-xs font-bold tracking-[0.2em] text-primary uppercase mb-4">
-            Latest News
+            {t("snapshotLabel")}
           </p>
           <h2 className="font-display text-3xl sm:text-[2.5rem] font-extrabold text-foreground leading-tight">
-            최근 <span className="text-gradient">소식</span>
+            {t("snapshotHeading")}{" "}
+            <span className="text-gradient">
+              {t("snapshotHeadingHighlight")}
+            </span>
           </h2>
         </div>
 
@@ -45,7 +51,7 @@ export function LatestNewsSection({
             return (
               <div
                 key={item.id}
-                className="card-hover rounded-2xl border border-border bg-white p-8 shadow-sm"
+                className="card-hover rounded-2xl border border-border bg-white p-4 sm:p-6 lg:p-8 shadow-sm"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-xs font-bold text-primary bg-primary-muted px-3 py-1 rounded-full">

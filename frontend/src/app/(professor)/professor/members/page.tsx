@@ -23,7 +23,7 @@ export default async function ProfessorMembersPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">멤버 관리</h1>
         <Link
           href="/professor/members/new"
@@ -49,19 +49,19 @@ export default async function ProfessorMembersPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-200 bg-gray-50">
-                  <th className="text-left px-4 py-3 font-semibold text-gray-700">
+                  <th className="text-left px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-700">
                     이름
                   </th>
-                  <th className="text-left px-4 py-3 font-semibold text-gray-700">
+                  <th className="text-left px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-700">
                     그룹
                   </th>
-                  <th className="text-left px-4 py-3 font-semibold text-gray-700">
+                  <th className="text-left px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-700">
                     직위
                   </th>
-                  <th className="text-left px-4 py-3 font-semibold text-gray-700">
+                  <th className="text-left px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-700 hidden md:table-cell">
                     이메일
                   </th>
-                  <th className="text-right px-4 py-3 font-semibold text-gray-700">
+                  <th className="text-right px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-700">
                     관리
                   </th>
                 </tr>
@@ -72,7 +72,7 @@ export default async function ProfessorMembersPage() {
                     key={member.id}
                     className="hover:bg-gray-50 transition-colors"
                   >
-                    <td className="px-4 py-3">
+                    <td className="px-2 sm:px-4 py-2 sm:py-3">
                       <div>
                         <p className="font-medium text-gray-900">
                           {member.nameKo}
@@ -80,20 +80,20 @@ export default async function ProfessorMembersPage() {
                         <p className="text-xs text-gray-500">{member.nameEn}</p>
                       </div>
                     </td>
-                    <td className="px-4 py-3">
+                    <td className="px-2 sm:px-4 py-2 sm:py-3">
                       <span
                         className={`inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full ${groupBadgeColors[member.group] ?? "bg-gray-100 text-gray-600"}`}
                       >
                         {groupLabels[member.group] ?? member.group}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-gray-600">
+                    <td className="px-2 sm:px-4 py-2 sm:py-3 text-gray-600">
                       {member.position}
                     </td>
-                    <td className="px-4 py-3 text-gray-600">
+                    <td className="px-2 sm:px-4 py-2 sm:py-3 text-gray-600 hidden md:table-cell">
                       {member.email ?? <span className="text-gray-400">-</span>}
                     </td>
-                    <td className="px-4 py-3 text-right">
+                    <td className="px-2 sm:px-4 py-2 sm:py-3 text-right">
                       <div className="flex items-center justify-end gap-3">
                         <Link
                           href={`/professor/members/${member.id}/edit`}

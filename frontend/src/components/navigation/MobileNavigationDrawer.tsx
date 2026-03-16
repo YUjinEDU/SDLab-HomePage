@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 type SubLink = {
@@ -59,6 +59,7 @@ type Props = {
 
 export function MobileNavigationDrawer({ isOpen, onClose }: Props) {
   const pathname = usePathname();
+  const t = useTranslations("common");
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   function toggleExpand(index: number) {
@@ -78,7 +79,7 @@ export function MobileNavigationDrawer({ isOpen, onClose }: Props) {
 
       {/* Drawer */}
       <div
-        className={`fixed top-0 right-0 z-50 h-full w-72 bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 z-50 h-full w-[calc(100vw-60px)] max-w-72 bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -96,7 +97,7 @@ export function MobileNavigationDrawer({ isOpen, onClose }: Props) {
           <button
             onClick={onClose}
             className="p-1.5 text-text-secondary hover:text-foreground transition-colors"
-            aria-label="메뉴 닫기"
+            aria-label={t("closeMenu")}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

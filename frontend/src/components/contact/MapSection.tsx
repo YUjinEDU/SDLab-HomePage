@@ -1,20 +1,23 @@
+import { getTranslations } from "next-intl/server";
+
 type Props = {
   address: string;
   embedUrl: string | null;
 };
 
-export function MapSection({ address, embedUrl }: Props) {
+export async function MapSection({ address, embedUrl }: Props) {
+  const t = await getTranslations("contact");
+
   return (
     <div className="rounded-xl border border-border bg-surface overflow-hidden">
       {embedUrl ? (
         <iframe
           src={embedUrl}
-          title="연구실 위치 지도"
+          title={t("mapAlt")}
           width="100%"
-          height="400"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          className="block border-0"
+          className="block border-0 h-64 sm:h-80 md:h-[400px]"
         />
       ) : (
         <div className="flex flex-col items-center justify-center gap-4 py-16 px-6 text-center bg-primary-muted/10">
@@ -34,7 +37,9 @@ export function MapSection({ address, embedUrl }: Props) {
             <circle cx="12" cy="10" r="3" />
           </svg>
           <div>
-            <p className="text-sm font-semibold text-foreground">주소</p>
+            <p className="text-sm font-semibold text-foreground">
+              {t("infoHeading")}
+            </p>
             <p className="mt-1 text-text-secondary text-sm">{address}</p>
           </div>
           <a
@@ -43,7 +48,7 @@ export function MapSection({ address, embedUrl }: Props) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface px-4 py-2 text-sm font-medium text-foreground hover:bg-primary-muted/30 transition-colors"
           >
-            네이버 지도에서 보기
+            {t("directionsHeading")}
             <span aria-hidden="true">↗</span>
           </a>
         </div>

@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/layout/Container";
 import type { ContactInfo } from "@/types";
 
@@ -6,16 +7,21 @@ type ContactSummarySectionProps = {
   contactInfo: ContactInfo;
 };
 
-export function ContactSummarySection({
+export async function ContactSummarySection({
   contactInfo,
 }: ContactSummarySectionProps) {
+  const t = await getTranslations("contact");
+
   return (
     <section className="py-20 bg-dark-bg text-white">
       <Container>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <div>
             <h2 className="font-display text-2xl font-extrabold mb-3">
-              Contact Us
+              {t("snapshotHeading")}{" "}
+              <span className="text-gradient">
+                {t("snapshotHeadingHighlight")}
+              </span>
             </h2>
             <p className="text-sm text-white/50 leading-relaxed">
               {contactInfo.location.building} {contactInfo.location.lab}{" "}
@@ -36,7 +42,7 @@ export function ContactSummarySection({
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/20 flex-shrink-0"
           >
-            오시는 길
+            {t("viewContact")}
             <svg
               width="16"
               height="16"

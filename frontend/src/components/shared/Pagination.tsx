@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 interface PaginationProps {
   total: number;
   page: number;
@@ -13,13 +15,15 @@ export function Pagination({
   perPage,
   onChange,
 }: PaginationProps) {
+  const t = useTranslations("common");
   const totalPages = Math.ceil(total / perPage);
 
   if (totalPages <= 1) return null;
 
   const getPageNumbers = () => {
     const pages: (number | "...")[] = [];
-    const maxVisible = 5;
+    const maxVisible =
+      typeof window !== "undefined" && window.innerWidth < 640 ? 3 : 5;
 
     if (totalPages <= maxVisible) {
       for (let i = 1; i <= totalPages; i++) pages.push(i);
@@ -41,14 +45,14 @@ export function Pagination({
   return (
     <nav
       className="flex items-center justify-center gap-1"
-      aria-label="페이지 탐색"
+      aria-label={t("pageNav")}
     >
       <button
         onClick={() => onChange(page - 1)}
         disabled={page === 1}
         className="px-3 py-2 text-sm font-medium rounded-lg text-foreground hover:bg-primary-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
       >
-        이전
+        {t("prev")}
       </button>
 
       {getPageNumbers().map((p, i) =>
@@ -60,7 +64,7 @@ export function Pagination({
           <button
             key={p}
             onClick={() => onChange(p)}
-            className={`w-10 h-10 text-sm font-medium rounded-lg transition-colors ${
+            className={`w-9 h-9 sm:w-10 sm:h-10 text-sm font-medium rounded-lg transition-colors ${
               p === page
                 ? "bg-primary text-primary-foreground"
                 : "text-foreground hover:bg-primary-muted"
@@ -76,7 +80,7 @@ export function Pagination({
         disabled={page === totalPages}
         className="px-3 py-2 text-sm font-medium rounded-lg text-foreground hover:bg-primary-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
       >
-        다음
+        {t("next")}
       </button>
     </nav>
   );

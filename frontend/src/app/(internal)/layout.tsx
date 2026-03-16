@@ -13,7 +13,9 @@ export default async function InternalLayout({
   return (
     <div className="min-h-screen bg-gray-50 flex">
       <InternalSidebar userEmail={user.email ?? ""} />
-      <main className="flex-1 min-w-0 p-6 lg:p-8 lg:ml-64">{children}</main>
+      <main className="flex-1 min-w-0 p-3 sm:p-4 lg:p-6 xl:p-8 lg:ml-64">
+        {children}
+      </main>
     </div>
   );
 }

@@ -34,19 +34,19 @@ export default async function NewsListPage() {
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                   제목
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hidden md:table-cell">
                   카테고리
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 hidden md:table-cell">
                   날짜
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                   고정
                 </th>
-                <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-2 sm:px-4 py-2 sm:py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">
                   작업
                 </th>
               </tr>
@@ -57,7 +57,7 @@ export default async function NewsListPage() {
                   key={item.id}
                   className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}
                 >
-                  <td className="max-w-xs truncate px-4 py-3 text-sm text-gray-900">
+                  <td className="max-w-xs truncate px-2 sm:px-4 py-2 sm:py-3 text-sm text-gray-900">
                     {item.title}
                     {item.isPinned && (
                       <span className="ml-2 inline-block rounded bg-green-100 px-1.5 py-0.5 text-xs text-green-700">
@@ -65,16 +65,16 @@ export default async function NewsListPage() {
                       </span>
                     )}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-600">
+                  <td className="whitespace-nowrap px-2 sm:px-4 py-2 sm:py-3 text-sm text-gray-600 hidden md:table-cell">
                     {CATEGORY_LABELS[item.category] ?? item.category}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-600">
+                  <td className="whitespace-nowrap px-2 sm:px-4 py-2 sm:py-3 text-sm text-gray-600 hidden md:table-cell">
                     {item.date}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-600">
+                  <td className="whitespace-nowrap px-2 sm:px-4 py-2 sm:py-3 text-sm text-gray-600">
                     {item.isPinned ? "Y" : ""}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-3 text-right text-sm">
+                  <td className="whitespace-nowrap px-2 sm:px-4 py-2 sm:py-3 text-right text-sm">
                     <Link
                       href={`/professor/news/${item.id}/edit`}
                       className="mr-3 text-green-700 hover:text-green-900"

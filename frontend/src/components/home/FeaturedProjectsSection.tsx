@@ -1,15 +1,21 @@
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/layout/Container";
 
-export function FeaturedProjectsSection() {
+export async function FeaturedProjectsSection() {
+  const t = await getTranslations("featured");
+
   return (
     <section className="py-24 lg:py-32">
       <Container>
         <div className="max-w-4xl mx-auto mb-14">
           <p className="font-display text-xs font-bold tracking-[0.2em] text-primary uppercase mb-4">
-            Achievements
+            {t("projectsLabel")}
           </p>
           <h2 className="font-display text-3xl sm:text-[2.5rem] font-extrabold text-foreground mb-4 leading-tight">
-            주요 연구 <span className="text-gradient">성과</span>
+            {t("projectsHeading")}{" "}
+            <span className="text-gradient">
+              {t("projectsHeadingHighlight")}
+            </span>
           </h2>
           <p className="text-base text-text-secondary max-w-2xl leading-relaxed">
             대형 연구사업 총괄 수행 및 다수의 특허, 논문, 기술이전 실적을

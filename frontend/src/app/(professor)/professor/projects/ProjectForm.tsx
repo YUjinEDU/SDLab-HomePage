@@ -297,7 +297,7 @@ export default function ProjectForm({
         <div className="space-y-6">
           <div>
             <p className="mb-2 text-sm font-medium text-gray-700">참여 멤버</p>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
               {members.map((m) => (
                 <label key={m.id} className="flex items-center gap-2 text-sm">
                   <input
@@ -318,7 +318,7 @@ export default function ProjectForm({
 
           <div>
             <p className="mb-2 text-sm font-medium text-gray-700">연구 분야</p>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
               {researchAreas.map((area) => (
                 <label
                   key={area.id}
@@ -345,7 +345,7 @@ export default function ProjectForm({
       </section>
 
       {/* 버튼 */}
-      <div className="flex items-center justify-end gap-3">
+      <div className="flex flex-col sm:flex-row sm:justify-end gap-2 sm:gap-3">
         <button
           type="button"
           onClick={() => router.push("/professor/projects")}

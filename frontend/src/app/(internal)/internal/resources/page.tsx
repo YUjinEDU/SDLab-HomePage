@@ -58,7 +58,7 @@ export default function ResourcesPage() {
           {categories.map((cat, idx) => (
             <button
               key={cat.key}
-              className={`px-5 py-3 text-sm font-medium whitespace-nowrap transition-colors ${
+              className={`px-3 sm:px-5 py-3 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors ${
                 idx === 0
                   ? "text-slate-700 border-b-2 border-slate-700 bg-slate-50/50"
                   : "text-gray-500 hover:text-gray-700"

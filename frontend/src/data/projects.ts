@@ -23,6 +23,7 @@ export const projects: Project[] = [
     researchAreaIds: ["ra-1"],
     demoUrl: null,
     isFeatured: true,
+    isPublic: true,
   },
   {
     id: "proj-2",
@@ -46,6 +47,7 @@ export const projects: Project[] = [
     researchAreaIds: ["ra-2"],
     demoUrl: null,
     isFeatured: true,
+    isPublic: true,
   },
   {
     id: "proj-3",
@@ -69,6 +71,7 @@ export const projects: Project[] = [
     researchAreaIds: ["ra-3"],
     demoUrl: null,
     isFeatured: false,
+    isPublic: true,
   },
   {
     id: "proj-4",
@@ -92,5 +95,6 @@ export const projects: Project[] = [
     researchAreaIds: ["ra-1"],
     demoUrl: null,
     isFeatured: false,
+    isPublic: true,
   },
 ];

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import type { MemberGroup } from "@/types";
 
 type TabItem = {
@@ -15,10 +16,12 @@ type Props = {
 };
 
 export function MemberGroupTabs({ groups, activeGroup, onChange }: Props) {
+  const t = useTranslations("members");
+
   return (
     <div
       role="tablist"
-      aria-label="구성원 분류"
+      aria-label={t("tabsAriaLabel")}
       className="flex flex-wrap gap-2"
     >
       {groups.map((tab) => {
@@ -30,7 +33,7 @@ export function MemberGroupTabs({ groups, activeGroup, onChange }: Props) {
             aria-selected={isActive}
             onClick={() => onChange(tab.value)}
             className={[
-              "inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+              "inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors",
               isActive
                 ? "bg-primary text-primary-foreground shadow-sm"
                 : "bg-surface border border-border text-text-secondary hover:text-foreground hover:border-primary/50",

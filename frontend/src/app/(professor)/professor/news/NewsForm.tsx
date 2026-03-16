@@ -164,7 +164,7 @@ export default function NewsForm({
             <p className="mb-2 text-sm font-medium text-gray-700">
               관련 프로젝트
             </p>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
               {projects.map((proj) => (
                 <label
                   key={proj.id}
@@ -218,7 +218,7 @@ export default function NewsForm({
       </section>
 
       {/* 버튼 */}
-      <div className="flex items-center justify-end gap-3">
+      <div className="flex flex-col sm:flex-row sm:justify-end gap-2 sm:gap-3">
         <button
           type="button"
           onClick={() => router.push("/professor/news")}

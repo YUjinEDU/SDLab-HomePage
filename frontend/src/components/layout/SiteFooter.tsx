@@ -1,15 +1,18 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Container } from "./Container";
 
-const quickLinks = [
-  { href: "/members", label: "Members" },
-  { href: "/research", label: "Research" },
-  { href: "/publications", label: "Publications" },
-  { href: "/projects", label: "Projects" },
-  { href: "/contact", label: "Contact" },
-];
+export async function SiteFooter() {
+  const t = await getTranslations();
 
-export function SiteFooter() {
+  const quickLinks = [
+    { href: "/members", label: t("nav.members") },
+    { href: "/research", label: t("nav.research") },
+    { href: "/publications", label: t("nav.publications") },
+    { href: "/projects", label: t("nav.projects") },
+    { href: "/contact", label: t("nav.contact") },
+  ];
+
   return (
     <footer className="bg-dark-bg text-white">
       <Container className="py-14">
@@ -17,24 +20,24 @@ export function SiteFooter() {
           {/* Lab info */}
           <div>
             <h3 className="font-display text-sm font-extrabold mb-4 tracking-wide text-white">
-              Smart Data Lab
+              {t("footer.labName")}
             </h3>
             <p className="text-sm text-white/50 leading-relaxed">
-              충남대학교 컴퓨터인공지능학부
+              {t("footer.department")}
               <br />
-              스마트데이터연구실
+              {t("footer.labFullName")}
             </p>
             <p className="mt-3 text-sm text-white/50 leading-relaxed">
-              대전광역시 유성구 대학로 99
+              {t("footer.address")}
               <br />
-              충남대학교 공대 5호관 532호
+              {t("footer.room")}
             </p>
           </div>
 
           {/* Quick links */}
           <div>
             <h3 className="font-display text-sm font-extrabold mb-4 tracking-wide text-white">
-              바로가기
+              {t("footer.quickLinks")}
             </h3>
             <ul className="space-y-2.5">
               {quickLinks.map((link) => (
@@ -53,7 +56,7 @@ export function SiteFooter() {
           {/* Contact */}
           <div>
             <h3 className="font-display text-sm font-extrabold mb-4 tracking-wide text-white">
-              연락처
+              {t("footer.contact")}
             </h3>
             <ul className="space-y-2.5 text-sm text-white/50">
               <li>
@@ -64,14 +67,14 @@ export function SiteFooter() {
                   ykim@cnu.ac.kr
                 </a>
               </li>
-              <li>042-821-7441 (연구실)</li>
-              <li>042-821-5450 (교수 연구실)</li>
+              <li>{t("footer.phone_lab")}</li>
+              <li>{t("footer.phone_prof")}</li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-6 border-t border-white/10 text-center text-xs text-white/30">
-          &copy; 2026 Smart Data Lab, 충남대학교 컴퓨터인공지능학부
+          {t("footer.copyright")}
         </div>
       </Container>
     </footer>

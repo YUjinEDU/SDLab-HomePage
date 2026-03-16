@@ -1,14 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Container } from "./Container";
 import { MainNavigation } from "@/components/navigation/MainNavigation";
 import { MobileNavigationDrawer } from "@/components/navigation/MobileNavigationDrawer";
 import { AuthButton } from "@/components/navigation/AuthButton";
+import { LanguageToggle } from "@/components/navigation/LanguageToggle";
 
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const t = useTranslations();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-border/60">
@@ -24,23 +27,24 @@ export function SiteHeader() {
               className="object-contain"
             />
             <span className="hidden sm:block text-[11px] text-text-secondary leading-tight border-l border-border pl-3 font-medium">
-              충남대학교
+              {t("header.university")}
               <br />
-              컴퓨터인공지능학부
+              {t("header.department")}
             </span>
           </Link>
 
           <MainNavigation />
 
           <div className="flex items-center gap-2">
+            <LanguageToggle />
             <div className="hidden md:block">
               <AuthButton />
             </div>
 
             <button
-              className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+              className="md:hidden p-2.5 text-foreground hover:text-primary transition-colors"
               onClick={() => setMobileMenuOpen(true)}
-              aria-label="메뉴 열기"
+              aria-label={t("common.openMenu")}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -20,4 +20,5 @@ export type Project = {
   researchAreaIds: string[];
   demoUrl: string | null;
   isFeatured: boolean;
+  isPublic: boolean;
 };

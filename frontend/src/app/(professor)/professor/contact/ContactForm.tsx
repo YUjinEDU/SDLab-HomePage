@@ -124,7 +124,7 @@ export default function ContactForm({ contact }: ContactFormProps) {
       <section className="rounded-lg bg-white p-6 shadow-sm">
         <h2 className="mb-4 text-lg font-semibold text-gray-900">교수 정보</h2>
         <div className="space-y-4">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
             <div>
               <label
                 htmlFor="professorName"
@@ -181,7 +181,7 @@ export default function ContactForm({ contact }: ContactFormProps) {
       <section className="rounded-lg bg-white p-6 shadow-sm">
         <h2 className="mb-4 text-lg font-semibold text-gray-900">위치 정보</h2>
         <div className="space-y-4">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
             <div>
               <label
                 htmlFor="building"

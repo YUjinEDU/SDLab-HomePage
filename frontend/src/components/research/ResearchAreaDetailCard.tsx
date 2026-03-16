@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { ResearchArea } from "@/types";
 import { TagBadge } from "@/components/shared/TagBadge";
 

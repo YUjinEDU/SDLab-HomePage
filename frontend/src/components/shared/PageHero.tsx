@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/layout/Container";
 
 interface PageHeroProps {
@@ -29,7 +29,7 @@ export function PageHero({ title, description, breadcrumb }: PageHeroProps) {
           {restPart && <span className="text-primary"> {restPart}</span>}
         </h1>
         {description && (
-          <p className="mt-3 text-base sm:text-lg text-text-secondary max-w-2xl leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base lg:text-lg text-text-secondary max-w-2xl leading-relaxed">
             {description}
           </p>
         )}

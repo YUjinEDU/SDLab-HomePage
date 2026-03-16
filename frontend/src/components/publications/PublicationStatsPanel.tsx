@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import type { Publication } from "@/types";
 
 type PublicationStatsPanelProps = {
@@ -7,6 +10,8 @@ type PublicationStatsPanelProps = {
 export function PublicationStatsPanel({
   publications,
 }: PublicationStatsPanelProps) {
+  const t = useTranslations("publications");
+
   const total = publications.length;
   const intlJournal = publications.filter(
     (p) => p.type === "journal" && p.isInternational,
@@ -20,6 +25,7 @@ export function PublicationStatsPanel({
   const domConf = publications.filter(
     (p) => p.type === "conference" && !p.isInternational,
   ).length;
+  const swReg = publications.filter((p) => p.type === "sw_registration").length;
 
   const years = publications.map((p) => p.year);
   const minYear = years.length > 0 ? Math.min(...years) : null;
@@ -32,17 +38,18 @@ export function PublicationStatsPanel({
       : "-";
 
   const stats = [
-    { label: "전체", value: total },
-    { label: "국제 저널", value: intlJournal },
-    { label: "국내 저널", value: domJournal },
-    { label: "국제 학술대회", value: intlConf },
-    { label: "국내 학술대회", value: domConf },
-    { label: "연구 기간", value: yearRange },
+    { label: t("statsTotal"), value: total },
+    { label: `${t("statsJournal")} (Intl.)`, value: intlJournal },
+    { label: `${t("statsJournal")} (Dom.)`, value: domJournal },
+    { label: `${t("statsConference")} (Intl.)`, value: intlConf },
+    { label: `${t("statsConference")} (Dom.)`, value: domConf },
+    { label: t("typeSW"), value: swReg },
+    { label: t("statsRecent"), value: yearRange },
   ];
 
   return (
     <div className="rounded-xl border border-border bg-surface px-6 py-4">
-      <dl className="flex flex-wrap gap-x-8 gap-y-3">
+      <dl className="flex flex-wrap gap-x-4 sm:gap-x-8 gap-y-3">
         {stats.map(({ label, value }) => (
           <div key={label} className="flex items-baseline gap-2">
             <dt className="text-sm text-text-secondary">{label}</dt>

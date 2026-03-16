@@ -1,12 +1,12 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/layout/Container";
 
-const areas = [
+const areaKeys = [
   {
-    title: "실시간 스마트 컴퓨팅 응용",
-    description:
-      "실시간 데이터 처리와 상황인지 기술을 기반으로 스마트 서비스와 다양한 산업 응용 문제를 연구합니다.",
-    keywords: ["추천시스템", "실시간 스트림 데이터 처리", "상황인지", "IoT"],
+    titleKey: "area1Title" as const,
+    descKey: "area1Description" as const,
+    keywordsKey: "area1Keywords" as const,
     icon: (
       <svg
         width="24"
@@ -23,10 +23,9 @@ const areas = [
     ),
   },
   {
-    title: "바이오AI융합 연구",
-    description:
-      "인공지능 기술을 활용하여 바이오 데이터와 스마트팜 등 실제 문제 해결형 융합 연구를 수행합니다.",
-    keywords: ["스마트팜", "바이오 빅데이터", "지능형 서비스"],
+    titleKey: "area2Title" as const,
+    descKey: "area2Description" as const,
+    keywordsKey: "area2Keywords" as const,
     icon: (
       <svg
         width="24"
@@ -46,10 +45,9 @@ const areas = [
     ),
   },
   {
-    title: "환경IT융합 연구",
-    description:
-      "IoT와 AI를 활용하여 수질, 대기오염, 미세먼지 등 환경 문제 해결을 위한 데이터 기반 기술을 연구합니다.",
-    keywords: ["수질관리", "대기오염", "미세먼지"],
+    titleKey: "area3Title" as const,
+    descKey: "area3Description" as const,
+    keywordsKey: "area3Keywords" as const,
     icon: (
       <svg
         width="24"
@@ -67,7 +65,9 @@ const areas = [
   },
 ];
 
-export function ResearchAreasSection() {
+export async function ResearchAreasSection() {
+  const t = await getTranslations("research");
+
   return (
     <section className="py-24 lg:py-32 bg-surface relative overflow-hidden">
       {/* Decorative dot pattern */}
@@ -76,40 +76,47 @@ export function ResearchAreasSection() {
       <Container className="relative">
         <div className="max-w-4xl mx-auto mb-14">
           <p className="font-display text-xs font-bold tracking-[0.2em] text-primary uppercase mb-4">
-            Research Areas
+            {t("sectionLabel")}
           </p>
           <h2 className="font-display text-3xl sm:text-[2.5rem] font-extrabold text-foreground leading-tight">
-            연구 <span className="text-gradient">분야</span>
+            {t("heading")}{" "}
+            <span className="text-gradient">{t("headingHighlight")}</span>
           </h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {areas.map((area) => (
-            <div
-              key={area.title}
-              className="card-hover bg-white rounded-2xl p-8 lg:p-10 border border-border shadow-sm"
-            >
-              <div className="w-12 h-12 rounded-xl bg-primary-muted text-primary flex items-center justify-center mb-7">
-                {area.icon}
+          {areaKeys.map((area) => {
+            const title = t(area.titleKey);
+            const description = t(area.descKey);
+            const keywords = t(area.keywordsKey).split(",");
+
+            return (
+              <div
+                key={area.titleKey}
+                className="card-hover bg-white rounded-2xl p-8 lg:p-10 border border-border shadow-sm"
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary-muted text-primary flex items-center justify-center mb-7">
+                  {area.icon}
+                </div>
+                <h3 className="text-lg font-extrabold text-foreground mb-3 leading-snug">
+                  {title}
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed mb-6">
+                  {description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {keywords.map((kw) => (
+                    <span
+                      key={kw}
+                      className="text-xs font-semibold text-primary bg-primary-muted px-3 py-1 rounded-full"
+                    >
+                      {kw.trim()}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <h3 className="text-lg font-extrabold text-foreground mb-3 leading-snug">
-                {area.title}
-              </h3>
-              <p className="text-sm text-text-secondary leading-relaxed mb-6">
-                {area.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {area.keywords.map((kw) => (
-                  <span
-                    key={kw}
-                    className="text-xs font-semibold text-primary bg-primary-muted px-3 py-1 rounded-full"
-                  >
-                    {kw}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-14 text-center">
@@ -117,7 +124,7 @@ export function ResearchAreasSection() {
             href="/research"
             className="inline-flex items-center gap-2.5 text-sm font-bold text-primary hover:text-primary-dark transition-colors"
           >
-            연구 분야 상세 보기
+            {t("viewAll")}
             <svg
               width="16"
               height="16"

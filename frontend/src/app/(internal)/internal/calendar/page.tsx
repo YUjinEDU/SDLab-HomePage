@@ -22,7 +22,7 @@ export default function CalendarPage() {
   return (
     <div className="max-w-5xl mx-auto space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">연구실 일정</h1>
           <p className="text-sm text-gray-500 mt-1">{monthName}</p>
@@ -67,7 +67,7 @@ export default function CalendarPage() {
             {cells.map((day, i) => (
               <div
                 key={i}
-                className={`border-t border-gray-100 min-h-[72px] p-1.5 ${
+                className={`border-t border-gray-100 min-h-[48px] sm:min-h-[72px] p-1.5 ${
                   day === null ? "bg-gray-50/50" : ""
                 }`}
               >
