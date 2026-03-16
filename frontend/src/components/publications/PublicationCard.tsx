@@ -175,13 +175,31 @@ export function PublicationCard({
             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
           </svg>
           <span className="truncate min-w-0">{venueDate}</span>
+          {doi && (
+            <a
+              href={`https://doi.org/${doi}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative z-10 shrink-0 text-primary hover:text-primary-dark transition-colors"
+              title={`DOI: ${doi}`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              </svg>
+            </a>
+          )}
         </p>
-
-        {type === "sw_registration" && doi && (
-          <p className="text-[12px] text-text-secondary font-mono mb-3">
-            {t("typeSW")}: {doi}
-          </p>
-        )}
 
         {keywords.length > 0 && (
           <div className="flex flex-wrap gap-1.5 relative z-10">
