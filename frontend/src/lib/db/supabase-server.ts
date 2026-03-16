@@ -13,9 +13,15 @@ export async function createClient() {
           return cookieStore.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options),
-          );
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options),
+            );
+          } catch {
+            // setAll is called from Server Components where cookies
+            // cannot be modified. The error is safe to ignore because
+            // the cookie refresh will be picked up by middleware instead.
+          }
         },
       },
     },

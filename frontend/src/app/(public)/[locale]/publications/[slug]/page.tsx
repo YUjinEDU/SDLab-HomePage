@@ -4,7 +4,6 @@ import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/layout/Container";
 import { TagBadge } from "@/components/shared/TagBadge";
 import { PublicationExternalLinks } from "@/components/publications/PublicationExternalLinks";
-import { BibtexCopyButton } from "@/components/publications/BibtexCopyButton";
 import { ProjectBacklink } from "@/components/shared/ProjectBacklink";
 import {
   getPublicationBySlug,
@@ -207,17 +206,6 @@ export default async function PublicationDetailPage({ params }: Props) {
             </section>
           )}
 
-          {/* BibTeX */}
-          <section className="mb-8">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-lg font-semibold text-foreground">BibTeX</h2>
-              <BibtexCopyButton publication={pub} />
-            </div>
-            <pre className="rounded-xl border border-border bg-gray-50 p-4 text-xs text-text-secondary overflow-x-auto whitespace-pre-wrap leading-relaxed font-mono">
-              {pub.bibtex ?? generateBibtexPreview(pub)}
-            </pre>
-          </section>
-
           {/* Related research areas */}
           {relatedAreas.length > 0 && (
             <section className="mb-8">
@@ -247,25 +235,4 @@ export default async function PublicationDetailPage({ params }: Props) {
       </Container>
     </div>
   );
-}
-
-function generateBibtexPreview(pub: Publication): string {
-  const key = `${pub.authors[0]?.split(" ").pop() ?? "Author"}${pub.year}`;
-  const entryType = pub.type === "journal" ? "article" : "inproceedings";
-  const authorsFormatted = pub.authors.join(" and ");
-
-  const lines = [
-    `@${entryType}{${key},`,
-    `  author    = {${authorsFormatted}},`,
-    `  title     = {${pub.title}},`,
-    pub.type === "journal"
-      ? `  journal   = {${pub.venue}},`
-      : `  booktitle = {${pub.venue}},`,
-    `  year      = {${pub.year}},`,
-    pub.month != null ? `  month     = {${pub.month}},` : null,
-    pub.doi ? `  doi       = {${pub.doi}},` : null,
-    `}`,
-  ].filter(Boolean) as string[];
-
-  return lines.join("\n");
 }

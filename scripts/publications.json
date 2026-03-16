@@ -29,7 +29,7 @@
     "publisher": "Elsevier Science",
     "year": 1996,
     "month": null,
-    "doi": null,
+    "doi": "10.1016/s1383-7621(96)00039-2",
     "index_type": null,
     "volume_info": "vol.42 pp.547-562",
     "is_featured": false,
@@ -48,7 +48,7 @@
     "publisher": "IEEE",
     "year": 2006,
     "month": 2,
-    "doi": null,
+    "doi": "10.1109/icce.2006.1598382",
     "index_type": null,
     "volume_info": "Vol.52 No.1 pp.33-39",
     "is_featured": false,
@@ -58,7 +58,7 @@
     "title": "Dynamically Personalized Web Service System to Mobile Devices",
     "authors": [
       "강상길",
-      "박원의",
+      "박원익",
       "김영국"
     ],
     "type": "journal",
@@ -67,7 +67,7 @@
     "publisher": "Springer",
     "year": 2006,
     "month": 6,
-    "doi": null,
+    "doi": "10.1007/11766254_35",
     "index_type": null,
     "volume_info": "LNAI 4027 pp.416-426",
     "is_featured": false,
@@ -77,7 +77,7 @@
     "title": "Dynamical E-commerce System for Shopping Mall Site through Mobile Devices",
     "authors": [
       "강상길",
-      "박원의",
+      "박원익",
       "김영국"
     ],
     "type": "journal",
@@ -95,7 +95,7 @@
   {
     "title": "Personalized Digital E-library Service Using Users' Profile Information",
     "authors": [
-      "박원의",
+      "박원익",
       "김원일",
       "강상길",
       "이현진",
@@ -107,7 +107,7 @@
     "publisher": "Springer",
     "year": 2006,
     "month": 9,
-    "doi": null,
+    "doi": "10.1007/11863878_60",
     "index_type": null,
     "volume_info": "LNCS 4172 pp.528-531",
     "is_featured": false,
@@ -118,8 +118,8 @@
     "authors": [
       "이우기",
       "강상길",
-      "입속길",
-      "신명극",
+      "임승길",
+      "신명근",
       "김영국"
     ],
     "type": "journal",
@@ -128,7 +128,7 @@
     "publisher": "IEEE",
     "year": 2007,
     "month": 5,
-    "doi": null,
+    "doi": "10.1109/tce.2007.381762",
     "index_type": null,
     "volume_info": "Vol.53 No.2 pp.796-803",
     "is_featured": false,
@@ -137,10 +137,10 @@
   {
     "title": "The Design Characteristics of an Advanced Alarm System for SMART",
     "authors": [
-      "장귀속",
-      "성희현",
-      "금종통",
-      "박희운",
+      "장귀숙",
+      "성덕현",
+      "금종룡",
+      "박희윤",
       "김영국"
     ],
     "type": "journal",
@@ -149,16 +149,16 @@
     "publisher": "Elsevier",
     "year": 2008,
     "month": 6,
-    "doi": null,
+    "doi": "10.1016/j.anucene.2007.11.009",
     "index_type": null,
-    "volume_info": "Vol.35 No.6 pp.1006-1015",
+    "volume_info": "Vol.35 No.6 pp.1006-101 5",
     "is_featured": false,
     "section": "intl_journal"
   },
   {
     "title": "A Personalized Multimedia Contents Recommendation Using a Psychological Model",
     "authors": [
-      "박원의",
+      "박원익",
       "강상길",
       "김영국"
     ],
@@ -168,7 +168,7 @@
     "publisher": "ComSIS Consortium",
     "year": 2012,
     "month": 1,
-    "doi": null,
+    "doi": "10.2298/csis100618036p",
     "index_type": "SCIE",
     "volume_info": "Vol.9 No.1 pp.1-21",
     "is_featured": false,
@@ -177,7 +177,7 @@
   {
     "title": "A Recommendation Scheme Considering Customer's Psychological Patterns in M-Commerce Environment",
     "authors": [
-      "박원의",
+      "박원익",
       "강상길",
       "김영국"
     ],
@@ -196,11 +196,11 @@
   {
     "title": "Providing Prioritized Search Result with Tag Coupling-based Boolean Query Matching",
     "authors": [
-      "주원군",
-      "바민우",
-      "취기석",
-      "김용김",
-      "영국"
+      "주원균",
+      "박민우",
+      "최기석",
+      "김용",
+      "김영국"
     ],
     "type": "journal",
     "is_international": true,
@@ -210,7 +210,7 @@
     "month": 7,
     "doi": null,
     "index_type": "SCOPUS",
-    "volume_info": "Vol.6 No.3pp.67-74",
+    "volume_info": "Vol.6 No.3 pp.67-74",
     "is_featured": false,
     "section": "intl_journal"
   },
@@ -218,160 +218,159 @@
     "title": "Expert Recommendation System based on Analyzing Expertise and Networks of Human Resources in National Science & Technology Information Service",
     "authors": [
       "양명석",
-      "강님귀",
-      "윤경김",
-      "제수취",
-      "확님김",
-      "영국"
+      "강남규",
+      "김윤정",
+      "김재수",
+      "최광남",
+      "김영국"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Journal of Central South University of Technology,2227-5223(online)",
+    "venue": "Journal of Central South University of Technology (print), 2227-5223 (online)",
     "publisher": "Springer Berlin Heidelberg",
     "year": 2013,
     "month": 9,
-    "doi": null,
+    "doi": "10.1007/s11771-013-1726-1",
     "index_type": "SCIE",
-    "volume_info": "Vol.20 No.8pp.2212-2218",
+    "volume_info": "Vol.20 No.8 pp.2212-2218",
     "is_featured": false,
     "section": "intl_journal"
   },
   {
-    "title": "A Study on Semantic Web Design for Global National R&D Status AnalysisFocusing on the Use of LOD Cloud-",
+    "title": "A Study on Semantic Web Design for Global National R&D Status Analysis - Focusing on the Use of LOD Cloud -",
     "authors": [
-      "권이닝",
-      "취기석",
-      "김제수",
-      "전성김",
-      "영국"
-    ],
-    "type": "journal",
-    "is_international": true,
-    "venue": "Cluster Computing,The Journal of(print version)(electronic version)(2012IF:0.776)",
-    "publisher": "SPRINGER,233SPRINGST,NEWYORK",
-    "year": 2013,
-    "month": null,
-    "doi": "10.1007/s10586-013-0299-y",
-    "index_type": "SCIE",
-    "volume_info": "Vol.17,No.3pp.791-804DOI:10.1007/s10586-013-0299-y",
-    "is_featured": false,
-    "section": "intl_journal"
-  },
-  {
-    "title": "TEMPORAL WORKLOAD ANALYSIS AND ITS APPLICATION TO POWER-AWARE SCHEDULING",
-    "authors": [
-      "설예인",
-      "김정욕",
+      "권이남",
+      "최기석",
+      "김재수",
+      "전성진",
       "김영국"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "International Journal of Embedded Systems and Applications(IJESA)기타학습지",
+    "venue": "Cluster Computing, The Journal of (print version) (electronic version) (2012 IF: 0.776)",
+    "publisher": "SPRINGE R, 233 SPRING ST, NEW YORK",
+    "year": 2013,
+    "month": null,
+    "doi": "10.1007/s1058",
+    "index_type": "SCIE",
+    "volume_info": "Vol.17, No.3, pp.791-804 DOI: 10.1007/s1058 6-013-0299-y",
+    "is_featured": false,
+    "section": "intl_journal"
+  },
+  {
+    "title": "TEMPORAL WORKLOAD ANALYSIS AND ITS APPLICATION TO POWER-AW ARE SCHEDULING",
+    "authors": [
+      "설예인",
+      "김정욱",
+      "김영국"
+    ],
+    "type": "journal",
+    "is_international": true,
+    "venue": "International Journal of Embedded Systems and Applications (IJESA) 기타학술지",
     "publisher": "AIRCC Publishing Corporation",
     "year": 2013,
     "month": null,
-    "doi": null,
+    "doi": "10.5121/ijesa.2013.3301",
     "index_type": null,
-    "volume_info": "Vol.3,No.3pp.1-17",
+    "volume_info": "Vol.3, No.3, pp.1-17",
     "is_featured": false,
     "section": "intl_journal"
   },
   {
-    "title": "Evaluating performance ofMARTe as a real-timeframework for feed-backcontrol system at tokamakdevice",
+    "title": "Evaluating performance of MARTe as a real-time framework for feed-back control system at tokamak device",
     "authors": [
-      "윤상원이용됩이태구바미경이상일AndréNeto",
-      "AndersWallander",
-      "김영국"
+      "윤상원 이웅렬 이 태구 박미경 이상일 Andre Neto",
+      "Anders Wallan der. 김영국"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Fusion Engineeringand Design",
+    "venue": "Fusion Engineering and Design",
     "publisher": "Elsevier",
     "year": 2013,
     "month": 10,
-    "doi": "10.1016/j.fuseingdes.2013.03.028",
+    "doi": "10.1016/j.fuse",
     "index_type": "SCI",
-    "volume_info": "Vol.88,issues6-8,Oct.2013pp.1323-1326DOI:10.1016/j.fuseingdes.2013.03.028",
+    "volume_info": "Vol.88, issues 6-8, Oct. 2013 pp.1323-1326 DOI: 10.1016/j.fuse ngdes.2013.03. 028",
     "is_featured": false,
     "section": "intl_journal"
   },
   {
-    "title": "A Study of Construction ofAgent-basedInformation-connectingFramework for EfficientCollection of National R&DReports",
+    "title": "A Study of Construction of Agent-based Information-connecting Framework for Efficient Collection of National R&D Reports",
     "authors": [
       "최기석",
       "김영국"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Journal of NextGenerationInformationTechnology(JNIT)",
+    "venue": "Journal of Next Generation Information Technology(JNIT)",
     "publisher": "AICIT",
     "year": 2013,
     "month": null,
     "doi": null,
     "index_type": "SCOPUS",
-    "volume_info": "Volume4,Number8,pp.501-508",
+    "volume_info": "Volume 4, Number 8, pp. 501-508",
     "is_featured": false,
     "section": "intl_journal"
   },
   {
-    "title": "Applying Dynamic PriorityScheduling Scheme to StaticSystems of Pinwheel TaskModel in Power-AwareScheduling",
+    "title": "Applying Dynamic Priority Scheduling Scheme to Static Systems of Pinwheel Task Model in Power-Aware Scheduling",
     "authors": [
-      "설에인",
+      "설예인",
       "김영국"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "TheScientificWorldJournal(TSWJ),1537-744X(Online)(기타학습지)",
-    "publisher": "HindawiPublishingCorporation",
+    "venue": "The Scientific World Journal (TSWJ) (Print), 1537-744X (Online) (기타학술지)",
+    "publisher": "Hindawi Publishing Corporation",
     "year": 2014,
     "month": null,
     "doi": "10.1155/8086",
     "index_type": null,
-    "volume_info": "Vol.2014,ArticleID587321pp.1-9DOI:10.1155/8086",
+    "volume_info": "Vol. 2014, Article ID 587321 1-9 pp. DOI: 10.1155/8086",
     "is_featured": false,
     "section": "intl_journal"
   },
   {
-    "title": "An Intrusive Analyzer forHadoop Systems based onWireless Sensor Networks",
+    "title": "An Intrusive Analyzer for Hadoop Systems based on Wireless Sensor Networks",
     "authors": [
-      "배명진",
+      "배병진",
       "김영주",
       "김영국",
-      "하욕군",
+      "하옥균",
       "전용기"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "InternationalJournalofDistributedSensorNetworks,1550-1477(Online)",
-    "publisher": "HindawiPublishingCorporation",
+    "venue": "International Journal of Distributed Sensor Networks (Print), 1550-1477 (Online)",
+    "publisher": "Hindawi Publishing Corporation",
     "year": 2014,
     "month": null,
     "doi": "10.1155/2648",
     "index_type": "SCIE",
-    "volume_info": "Vol.2014,ArticleID196040pp.1-8DOI:10.1155/2648",
+    "volume_info": "Vol. 2014, Article ID 196040, 1-8 pp. DOI: 10.1155/2648",
     "is_featured": false,
     "section": "intl_journal"
   },
   {
-    "title": "Construction of National R&DData Retrieval-basedResearcherMap",
+    "title": "Construction of National R&D Data Retrieval-based Researcher Map",
     "authors": [
       "양명석",
-      "강님귀",
-      "태현주",
-      "원군입",
-      "경태최",
-      "공님김",
-      "영국"
+      "강남규",
+      "김태현",
+      "주원균",
+      "임경태",
+      "최광남",
+      "김영국"
     ],
     "type": "journal",
     "is_international": true,
     "venue": "Information",
-    "publisher": "InternationalInformationInstitute",
+    "publisher": "International Information Institute",
     "year": 2016,
     "month": 1,
     "doi": null,
     "index_type": "SCOPUS",
-    "volume_info": "Vol.19No.1pp.37-42",
+    "volume_info": "Vol.19 No.1 pp.37-42",
     "is_featured": false,
     "section": "intl_journal"
   },
@@ -379,18 +378,17 @@
     "title": "A Self Synchronization Mechanism in a Federated Cloud",
     "authors": [
       "Dada Huang",
-      "Amol Jaikar",
-      "Geyong-Ryoon Kim",
-      "Young-Kuk Kim",
-      "Seo-Young Noh"
+      "Amol Jaikar. Geyong -Ryoon Kim",
+      "Young- Kuk Kim",
+      "Seo-Yo ung Noh"
     ],
     "type": "journal",
     "is_international": true,
     "venue": "International Journal of Software Engineering and Its Applications",
-    "publisher": "보안공학 연구지원센터(IJSEIA)",
+    "publisher": "보안공학 연구지원 센터 (IJSEIA)",
     "year": 2016,
     "month": 1,
-    "doi": null,
+    "doi": "10.14257/ijseia.2016.10.1.22",
     "index_type": "SCOPUS",
     "volume_info": "Vol.10 No.1, pp.233-240",
     "is_featured": false,
@@ -400,55 +398,55 @@
     "title": "Development of Platform-Based Knowledge Map Service to get Data Insights of R&D Institution on User-Interested Subjects",
     "authors": [
       "양명석",
-      "주원군",
+      "주원균",
       "최기석",
       "김영국",
-      "김윤경"
+      "김윤정"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Wireless Personal Communications: An International Journal IF:0.951/2016",
+    "venue": "Wireless Personal Communications: An International Journal IF: 0.951/2016",
     "publisher": "Springer",
     "year": 2018,
     "month": 2,
-    "doi": null,
+    "doi": "10.1007/s11277-017-5097-z",
     "index_type": "SCIE",
-    "volume_info": "Vol.98 No.4, pp.3265-3285",
+    "volume_info": "Vol.98 No.4, pp. 3265-3285",
     "is_featured": false,
     "section": "intl_journal"
   },
   {
-    "title": "Weak signal detecting of industry convergence using information of products and services of global listed companies - focusing on growth engine industry in South Korea",
+    "title": "Weak signal detecting of industry convergence using information of products and services of global listed companies - focusing on growth engine industry in South Korea -",
     "authors": [
-      "권이달",
+      "권이남",
       "박준환",
       "문영호",
       "이방래",
       "신영호",
-      "김영국"
+      "김영국 Soo-Ye"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Journal of Open Innovation: Technology, Market, and ComplexityIF:4.209(2020)",
+    "venue": "Journal of Open Innovation: Technology, Market, and Complexity IF: 4.209 (2020)",
     "publisher": "Springer",
     "year": 2018,
     "month": 3,
-    "doi": null,
+    "doi": "10.1186/s40852-018-0083-6",
     "index_type": null,
-    "volume_info": "Vol.4 No.10, pp.1-19",
+    "volume_info": "Vol.4 No.10, pp. 1-19",
     "is_featured": false,
     "section": "intl_journal"
   },
   {
     "title": "A Context-Aware Personalized Recommender System in Smart Vending Machine",
     "authors": [
-      "Soo-Ye on Jeong",
+      "on Jeong",
       "Kim Ryong",
-      "Young-Kuk Kim"
+      "Young- Kuk Kim"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Information: an international Interdisciplinary journalIF:0.250(2011)",
+    "venue": "Information: an international Interdisciplinary journal IF: 0.250 (2011)",
     "publisher": "International Information Institute",
     "year": 2018,
     "month": 7,
@@ -459,76 +457,77 @@
     "section": "intl_journal"
   },
   {
-    "title": "Deep Learning Model for Unstructured Knowledge Classification Using Structural Features",
+    "title": "DeepLearning Model for UnstructuredKnowledge Classification Using- Structural Features",
     "authors": [
-      "Wonkyun-Joo",
+      "Wonky unJoo",
       "KiSeok Choi",
-      "Young-Kuk Kim"
+      "Young- Kuk- Kim"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Personal and Ubiquitous Computing1617-4917(Online)IF:1.735(2019),IF:3.006(2020)",
-    "publisher": "Springer-London",
+    "venue": "Personal_and- Ubiquitous- Computing (Print) 1617-4917- (Online) IF:1.735(2019), IF:3.006(2020)",
+    "publisher": "Springer- London",
     "year": 2019,
     "month": 6,
-    "doi": "10.1007/s00779-019-01244-x(눈문계재장라곤",
+    "doi": null,
     "index_type": "SCI",
-    "volume_info": "pp.1-12(마길증)doi.org/10.1007/s00779-019-01244-x(눈문계재장라곤)",
+    "volume_info": "pp.1-12 (미검증) doi.org/10.100 7/s00779-019- 01244-x (논문게재장려금)",
     "is_featured": false,
     "section": "intl_journal"
   },
   {
     "title": "Identification of Target Chicken Populations by Machine Learning Models Using the Minimum Number of SNPs",
     "authors": [
-      "Dongwon Seo",
-      "외8명"
+      "Dongw on",
+      "Seo",
+      "외 8명"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Animals(Online)IF:2.323(2019)",
+    "venue": "Animals (Online) IF: 2.323 (2019)",
     "publisher": "MDPI",
     "year": 2021,
     "month": 1,
-    "doi": "10.3390/ani11010241(지금",
+    "doi": "10.3390/ani11010241",
     "index_type": "SCI",
-    "volume_info": "vol.11(1),241pp.1-18doi.org/10.3390/ani11010241(지금 대상 아님)",
+    "volume_info": "vol.11(1), 241 pp.1-18 doi.org/10.339 0/ani11010241 (지급 대상 아님)",
     "is_featured": true,
     "section": "intl_journal"
   },
   {
-    "title": "AORM:Fast Incremental Arbitrary-Order Reachability Matrix Computation for Massive Graphs",
+    "title": "AORM: Fast Incremental Arbitrary-Order Reachability Matrix Computation for Massive Graphs",
     "authors": [
-      "Sung-Soo Kim",
-      "Young-Kuk Kim",
-      "Young-Min Kang"
+      "Sung-S 00 Kim",
+      "Young - Kuk Kim",
+      "Young- Min Kang"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "IEEE AccessPrint Online IF:3.745(2019-2020)",
+    "venue": "IEEE Access Print Online IF: 3.745 (2019-2020)",
     "publisher": "IEEE",
     "year": 2021,
     "month": 5,
-    "doi": "10.1109/ACCESS.2021.3077888",
+    "doi": "10.1109/access.2021.3077888",
     "index_type": "SCI",
-    "volume_info": "vol.9pp.69539-69558doi.org/10.1109/ACCESS.2021.3077888",
+    "volume_info": "vol.9 pp.69539-69 558 doi.org/10.110 9/ACCESS.202 1.3077888",
     "is_featured": true,
     "section": "intl_journal"
   },
   {
-    "title": "GpNet:Genomic prediction network using locallyconnected layers in Korean native cattle",
+    "title": "GpNet: Genomic prediction network using locallyconnecteed layers in Koreannative cattle",
     "authors": [
-      "Hyo-Jun Lee",
+      "Hyo-Ju nLee-",
       "외10명"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "BMC-Bioinformatics",
+    "venue": "BMC Bioinformatics",
     "publisher": "",
     "year": 2021,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "2021.06.14submitted",
+    "volume_info": "2021.06.14 submitted",
     "is_featured": false,
     "section": "intl_journal"
   },
@@ -537,72 +536,75 @@
     "authors": [
       "Hyun Chul",
       "Kang",
-      "외5명"
+      "외 5명"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Applied SciencesIF:2.679(2020)IF:2.838(2022)",
+    "venue": "Applied Sciences IF: 2.679 (2020) IF: 2,838 (2022)",
     "publisher": "MDPI",
     "year": 2021,
     "month": 8,
-    "doi": "10.3390/app11167593(교육연구학생지도비",
+    "doi": "10.3390/app11167593",
     "index_type": null,
-    "volume_info": "vol 11(16),7593pp.1-19doi.org/10.3390/app11167593(교육연구학생지도비)",
+    "volume_info": "vol 11(16), 7593 pp.1-19 doi.org/10.339 0/app11167593 (교육연구학생지도비)",
     "is_featured": true,
     "section": "intl_journal"
   },
   {
-    "title": "Automated Classification of Normal Control and Early-Stage Dementia Based on Activities of Daily Living(ADL) Data Acquired from Smart Home Environment",
+    "title": "Automated Classification of Normal Control and Early-Stage Dementia Based on Activities of Daily Living (ADL) Data Acquired from Smart Home Environment",
     "authors": [
-      "Lee-Nam Kwon",
-      "외8명"
+      "Lee-Na m",
+      "Kwon",
+      "외 8명"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "International Journal of Environmental Research and Public Health(IJERPH)IF:3.390(2020)",
+    "venue": "International Journal of Environmental Research and Public Health (IJERPH) IF: 3.390 (2020)",
     "publisher": "MDPI",
     "year": 2021,
     "month": 12,
     "doi": "10.3390/ijerph182413235",
     "index_type": null,
-    "volume_info": "vol 18(24),13235pp.1-12doi.org/10.3390/ijerph182413235",
+    "volume_info": "vol 18(24), 13235 pp.1-12 doi.org/10.339 0/ijerph18241 3235",
     "is_featured": true,
     "section": "intl_journal"
   },
   {
     "title": "Deep Learning-Based Context-Aware Recommender System Considering Contextual Features",
     "authors": [
-      "Soo-Yeon Jeong",
-      "and Young-Kuk",
+      "Soo-Yeo n",
+      "Jeong and",
+      "Young- Kuk",
       "Kim"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Applied SciencesIF:2.679(2020)IF:2.838(2022)",
+    "venue": "Applied Sciences IF: 2.679 (2020) IF: 2,838 (2022)",
     "publisher": "MDPI",
     "year": 2021,
     "month": 12,
-    "doi": "10.3390/app12010045(자체연구비결과물",
+    "doi": "10.3390/app12010045",
     "index_type": "SCIE",
-    "volume_info": "vol 12(1),45pp.1-12doi.org/10.3390/app12010045(자체연구비결과물)",
+    "volume_info": "vol 12(1), 45 pp.1-12 doi.org/10.339 0/app12010045 (자체연구비결과물)",
     "is_featured": true,
     "section": "intl_journal"
   },
   {
     "title": "Use of a graph neural network to the weighted gene co-expression network analysis of Korean native cattle",
     "authors": [
-      "Hyo-Jun Lee",
+      "Hyo-Ju n",
+      "Lee",
       "외 6명"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Scientific Reports IF:4.996(2021)",
+    "venue": "Scientific Reports IF: 4.996 (2021) (online)",
     "publisher": "Springer Nature",
     "year": 2022,
     "month": 6,
-    "doi": "10.1038/S41598-022-13796-9(지금",
+    "doi": "10.21203/rs.3.rs-1063895/v1",
     "index_type": null,
-    "volume_info": "(2022)12:9854pp.1-13doi.org/10.1038/S41598-022-13796-9(지금 대상 아닐)",
+    "volume_info": "(2022)12:9854 pp.1-13 doi.org/10.103 8/S41598-022- 13796-9 (지급 대상 아님)",
     "is_featured": true,
     "section": "intl_journal"
   },
@@ -615,50 +617,51 @@
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Meat ScienceIF:7.077",
+    "venue": "Meat Science IF: 7.077",
     "publisher": "Elsevier",
     "year": 2022,
     "month": 3,
-    "doi": "10.1016/j.meatsci.2022.108784(지금",
+    "doi": "10.1016/j.meatsci.2022.108784",
     "index_type": null,
-    "volume_info": "vol.188(2022),108784pp.1-11doi.org/10.1016/j.meatsci.2022.108784(지금 대상 아닐)",
+    "volume_info": "vol. 188(2022), 108784 pp.1-11 doi.org/10.101 6/j.meatsci.202 2.108784 (지급 대상 아님)",
     "is_featured": true,
     "section": "intl_journal"
   },
   {
     "title": "BTENet: Back-Fat Thickness Estimation Network for Automated Grading of the Korean Commercial Pig",
     "authors": [
-      "Hyo-Jun Lee",
+      "Hyo-Ju n",
+      "Lee",
       "외 7명"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "ElectronicsIF:2.397(2020)",
+    "venue": "Electronics IF: 2.397 (2020)",
     "publisher": "MDPI",
     "year": 2022,
     "month": 4,
-    "doi": "10.3390/electronics11091296(지금",
+    "doi": "10.3390/electronics11091296",
     "index_type": null,
-    "volume_info": "vol.11(9),1296pp.1-10doi.org/10.3390/electronics11091296(지금 대상 아닐)",
+    "volume_info": "vol. 11(9), 1296 pp.1-10 doi.org/10.339 0/electronics1 1091296 (지급 대상 아님)",
     "is_featured": true,
     "section": "intl_journal"
   },
   {
     "title": "Deep Learning Model for Unstructured Knowledge Classification Using Structural Features",
     "authors": [
-      "Wonkyun Joo",
+      "Wonky un Joo",
       "KiSeok Choi",
-      "Young-Kuk Kim"
+      "Young- Kuk Kim"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Personal and Ubiquitous Computing1617-4917(Online)IF:1.735(2019),IF:3.006(2020)",
+    "venue": "Personal and Ubiquitous Computing (Print) 1617-4917 (Online) IF: 1.735 (2019), IF: 3,006 (2020)",
     "publisher": "Springer London",
     "year": 2019,
     "month": 6,
-    "doi": "10.1007/s00779-019-01244-x(눈문계제장려금)vol.26,no.2pp.247-258(지금",
+    "doi": "10.1007/s00779-019-01244-x",
     "index_type": "SCI",
-    "volume_info": "doi.org/10.1007/s00779-019-01244-x(눈문계제장려금)vol.26,no.2pp.247-258(지금 대상 아닐)",
+    "volume_info": "doi.org/10.100 7/s00779-019- 01244-x (논문게재장려금) vol.26, no.2 pp.247-258 (지급 대상 아님)",
     "is_featured": false,
     "section": "intl_journal"
   },
@@ -670,54 +673,55 @@
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Journal of Animal Science and Technology(JAST)epIF:1.801(2021)",
+    "venue": "Journal of Animal Science and Technology (JAST) e p IF: 1.801 (2021)",
     "publisher": "Korean Society of Animal Science and Technology",
     "year": 2022,
     "month": 9,
-    "doi": "10.5187/jast.2022.e64(지금",
+    "doi": "10.5187/jast.2022.e64",
     "index_type": null,
-    "volume_info": "vol.64(5):830-841doi.org/10.5187/jast.2022.e64(지금 대상 아닐)",
+    "volume_info": "vol.64(5): 830-841 doi.org/10.518 7/jast.2022.e64 (지급 대상 아님)",
     "is_featured": false,
     "section": "intl_journal"
   },
   {
     "title": "A genome-wide association study for eumelanin pigmentation in chicken plumage using a computer vision approach",
     "authors": [
-      "Seonyeong Heo",
+      "Seonye ong",
+      "Heo",
       "외 9명"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "Journal of Animal GeneticsIF:2.884(2021)Online",
+    "venue": "of Animal Journal Genetics IF: 2,884 (2021) Online",
     "publisher": "Wiley",
     "year": 2023,
     "month": 6,
-    "doi": "10.1111/age.13303(지금",
+    "doi": "10.1111/age.13303",
     "index_type": null,
-    "volume_info": "vol.54(3)pp.355-362doi.org/10.1111/age.13303(지금 대상 아닐)",
+    "volume_info": "vol. 54(3) pp.355-362 doi.org/10.111 1/age.13303 (지급 대상 아님)",
     "is_featured": false,
     "section": "intl_journal"
   },
   {
-    "title": "Deep Learning-based Context-Aware Recommender System Considering Change in Preference(2020년 연구년 연구결과물)",
+    "title": "Deep Learning-based Context-Aware Recommender System Considering Change in Preference (2020년 연구년 연구결과물)",
     "authors": [
       "정수연",
       "김영국"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "ElectronicsIF:2.690(2021)",
+    "venue": "Electronics IF: 2.690 (2021)",
     "publisher": "MDPI",
     "year": 2023,
     "month": 5,
-    "doi": "10.3390/electronics12102337(지급",
+    "doi": "10.3390/electronics12102337",
     "index_type": "SCIE",
-    "volume_info": "vol.12(10),2337pp.1-14doi.org/10.3390/electronics12102337(지급 대상)",
+    "volume_info": "vol. 12(10), 2337 pp.1-14 doi.org/10.339 0/electronics1 2102337 (지급 대상)",
     "is_featured": true,
     "section": "intl_journal"
   },
   {
-    "title": "Generating psychological analysis tables for children's drawings using deep learning(2021년 CNU자체연구과제-재직II-1결과물)",
+    "title": "Generating psychological analysis tables for children's drawings using deep learning (2021년 CNU자체연구과제-재직II-1 결과물)",
     "authors": [
       "이문영",
       "김영호",
@@ -725,13 +729,13 @@
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "DATA&KNOWLEDGEENGINEERINGIF:2.5Online Print",
+    "venue": "DATA & KNOWLEDGE ENGINEERING IF: 2.5 Online Print",
     "publisher": "Elsevier",
     "year": 2023,
     "month": 12,
-    "doi": "10.1016/j.datak.2023.102266(2023/12/01,submitted)(지급대상아님",
+    "doi": "10.1016/j.datak.2023.102266",
     "index_type": "SCIE",
-    "volume_info": "vol.149(2024),102266pp.1-19doi.org/10.1016/j.datak.2023.102266(2023/12/01,submitted)(지급대상아님)",
+    "volume_info": "vol. 149(2024), 102266 pp.1-19 doi.org/10.101 6/j.datak.2023. 102266 (2023/12/01, submitted) (지급대상아님)",
     "is_featured": true,
     "section": "intl_journal"
   },
@@ -739,35 +743,35 @@
     "title": "Absorption Distribution Metabolism Excretion and Toxicity Property Prediction Utilizing a Pre-Trained Natural Language Processing Model and Its Applications in Early-Stage Drug Development",
     "authors": [
       "정우진",
-      "외7명"
+      "외 7명"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "PharmaceuticalsIF:4.6(2022),Q2",
+    "venue": "Pharmaceuticals IF: 4.6 (2022), Q2",
     "publisher": "MDPI",
     "year": 2024,
     "month": 3,
-    "doi": "10.3390/ph17030382(2024/2/20,submitted)(지급대상아님",
+    "doi": "10.3390/ph17030382",
     "index_type": "SCI",
-    "volume_info": "vol.17(3),382pp.1-16doi.org/10.3390/ph17030382(2024/2/20,submitted)(지급대상아님)",
+    "volume_info": "vol. 17(3), 382 pp.1-16 doi.org/10.339 0/ph17030382 (2024/2/20, submitted) (지급대상아님)",
     "is_featured": true,
     "section": "intl_journal"
   },
   {
-    "title": "Closha 2.0:a bio-workflow design system for massive genome data analysis on high performance cluster infrastructure",
+    "title": "Closha 2.0: a bio-workflow design system for massive genome data analysis on high performance cluster infrastructure",
     "authors": [
       "고건환",
-      "외8명"
+      "외 8명"
     ],
     "type": "journal",
     "is_international": true,
-    "venue": "BMCBioinformaticsIF:2.9(2024),Q1",
-    "publisher": "SpringerNature",
+    "venue": "BMC Bioinformatics IF: 2.9 (2024), Q1",
+    "publisher": "Springer Nature",
     "year": 2024,
     "month": 11,
-    "doi": "10.1186/s12859-024-05963-8(지급대상",
+    "doi": "10.1186/s12859-024-05963-8",
     "index_type": "SCI",
-    "volume_info": "vol.25,353pp.1-13doi.org/10.1186/s12859-024-05963-8(지급대상)",
+    "volume_info": "vol. 25, 353 pp.1-13 doi.org/10.118 6/s12859-024- 05963-8 (지급 대상)",
     "is_featured": true,
     "section": "intl_journal"
   },
@@ -775,7 +779,7 @@
     "title": "An Approach Towards Predictable Real-Time Transaction Processing",
     "authors": [
       "김영국",
-      "외1인"
+      "외 1인"
     ],
     "type": "conference",
     "is_international": true,
@@ -783,7 +787,7 @@
     "publisher": "IEEE CS",
     "year": 1993,
     "month": 6,
-    "doi": null,
+    "doi": "10.1109/emwrt.1993.639058",
     "index_type": null,
     "volume_info": "70-75",
     "is_featured": false,
@@ -793,15 +797,15 @@
     "title": "Developing a Database System for Time-Critical Applications",
     "authors": [
       "김영국",
-      "외2인"
+      "외 2인"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "DEXA‘93",
+    "venue": "DEXA '93",
     "publisher": "IEEE",
     "year": 1993,
     "month": 9,
-    "doi": null,
+    "doi": "10.1007/3-540-57234-1_28",
     "index_type": null,
     "volume_info": "313-324",
     "is_featured": false,
@@ -811,11 +815,11 @@
     "title": "Predictability and Consistency in Real-Time Database Systems",
     "authors": [
       "김영국",
-      "외1인"
+      "외 1인"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "InfoScience‘93",
+    "venue": "InfoScience '93",
     "publisher": "KISS",
     "year": 1993,
     "month": 10,
@@ -826,10 +830,10 @@
     "section": "intl_conference"
   },
   {
-    "title": "MRDB:A Multi-User Real-Time Database Testbed",
+    "title": "MRDB: A Multi-User Real-Time Database Testbed",
     "authors": [
       "김영국",
-      "외2인"
+      "외 2인"
     ],
     "type": "conference",
     "is_international": true,
@@ -847,7 +851,7 @@
     "title": "A Database Server for Distributed Real-Time Systems: Issues and Experiences",
     "authors": [
       "김영국",
-      "외3인"
+      "외 3인"
     ],
     "type": "conference",
     "is_international": true,
@@ -855,17 +859,17 @@
     "publisher": "IEEE CS",
     "year": 1994,
     "month": 4,
-    "doi": null,
+    "doi": "10.1109/wpdrts.1994.365648",
     "index_type": null,
     "volume_info": null,
     "is_featured": false,
     "section": "intl_conference"
   },
   {
-    "title": "StarBase:A Firm Real-Time Database Manager for Time-Critical Applications",
+    "title": "StarBase: A Firm Real-Time Database Manager for Time-Critical Applications",
     "authors": [
       "김영국",
-      "외2인"
+      "외 2인"
     ],
     "type": "conference",
     "is_international": true,
@@ -873,7 +877,7 @@
     "publisher": "IEEE CS",
     "year": 1995,
     "month": 6,
-    "doi": null,
+    "doi": "10.1109/emwrts.1995.514327",
     "index_type": null,
     "volume_info": "317-322",
     "is_featured": false,
@@ -883,7 +887,7 @@
     "title": "Performance Evaluation of a Firm Real-Time DataBase System",
     "authors": [
       "김영국",
-      "외2명"
+      "외 2명"
     ],
     "type": "conference",
     "is_international": true,
@@ -891,7 +895,7 @@
     "publisher": "IEEE CS",
     "year": 1995,
     "month": 10,
-    "doi": null,
+    "doi": "10.21236/ada465528",
     "index_type": null,
     "volume_info": "116-124",
     "is_featured": false,
@@ -901,7 +905,7 @@
     "title": "Managing Contention and Timing Constraints in a Real-Time Database System",
     "authors": [
       "김영국",
-      "외2인"
+      "외 2인"
     ],
     "type": "conference",
     "is_international": true,
@@ -909,7 +913,7 @@
     "publisher": "IEEE CS",
     "year": 1995,
     "month": 12,
-    "doi": null,
+    "doi": "10.21236/ada453233",
     "index_type": null,
     "volume_info": "332-341",
     "is_featured": false,
@@ -919,7 +923,7 @@
     "title": "Towards Real-Time Performance in a Scalable, Continuously Available Telecom DBMS",
     "authors": [
       "김영국",
-      "외2인"
+      "외 2인"
     ],
     "type": "conference",
     "is_international": true,
@@ -937,7 +941,7 @@
     "title": "Supporting Predictability in Real-Time Database Systems",
     "authors": [
       "김영국",
-      "외1인"
+      "외 1인"
     ],
     "type": "conference",
     "is_international": true,
@@ -945,7 +949,7 @@
     "publisher": "IEEE TC-RTS",
     "year": 1996,
     "month": 6,
-    "doi": null,
+    "doi": "10.1109/rttas.1996.509521",
     "index_type": null,
     "volume_info": "38-48",
     "is_featured": false,
@@ -955,7 +959,7 @@
     "title": "Efficiently Supporting Hard/Soft Deadline Transactions in Real-Time Database Systems",
     "authors": [
       "김영국",
-      "외4인"
+      "외 4인"
     ],
     "type": "conference",
     "is_international": true,
@@ -963,17 +967,17 @@
     "publisher": "IEEE CS",
     "year": 1996,
     "month": 10,
-    "doi": null,
+    "doi": "10.1109/rtcsa.1996.554963",
     "index_type": null,
     "volume_info": "74-80",
     "is_featured": false,
     "section": "intl_conference"
   },
   {
-    "title": "Hybrid-TH:A Hybrid Access Mechanism for Real-Time Memory-Resident DBMS",
+    "title": "Hybrid-TH : A Hybrid Access Mechanism for Real-Time Memory-Resident DBMS",
     "authors": [
       "김영국",
-      "외4인"
+      "외 4인"
     ],
     "type": "conference",
     "is_international": true,
@@ -991,7 +995,7 @@
     "title": "Multiple Intelligent Agent Architecture for Personalized Services on Internet Shopping Mall",
     "authors": [
       "김영국",
-      "외6명"
+      "외 6명"
     ],
     "type": "conference",
     "is_international": true,
@@ -1009,7 +1013,7 @@
     "title": "No-Log Recovery Mechanism Using Stable Memory For Real-Time Main Memory Database Systems",
     "authors": [
       "김영국",
-      "외6명"
+      "외 6명"
     ],
     "type": "conference",
     "is_international": true,
@@ -1027,7 +1031,7 @@
     "title": "A Tool Broker in Remote Development Environments for Embedded Applications",
     "authors": [
       "김영국",
-      "외2인"
+      "외 2인"
     ],
     "type": "conference",
     "is_international": true,
@@ -1045,7 +1049,7 @@
     "title": "Kernel Structuring using Time-Triggered Message-Triggered Objects for Real-Time Active DBMS in Layered Architecture",
     "authors": [
       "김영국",
-      "외4인"
+      "외 4인"
     ],
     "type": "conference",
     "is_international": true,
@@ -1053,7 +1057,7 @@
     "publisher": "IEEE CS",
     "year": 2000,
     "month": 3,
-    "doi": null,
+    "doi": "10.1109/isorc.2000.839522",
     "index_type": null,
     "volume_info": "148-155",
     "is_featured": false,
@@ -1063,7 +1067,7 @@
     "title": "Two-Step Backup Mechanism for Real-Time Main Memory Database Recovery",
     "authors": [
       "김영국",
-      "외7명"
+      "외 7명"
     ],
     "type": "conference",
     "is_international": true,
@@ -1081,12 +1085,12 @@
     "title": "Reducing Communication Overhead in an Embedded Application Development Toolset",
     "authors": [
       "김영국",
-      "외2명"
+      "외 2명"
     ],
     "type": "conference",
     "is_international": true,
     "venue": "International Conference on Applied Informatics",
-    "publisher": "IASTED International",
+    "publisher": "IASTED Internatio nal",
     "year": 2001,
     "month": 2,
     "doi": null,
@@ -1099,7 +1103,7 @@
     "title": "Developing a Triggering System for Real-Time Databases in Distributed Environment",
     "authors": [
       "김영국",
-      "외3명"
+      "외 3명"
     ],
     "type": "conference",
     "is_international": true,
@@ -1107,7 +1111,7 @@
     "publisher": "IEEE CS",
     "year": 2001,
     "month": 5,
-    "doi": null,
+    "doi": "10.1109/isorc.2001.922861",
     "index_type": null,
     "volume_info": "366-371",
     "is_featured": false,
@@ -1117,7 +1121,7 @@
     "title": "An Efficient Selection and Provision Mechanism for Personalized Services In Internet Virtual Shopping Mall Environment",
     "authors": [
       "김영국",
-      "외2인"
+      "외 2인"
     ],
     "type": "conference",
     "is_international": true,
@@ -1127,7 +1131,7 @@
     "month": 7,
     "doi": null,
     "index_type": null,
-    "volume_info": "Vol 1217-221",
+    "volume_info": "Vol 1 217-221",
     "is_featured": false,
     "section": "intl_conference"
   },
@@ -1135,7 +1139,7 @@
     "title": "Development of a Personalized Virtual Shopping Mall System in Distributed Heterogeneous Environment",
     "authors": [
       "김영국",
-      "외2인"
+      "외 2인"
     ],
     "type": "conference",
     "is_international": true,
@@ -1153,7 +1157,7 @@
     "title": "An Efficient Selection Method for Personalized Advertisements Using Bitwise Operations",
     "authors": [
       "김영국",
-      "외4인"
+      "외 4인"
     ],
     "type": "conference",
     "is_international": true,
@@ -1171,7 +1175,7 @@
     "title": "A Security System for Preventing an Intrusion on Network",
     "authors": [
       "김영국",
-      "외2인"
+      "외 2인"
     ],
     "type": "conference",
     "is_international": true,
@@ -1189,7 +1193,7 @@
     "title": "Middleware for Platform Independent Toolset to Develop Real-Time Embedded Applications",
     "authors": [
       "김영국",
-      "외3명"
+      "외 3명"
     ],
     "type": "conference",
     "is_international": true,
@@ -1207,7 +1211,8 @@
     "title": "Performance Enhancement of Java Virtual Machine in Embedded System Environment through the Extension of Java Byte Code",
     "authors": [
       "이지현",
-      "김영국의1명"
+      "김 영국",
+      "외 1명"
     ],
     "type": "conference",
     "is_international": true,
@@ -1224,13 +1229,13 @@
   {
     "title": "Consistent Real-Time Data Dissemination in Mobile Computing Environment",
     "authors": [
-      "윤혜수",
+      "윤혜숙",
       "김영국"
     ],
     "type": "conference",
     "is_international": true,
     "venue": "Proceeding of the Symposium on Information and Communications Technology (ICT)",
-    "publisher": "KSEA,KOFST",
+    "publisher": "KSEA, KOFST",
     "year": 2004,
     "month": 8,
     "doi": null,
@@ -1242,7 +1247,7 @@
   {
     "title": "Broadcasting Real-Time Data with Maintaining Consistency in Mobile Environments",
     "authors": [
-      "윤혜수",
+      "윤혜숙",
       "김영국"
     ],
     "type": "conference",
@@ -1269,7 +1274,7 @@
     "publisher": "IEEE CS",
     "year": 2005,
     "month": 4,
-    "doi": null,
+    "doi": "10.1109/deec.2005.24",
     "index_type": null,
     "volume_info": "112-118",
     "is_featured": false,
@@ -1315,6 +1320,7 @@
     "title": "A Channel Recommendation System in Mobile Environment",
     "authors": [
       "박성준",
+      "강상길",
       "김영국"
     ],
     "type": "conference",
@@ -1323,7 +1329,7 @@
     "publisher": "IEEE",
     "year": 2006,
     "month": 1,
-    "doi": null,
+    "doi": "10.1109/tce.2006.1605022",
     "index_type": null,
     "volume_info": "205-206",
     "is_featured": false,
@@ -1332,8 +1338,8 @@
   {
     "title": "Dynamically Personalized Web Service System to Mobile Devices",
     "authors": [
-      "김상길",
-      "박원의",
+      "강상길",
+      "박원익",
       "김영국"
     ],
     "type": "conference",
@@ -1342,7 +1348,7 @@
     "publisher": "Springer",
     "year": 2006,
     "month": 6,
-    "doi": null,
+    "doi": "10.1007/11766254_35",
     "index_type": null,
     "volume_info": "416-426",
     "is_featured": false,
@@ -1351,8 +1357,8 @@
   {
     "title": "Dynamical E-commerce System for Shopping Mall Site through Mobile Devices",
     "authors": [
-      "김상길",
-      "박원의",
+      "강상길",
+      "박원익",
       "김영국"
     ],
     "type": "conference",
@@ -1370,9 +1376,9 @@
   {
     "title": "Personalized Digital E-library Service Using Users' Profile Information",
     "authors": [
-      "박원의",
+      "박원익",
       "김원일",
-      "김상길",
+      "강상길",
       "이현진",
       "김영국"
     ],
@@ -1382,7 +1388,7 @@
     "publisher": "Springer",
     "year": 2006,
     "month": 9,
-    "doi": null,
+    "doi": "10.1007/11863878_60",
     "index_type": null,
     "volume_info": "528-531",
     "is_featured": false,
@@ -1391,10 +1397,10 @@
   {
     "title": "Using Active Database Techniques for an Advanced Alarm Processing",
     "authors": [
-      "장귀속",
+      "장귀숙",
       "성덕현",
-      "금종통",
-      "박회연",
+      "금종룡",
+      "박희연",
       "김영국"
     ],
     "type": "conference",
@@ -1412,7 +1418,7 @@
   {
     "title": "Dynamically Personalized Music Recommendation System for PDA",
     "authors": [
-      "박원의",
+      "박원익",
       "강상길",
       "최미선",
       "김영국"
@@ -1423,7 +1429,7 @@
     "publisher": "Springer",
     "year": 2007,
     "month": 8,
-    "doi": null,
+    "doi": "10.1007/978-3-540-74282-1_111",
     "index_type": null,
     "volume_info": "991-1000",
     "is_featured": false,
@@ -1433,7 +1439,7 @@
     "title": "A Hybrid Cache Coherency Scheme for Ubiquitous Mobile Clients",
     "authors": [
       "최미선",
-      "박원의",
+      "박원익",
       "김영국"
     ],
     "type": "conference",
@@ -1442,7 +1448,7 @@
     "publisher": "IEEE CS",
     "year": 2007,
     "month": 11,
-    "doi": null,
+    "doi": "10.1109/iccit.2007.205",
     "index_type": null,
     "volume_info": "181-188",
     "is_featured": false,
@@ -1451,7 +1457,7 @@
   {
     "title": "A Context-Based Collaboration System in Ubiquitous Environments",
     "authors": [
-      "박원의",
+      "박원익",
       "김영국",
       "외8인"
     ],
@@ -1461,7 +1467,7 @@
     "publisher": "IEEE CS",
     "year": 2007,
     "month": 11,
-    "doi": null,
+    "doi": "10.1109/iccit.2007.4420244",
     "index_type": null,
     "volume_info": "101-107",
     "is_featured": false,
@@ -1471,7 +1477,7 @@
     "title": "A Split Synchronizing Mobile Transaction Model",
     "authors": [
       "최미선",
-      "박원의",
+      "박원익",
       "김영국"
     ],
     "type": "conference",
@@ -1480,7 +1486,7 @@
     "publisher": "",
     "year": 2008,
     "month": 1,
-    "doi": null,
+    "doi": "10.1145/1352793.1352835",
     "index_type": null,
     "volume_info": "213-218",
     "is_featured": false,
@@ -1489,10 +1495,11 @@
   {
     "title": "Selection of Orthogonal Features in Fisher Discriminant Analysis",
     "authors": [
-      "솔조가",
+      "손조가",
       "최미선",
-      "박정회",
-      "김영국"
+      "박정희",
+      "김영국",
+      "이우기"
     ],
     "type": "conference",
     "is_international": true,
@@ -1509,10 +1516,9 @@
   {
     "title": "Cohesive Arc Measure for Web Navigation",
     "authors": [
-      "이우기",
-      "니디아",
-      "로라김",
-      "영국"
+      "니디",
+      "아로라",
+      "김영국"
     ],
     "type": "conference",
     "is_international": true,
@@ -1530,9 +1536,9 @@
     "title": "Personalized Recommender System for Resource Sharing Based on Context-Aware in Ubiquitous Environments",
     "authors": [
       "박종현",
-      "박원의",
+      "박원익",
       "김영국",
-      "강지홈"
+      "강지훈"
     ],
     "type": "conference",
     "is_international": true,
@@ -1540,17 +1546,17 @@
     "publisher": "IEEE CS",
     "year": 2008,
     "month": 8,
-    "doi": null,
+    "doi": "10.1109/itsim.2008.4631888",
     "index_type": null,
-    "volume_info": "2414-2418",
+    "volume_info": "2414-241 8",
     "is_featured": false,
     "section": "intl_conference"
   },
   {
     "title": "An Active Alarm Processing in a Nuclear Power Plant",
     "authors": [
-      "장귀속",
-      "금종통",
+      "장귀숙",
+      "금종룡",
       "박재연",
       "김영국"
     ],
@@ -1560,9 +1566,9 @@
     "publisher": "IEEE",
     "year": 2008,
     "month": 9,
-    "doi": null,
+    "doi": "10.1109/amige.2008.ecp.78",
     "index_type": null,
-    "volume_info": "S5B-3:1-3",
+    "volume_info": "S5B-3: 1-3",
     "is_featured": false,
     "section": "intl_conference"
   },
@@ -1570,9 +1576,10 @@
     "title": "Situation-Based Resource Recommender System in Ubiquitous Environments",
     "authors": [
       "박종현",
-      "박원의",
+      "박원익",
       "김영국",
-      "강지홈"
+      "강지훈",
+      "이우기"
     ],
     "type": "conference",
     "is_international": true,
@@ -1580,7 +1587,7 @@
     "publisher": "IEEE CS",
     "year": 2008,
     "month": 10,
-    "doi": null,
+    "doi": "10.1109/icpca.2008.4783652",
     "index_type": null,
     "volume_info": "74-77",
     "is_featured": false,
@@ -1589,7 +1596,10 @@
   {
     "title": "Query Based Optimal Web Site Clustering Using Simulated Annealing",
     "authors": [
-      "이우기김영국운북식JiangJin",
+      "김영국",
+      "윤복식",
+      "Jiang",
+      "Jin",
       "Xi"
     ],
     "type": "conference",
@@ -1598,7 +1608,7 @@
     "publisher": "ACM",
     "year": 2008,
     "month": 11,
-    "doi": null,
+    "doi": "10.1145/1497308.1497359",
     "index_type": null,
     "volume_info": "271-278",
     "is_featured": false,
@@ -1607,7 +1617,8 @@
   {
     "title": "An Enhanced Recommendation Technique for Personalized e-Commerce Portal",
     "authors": [
-      "Shohel Ahmed",
+      "Shohel",
+      "Ahmed",
       "고평관",
       "김주완",
       "김영국",
@@ -1619,7 +1630,7 @@
     "publisher": "IEEE CS",
     "year": 2008,
     "month": 12,
-    "doi": null,
+    "doi": "10.1109/iita.2008.289",
     "index_type": null,
     "volume_info": "196-200",
     "is_featured": false,
@@ -1628,7 +1639,7 @@
   {
     "title": "A Music Recommendation System in Mobile Environment",
     "authors": [
-      "박원의",
+      "박원익",
       "강상길",
       "최미선",
       "김영국"
@@ -1639,7 +1650,7 @@
     "publisher": "IEEE",
     "year": 2009,
     "month": 1,
-    "doi": null,
+    "doi": "10.1109/icce.2009.5012299",
     "index_type": null,
     "volume_info": null,
     "is_featured": false,
@@ -1649,7 +1660,7 @@
     "title": "Two-phase Mobile Transaction Validation in Wireless Broadcast Environments",
     "authors": [
       "최미선",
-      "박원의",
+      "박원익",
       "김영국"
     ],
     "type": "conference",
@@ -1658,7 +1669,7 @@
     "publisher": "ACM",
     "year": 2009,
     "month": 1,
-    "doi": null,
+    "doi": "10.1145/1516241.1516248",
     "index_type": null,
     "volume_info": "32-38",
     "is_featured": false,
@@ -1668,9 +1679,10 @@
     "title": "AnchorWoman: Top-k Structured Mobile Web Search Engine",
     "authors": [
       "이우기",
-      "이정희",
+      "이정훈",
       "김영국",
-      "Carson Leung"
+      "Carson",
+      "Leung"
     ],
     "type": "conference",
     "is_international": true,
@@ -1680,7 +1692,7 @@
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "2089-2090",
+    "volume_info": "2089- 2090",
     "is_featured": false,
     "section": "intl_conference"
   },
@@ -1706,7 +1718,7 @@
   {
     "title": "An Agent-Based Personalized Multimedia Jukebox for Mobile Devices using Consumption Sentiment",
     "authors": [
-      "박원의",
+      "박원익",
       "최미선",
       "김영국"
     ],
@@ -1716,19 +1728,19 @@
     "publisher": "IEEE",
     "year": 2010,
     "month": 1,
-    "doi": null,
+    "doi": "10.1109/icce.2010.5418858",
     "index_type": null,
-    "volume_info": "6.2-2:1-2",
+    "volume_info": "6.2-2: 1-2",
     "is_featured": false,
     "section": "intl_conference"
   },
   {
     "title": "An Efficient Context-Aware Personalization Technique in Ubiquitous Environments",
     "authors": [
-      "박원의",
+      "박원익",
       "박종현",
       "김영국",
-      "강지희"
+      "강지훈"
     ],
     "type": "conference",
     "is_international": true,
@@ -1736,7 +1748,7 @@
     "publisher": "ACM",
     "year": 2010,
     "month": 1,
-    "doi": null,
+    "doi": "10.1145/2108616.2108689",
     "index_type": null,
     "volume_info": "415-421",
     "is_featured": false,
@@ -1745,10 +1757,12 @@
   {
     "title": "The Design and Implementation of Standard System to Managing, Gathering and Providing of National R&D Outcome Information",
     "authors": [
-      "Won-Kyun Joo",
-      "Ki-Seok Choi",
+      "Won-K yun",
+      "Joo Ki-Seo",
+      "k Choi",
       "Jae-Soo Kim",
-      "Young-Kuk Kim"
+      "Young- Kuk",
+      "Kim"
     ],
     "type": "conference",
     "is_international": true,
@@ -1768,26 +1782,29 @@
       "김종우",
       "김주완",
       "강상길",
-      "김화만",
+      "김학만",
       "김영국"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "The 1st International Conference on Security-enriched Urban Computing and Smart Grid(SUComS 2010)",
-    "publisher": "SERSC Springer-Verlag",
+    "venue": "The 1st International Conference on Security-enriched Urban Computing and Smart Grid (SUComS 2010)",
+    "publisher": "SERSC Springer- Verlag",
     "year": 2010,
     "month": 9,
-    "doi": null,
+    "doi": "10.1007/978-3-642-16444-6_30",
     "index_type": null,
-    "volume_info": "Vol.78,pp.235-241",
+    "volume_info": "Vol. 78, pp. 235-241",
     "is_featured": false,
     "section": "intl_conference"
   },
   {
     "title": "Fragmenting Steiner Tree Browsers Based on Ajax",
     "authors": [
-      "이우기송종수Nidhi",
-      "Arora김영국"
+      "이우기",
+      "송종수",
+      "Nidhi",
+      "Arora",
+      "김영국"
     ],
     "type": "conference",
     "is_international": true,
@@ -1795,9 +1812,9 @@
     "publisher": "ACM",
     "year": 2011,
     "month": 2,
-    "doi": null,
+    "doi": "10.1145/1968613.1968697",
     "index_type": null,
-    "volume_info": "(퍼이지염음)",
+    "volume_info": "(페이지 없음)",
     "is_featured": false,
     "section": "intl_conference"
   },
@@ -1813,14 +1830,14 @@
     "publisher": "Springer",
     "year": 2011,
     "month": 4,
-    "doi": null,
+    "doi": "10.1007/978-3-642-20998-7_15",
     "index_type": null,
-    "volume_info": "Vol.151,pp.114-122",
+    "volume_info": "Vo1. 151, pp 114-122",
     "is_featured": false,
     "section": "intl_conference"
   },
   {
-    "title": "An Architecture of Real-time,Historical Database System for Industrial Process Control&Monitoring",
+    "title": "An Architecture of Real-time, Historical Database System for Industrial Process Control & Monitoring",
     "authors": [
       "한상혁",
       "김영국"
@@ -1828,12 +1845,12 @@
     "type": "conference",
     "is_international": true,
     "venue": "CNSI 2011",
-    "publisher": "ACIS/JNU",
+    "publisher": "ACIS/ JNU",
     "year": 2011,
     "month": 5,
-    "doi": null,
+    "doi": "10.1109/cnsi.2011.25",
     "index_type": null,
-    "volume_info": "pp.31-34",
+    "volume_info": "pp. 31-34",
     "is_featured": false,
     "section": "intl_conference"
   },
@@ -1851,16 +1868,16 @@
     "publisher": "IEEE",
     "year": 2011,
     "month": 5,
-    "doi": null,
+    "doi": "10.1109/eit.2011.5978577",
     "index_type": null,
-    "volume_info": "#036pp.1-7",
+    "volume_info": "#036 pp.1-7",
     "is_featured": false,
     "section": "intl_conference"
   },
   {
     "title": "Personalized Mobile e-commerce System using DISC Psychological Model",
     "authors": [
-      "박원의",
+      "박원익",
       "강상길",
       "김영국"
     ],
@@ -1870,7 +1887,7 @@
     "publisher": "ACM",
     "year": 2011,
     "month": 11,
-    "doi": null,
+    "doi": "10.1145/2103380.2103429",
     "index_type": null,
     "volume_info": "245-248",
     "is_featured": false,
@@ -1879,62 +1896,62 @@
   {
     "title": "A Study on the Core Competency of Engineering Students Based on the Recognition of Expert",
     "authors": [
-      "이자회",
-      "구진회",
+      "이자희",
+      "구진희",
       "김영국",
-      "회완식"
+      "최완식"
     ],
     "type": "conference",
     "is_international": true,
     "venue": "ICCC 2011",
-    "publisher": "KOCON(한국롯테스학회)",
+    "publisher": "KOCON (한국콘텐 츠학회)",
     "year": 2011,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.315-316",
+    "volume_info": "pp. 315-316",
     "is_featured": false,
     "section": "intl_conference"
   },
   {
-    "title": "The Development of Integrated Engineering Tool(SafeCASE-PLC) for Safety Grade PLC",
+    "title": "The Development of Integrated Engineering Tool (SafeCASE-PLC) for Safety Grade PLC",
     "authors": [
-      "이영종",
-      "이강수",
+      "이영준",
+      "이장수",
       "이동영",
       "김영국"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "NPIC & HMIT2012",
-    "publisher": "American Nuclear Society(ANS)",
+    "venue": "NPIC & HMIT 2012",
+    "publisher": "American Nuclear Society (ANS)",
     "year": 2012,
     "month": 7,
     "doi": null,
     "index_type": null,
-    "volume_info": "1843-1852",
+    "volume_info": "1843- 1852",
     "is_featured": false,
     "section": "intl_conference"
   },
   {
-    "title": "Design and Implementation of Collaborative Partner Search Services based on Analyzing Expertise and Networks of Human Resources in National R&D Information",
+    "title": "Design and Implementation of Collaborative Partner Search Services based on Analyzing Expertise and Networks of Human Resources in National R & D Information",
     "authors": [
       "양명석",
-      "최판난",
-      "강남극",
-      "김울경",
-      "김제수",
+      "최광남",
+      "강남규",
+      "김윤정",
+      "김재수",
       "김영국"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "The 2nd Int. Conf. on Convergency Technology 2012(ICCT 2012)",
-    "publisher": "Korea Convergence Society(KCS)",
+    "venue": "The 2nd Int. Conf. on Convergency Technology 2012 (ICCT 2012)",
+    "publisher": "Korea Converge nce Society (KCS)",
     "year": 2012,
     "month": 7,
     "doi": null,
     "index_type": null,
-    "volume_info": "Vol.1No.2pp.9-13",
+    "volume_info": "Vol.1 No.2 pp. 9-13",
     "is_featured": false,
     "section": "intl_conference"
   },
@@ -1946,13 +1963,13 @@
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "The 2nd Int. Conf. on Convergency Technology 2012(ICCT 2012)",
-    "publisher": "Korea Convergence Society(KCS)",
+    "venue": "The 2nd Int. Conf. on Convergency Technology 2012 (ICCT 2012)",
+    "publisher": "Korea Converge nce Society (KCS)",
     "year": 2012,
     "month": 7,
     "doi": null,
     "index_type": null,
-    "volume_info": "Vol.1No.2pp.29-33",
+    "volume_info": "Vol.1 No.2 pp. 29-33",
     "is_featured": false,
     "section": "intl_conference"
   },
@@ -1962,12 +1979,12 @@
       "Dada Huang",
       "Ho Young Kim",
       "Sung Woo Choi",
-      "Young-Kuk Kim",
+      "Youn g-Kuk Kim",
       "Sang Hyuck Han"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "The 4th Int. Conf. on Emerging Databases(EDB 2012)",
+    "venue": "The 4th Int. Conf. on Emerging Databases (EDB 2012)",
     "publisher": "KIISE Database Society of Korea",
     "year": 2012,
     "month": 8,
@@ -1978,40 +1995,40 @@
     "section": "intl_conference"
   },
   {
-    "title": "Evaluating performance of MARTe as a real-time framework for feed-back control system at tokamak device(https://doi.org/10.1016/j.fusengdes.2013.03.028)",
+    "title": "Evaluating performance of MARTe as a real-time framework for feed-back control system at tokamak device (https://doi.org/10.1016/j.fusen gdes.2013.03.028)",
     "authors": [
       "윤상원",
-      "이옥림",
+      "이웅렬",
       "이태구",
-      "바미경",
+      "박미경",
       "이상일"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "27th Symposium on Fusion Technology(SOFT 2012)",
-    "publisher": "SCK·CE NTEC",
+    "venue": "27th Symposium on Fusion Technology (SOFT 2012)",
+    "publisher": "SCK・CE N TEC",
     "year": 2012,
     "month": 9,
-    "doi": null,
+    "doi": "10.1016/j.fusengdes.2013.03.028",
     "index_type": null,
-    "volume_info": "P4.73:Poster",
+    "volume_info": "P4.73: Poster",
     "is_featured": false,
     "section": "intl_conference"
   },
   {
-    "title": "A Real Time Synchronous V-C System with the Extracted Data from Buffering Function",
+    "title": "A Real Time Synchronous V - C System with the Extracted Data from Buffering Function",
     "authors": [
       "김형세",
-      "경찰석",
+      "정찬석",
       "이문환",
-      "성배열",
+      "성백열",
       "최성우",
       "최미선",
       "김영국"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "The 12th Int. Conf. on Networks(ICN 2013)",
+    "venue": "The 12th Int. Conf. on Networks (ICN 2013)",
     "publisher": "IARIA",
     "year": 2013,
     "month": 1,
@@ -2024,18 +2041,19 @@
   {
     "title": "A Study of Quality Control Methods for Guaranteeing Reliability of Distributed Data Interoperability",
     "authors": [
-      "Kiseok ChoiYoung-Kuk",
+      "Kiseok Choi",
+      "Young- Kuk",
       "Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "The 3nd Int. Conf. on Convergency Technology 2013(ICCT 2013)",
-    "publisher": "Korea Convergence Society(KCS)",
+    "venue": "The 3nd Int. Conf. on Convergency Technology 2013 (ICCT 2013)",
+    "publisher": "Korea Converge nce Society (KCS)",
     "year": 2013,
     "month": 7,
     "doi": null,
     "index_type": null,
-    "volume_info": "Vol.2No.1pp.986-987",
+    "volume_info": "Vol.2 No.1 pp. 986-987",
     "is_featured": false,
     "section": "intl_conference"
   },
@@ -2043,21 +2061,21 @@
     "title": "Design of National R&D Researchers Network in NTIS",
     "authors": [
       "양명석",
-      "최강남",
-      "강남바",
-      "민우정",
-      "육남김",
-      "영국"
+      "최광남",
+      "강남규",
+      "박민우",
+      "정옥남",
+      "김영국"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "The 3nd Int. Conf. on Convergency Technology 2013(ICCT 2013)",
-    "publisher": "Korea Convergence Society(KCS)",
+    "venue": "The 3nd Int. Conf. on Convergency Technology 2013 (ICCT 2013)",
+    "publisher": "Korea Converge nce Society (KCS)",
     "year": 2013,
     "month": 7,
     "doi": null,
     "index_type": null,
-    "volume_info": "Vol.2No.1pp.988-989",
+    "volume_info": "Vol.2 No.1 pp. 988-989",
     "is_featured": false,
     "section": "intl_conference"
   },
@@ -2067,8 +2085,9 @@
       "Heenam Lee",
       "Hyungse Kim",
       "Jaemin Song",
-      "Hyungdae Lee",
-      "Youngkuk Kim"
+      "Hyungd ae",
+      "Lee Youngk",
+      "uk Kim"
     ],
     "type": "conference",
     "is_international": true,
@@ -2083,16 +2102,16 @@
     "section": "intl_conference"
   },
   {
-    "title": "Enforcing Web Business Model and Patentability Consideration-International Workshop on Graph Databases and Social Networking 2013(GSN 2013)",
+    "title": "Enforcing Web Business Model and Patentability Consideration - International Workshop on Graph Databases and Social Networking 2013 (GSN 2013)",
     "authors": [
       "Wookey Lee",
       "Mye M. Sohn",
-      "Young-Kuk Kim"
+      "Young-K uk Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "Third International Conference on Cloud and Green Computing(CGC),2013",
-    "publisher": "KIT,IEEE TCSC",
+    "venue": "Third International Conference on Cloud and Green Computing (CGC), 2013",
+    "publisher": "KIT, IEEE TCSC",
     "year": 2013,
     "month": 9,
     "doi": null,
@@ -2104,16 +2123,16 @@
   {
     "title": "JDI based Hadoop Framework Monitoring for Big Data Analysis of Sensor Networks",
     "authors": [
-      "Byoung-Jin Bae",
-      "Young-Jo Kim",
-      "Young-Kuk Kim",
-      "Ok-Kyoon Ha",
-      "Yong-Ke Jun"
+      "Byoung-J in Bae",
+      "Young-Jo 0 Kim",
+      "Young-K uk Kim",
+      "Ok-Kyoo n Ha",
+      "Yong-Ke e Jun"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "2nd International Conference on Convergence and its Application(ICCA 2013 2nd)",
-    "publisher": "IACS(International Academic Consulting and Service)",
+    "venue": "2nd International Conference on Convergence and its Application (ICCA 2013 2nd)",
+    "publisher": "IACS (Internationa 1 Academic Consulting and Service)",
     "year": 2013,
     "month": 11,
     "doi": null,
@@ -2127,48 +2146,48 @@
     "authors": [
       "Ye-In Seol",
       "Jeong-Uk Kim",
-      "Young-Kuk Kim"
+      "Young-K uk Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "CSA 2013(Advanced in Computer Science and its Applications,LNEE)",
+    "venue": "CSA 2013 (Advanced in Computer Science and its Applications, LNEE)",
     "publisher": "Springer Berlin Heidelberg",
     "year": 2013,
     "month": 12,
-    "doi": null,
+    "doi": "10.1007/978-3-642-41674-3_8",
     "index_type": null,
-    "volume_info": "Vol.279,2014,pp51-57",
+    "volume_info": "Vol. 279, 2014, pp 51-57",
     "is_featured": false,
     "section": "intl_conference"
   },
   {
     "title": "A GPU-Accelerated Density-Based Clustering Algorithm",
     "authors": [
-      "Woong-Kee Loh",
-      "Young-Kuk Kim"
+      "Woong-K ee Loh",
+      "Young-K uk Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "2014 IEEE Fourth International Conference on Big Data and Cloud Computing(International Workshop on Graph Databases and Social Networking 2014;GSN 2014)",
+    "venue": "2014 IEEE Fourth International Conference on Big Data and Cloud Computing (International Workshop on Graph Databases and Social Networking 2014; GSN 2014)",
     "publisher": "IEEE Computer Society",
     "year": 2014,
     "month": 12,
-    "doi": null,
+    "doi": "10.1109/bdcloud.2014.130",
     "index_type": null,
     "volume_info": "775-776",
     "is_featured": false,
     "section": "intl_conference"
   },
   {
-    "title": "Improving Similarity Measurement of User Rating Score using Sigmoid Function in Personalization System",
+    "title": "Improving Similarity- Measurement of User Ratin Score_using Sigmoid Function m Personalization System",
     "authors": [
-      "Kim-Ryong",
-      "Young-Kuk Kim"
+      "Kim- Ryong",
+      "Young-K ukKim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "The 5th International Conference on Convergence Technology 2015(ICCT 2015)",
-    "publisher": "Korea Convergence Society",
+    "venue": "The 5th- International- Conference on- Convergence- Technology 2015 (ICCT-2015) 3252",
+    "publisher": "Korea- Converge nce- Society",
     "year": 2015,
     "month": 6,
     "doi": null,
@@ -2180,13 +2199,13 @@
   {
     "title": "Fault detection coverage measurement using a fault imitation method for nuclear digital controller",
     "authors": [
-      "Young-Jun Lee",
+      "Young-Ju n Lee",
       "Jang-Soo Lee",
-      "Young-Kuk Kim"
+      "Young-K uk Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "Int'l Conf. Software Eng. Research and Practice(SERP'15)",
+    "venue": "Int'l Conf. Software Eng. Research and Practice (SERP'15)",
     "publisher": "",
     "year": 2015,
     "month": 7,
@@ -2200,18 +2219,18 @@
     "title": "Improving Similarity Measurement of User's Rating Value using Sigmoid Function in Personalization System",
     "authors": [
       "Kim Ryong",
-      "Park Kyung-Hye",
-      "Young-Kuk Kim"
+      "Park Kyung-H ye",
+      "Young-K uk Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "The 10th International Conference on Ubiquitous Information Management and Communication2016(IMCOM 2016)ISBN978-1-4503-4142-4",
-    "publisher": "Association for Computing Machinery(ACM)",
+    "venue": "The 10th International Conference on Ubiquitous Information Management and Communication 2016 (IMCOM 2016) ISBN 978-1-4503-4142-4",
+    "publisher": "Association for Computing Machinery (ACM)",
     "year": 2016,
     "month": 1,
-    "doi": "10.1145/2857546.2857580",
+    "doi": "10.1145/2",
     "index_type": null,
-    "volume_info": "Poster(DOI:http://dx.doi.org/10.1145/2857546.2857580)",
+    "volume_info": "Poster (DOI: http://dx .doi.org/ 10.1145/2 857546.2 857580)",
     "is_featured": false,
     "section": "intl_conference"
   },
@@ -2219,17 +2238,17 @@
     "title": "Interoperation System between HLA/RTI Federation and DBMS through HLA/RTI Simulating Virtual Test",
     "authors": [
       "Yena Lee",
-      "Jin-Hyeok Son",
+      "Jin-Hyeo k Son",
       "Mi-Seon Choi",
-      "Young-kuik Kim"
+      "Young-ku k Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "Third International Conference on Big Data and Smart Computing(BigComp 2016)",
-    "publisher": "KIISE,IEEE Computer Society",
+    "venue": "Third International Conference on Big Data and Smart Computing (BigComp 2016)",
+    "publisher": "KIISE, IEEE Computer Society",
     "year": 2016,
     "month": 1,
-    "doi": null,
+    "doi": "10.1109/bigcomp.2016.7425953",
     "index_type": null,
     "volume_info": "382-385",
     "is_featured": false,
@@ -2245,7 +2264,7 @@
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "The Second Int. Conf. on Fundamentals and Advances in Software Systems Integration(FASSI2016)",
+    "venue": "The Second Int. Conf. on Fundamentals and Advances in Software Systems Integration (FASSI2016)",
     "publisher": "IARIA",
     "year": 2016,
     "month": 7,
@@ -2258,17 +2277,17 @@
   {
     "title": "Delta RAID to Enhance Recovery and Small-Write Performance of RAID Storage Systems",
     "authors": [
-      "Mehdi Pirahandeh",
-      "Young-Kuk Kim",
-      "Deok-Hwan Kim"
+      "Mehdi Pirahande h",
+      "Young-K uk Kim",
+      "Deok-Hw an Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "The 5th Graph DataBase Workshop(GDB2016)",
+    "venue": "The 5th Graph DataBase Workshop (GDB 2016)",
     "publisher": "IEEE",
     "year": 2016,
     "month": 7,
-    "doi": null,
+    "doi": "10.1109/uic-atc-scalcom-cbdcom-iop-smartworld.2016.0188",
     "index_type": null,
     "volume_info": "1228",
     "is_featured": false,
@@ -2277,17 +2296,18 @@
   {
     "title": "Improving real-time interoperation of national defense M&S system using distributed DBMS",
     "authors": [
-      "이해나손진혁",
-      "취미선",
+      "이예나",
+      "손진혁",
+      "최미선",
       "김영국"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "Proceedings of the Sixth Int. Conf. on Emerging Databases: Technologies, Applications, and Theory(EDB2016)",
+    "venue": "Proceedings of the Sixth Int. Conf. on Emerging Databases: Technologies, Applications, and Theory (EDB2016)",
     "publisher": "IEEE",
     "year": 2016,
     "month": 10,
-    "doi": null,
+    "doi": "10.1145/3007818.3007845",
     "index_type": null,
     "volume_info": "145-148",
     "is_featured": false,
@@ -2296,26 +2316,31 @@
   {
     "title": "Robust Fault Analysis using Sensors in Semiconductor Manufacturing Processes",
     "authors": [
-      "Woong-Kee Loh",
-      "Young-Kuk Kim"
+      "Woong-K ee Loh",
+      "Young-K uk Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "2018 IEEE Conf. on Smart Data(GDB2018)",
+    "venue": "2018 IEEE Conf. on Smart Data (GDB2018)",
     "publisher": "IEEE",
     "year": 2018,
     "month": 7,
-    "doi": null,
+    "doi": "10.1109/cybermatics_2018.2018.00178",
     "index_type": null,
     "volume_info": "933-034",
     "is_featured": false,
     "section": "intl_conference"
   },
   {
-    "title": "SALT-Viz:Real-Time Visualization for Large-Scale Traffic Simulation",
+    "title": "SALT-Viz: Real-Time Visualization for Large-Scale Traffic Simulation",
     "authors": [
-      "Sung-Soo Kim",
-      "Okgee MinYoung-Kuk",
+      "Sung-S",
+      "00",
+      "Kim",
+      "Okgee",
+      "Min",
+      "Young-",
+      "Kuk",
       "Kim"
     ],
     "type": "conference",
@@ -2324,7 +2349,7 @@
     "publisher": "IEEE",
     "year": 2019,
     "month": 5,
-    "doi": null,
+    "doi": "10.1109/itec-ap.2019.8903650",
     "index_type": null,
     "volume_info": null,
     "is_featured": false,
@@ -2333,13 +2358,18 @@
   {
     "title": "Improved Spatial Modeling using Path Distance Metric for Urban Traffic Prediction",
     "authors": [
-      "Sung-Soo Kim",
-      "Okgee MinYoung-Kuk",
+      "Sung-S",
+      "00",
+      "Kim",
+      "Okgee",
+      "Min",
+      "Young-",
+      "Kuk",
       "Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "7th International Conference on Big Data Applications and Services(BIGDAS2019)",
+    "venue": "7th International Conference on Big Data Applications and Services (BIGDAS2019)",
     "publisher": "Korea Big Data Services Society",
     "year": 2019,
     "month": 8,
@@ -2356,18 +2386,16 @@
       "Hyonyoung Han",
       "Heechul Bae",
       "Eunseo Lee",
-      "Mingi Kim",
-      "Jiyeon Son",
-      "Hyun Kim",
-      "Young-Kuk Kim"
+      "Mingi Kim Jiyeon Son",
+      "Hyun Kimi Young-Kuk Kim"
     ],
     "type": "conference",
     "is_international": true,
     "venue": "The 10th Int. Conf. on ICT Convergence (ICTC 2019)",
-    "publisher": "Korean Institute of Communications and Information Sciences (KICS)",
+    "publisher": "Korean Institute of Communica tions and Information Sciences (KICS)",
     "year": 2019,
     "month": 10,
-    "doi": null,
+    "doi": "10.1109/ictc46691.2019.8939796",
     "index_type": null,
     "volume_info": "1010-1012",
     "is_featured": false,
@@ -2378,15 +2406,15 @@
     "authors": [
       "Taeho Kim",
       "Seung Keun Park",
-      "Hyeyeon Kwon: Young-Kuk Kim"
+      "Hyeyeon Kwon; Young-Ku k Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "The 10th Int. Conf. on ICT Convergence (ICTC 2019)",
-    "publisher": "Korean Institute of Communications and Information Sciences (KICS)",
+    "venue": "10th Int. The Conf. on ICT Convergence (ICTC 2019)",
+    "publisher": "Korean Institute of Communica tions and Information Sciences (KICS)",
     "year": 2019,
     "month": 10,
-    "doi": null,
+    "doi": "10.1109/ictc46691.2019.8939692",
     "index_type": null,
     "volume_info": "1454-1456",
     "is_featured": false,
@@ -2396,13 +2424,13 @@
     "title": "Context-Aware Collaborative Filtering for Data Sparsity Problem using Jaccard Similarity",
     "authors": [
       "Soo-Yeon Jeong",
-      "Jin-Hyeok Son",
-      "Young-Kuk Kim"
+      "Jin-Hyeo k Son",
+      "Young-K uk Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "The 6th International Conference for Small & Medium Business in 2020(ICSMB2020)",
-    "publisher": "Convergence Society for Small & Medium Business",
+    "venue": "The 6th International Conference for Small & Medium Business in 2020 (ICSMB2020)",
+    "publisher": "Convergen ce Society for Small & Medium Business",
     "year": 2020,
     "month": 1,
     "doi": null,
@@ -2415,16 +2443,15 @@
     "title": "Urban Traffic Prediction using Congestion Diffusion Model",
     "authors": [
       "Sung-Soo Kim",
-      "Moonyoung Chung",
-      "Young-Kuk Kim"
+      "Moonyou ng Chung. Young-K uk Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "The Fifth International Conference On Consumer Electronics(ICCE) Asia",
+    "venue": "The Fifth International Conference On Consumer Electronics (ICCE) Asia",
     "publisher": "IEEE-IEIE",
     "year": 2020,
     "month": 11,
-    "doi": null,
+    "doi": "10.1109/icce-asia49877.2020.9276823",
     "index_type": null,
     "volume_info": "360-363",
     "is_featured": false,
@@ -2433,8 +2460,8 @@
   {
     "title": "Sparsity-Aware Reachability Computation for Massive Graphs",
     "authors": [
-      "Sung-Soo Kim",
-      "Young-Min Kang and Young-Kuk Kim"
+      "Sung-So 0 Kim",
+      "Young-M in Kang and Young-K uk Kim"
     ],
     "type": "conference",
     "is_international": true,
@@ -2442,7 +2469,7 @@
     "publisher": "IEEE CS",
     "year": 2022,
     "month": 1,
-    "doi": null,
+    "doi": "10.1109/bigcomp54360.2022.00038",
     "index_type": null,
     "volume_info": "157-160",
     "is_featured": false,
@@ -2454,11 +2481,11 @@
       "Youngho Kim",
       "Dami Cho",
       "Taeseong Song",
-      "Sunghyun Kim and Young-Kuk Kim"
+      "Sunghyun Kim and Young-Ku k Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "IEEE BigComp 2022(VOICE AI 2022)",
+    "venue": "IEEE BigComp 2022 (VOICE AI 2022)",
     "publisher": "IEEE CS",
     "year": 2022,
     "month": 1,
@@ -2475,11 +2502,11 @@
       "Hanmin Jung",
       "Seungkyo Jin",
       "Jungsun Yoon",
-      "Young-Kuk Kim"
+      "Young-K uk Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "15th International Conference on Knowledge and Smart Technology(KST-2023)",
+    "venue": "15th International Conference on Knowledge and Smart Technology (KST-2023)",
     "publisher": "IEEE CS",
     "year": 2023,
     "month": 2,
@@ -2490,35 +2517,33 @@
     "section": "intl_conference"
   },
   {
-    "title": "Optimizing PROTAC Design:A Novel Approach Using Exposure Scores for Linker Site Selection",
+    "title": "Optimizing PROTAC Design: A Novel Approach Using Exposure Scores for Linker Site Selection",
     "authors": [
       "Yeonju Jeong",
       "Jae-Mun Choi",
-      "Young-Kuk Kim"
+      "Young-K uk Kim"
     ],
     "type": "conference",
     "is_international": true,
-    "venue": "IEEE BigComp2025",
+    "venue": "IEEE BigComp 2025",
     "publisher": "IEEE CS",
     "year": 2025,
     "month": 2,
-    "doi": null,
+    "doi": "10.1109/bigcomp64353.2025.00011",
     "index_type": null,
-    "volume_info": "-",
+    "volume_info": null,
     "is_featured": false,
     "section": "intl_conference"
   },
   {
     "title": "실시간 데이터베이스 시스템",
     "authors": [
-      "김영국",
-      "의",
-      "3인"
+      "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보처리학회지",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처 리학회지",
+    "publisher": "한국정보 처리학회",
     "year": 1998,
     "month": 7,
     "doi": null,
@@ -2531,13 +2556,12 @@
     "title": "인터넷 상점에서의 실시간 개인화된 광고 제공 기법",
     "authors": [
       "김영국",
-      "의",
-      "3인"
+      "외 3인"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "경영정보학연구",
-    "publisher": "한국정영정보학회",
+    "venue": "경영정보학 연구",
+    "publisher": "한국경영 정보학회",
     "year": 1999,
     "month": 12,
     "doi": null,
@@ -2547,16 +2571,15 @@
     "section": "dom_journal"
   },
   {
-    "title": "복수의 인터넷 소팥물에서 통용되는 안정한 전자상거래 지불수단으로서 로열티 시스템",
+    "title": "복수의 인터넷 쇼핑몰에서 통용되는 안정한 전자상거래 지불수단으로서 로열티 시스템",
     "authors": [
       "김영국",
-      "의",
-      "3인"
+      "외 3인"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보처리학회는문지",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보 처리학회 논문지",
+    "publisher": "한국정보 처리학회",
     "year": 2000,
     "month": 5,
     "doi": null,
@@ -2566,16 +2589,15 @@
     "section": "dom_journal"
   },
   {
-    "title": "전자상거래 RO열티 서비스를 위한 시스템 제공자 실계 및 구현",
+    "title": "전자상거래 로열티 서비스를 위한 시스템 제공자 설계 및 구현",
     "authors": [
       "김영국",
-      "의",
-      "5인"
+      "외 5인"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보과학회는문지: 경유택의 실계",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과 학회논문지 : 컴퓨팅의 실제",
+    "publisher": "한국정보 과학회",
     "year": 2000,
     "month": 6,
     "doi": null,
@@ -2588,13 +2610,12 @@
     "title": "이동 데이터베이스 개요 및 연구현황",
     "authors": [
       "김영국",
-      "의",
-      "1인"
+      "외 1인"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보과학회 データ베이스연구",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과 학회 데이터베이 스연구",
+    "publisher": "한국정보 과학회",
     "year": 2001,
     "month": 9,
     "doi": null,
@@ -2604,16 +2625,15 @@
     "section": "dom_journal"
   },
   {
-    "title": "CORBA기반의 미들웨어를 이용한 DBMS 통합 시스템의 실계 및 구현",
+    "title": "CORBA기반의 미들웨어를 이용한 DBMS 통합 시스템의 설계 및 구현",
     "authors": [
       "김영국",
-      "의",
-      "1인"
+      "외 1인"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "충남과학연구지",
-    "publisher": "충남대학교 기초과학연구소",
+    "venue": "충남과학 연구지",
+    "publisher": "충남대학 교 기초과학 연구소",
     "year": 2001,
     "month": 12,
     "doi": null,
@@ -2623,16 +2643,15 @@
     "section": "dom_journal"
   },
   {
-    "title": "분산 이기종 인터넷 소팥물 환경에서의 백터모발 기반 개인화서비스 시스템",
+    "title": "분산 이기종 인터넷 쇼핑몰 환경에서의 벡터모델 기반 개인화서비스 시스템",
     "authors": [
       "김영국",
-      "의",
-      "2인"
+      "외 2인"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보과학회는문지: 경유택의 실계",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과 학회논문지 : 컴퓨팅의 실제",
+    "publisher": "한국정보 과학회",
     "year": 2002,
     "month": 4,
     "doi": null,
@@ -2642,16 +2661,15 @@
     "section": "dom_journal"
   },
   {
-    "title": "보안층면에서의 비트워크 이상정후 분석 기술",
+    "title": "보안측면에서의 네트워크 이상징후 분석 기술",
     "authors": [
       "김영국",
-      "의",
-      "1인"
+      "외 1인"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국통신학회지",
-    "publisher": "한국통신학회",
+    "venue": "한국통신 학회지",
+    "publisher": "한국통신 학회",
     "year": 2003,
     "month": 8,
     "doi": null,
@@ -2661,15 +2679,15 @@
     "section": "dom_journal"
   },
   {
-    "title": "이동 캐릭택 환경에서 데이터 방송을 위한 동시성 제어기법",
+    "title": "이동 컴퓨팅 환경에서 데이터 방송을 위한 동시성 제어기법",
     "authors": [
-      "웹해속",
+      "윤혜숙",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보과학회는문지: 데이터베이스",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과 학회논문지 :데이타베 이스",
+    "publisher": "한국정보 과학회",
     "year": 2004,
     "month": 4,
     "doi": null,
@@ -2679,15 +2697,15 @@
     "section": "dom_journal"
   },
   {
-    "title": "페재형 캐릭택 환경에서의 e-비즈니스 음용을 위한 분할 등기화 이동 트레케신 처리 모델",
+    "title": "편재형 컴퓨팅 환경에서의 e-비즈니스 응용을 위한 분할 동기화 이동 트랜잭션 처리 모델",
     "authors": [
-      "회미선",
+      "최미선",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보처리학회는문지D",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처 리학회 논문지D",
+    "publisher": "한국정보 처리학회",
     "year": 2004,
     "month": 8,
     "doi": null,
@@ -2697,16 +2715,15 @@
     "section": "dom_journal"
   },
   {
-    "title": "추천시스템의 성능 환상을 위한 시간스키마 적용 2단계 클라이드럽기법",
+    "title": "추천시스템의 성능 향상을 위한 시간스키마 적용 2단계 클러스터링 기법",
     "authors": [
       "김영국",
-      "의",
-      "4인"
+      "외 4인"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보자거래학회지",
-    "publisher": "한국정보자거래학회",
+    "venue": "한국전자거 래학회지",
+    "publisher": "한국전자 거래학회",
     "year": 2005,
     "month": 5,
     "doi": null,
@@ -2716,15 +2733,15 @@
     "section": "dom_journal"
   },
   {
-    "title": "이동 김꽃명 환경에서 데이터 특성을 고려한 실시간 혼성 방송 알고리즘",
+    "title": "이동 컴퓨팅 환경에서 데이터 특성을 고려한 실시간 혼성 방송 알고리즘",
     "authors": [
-      "워해속",
+      "윤혜숙",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보과 환력눈문지 : 정보통신",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과 학회논문지 : 정보통신",
+    "publisher": "한국정보 과학회",
     "year": 2005,
     "month": 6,
     "doi": null,
@@ -2734,16 +2751,16 @@
     "section": "dom_journal"
   },
   {
-    "title": "선호도 전이 황를을 이용한 말티미디어 컨텍스 추천 시스템",
+    "title": "선호도 전이 확률을 이용한 멀티미디어 컨텐츠 추천 시스템",
     "authors": [
-      "박성종",
+      "박성준",
       "강상길",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국 파지 및 지능시스템학회 눈문지",
-    "publisher": "한국 파지 및 지능시스템학회",
+    "venue": "한국 퍼지 및 지능시스템학 회 논문지",
+    "publisher": "한국 퍼지 및 지능시스템 학회",
     "year": 2006,
     "month": 4,
     "doi": null,
@@ -2753,17 +2770,17 @@
     "section": "dom_journal"
   },
   {
-    "title": "원전 제어목구동장치제어계통 시험실비의 입배디드 제어 프로그래명 실제",
+    "title": "제어봉구동장치제어계통 원전 시험설비의 임베디드 제어 프로그래밍 실제",
     "authors": [
-      "장귀속",
-      "금종물",
-      "박회워",
+      "장귀숙",
+      "금종룡",
+      "박희윤",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보과학회 프로그래명 연언눈문지",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과 학회 프로그래밍 언어논문지",
+    "publisher": "한국정보 과학회",
     "year": 2006,
     "month": 9,
     "doi": null,
@@ -2773,17 +2790,17 @@
     "section": "dom_journal"
   },
   {
-    "title": "개인화된 방송 컨텍스 추천을 위한 가중치 적용 Markov 모템",
+    "title": "개인화된 방송 컨텐츠 추천을 위한 가중치 적용 Markov 모델",
     "authors": [
-      "박성종",
-      "홈종구",
+      "박성준",
+      "홍종규",
       "강상길",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보과학회눈문지 : 김꽃명의 실제",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과 학회논문지 : 컴퓨팅의 실제",
+    "publisher": "한국정보 과학회",
     "year": 2006,
     "month": 10,
     "doi": null,
@@ -2793,16 +2810,16 @@
     "section": "dom_journal"
   },
   {
-    "title": "정규화번환을 지원하는 스트리명 시계열 매청알고리즘",
+    "title": "정규화변환을 지원하는 스트리밍 시계열 매칭알고리즘",
     "authors": [
-      "노용기",
+      "노웅기",
       "문양세",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보과학회눈문지 : 데이터베이스",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과 학회논문지 :데이터베 이스",
+    "publisher": "한국정보 과학회",
     "year": 2006,
     "month": 11,
     "doi": null,
@@ -2812,36 +2829,36 @@
     "section": "dom_journal"
   },
   {
-    "title": "유비케터스 환경에서의 상황인지 기반 디바이스 협업 시스템",
+    "title": "유비쿼터스 환경에서의 상황인지 기반 디바이스 협업 시스템",
     "authors": [
-      "박원의",
+      "박원익",
       "박종현",
       "김영국",
-      "강지희"
+      "강지훈"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "전자공학회 눈문지",
-    "publisher": "대한전자공학회",
+    "venue": "전자공학회 논문지",
+    "publisher": "대한전자 공학회",
     "year": 2008,
     "month": 5,
     "doi": null,
     "index_type": null,
-    "volume_info": "제45권 CI권 제3호 pp.86-96",
+    "volume_info": "제45권 CI편 제3호 pp.86-96",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "신경맥을 이용한 결추 수문자료 추정 및 실시간 자료 보정",
+    "title": "신경망을 이용한 결측 수문자료 추정 및 실시간 자료 보정",
     "authors": [
-      "오제우",
+      "오재우",
       "박진혁",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국수자원학회눈문점",
-    "publisher": "한국수자원학회",
+    "venue": "한국수자원 학회논문집",
+    "publisher": "한국수자 원학회",
     "year": 2008,
     "month": 10,
     "doi": null,
@@ -2851,16 +2868,18 @@
     "section": "dom_journal"
   },
   {
-    "title": "E-Commerce 포탄에서 환상된 개인화 추천 기법",
+    "title": "E-Commerce 포탈에서 향상된 개인화 추천 기법",
     "authors": [
-      "고편관",
+      "고평관",
       "Shohel",
-      "Ahmed김영국강상길"
+      "Ahmed",
+      "김영국",
+      "강상길"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보과학회눈문지 : 김꽃명의 실제 및 메터",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과 학회논문지 : 컴퓨팅의 실제 및 레터",
+    "publisher": "한국정보 과학회",
     "year": 2008,
     "month": 12,
     "doi": null,
@@ -2870,36 +2889,36 @@
     "section": "dom_journal"
   },
   {
-    "title": "유비케터스 환경에서 상황인지 기반 사용자 맞춤혁장치 추천 시스템",
+    "title": "유비쿼터스 환경에서 상황인지 기반 사용자 맞춤형 장치 추천 시스템",
     "authors": [
       "박종현",
-      "박원의",
+      "박원익",
       "김영국",
-      "강지희"
+      "강지훈"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "전자공학회 눈문지",
-    "publisher": "대한전자공학회",
+    "venue": "전자공학회 논문지",
+    "publisher": "대한전자 공학회",
     "year": 2009,
     "month": 5,
     "doi": null,
     "index_type": null,
-    "volume_info": "제46권 CI권 제3호 pp.15-23",
+    "volume_info": "제46권 CI편 제3호 pp.15-23",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "국가R&D 중합모니터럽시스템 구추에 관한 연구",
+    "title": "국가R&D 종합모니터링시스템 구축에 관한 연구",
     "authors": [
-      "회기석",
-      "박만회",
+      "최기석",
+      "박만희",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "산업경영시스템학회지",
-    "publisher": "산업경영시스템학회",
+    "venue": "산업경영시 스템학회지",
+    "publisher": "산업경영 시스템학 회",
     "year": 2009,
     "month": 12,
     "doi": null,
@@ -2909,67 +2928,67 @@
     "section": "dom_journal"
   },
   {
-    "title": "사용자의심리와상황을고려한맞춤형모바일멀티미디어콘텐츠추천기법",
+    "title": "사용자의 심리와 상황을 고려한 맞춤형 모바일 멀티미디어 콘텐츠 추천 기법",
     "authors": [
-      "박원의",
+      "박원익",
       "심우제",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "정보과학회눈문지:결유탕의실제 및레터",
-    "publisher": "한국정보과학회",
+    "venue": "정보과학회 논문지: 컴퓨팅의 실제 및 레터",
+    "publisher": "한국정보 과학회",
     "year": 2010,
     "month": 2,
     "doi": null,
     "index_type": null,
-    "volume_info": "제16권 제2호pp.232-236",
+    "volume_info": "제16권 제2호 pp.232-236",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "지역검의생성기반전역XQuery검의처리기법",
+    "title": "지역 질의 생성기반 전역 XQuery 질의 처리 기법",
     "authors": [
       "박종현",
-      "박원의",
+      "박원익",
       "김영국",
-      "강지희"
+      "강지훈"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국검희전역정보학회눈문지",
-    "publisher": "한국검희전역정보학회",
+    "venue": "한국컴퓨터 정보학회 논문지",
+    "publisher": "한국컴퓨 터정보학 회",
     "year": 2010,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "제15권제11호pp.11-20",
+    "volume_info": "제15권 제11호 pp.11-20",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "의사검정나무를이용한근검전부전문가시스템",
+    "title": "의사결정나무를 이용한 근접전투전문가시스템",
     "authors": [
       "김형세",
-      "문호식",
+      "문호석",
       "이동근",
       "황명상",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국국방경영분석학회눈문지",
-    "publisher": "한국국방경영분석학회",
+    "venue": "한국국방경 영분석학회 논문지",
+    "publisher": "한국국방 경영분석 학회",
     "year": 2010,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "제36권 3호pp.83-93",
+    "volume_info": "제36권 3호 pp.83-93",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "가중치를이용한소프트웨어테스트케이스동적관리기법(A Dynamic Management Technique for Weighted Testcases in Software Testing)",
+    "title": "가중치를 이용한 소프트웨어 테스트케이스 동적 관리 기법 (A Dynamic Management Technique for Weighted Testcases in Software Testing )",
     "authors": [
       "한상혁",
       "정정수",
@@ -2978,36 +2997,36 @@
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "정보처리학회눈문지D",
-    "publisher": "정보처리학회",
+    "venue": "정보처리학 회논문지D",
+    "publisher": "정보처리 학회",
     "year": 2010,
     "month": 12,
-    "doi": null,
+    "doi": "10.3745/kipstd.2010.17d.6.423",
     "index_type": null,
-    "volume_info": "제17-D권제6호pp.423-430",
+    "volume_info": "제17-D권 제6호 pp.423-430",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "USN 기반의화재강시용용을위한설서테이터처리시스템",
+    "title": "USN 기반의 화재감시 응용을 위한 센서 데이터 처리 시스템",
     "authors": [
-      "박원의",
+      "박원익",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "결유탕정보학회눈문지",
-    "publisher": "결유탕정보학회",
+    "venue": "컴퓨터정보 학회논문지",
+    "publisher": "컴퓨터정 보학회",
     "year": 2011,
     "month": 5,
     "doi": null,
     "index_type": null,
-    "volume_info": "제16권 5호pp.135-145",
+    "volume_info": "제16권 5호 pp.135-145",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "대용량테이터고속처리용분산메인메모리테이터배이스관리시스템구조",
+    "title": "대용량 데이터 고속처리용 분산 메인 메모리 데이터베이스 관리 시스템 구조",
     "authors": [
       "한상혁",
       "김영국",
@@ -3015,231 +3034,231 @@
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "정보과학회눈문지:테이터배이스",
-    "publisher": "한국정보과학회",
+    "venue": "정보과학회 논문지: 데이터베이 스",
+    "publisher": "한국정보 과학회",
     "year": 2011,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "제38권 제3호pp.141-148",
+    "volume_info": "제38권 제3호 pp.141-148",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "3차원CAD테이터의제품구조를포함하는X3D기반테이터로의변환기법",
+    "title": "3차원 CAD 데이터의 제품구조를 포함하는 X3D 기반 데이터로의 변환 기법",
     "authors": [
       "조귀목",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "정보처리학회눈문지A",
-    "publisher": "정보처리학회",
+    "venue": "정보처리학 회논문지A",
+    "publisher": "정보처리 학회",
     "year": 2011,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "제18-A권제3호pp.81-92",
+    "volume_info": "제18-A권 제3호 pp.81-92",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "분석분야에홈량모발할홈용방안연구:창조21과JICM의방용분야모의눈리비교를중심으로",
+    "title": "분석분야에 훈련모델 활용방안연구: 창조21과 JICM의 방공분야 모의논리 비교를 중심으로",
     "authors": [
       "김형세",
-      "문호식",
-      "회연호",
+      "문호석",
+      "최연호",
       "이동근",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국국방경영분석학회눈문지",
-    "publisher": "한국국방경영분석학회",
+    "venue": "한국국방경 영분석학회 논문지",
+    "publisher": "한국국방 경영분석 학회",
     "year": 2011,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "제37권 2호pp.13-26",
+    "volume_info": "제37권 2호 pp.13-26",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "UAV영상연동체계구종개담연구:V-C(Virtural Constructive)체계구종을중심으로",
+    "title": "UAV영상 연동체계 구축개념 연구 : V-C(Virtural Constructive)체계 구축을 중심으로",
     "authors": [
       "김형세",
-      "김종림",
+      "김종필",
       "이동근",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국국방경영분석학회눈문지",
-    "publisher": "한국국방경영분석학회",
+    "venue": "한국국방경 영분석학회 논문지",
+    "publisher": "한국국방 경영분석 학회",
     "year": 2011,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "제37권 4호pp.49-60",
+    "volume_info": "제37권 4호 pp.49-60",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "소비자 심리유형 정보를 이용한가중치 기반 추천기법",
+    "title": "소비자 심리유형 정보를 이용한 가중치 기반 추천기법",
     "authors": [
-      "박원의",
+      "박원익",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "정보과학회눈문지:대이터베이스",
-    "publisher": "한국정보과학회",
+    "venue": "정보과학회 논문지: 데이터베이스",
+    "publisher": "한국정보 과학회",
     "year": 2012,
     "month": 4,
     "doi": null,
     "index_type": null,
-    "volume_info": "제39권 제2호pp.129-137",
+    "volume_info": "제39권 제2호 pp.129-137",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "실시간 상황인지 음용에서 다차원분석 결의 성능 개선을 위한 적용적대이터 쿠트의 구축 방안",
+    "title": "실시간 상황인지 응용에서 다차원 분석 질의 성능 개선을 위한 적응적 데이터 큐브의 구축 방안",
     "authors": [
       "김호영",
       "유민형",
-      "라정회",
-      "박원의",
+      "라정휘",
+      "박원익",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "대이터베이스연구",
-    "publisher": "한국정보과학회",
+    "venue": "데이터베이 스연구",
+    "publisher": "한국정보 과학회",
     "year": 2012,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "제28권 제3호pp.71-87",
+    "volume_info": "제28권 제3호 pp.71-87",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "올를로지 기반의 주제-결체관계를이용한국가 R&D 지식말 구축",
+    "title": "온톨로지 기반의 주제-객체관계를 이용한 국가 R&D 지식맵 구축",
     "authors": [
       "양명석",
-      "감닉구",
+      "강남규",
       "김윤정",
-      "회관닉",
+      "최광남",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "정보관리학회지",
-    "publisher": "한국정보관리학회",
+    "venue": "정보관리학 회지",
+    "publisher": "한국정보 관리학회",
     "year": 2012,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "제29권 제4호pp.123-142",
+    "volume_info": "제29권 제4호 pp.123-142",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "국방 M&S 가상시험 연동 환경을위한 SimCoreDB 설계 및 적합성평가",
+    "title": "국방 M&S 가상시험 연동 환경을 위한 SimCoreDB 설계 및 적합성 평가",
     "authors": [
-      "회미선",
-      "회성우",
-      "이에나",
+      "최미선",
+      "최성우",
+      "이예나",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "정보과학회눈문지:대이터베이스",
-    "publisher": "한국정보과학회",
+    "venue": "정보과학회 논문지: 데이터베이스",
+    "publisher": "한국정보 과학회",
     "year": 2014,
     "month": 4,
     "doi": null,
     "index_type": null,
-    "volume_info": "제41권 제2호pp.100-110",
+    "volume_info": "제41권 제2호 pp.100-110",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "그림추천시스템에서 아이템 평가또도수와 속성있을 이용하는TF-IDF 기반 그림 적계 전판",
+    "title": "그룹추천시스템에서 아이템 평가 빈도수와 속성값을 이용하는 TF-IDF 기반 그룹 집계 전략",
     "authors": [
       "안두철",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "대이터베이스연구",
-    "publisher": "한국정보과학회",
+    "venue": "데이터베이 스연구",
+    "publisher": "한국정보 과학회",
     "year": 2015,
     "month": 8,
     "doi": null,
     "index_type": null,
-    "volume_info": "제31권 제2호pp.169-178",
+    "volume_info": "제31권 제2호 pp.169-178",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "모바일 단말을 위한 슬라이딩원도우 모바일 기반의 상황인지개인화된 사용자 인터페이스 생성기법",
+    "title": "모바일 단말을 위한 슬라이딩 윈도우 모델 기반의 상황인지 개인화된 사용자 인터페이스 생성 기법",
     "authors": [
-      "윤시현",
+      "윤서현",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "대이터베이스연구",
-    "publisher": "한국정보과학회",
+    "venue": "데이터 베이 스 (ISS : 1598-9798)",
+    "publisher": "한국정보 과학회",
     "year": 2016,
     "month": 4,
     "doi": null,
     "index_type": null,
-    "volume_info": "제32권 제1호pp.78-87",
+    "volume_info": "제32권 제1호 pp.78-87",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "가중치 기반 고장감지 커비리지방법을 이용한 원전 제어기기소프트웨어 신리도 평가",
+    "title": "가중치 기반 고장감지 커버리지 방법을 이용한 원전 제어기기 소프트웨어 신뢰도 평가",
     "authors": [
-      "이영종",
+      "이영준",
       "이장수",
       "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보처리학회눈문지/결품터 및통신시스템",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처 리학회논문 지/컴퓨터 및 통신시스템",
+    "publisher": "한국정보 처리학회",
     "year": 2016,
     "month": 9,
     "doi": null,
     "index_type": null,
-    "volume_info": "제5권 제9호pp.275-284",
+    "volume_info": "제5권 제9호 pp.275-284",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "상환정보 가중치를 이용스마트 자동관매기 개인화추천시스템",
+    "title": "상황정보 가중치를 이용한 스마트 자동판매기 개인화 추천시스템",
     "authors": [
       "정수연",
-      "김용김",
-      "영국"
+      "김룡",
+      "김영국"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "대이터베이스연구",
-    "publisher": "한국정보과학회",
+    "venue": "데이터베이 스연구",
+    "publisher": "한국정보 과학회",
     "year": 2017,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "제33권 제3호pp.15-26",
+    "volume_info": "제33권 제3호 pp.15-26",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "사물인터넷 환경에서 대이터회방성을 고려한 유사도 추정 방법",
+    "title": "사물인터넷 환경에서 데이터 희박성을 고려한 유사도 측정 방법",
     "authors": [
       "정수연",
       "손진혁",
@@ -3247,40 +3266,40 @@
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "대이터베이스연구",
-    "publisher": "한국정보과학회",
+    "venue": "데이터베이 스연구",
+    "publisher": "한국정보 과학회",
     "year": 2019,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "제35권 제3호pp.109-118(자체연구비검과물)",
+    "volume_info": "제35권 제3호 pp.109-118 (자체연구비결과물)",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "수경재배 양애 내 탄산정 처리에 의한 상추의 생육 및 생리활성물건 항량 변화(DOI https://doi.org/10.12791/KSBEC.2021.30.1.085)",
+    "title": "수경재배 양액 내 탄산정 처리에 의한 상추의 생육 및 생리활성물질 함량 변화 (DOI https://doi.org/10.12791/KSBEC.2021.30.1.085)",
     "authors": [
-      "부권정",
+      "복권정",
       "노승원",
       "김영국",
       "남창수",
-      "진체민",
+      "진채린",
       "박종석"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "생물활경조 점화회지(p)",
-    "publisher": "생물활경조 점화회",
+    "venue": "생물환경조 절학회지 (p)",
+    "publisher": "생물환경 조절학회",
     "year": 2021,
     "month": 1,
     "doi": null,
     "index_type": null,
-    "volume_info": "제30권 제1호pp.85-93(지금 대상 아닙)",
+    "volume_info": "제30권 제1호 pp.85-93 (지급 대상 아님)",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "저학년 아동 화습지 자동 채정을 위한 단라님 기반 한글 손글씨 인식모태",
+    "title": "저학년 아동 학습지 자동 채점을 위한 딥러닝 기반 한글 손글씨 인식 모델",
     "authors": [
       "김문현",
       "김영호",
@@ -3288,97 +3307,98 @@
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "태이터배이스연구",
-    "publisher": "한국정보과학회",
+    "venue": "데이터베이 스연구",
+    "publisher": "한국정보 과학회",
     "year": 2023,
     "month": 4,
     "doi": null,
     "index_type": null,
-    "volume_info": "제39권 제1호pp.85-95(눈문정리금 지금 대상)",
+    "volume_info": "제39권 제1호 pp.85-95 (논문장려금 지급 대상)",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "훈을적인 HWP 알성코드 탑지를 위한 태이터 유용성 김중 및 화보기반 준지도활습 기법",
+    "title": "효율적인 HWP 악성코드 탐지를 위한 데이터 유용성 검증 및 확보 기반 준지도학습 기법",
     "authors": [
       "손진혁",
       "외 3명"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국정보보호학회는문지",
-    "publisher": "한국정보보호학회",
+    "venue": "한국정보보 호학회 논문지",
+    "publisher": "한국정보 보호학회",
     "year": 2024,
     "month": 2,
     "doi": null,
     "index_type": null,
-    "volume_info": "제34권 제1호pp.71-82(눈문정리금 지금 대상)",
+    "volume_info": "제34권 제1호 pp.71-82 (논문장려금 지급 대상)",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "생성혁 AI 이미지 중강을 통한 채외별해축 태이터 분굴혁 개선 및 분류성능 항상",
+    "title": "생성형 AI 이미지 증강을 통한 참외 병해충 데이터 불균형 개선 및 분류 성능 향상",
     "authors": [
       "박진수",
       "외 4명"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "한국멀티미이어학회는문지",
-    "publisher": "한국멀티미이어학회",
+    "venue": "한국멀티미 이어학회 논문지",
+    "publisher": "한국멀티 미이어학 회",
     "year": 2024,
     "month": 8,
     "doi": null,
     "index_type": null,
-    "volume_info": "제27권 제8호pp.1014-1022(눈문정리금 지금 대상)",
+    "volume_info": "제27권 제8호 pp. 1014-1022 (논문장려금 지급 대상)",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "Faster R-CNN 기반 생활페기물준재 여부이진 분류 시스템",
+    "title": "Faster R-CNN 기반 생활폐기물 존재 여부 이진 분류 시스템",
     "authors": [
       "정연주",
       "외 3명"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "정보과학회 김유탕의 실제는문지",
-    "publisher": "한국정보과학회",
+    "venue": "정보과학회 컴퓨팅의 실제 논문지",
+    "publisher": "한국정보 과학회",
     "year": 2025,
     "month": 10,
     "doi": null,
     "index_type": null,
-    "volume_info": "제31권 제10호pp.434-440(눈문정리금 지금 대상)",
+    "volume_info": "제31권 제10호 pp.434-440 (논문장려금 지급 대상)",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "실명가능한 인공지능과 BERT모태을 활용한 신력성 휘은 유해월사이트 분류 및 한글 특화 해석기법",
+    "title": "설명가능한 인공지능과 BERT 모델을 활용한 신뢰성 높은 유해 웹사이트 분류 및 한글 특화 해석 기법",
     "authors": [
       "손진혁",
       "외 4명"
     ],
     "type": "journal",
     "is_international": false,
-    "venue": "정보과학회 김유탕의 실제는문지",
-    "publisher": "한국정보과학회",
+    "venue": "정보과학회 컴퓨팅의 실제 논문지",
+    "publisher": "한국정보 과학회",
     "year": 2025,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "제52권 제12호pp.1016-1024(눈문정리금 지금 대상)",
+    "volume_info": "제52권 제12호 pp.1016-1024 (논문장려금 지급 대상)",
     "is_featured": false,
     "section": "dom_journal"
   },
   {
-    "title": "차세대지능망에서의 디렉토리목 실시간테이타벅이스 기술적용에 관한 연구",
+    "title": "차세대지능망에서의 디렉토리 및 실시간데이타베이스 기술 적용에 관한 연구",
     "authors": [
-      "김영국의2인"
+      "김영국",
+      "외 2인"
     ],
     "type": "conference",
     "is_international": false,
     "venue": "AIN'96",
-    "publisher": "한국통신학회",
+    "publisher": "한국통신 학회",
     "year": 1996,
     "month": 8,
     "doi": null,
@@ -3388,14 +3408,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "비감독하의 학습을 이용한 전자상거래 시스템에서의 개인화된 공고 제공",
+    "title": "비감독하의 학습을 이용한 전자상거래 시스템에서의 개인화된 광고 제공",
     "authors": [
-      "김영국의5인"
+      "김영국",
+      "외 5인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "대한신업공학회/한국경영과학회'98층계공동학습대회",
-    "publisher": "대한신업공학회/한국경영과학회",
+    "venue": "대한산업공학회/ 한국경영과학회 '98춘계공동학술 대회",
+    "publisher": "대한산업 공학회/한 국 경영과학 회",
     "year": 1998,
     "month": 4,
     "doi": null,
@@ -3407,12 +3428,13 @@
   {
     "title": "TMN 시험시스템 구조",
     "authors": [
-      "김영국의2인"
+      "김영국",
+      "외 2인"
     ],
     "type": "conference",
     "is_international": false,
     "venue": "COMSW'98",
-    "publisher": "한국통신학회",
+    "publisher": "한국통신 학회",
     "year": 1998,
     "month": 7,
     "doi": null,
@@ -3422,14 +3444,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "개인화된 전자상거래 서비스를 위한 예이전트와 데이터베이스 설계 기술",
+    "title": "개인화된 전자상거래 서비스를 위한 에이젼트와 데이터베이스 설계 기술",
     "authors": [
-      "김영국의4인"
+      "김영국",
+      "외 4인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회'98층계학습대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '98추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 1998,
     "month": 10,
     "doi": null,
@@ -3439,14 +3462,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "가상 상점을 위한 마케딩의사결정 지원시스템",
+    "title": "가상 상점을 위한 마케팅 의사결정 지원시스템",
     "authors": [
-      "김영국의5인"
+      "김영국",
+      "외 5인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국전자거래학회학습대회",
-    "publisher": "한국전자거래학회",
+    "venue": "한국전자거래학회 학술대회",
+    "publisher": "한국전자 거래학회",
     "year": 1998,
     "month": 12,
     "doi": null,
@@ -3456,14 +3480,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "웹과 데이터베이스 연동기발류설",
+    "title": "웹과 데이터베이스 연동기법 분석",
     "authors": [
-      "김영국의3인"
+      "김영국",
+      "외 3인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보처리학회'99층계학습대회",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처리학회 '99춘계학술대회",
+    "publisher": "한국정보 처리학회",
     "year": 1999,
     "month": 4,
     "doi": null,
@@ -3473,14 +3498,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "주기역장치 상주형 데이터베이스 시스템에서트랜젝선의 순차수행과 2PL기발동시성제어의 성능비교",
+    "title": "주기억장치 상주형 데이터베이스 시스템에서 트랜잭션의 순차수행과 2PL기반 동시성제어의 성능비교",
     "authors": [
-      "김영국의4인"
+      "김영국",
+      "외 4인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보처리학회'99층계학습대회",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처리학회 '99춘계학술대회",
+    "publisher": "한국정보 처리학회",
     "year": 1999,
     "month": 4,
     "doi": null,
@@ -3490,14 +3516,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "주기역장치 상주형 데이터베이스 시스템을 이용한대용량 서지정보 검색시스템의설계 및 구현",
+    "title": "주기억장치 상주형 데이터베이스 시스템을 이용한 대용량 서지정보 검색시스템의 설계 및 구현",
     "authors": [
-      "김영국의5인"
+      "김영국",
+      "외 5인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보처리학회'99층계학습대회",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처리학회 '99춘계학술대회",
+    "publisher": "한국정보 처리학회",
     "year": 1999,
     "month": 4,
     "doi": null,
@@ -3509,12 +3536,13 @@
   {
     "title": "상호운용성 시험 스위트 도출",
     "authors": [
-      "김영국의3인"
+      "김영국",
+      "외 3인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "제4회통신소프트웨어학습대회",
-    "publisher": "한국통신학회",
+    "venue": "제4회 통신소프트웨어 학술대회",
+    "publisher": "한국통신 학회",
     "year": 1999,
     "month": 7,
     "doi": null,
@@ -3524,14 +3552,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "개인화된 공고서비스를 위한에이전트 시스템 설계",
+    "title": "개인화된 광고서비스를 위한 에이전트 시스템 설계",
     "authors": [
-      "김영국의4인"
+      "김영국",
+      "외 4인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회'99층계학습대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '99추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 1999,
     "month": 10,
     "doi": null,
@@ -3541,50 +3570,53 @@
     "section": "dom_conference"
   },
   {
-    "title": "인터넷 소항물 허브채이트를위한 개인화된 막층서비스 제공시스템",
+    "title": "인터넷 쇼핑몰 허브싸이트를 위한 개인화된 맞춤서비스 제공 시스템",
     "authors": [
-      "박성종",
+      "박성준",
       "김주연",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회'00층계학습대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '00추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2000,
     "month": 10,
     "doi": null,
     "index_type": null,
-    "volume_info": "27권 2호449-451",
+    "volume_info": "27권 2호 449-451",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "주메모리 DBMS를 위한다계축 자바 API 설계 및 구현",
+    "title": "주메모리 DBMS를 위한 다계층 자바 API 설계 및 구현",
     "authors": [
-      "이도영김영국의1인"
+      "이도영",
+      "김영국",
+      "외 1인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회'01층계학습대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '01춘계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2001,
     "month": 4,
     "doi": null,
     "index_type": null,
-    "volume_info": "제28권1호217-219",
+    "volume_info": "제28권1호 217-219",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "인터넷 순권물에서 다중에이전트기반의 서비스 시스템설계에 대한 연구",
+    "title": "인터넷 쇼핑몰에서 다중 에이전트기반의 서비스 시스템 설계에 대한 연구",
     "authors": [
-      "김영국의4인"
+      "김영국",
+      "외 4인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보처리학회‘99추계학술대회",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처리학회 '99추계학술대회",
+    "publisher": "한국정보 처리학회",
     "year": 1999,
     "month": 10,
     "doi": null,
@@ -3594,51 +3626,52 @@
     "section": "dom_conference"
   },
   {
-    "title": "분산이기종 환경에서XML기반메타데이터를이용하는통합정보김색시스템",
+    "title": "분산 이기종 환경에서 XML기반 메타데이터를 이용하는 통합 정보 검색 시스템",
     "authors": [
-      "박성종",
-      "강지희",
+      "박성준",
+      "강지훈",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘01추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '01추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2001,
     "month": 10,
     "doi": null,
     "index_type": null,
-    "volume_info": "제28권2호(Vol.III)559-561",
+    "volume_info": "제28권2호 (Vol.III) 559-561",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "ebXML비즈니스프로세스에디터설계 및구현",
+    "title": "ebXML 비즈니스 프로세스 에디터 설계 및 구현",
     "authors": [
       "김주연",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘01추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '01추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2001,
     "month": 10,
     "doi": null,
     "index_type": null,
-    "volume_info": "제28권2호(Vol.I)430-432",
+    "volume_info": "제28권2호 (Vol.I) 430-432",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "무선인터넷환경에서의내�장형DBMS를위한자료동기화기술",
+    "title": "무선 인터넷 환경에서의 내장형 DBMS를 위한 자료 동기화 기술",
     "authors": [
-      "김영국의5인"
+      "김영국",
+      "외 5인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "제1회정보가전과실시간시스템용용위크상",
-    "publisher": "한국정보처리학회",
+    "venue": "제1회 정보가전과 실시간 시스템 응용 워크샵",
+    "publisher": "한국정보 처리학회",
     "year": 2001,
     "month": 11,
     "doi": null,
@@ -3648,31 +3681,34 @@
     "section": "dom_conference"
   },
   {
-    "title": "이동캐플릭환경에서분산이결정보통합을위한이동트랜젝선목태",
+    "title": "이동 컴퓨팅 환경에서 분산 이질 정보 통합을 위한 이동 트랜잭션 모델",
     "authors": [
-      "최정인김영국의3명"
+      "최정인",
+      "김영국",
+      "외 3명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보처리학회‘01추계학술대회",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처리학회 '01추계학술대회",
+    "publisher": "한국정보 처리학회",
     "year": 2001,
     "month": 10,
     "doi": null,
     "index_type": null,
-    "volume_info": "제8권2호125-128",
+    "volume_info": "제8권2호 125-128",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "ebXML비즈니스프로세스문서작성에서의사전검증과사용자원의제공기법",
+    "title": "ebXML 비즈니스 프로세스 문서 작성에서의 사전검증과 사용자 편의 제공 기법",
     "authors": [
-      "김영국의1인"
+      "김영국",
+      "외 1인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회축청지부학술발표",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 충청지부 학술발표",
+    "publisher": "한국정보 과학회",
     "year": 2001,
     "month": 11,
     "doi": null,
@@ -3682,14 +3718,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "결체지항멀티미디어DBMS를위한비용기반결의최적화설계",
+    "title": "객체지향 멀티미디어 DBMS를 위한 비용 기반 질의 최적화 설계",
     "authors": [
-      "김영국의2인"
+      "김영국",
+      "외 2인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회축청지부학술발표",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 충청지부 학술발표",
+    "publisher": "한국정보 과학회",
     "year": 2001,
     "month": 11,
     "doi": null,
@@ -3699,49 +3736,52 @@
     "section": "dom_conference"
   },
   {
-    "title": "무선령을이용한HAVi비트워크의원검제어시스템설계 및구현",
+    "title": "무선랜을 이용한 HAVi 네트워크의 원격 제어 시스템 설계 및 구현",
     "authors": [
-      "이보의김영국의2인"
+      "이보익",
+      "김영국",
+      "외 2인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보처리학회‘02추계학술대회",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처리학회 '02춘계학술대회",
+    "publisher": "한국정보 처리학회",
     "year": 2002,
     "month": 4,
     "doi": null,
     "index_type": null,
-    "volume_info": "제9권1호1251-1254",
+    "volume_info": "제9권1호 1251-1254",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "로그기반백업 및안정기업장치를이용한주기업장치DBMS에서의회부기법",
+    "title": "로그 기반 백업 및 안정기억장치를 이용한 주기억장치 DBMS에서의 회복기법",
     "authors": [
       "최미선",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘02추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '02춘계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2002,
     "month": 4,
     "doi": null,
     "index_type": null,
-    "volume_info": "제29권1호115-117",
+    "volume_info": "제29권1호 115-117",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "항공기용디지털지도 데이터베이스와디스플레이소프트웨어구현",
+    "title": "항공기용 디지털 지도 데이터 베이스와 디스플레이 소프트웨어 구현",
     "authors": [
-      "김영국의6인"
+      "김영국",
+      "외 6인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "제8회항공기개발기술심포지업",
-    "publisher": "한국극사과학기술학회",
+    "venue": "제8회 항공기 개발 기술 심포지엄",
+    "publisher": "한국군사 과학기술 학회",
     "year": 2002,
     "month": 5,
     "doi": null,
@@ -3751,32 +3791,33 @@
     "section": "dom_conference"
   },
   {
-    "title": "M-Commerce 모바일 인터넷환경에서 개인화 막추서비스제공기법",
+    "title": "M-Commerce 모바일 인터넷 환경에서 개인화 맞춤서비스 제공 기법",
     "authors": [
-      "박성종",
+      "박성준",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘02추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '02추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2002,
     "month": 10,
     "doi": null,
     "index_type": null,
-    "volume_info": "제29권2호337-339",
+    "volume_info": "제29권2호 337-339",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "이동세일증용용을위한이동트랜젝선목태",
+    "title": "이동 세일즈 응용을 위한 이동 트랜잭션 모델",
     "authors": [
-      "김영국의1인"
+      "김영국",
+      "외 1인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘02추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '02추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2002,
     "month": 10,
     "doi": null,
@@ -3786,33 +3827,35 @@
     "section": "dom_conference"
   },
   {
-    "title": "B2B환경에서XML기반상호운용성항상제공기법",
+    "title": "B2B 환경에서 XML 기반 상호 운용성 향상 제공 기법",
     "authors": [
-      "박성종김영국의1인"
+      "박성준",
+      "김영국",
+      "외 1인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘02추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '02추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2002,
     "month": 10,
     "doi": null,
     "index_type": null,
-    "volume_info": "제29권2호589-591",
+    "volume_info": "제29권2호 589-591",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "루프 바이트코드의 정의를 통한성능 개선",
+    "title": "루프 바이트코드의 정의를 통한 성능 개선",
     "authors": [
       "이지현",
       "김영국",
-      "외2인"
+      "외 2인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보처리학회‘02추계학술대회",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처리학회 '02추계학술대회",
+    "publisher": "한국정보 처리학회",
     "year": 2002,
     "month": 10,
     "doi": null,
@@ -3822,15 +3865,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "주기억장치 상주형 DBMS에서법용 테랜체선 처리를 위한호울적인 다중단위 장급기법설계",
+    "title": "주기억장치 상주형 DBMS에서 범용 트랜잭션 처리를 위한 효율적인 다중단위 잠금기법 설계",
     "authors": [
       "김영국",
-      "외3인"
+      "외 3인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회충청지부학술발포",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 충청지부 학술발표",
+    "publisher": "한국정보 과학회",
     "year": 2002,
     "month": 11,
     "doi": null,
@@ -3840,71 +3883,71 @@
     "section": "dom_conference"
   },
   {
-    "title": "공용 UDDI 비즈니스레지스트리의 현황에 대한 분석",
+    "title": "공용 UDDI 비즈니스 레지스트리의 현황에 대한 분석",
     "authors": [
-      "김정회",
+      "김정희",
       "김영국",
-      "외1인"
+      "외 1인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘03추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '03춘계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2003,
     "month": 4,
     "doi": null,
     "index_type": null,
-    "volume_info": "제30권1호460-462",
+    "volume_info": "제30권1호 460-462",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "우선순위 콘 기반의 HAVi메시지 시스템 설계 및 구현",
+    "title": "우선순위 큐 기반의 HAVi 메시지 시스템 설계 및 구현",
     "authors": [
-      "이보의",
+      "이보익",
       "김영국",
-      "외1인"
+      "외 1인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보처리학회‘03추계학술대회",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처리학회 '03춘계학술대회",
+    "publisher": "한국정보 처리학회",
     "year": 2003,
     "month": 5,
     "doi": null,
     "index_type": null,
-    "volume_info": "제10권1호1047-1050",
+    "volume_info": "제10권1호 1047-1050",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "자바가상미신에서 다차원배열의호울적인 접근과 성능개선",
+    "title": "자바가상머신에서 다차원배열의 효율적인 접근과 성능개선",
     "authors": [
       "이지현",
       "김영국",
-      "외2인"
+      "외 2인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보처리학회‘03추계학술대회",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처리학회 '03춘계학술대회",
+    "publisher": "한국정보 처리학회",
     "year": 2003,
     "month": 5,
     "doi": null,
     "index_type": null,
-    "volume_info": "제10권1호1457-1460",
+    "volume_info": "제10권1호 1457-1460",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "편제형 김유탕 한경에서의e-비즈니스 현안",
+    "title": "편재형 컴퓨팅 환경에서의 e-비즈니스 현안",
     "authors": [
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "u-Korea를 위한전자거래종합학술대회",
-    "publisher": "한국전자거래학회",
+    "venue": "u-Korea를 위한 전자거래종합학술 대회",
+    "publisher": "한국전자 거래학회",
     "year": 2003,
     "month": 9,
     "doi": null,
@@ -3914,35 +3957,35 @@
     "section": "dom_conference"
   },
   {
-    "title": "B2B e-Marketplace에서 웹에이전트 기반 추천시스템",
+    "title": "B2B e-Marketplace에서 웹 에이전트 기반 추천시스템",
     "authors": [
       "박성준",
       "김영국",
-      "김용"
+      "김룡"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘04추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '04춘계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2004,
     "month": 4,
     "doi": null,
     "index_type": null,
-    "volume_info": "제31권1호754-756",
+    "volume_info": "제31권1호 754-756",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "모바일 계이트웹이 음용 시스템",
+    "title": "모바일 게이트웨이 응용 시스템",
     "authors": [
-      "김용김",
-      "영국",
-      "외2명"
+      "김룡",
+      "김영국",
+      "외 2명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "제9회 통신소프트웨어학술대회",
-    "publisher": "한국통신학회",
+    "venue": "제9회 통신 소프트웨어 학술대회",
+    "publisher": "한국통신 학회",
     "year": 2004,
     "month": 7,
     "doi": null,
@@ -3952,91 +3995,91 @@
     "section": "dom_conference"
   },
   {
-    "title": "모바일 웹서비스를 위한 확장된WAP 계이트웹이",
+    "title": "모바일 웹 서비스를 위한 확장된 WAP 게이트웨이",
     "authors": [
       "박성준",
       "김영국",
-      "외2명"
+      "외 2명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘04추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '04추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2004,
     "month": 10,
     "doi": null,
     "index_type": null,
-    "volume_info": "제31권2호400-402",
+    "volume_info": "제31권2호 400-402",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "형업 랜덤럼 기반 개인화 추천모바일 계이트웹이",
+    "title": "협업 필터링 기반 개인화 추천 모바일 게이트웨이",
     "authors": [
-      "김용김",
-      "영국"
+      "김룡",
+      "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘04추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '04추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2004,
     "month": 10,
     "doi": null,
     "index_type": null,
-    "volume_info": "제31권2호403-405",
+    "volume_info": "제31권2호 403-405",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "형서비스를 이용한 분산이기종 통합 시스템 성능분석",
+    "title": "웹 서비스를 이용한 분산 이 기종 통합 시스템 성능분석",
     "authors": [
-      "안영현",
+      "안영헌",
       "박성준",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘04추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '04추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2004,
     "month": 10,
     "doi": null,
     "index_type": null,
-    "volume_info": "제31권2호166-168",
+    "volume_info": "제31권2호 166-168",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "형서비스 환경에서 음를로지를응용한 지능형 추천 시스템",
+    "title": "웹 서비스 환경에서 온톨로지를 적용한 지능형 추천 시스템",
     "authors": [
-      "김용김",
-      "영국",
-      "외3명"
+      "김룡",
+      "김영국",
+      "외 3명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘04추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '04추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2004,
     "month": 10,
     "doi": null,
     "index_type": null,
-    "volume_info": "제31권2호640-642",
+    "volume_info": "제31권2호 640-642",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
     "title": "Recommender System using Ontology in B2B e-Marketplace Environment",
     "authors": [
-      "김용김",
-      "영국",
-      "외2명"
+      "김룡",
+      "김영국",
+      "외 2명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보기술응용학회‘04추계공동학술대회",
-    "publisher": "한국정보기술응용학회",
+    "venue": "한국정보기술응용 학회 '04 추계공동학술대회",
+    "publisher": "한국정보 기술응용 학회",
     "year": 2004,
     "month": 12,
     "doi": null,
@@ -4046,16 +4089,16 @@
     "section": "dom_conference"
   },
   {
-    "title": "Markov Model을 이용한개인화된 전자 프로그램 가이드시스템",
+    "title": "Markov Model을 이용한 개인화된 전자 프로그램 가이드 시스템",
     "authors": [
-      "홍종구",
-      "바원의",
+      "홍종규",
+      "박원익",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보기술용용학회 2005초계학술대회",
-    "publisher": "한국정보기술용용학회",
+    "venue": "한국정보기술응용 학회 2005 춘계학술대회",
+    "publisher": "한국정보 기술응용 학회",
     "year": 2005,
     "month": 6,
     "doi": null,
@@ -4065,127 +4108,130 @@
     "section": "dom_conference"
   },
   {
-    "title": "시간스키마 기법 2단계를리스타량 적용 추천시스템의성능 항상",
+    "title": "시간스키마 기법 2단계 클러스터링 적용 추천시스템의 성능 향상",
     "authors": [
-      "김용김영국의3명"
+      "김룡",
+      "김영국",
+      "외 3명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘05한국검희종학학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '05한국컴퓨터종 합학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2005,
     "month": 7,
     "doi": null,
     "index_type": null,
-    "volume_info": "제32권1호205-207",
+    "volume_info": "제32권1호 205-207",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "에이전트 기반의 개인화된 TV프로그램 추천시스템",
+    "title": "에이전트 기반의 개인화된 TV 프로그램 추천 시스템",
     "authors": [
-      "홍종구",
-      "바원의",
+      "홍종규",
+      "박원익",
+      "김룡",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘05추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '05추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2005,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "제32권2호214-216",
+    "volume_info": "제32권2호 214-216",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "모바일 위치 정보를 이용한개인화된 영화 예매 서비스",
+    "title": "모바일 위치 정보를 이용한 개인화된 영화 예매 서비스",
     "authors": [
-      "김용김",
-      "영국"
+      "김룡",
+      "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘05추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '05추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2005,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "제32권2호598-600",
+    "volume_info": "제32권2호 598-600",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "모바일 환경에서 환합 필터량방법을 사용한 개인화 서비스기법",
+    "title": "모바일 환경에서 혼합 필터링 방법을 사용한 개인화 서비스 기법",
     "authors": [
-      "김용이",
-      "지현주",
-      "원군김",
-      "영국"
+      "김룡",
+      "이지현",
+      "주원균",
+      "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘06한국검희종학학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '06한국컴퓨터종 합학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2006,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "제33권1(D)호286-288",
+    "volume_info": "제33권 1(D)호 286-288",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "모바일 환경에서 풀취 기술을이용한 개인화된 말티미디어콘텐츠 추천시스템",
+    "title": "모바일 환경에서 푸쉬 기술을 이용한 개인화된 멀티미디어 콘텐츠 추천 시스템",
     "authors": [
-      "김용강",
-      "지현김",
-      "영국"
+      "김룡",
+      "강지헌",
+      "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국류테즈학회2006추계종합학술대회",
-    "publisher": "한국류테즈학회",
+    "venue": "한국콘텐츠학회 2006 추계종합학술대회",
+    "publisher": "한국콘텐 츠학회",
     "year": 2006,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "제4권2호745-749",
+    "volume_info": "제4권 2호 745-749",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "Linux와 오픈소스를 활용한프로그램 연어 교육 콘텐츠",
+    "title": "Linux와 오픈소스를 활용한 프로그래밍 언어 교육 콘텐츠",
     "authors": [
       "김성현",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국류테즈학회2006추계종합학술대회",
-    "publisher": "한국류테즈학회",
+    "venue": "한국콘텐츠학회 2006 추계종합학술대회",
+    "publisher": "한국콘텐 츠학회",
     "year": 2006,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "제4권2호796-800",
+    "volume_info": "제4권 2호 796-800",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "월문서 제발치 에이전트 시스템",
+    "title": "웹문서 재배치 에이전트 시스템",
     "authors": [
       "조영임",
-      "강상김",
-      "영국"
+      "강상길",
+      "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국피지먼지능시스템학회2007년도추계학술대회",
-    "publisher": "한국피지먼지능시스템학회",
+    "venue": "한국퍼지및지능시 스템학회 2007년도 춘계학술대회",
+    "publisher": "한국퍼지 및지능시 스템학회",
     "year": 2007,
     "month": 4,
     "doi": null,
@@ -4195,16 +4241,16 @@
     "section": "dom_conference"
   },
   {
-    "title": "개인화 기법을 적용한 모바일추천시스템",
+    "title": "개인화 기법을 적용한 모바일 추천 시스템",
     "authors": [
-      "김용강",
-      "지현김",
-      "영국"
+      "김룡",
+      "강지헌",
+      "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국검영정보학회2007년추계국제학술대회",
-    "publisher": "한국검영정보학회",
+    "venue": "한국경영정보학회 2007년 춘계국제학술대회",
+    "publisher": "한국경영 정보학회",
     "year": 2007,
     "month": 6,
     "doi": null,
@@ -4214,18 +4260,18 @@
     "section": "dom_conference"
   },
   {
-    "title": "연구성과 김종시스템 구추에 관한연구",
+    "title": "연구성과 검증시스템 구축에 관한 연구",
     "authors": [
-      "주원군",
-      "바근철",
+      "주원균",
+      "박근철",
       "양명석",
-      "회기석",
+      "최기석",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국류테즈학회2007추계종합학술대회",
-    "publisher": "한국류테즈학회",
+    "venue": "한국콘텐츠학회 2007 춘계종합학술대회",
+    "publisher": "한국콘텐 츠학회",
     "year": 2007,
     "month": 6,
     "doi": null,
@@ -4235,19 +4281,19 @@
     "section": "dom_conference"
   },
   {
-    "title": "국가 R&D 현황을 종합적으로분석하기 위한 시스템에 관한연구",
+    "title": "국가 R&D 현황을 종합적으로 분석하기 위한 시스템에 관한 연구",
     "authors": [
       "양명석",
-      "바만회",
-      "주원군",
+      "박만희",
+      "주원균",
       "김태현",
-      "회기석",
+      "최기석",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국류테즈학회2007추계종합학술대회",
-    "publisher": "한국류테즈학회",
+    "venue": "한국콘텐츠학회 2007 춘계종합학술대회",
+    "publisher": "한국콘텐 츠학회",
     "year": 2007,
     "month": 6,
     "doi": null,
@@ -4257,145 +4303,149 @@
     "section": "dom_conference"
   },
   {
-    "title": "享대용 말티미디어 단말을 위한전테즈 멤타 정보 검색 시스템의설계 및 구현",
+    "title": "휴대용 멀티미디어 단말을 위한 컨텐츠 메타 정보 검색 시스템의 설계 및 구현",
     "authors": [
-      "바원의",
+      "박원익",
       "이광동",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘07한국검희종학학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '07한국컴퓨터종 합학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2007,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "제34권1(D)호350-355",
+    "volume_info": "제34권 1(D)호 350-355",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "원전의 개략형 경보처리를 위한능동 데이터배이스 기술 도입분석",
+    "title": "원전의 개량형 경보처리를 위한 능동 데이터베이스 기술 도입 분석",
     "authors": [
-      "장귀속",
-      "박회움",
-      "금종통",
+      "장귀숙",
+      "박희윤",
+      "금종룡",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘07한국검희터종합학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '07한국컴퓨터종 합학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2007,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "제34권1(C)호38-42",
+    "volume_info": "제34권 1(C)호 38-42",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "월 애플리케이션 보안에 관한고찰",
+    "title": "웹 애플리케이션 보안에 관한 고찰",
     "authors": [
       "정진미",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘07추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '07추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2007,
     "month": 10,
     "doi": null,
     "index_type": null,
-    "volume_info": "제34권제2호(D)66-70",
+    "volume_info": "제34권 제2호(D) 66-70",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "분산 P2P 환경에서 모바일동기화 서비스를 통한멀티미디어 콘텐츠 추천시스템의 설계",
+    "title": "분산 P2P 환경에서 모바일 동기화 서비스를 통한 멀티미디어 콘텐츠 추천 시스템의 설계",
     "authors": [
-      "김롬김",
-      "병만김",
-      "영국"
+      "김룡",
+      "김병만",
+      "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회‘07추계학술대회",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 '07추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2007,
     "month": 10,
     "doi": null,
     "index_type": null,
-    "volume_info": "제34권제2호390-393",
+    "volume_info": "제34권 제2호 390-393",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "유비커터스 환경에서 사용자맛추자 자원 공유 시스템",
+    "title": "유비쿼터스 환경에서 사용자 맞춤 자원 공유 시스템",
     "authors": [
-      "박원의김영국의6명"
+      "박원익",
+      "김영국",
+      "외 6명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국과지몽지능시스템회2007년도추계학술대회",
-    "publisher": "한국과지몽지능시스템회",
+    "venue": "한국퍼지및지능시 스템학회 2007년도 추계학술대회",
+    "publisher": "한국퍼지 및지능시 스템 학회",
     "year": 2007,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "제17권제2호272-275",
+    "volume_info": "제17권 제2호 272-275",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "유비커터스 환경에서 상황 기반디바이스 추천 시스템",
+    "title": "유비쿼터스 환경에서 상황 기반 디바이스 추천 시스템",
     "authors": [
-      "최환수김영국의6명"
+      "최환수",
+      "김영국",
+      "외 6명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보처리학회‘07추계학술대회",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처리학회 '07추계학술대회",
+    "publisher": "한국정보 처리학회",
     "year": 2007,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "제14권제2호903-906",
+    "volume_info": "제14권 제2호 903-906",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "기 개발된 정보시스템 내에포함된 비즈니스 구채 관리 방안",
+    "title": "기 개발된 정보시스템 내에 포함된 비즈니스 규칙 관리 방안",
     "authors": [
       "정진미",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보처리학회‘07추계학술대회",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처리학회 '07추계학술대회",
+    "publisher": "한국정보 처리학회",
     "year": 2007,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "제14권제2호719-720",
+    "volume_info": "제14권 제2호 719-720",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "개략현원전 경보감충을 위한멀티마이너과능동멀이터배이스 기술현안 및대안",
+    "title": "개량형원전 경보감축을 위한 데이터마이닝과 능동데이터베이스 기술현안 및 대안",
     "authors": [
-      "장귀속",
-      "금종통",
-      "박회움",
+      "장귀숙",
+      "금종룡",
+      "박희윤",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "Korean Database Conference 2008(KDBC 2008)",
-    "publisher": "한국정보과학회멀티배이스소사이어터",
+    "venue": "Korean Database Conference 2008 (KDBC 2008)",
+    "publisher": "한국정보 과학회 데이터베 이스 소사이어 티",
     "year": 2008,
     "month": 5,
     "doi": null,
@@ -4405,7 +4455,7 @@
     "section": "dom_conference"
   },
   {
-    "title": "DBMS 기능 시험 도구 설계 및구현",
+    "title": "DBMS 기능 시험 도구 설계 및 구현",
     "authors": [
       "한상혁",
       "정정수",
@@ -4415,8 +4465,8 @@
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "Korean Database Conference 2008(KDBC 2008)",
-    "publisher": "한국정보과학회멀티배이스소사이어터",
+    "venue": "Korean Database Conference 2008 (KDBC 2008)",
+    "publisher": "한국정보 과학회 데이터베 이스 소사이어 티",
     "year": 2008,
     "month": 5,
     "doi": null,
@@ -4426,35 +4476,35 @@
     "section": "dom_conference"
   },
   {
-    "title": "자바 기반 웹 애플리케이션프레임웰크 고찰",
+    "title": "자바 기반 웹 애플리케이션 프레임워크 고찰",
     "authors": [
       "정진미",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2008년도한국발터미디어학회 추계학술대회눈문집",
-    "publisher": "한국발터미디어학회",
+    "venue": "2008년도 한국멀티미디어학 회 춘계학술대회 논문집",
+    "publisher": "한국멀티 미디어학 회",
     "year": 2008,
     "month": 5,
     "doi": null,
     "index_type": null,
-    "volume_info": "제11권1호419-422",
+    "volume_info": "제11권 1호 419-422",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "상환인지 기반 사용자 맞추자 자원공유 시스템",
+    "title": "상황인지 기반 사용자 맞춤 자원 공유 시스템",
     "authors": [
       "이용대",
-      "박원의",
+      "박원익",
       "김영국",
-      "강지혁"
+      "강지훈"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국콘텐츠학회2008추계충학술대회",
-    "publisher": "한국콘텐츠학회",
+    "venue": "한국콘텐츠학회 2008 춘계종합학술대회",
+    "publisher": "한국콘텐 츠학회",
     "year": 2008,
     "month": 5,
     "doi": null,
@@ -4464,19 +4514,19 @@
     "section": "dom_conference"
   },
   {
-    "title": "국가R&D 참여인력 정보 활용을 위한서비스 제제구추에 관한연구",
+    "title": "국가R&D 참여인력 정보 활용을 위한 서비스 체제 구축에 관한 연구",
     "authors": [
       "양명석",
-      "윤영종",
+      "윤영준",
       "조항석",
       "신성호",
-      "순강테",
+      "손강렬",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국콘텐츠학회2008추계충학술대회",
-    "publisher": "한국콘텐츠학회",
+    "venue": "한국콘텐츠학회 2008 춘계종합학술대회",
+    "publisher": "한국콘텐 츠학회",
     "year": 2008,
     "month": 5,
     "doi": null,
@@ -4486,17 +4536,17 @@
     "section": "dom_conference"
   },
   {
-    "title": "유비커터스 지능공간에서자원공유를 위한 온통로지 기반추류",
+    "title": "유비쿼터스 지능공간에서 자원공유를 위한 온톨로지 기반 추론",
     "authors": [
-      "강선회",
+      "강선희",
       "박종현",
-      "강지희",
+      "강지훈",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국류탄증학회2008초계종합학술대회",
-    "publisher": "한국류탄증학회",
+    "venue": "한국콘텐츠학회 2008 춘계종합학술대회",
+    "publisher": "한국콘텐 츠학회",
     "year": 2008,
     "month": 5,
     "doi": null,
@@ -4506,17 +4556,17 @@
     "section": "dom_conference"
   },
   {
-    "title": "Alarm Reduction Processing ofAdvanced Nuclear Power PlantUsing Data Mining and ActiveDatabase Technologies",
+    "title": "Alarm Reduction Processing of Advanced Nuclear Power Plant Using Data Mining and Active Database Technologies",
     "authors": [
-      "장귀순",
-      "금종물",
-      "박희육",
+      "장귀숙",
+      "금종룡",
+      "박희윤",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "Transactions of the KoreanNuclear SocietySpring Meeting",
-    "publisher": "한국원자력학회",
+    "venue": "Transactions of the Korean Nuclear Society Spring Meeting",
+    "publisher": "한국원자 력학회",
     "year": 2008,
     "month": 5,
     "doi": null,
@@ -4526,134 +4576,134 @@
     "section": "dom_conference"
   },
   {
-    "title": "Linear Discriminant Clusteringin Pattern Recognition",
+    "title": "Linear Discriminant Clustering in Pattern Recognition",
     "authors": [
       "손조가",
-      "회미선",
+      "최미선",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2008년도대한전자공학회하계종합학술대회",
-    "publisher": "대한전자공학회",
+    "venue": "2008년도 대한전자공학회 하계종합학술대회",
+    "publisher": "대한전자 공학회",
     "year": 2008,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "제31권제1호717-718",
+    "volume_info": "제31권 제1호 717-718",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "유비커터스 환경에서사용자맞춤형디바이스 웹열시스템",
+    "title": "유비쿼터스 환경에서 사용자 맞춤형 디바이스 협업 시스템",
     "authors": [
-      "박원의",
+      "박원익",
       "이용대",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "‘08한국검희종합학술대회는문집(D)",
-    "publisher": "한국정보과학회",
+    "venue": "'08한국컴퓨터종 합학술대회 논문집(D)",
+    "publisher": "한국정보 과학회",
     "year": 2008,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "제35권제1호332-336",
+    "volume_info": "제35권 제1호 332-336",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "모바일 환경에서의발티미디어 컨텍스자동관리 시스템",
+    "title": "모바일 환경에서의 멀티미디어 컨텐츠 자동관리 시스템",
     "authors": [
       "심우제",
-      "확대대",
+      "황대대",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "‘08한국검희종합학술대회는문집(D)",
-    "publisher": "한국정보과학회",
+    "venue": "'08한국컴퓨터종 합학술대회 논문집(D)",
+    "publisher": "한국정보 과학회",
     "year": 2008,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "제35권제1호461-465",
+    "volume_info": "제35권 제1호 461-465",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "지도기발의 모바일 열열자동관리 시스템",
+    "title": "지도기반의 모바일 영업 자동화 시스템",
     "authors": [
-      "입문설",
-      "확성법",
+      "임문섭",
+      "홍성범",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "‘08한국검희종합학술대회는문집(D)",
-    "publisher": "한국정보과학회",
+    "venue": "'08한국컴퓨터종 합학술대회 논문집(D)",
+    "publisher": "한국정보 과학회",
     "year": 2008,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "제35권제1호466-469",
+    "volume_info": "제35권 제1호 466-469",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "유비커터스 환경에서 모바일발티미디어 컨텍스로의 지능적인관리 기법",
+    "title": "유비쿼터스 환경에서 모바일 멀티미디어 콘텐츠의 지능적인 관리 기법",
     "authors": [
       "이용대",
-      "박원의",
+      "박원익",
       "김영국",
-      "강지희"
+      "강지훈"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2008년도대한전자공학회추계학술대회",
-    "publisher": "대한전자공학회",
+    "venue": "2008년도 대한전자공학회 추계학술대회",
+    "publisher": "대한전자 공학회",
     "year": 2008,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "제31권제2호975-976",
+    "volume_info": "제31권 제2호 975-976",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "자원 공유 시스템에서 사용자선호도 및 자원 정보의 동적 처리기법",
+    "title": "자원 공유 시스템에서 사용자 선호도 및 자원 정보의 동적 처리 기법",
     "authors": [
       "심우제",
-      "박원의",
+      "박원익",
       "김영국",
-      "강지희"
+      "강지훈"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2008년도대한전자공학회추계학술대회",
-    "publisher": "대한전자공학회",
+    "venue": "2008년도 대한전자공학회 추계학술대회",
+    "publisher": "대한전자 공학회",
     "year": 2008,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "제31권제2호973-974",
+    "volume_info": "제31권 제2호 973-974",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "유비커터스 환경에서 개인화된서비스를 위한 온통로지와 구칭기반 자원 추류",
+    "title": "유비쿼터스 환경에서 개인화된 서비스를 위한 온톨로지와 규칙 기반 자원 추론",
     "authors": [
       "박종현",
-      "확성법",
-      "강선회",
+      "홍성범",
+      "강선희",
       "김영국",
-      "강지희"
+      "강지훈"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2008년도한국정보처리학회추계학술발표대회",
-    "publisher": "한국정보처리학회",
+    "venue": "2008년도 한국정보처리학회 추계학술발표대회",
+    "publisher": "한국정보 처리학회",
     "year": 2008,
     "month": 11,
     "doi": null,
@@ -4663,17 +4713,17 @@
     "section": "dom_conference"
   },
   {
-    "title": "자원 공유 환경에서 사용자맞춤형서비스 구성을 위한 추류시스템",
+    "title": "자원 공유 환경에서 사용자 맞춤형 서비스 구성을 위한 추론 시스템",
     "authors": [
-      "강선회",
+      "강선희",
       "박종현",
       "김영국",
-      "강지희"
+      "강지훈"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2008년도대한전자공학회추계학술대회",
-    "publisher": "대한전자공학회",
+    "venue": "2008년도 대한전자공학회 추계학술대회",
+    "publisher": "대한전자 공학회",
     "year": 2008,
     "month": 11,
     "doi": null,
@@ -4683,17 +4733,17 @@
     "section": "dom_conference"
   },
   {
-    "title": "서비스 및 상황에 디른장치공유를 위한 온통로지 기반 추류",
+    "title": "서비스 및 상황에 따른 장치 공유를 위한 온톨로지 기반 추론",
     "authors": [
-      "홍성번",
+      "홍성범",
       "박종현",
       "김영국",
-      "강지희"
+      "강지훈"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2008년도대한전자공학회추계학술대회",
-    "publisher": "대한전자공학회",
+    "venue": "2008년도 대한전자공학회 추계학술대회",
+    "publisher": "대한전자 공학회",
     "year": 2008,
     "month": 11,
     "doi": null,
@@ -4703,95 +4753,95 @@
     "section": "dom_conference"
   },
   {
-    "title": "조사분석정보와국가R&D포츠정보수집체계 일원화에 따른국가R&D정보 수집체계개선에 관한 연구",
+    "title": "조사분석정보와 국가R&D표준정보 수집체계 일원화에 따른 국가R&D정보 수집체계 개선에 관한 연구",
     "authors": [
-      "권이닐",
+      "권이남",
       "김태현",
-      "김윤경",
-      "최회식",
-      "김제수",
+      "김윤정",
+      "최희석",
+      "김재수",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국류태즈학회2009초계종합학술대회",
-    "publisher": "한국류태즈학회",
+    "venue": "한국콘텐츠학회 2009 춘계종합학술대회",
+    "publisher": "한국콘텐 츠학회",
     "year": 2009,
     "month": 5,
     "doi": null,
     "index_type": null,
-    "volume_info": "제7권제1호300-305",
+    "volume_info": "제7권 제1호 300-305",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "사용자의 심리와 상황을고려한 막종형 모바일멀티미디어 콘텐츠 제공기법",
+    "title": "사용자의 심리와 상황을 고려한 맞춤형 모바일 멀티미디어 콘텐츠 제공 기법",
     "authors": [
       "심우제",
-      "박원의",
+      "박원익",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "‘09한국검희종합학술대회는문집(A)",
-    "publisher": "한국검보과학회",
+    "venue": "'09한국컴퓨터종 합학술대회 논문집(A)",
+    "publisher": "한국정보 과학회",
     "year": 2009,
     "month": 7,
     "doi": null,
     "index_type": null,
-    "volume_info": "제36권제1호(A)257-258",
+    "volume_info": "제36권 제1호(A) 257-258",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "SensorML 기반 책서멀타테이터 정의 및작성 도구 개발",
+    "title": "SensorML 기반 센서 메타데이터 정의 및 작성 도구 개발",
     "authors": [
-      "임문설",
-      "한병열",
+      "임문섭",
+      "한병엽",
       "김영국",
-      "상지혁"
+      "강지훈"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "‘09한국검희종합학술대회는문집(D)",
-    "publisher": "한국검보과학회",
+    "venue": "'09한국컴퓨터종 합학술대회 논문집(D)",
+    "publisher": "한국정보 과학회",
     "year": 2009,
     "month": 7,
     "doi": null,
     "index_type": null,
-    "volume_info": "제36권제1호(D)147-151",
+    "volume_info": "제36권 제1호(D) 147-151",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "모바일 웹2.0 방식의 실시간여행정보서비스",
+    "title": "모바일 웹2.0 방식의 실시간 여행정보서비스",
     "authors": [
       "조운형",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "‘09한국검희종합학술대회는문집(A)",
-    "publisher": "한국검보과학회",
+    "venue": "'09한국컴퓨터종 합학술대회 논문집(A)",
+    "publisher": "한국정보 과학회",
     "year": 2009,
     "month": 7,
     "doi": null,
     "index_type": null,
-    "volume_info": "제36권제1호(A)22-26",
+    "volume_info": "제36권 제1호(A) 22-26",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "염무 변경시 시스템간 영향력최소화를 위한 심별체계 웹서비스실계에 관한 연구",
+    "title": "업무 변경시 시스템간 영향력 최소화를 위한 식별체계 웹서비스 설계에 관한 연구",
     "authors": [
-      "권이닐",
-      "김제수",
+      "권이남",
+      "김재수",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국기술회신학회2009년초계학술대회는문집",
-    "publisher": "한국기술회신학회",
+    "venue": "한국기술혁신학회 2009년 추계학술대회 논문집",
+    "publisher": "한국기술 혁신학회",
     "year": 2009,
     "month": 11,
     "doi": null,
@@ -4801,7 +4851,7 @@
     "section": "dom_conference"
   },
   {
-    "title": "USN Middleware에서셈서테이터 패턴분석을 위한셈서테이터 관리 제축",
+    "title": "USN Middleware에서 센서데이터 패턴분석을 위한 센서데이터 관리 계층",
     "authors": [
       "조운형",
       "김영국"
@@ -4809,7 +4859,7 @@
     "type": "conference",
     "is_international": false,
     "venue": "KCC 2010",
-    "publisher": "한국검보과학회",
+    "publisher": "한국정보 과학회",
     "year": 2010,
     "month": 6,
     "doi": null,
@@ -4819,15 +4869,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "말 지작 시스템용 MMDBMS의유지보수성 한상을 위한 Kairos유지보수 태스트 도구",
+    "title": "맵 저작 시스템용 MMDBMS의 유지보수성 향상을 위한 Kairos 유지보수 테스트 도구",
     "authors": [
       "한상혁",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국검보과학회‘10 추계학술대회",
-    "publisher": "한국검보과학회",
+    "venue": "한국정보과학회 '10 추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2010,
     "month": 11,
     "doi": null,
@@ -4837,7 +4887,7 @@
     "section": "dom_conference"
   },
   {
-    "title": "내비게이션 데이터 알층알고리즘 평가 도구 설계",
+    "title": "내비게이션 데이터 압축 알고리즘 평가 도구 설계",
     "authors": [
       "김호영",
       "한상혁",
@@ -4845,8 +4895,8 @@
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국검보처리학회2011년초계학술발평대회",
-    "publisher": "한국검보처리학회",
+    "venue": "한국정보처리학회 2011년 춘계학술발표대회",
+    "publisher": "한국정보 처리학회",
     "year": 2011,
     "month": 5,
     "doi": null,
@@ -4856,16 +4906,16 @@
     "section": "dom_conference"
   },
   {
-    "title": "공정 데이터 알층 성능평가를 위한 시물래이터 설계",
+    "title": "공정 데이터 압축 성능평가를 위한 시뮬레이터 설계",
     "authors": [
-      "유민혁",
+      "유민형",
       "한상혁",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국검보처리학회2011년초계학술발평대회",
-    "publisher": "한국검보처리학회",
+    "venue": "한국정보처리학회 2011년 춘계학술발표대회",
+    "publisher": "한국정보 처리학회",
     "year": 2011,
     "month": 5,
     "doi": null,
@@ -4875,74 +4925,74 @@
     "section": "dom_conference"
   },
   {
-    "title": "모바일 위치 기반서비스를 위한 멜터럽기반 이동 결제 데이터 알층 기반",
+    "title": "모바일 위치 기반 서비스를 위한 필터링 기반 이동 객체 데이터 압축 기법",
     "authors": [
       "한상혁",
-      "홈순김",
-      "호영김",
-      "영국"
+      "홍순필",
+      "김호영",
+      "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국검보과학회‘11 추계학술대회",
-    "publisher": "한국검보과학회",
+    "venue": "한국정보과학회 '11 추계학술대회",
+    "publisher": "한국정보 과학회",
     "year": 2011,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "Vol.38,No.2(D)129-132",
+    "volume_info": "Vol.38, No.2(D)12 9-132",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "신업감시 및 제어 음용을 위한이력 데이터,트랜젝션 그리고태이터베이스",
+    "title": "산업감시 및 제어 응용을 위한 이력 데이터, 트랜잭션 그리고 데이터베이스",
     "authors": [
       "한상혁",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국검보처리학회2012년초계학술발평대회",
-    "publisher": "한국검보처리학회",
+    "venue": "한국정보처리학회 2012년 춘계학술발표대회",
+    "publisher": "한국정보 처리학회",
     "year": 2012,
     "month": 4,
     "doi": null,
     "index_type": null,
-    "volume_info": "제19권제1호1051-1053",
+    "volume_info": "제19권 제1호 1051-1053",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "이력 데이터 알층 알고리즘의성능평가를 위한 시물래이터",
+    "title": "이력 데이터 압축 알고리즘의 성능평가를 위한 시뮬레이터",
     "authors": [
-      "유민혁",
+      "유민형",
       "김호영",
       "한상혁",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국검보과학회2012한국검희종합학술대회는문집(A)",
-    "publisher": "한국검보과학회",
+    "venue": "한국정보과학회 2012 한국컴퓨터종합학 술대회 논문집(A)",
+    "publisher": "한국정보 과학회",
     "year": 2012,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "Vol.39No.1(A)182-184",
+    "volume_info": "Vol.39 No.1(A) 182-184",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "말티코어 환경에서의 말티스레드 기법을 이용한 멤모리 할당 연산의 성능 평가를 위한 시물래이터",
+    "title": "멀티코어 환경에서의 멀티스레드 기법을 이용한 메모리 할당 연산의 성능 평가를 위한 시뮬레이터",
     "authors": [
       "김호영",
-      "홍대대",
+      "황대대",
       "한상혁",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 2012 한국검표터종합학 순대회 눈문집(A)",
+    "venue": "한국정보과학회 2012 한국컴퓨터종합학 술대회 논문집(A)",
     "publisher": "한국정보 과학회",
     "year": 2012,
     "month": 6,
@@ -4953,16 +5003,16 @@
     "section": "dom_conference"
   },
   {
-    "title": "오픈소스 클라우드 풀매풀 : 오픈스텔과 클라우드스텔",
+    "title": "오픈소스 클라우드 플랫폼 : 오픈스택과 클라우드스택",
     "authors": [
-      "라정회",
+      "라정휘",
       "한상혁",
       "성백열",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 2012 한국검표터종합학 순대회 눈문집(A)",
+    "venue": "한국정보과학회 2012 한국컴퓨터종합학 술대회 논문집(A)",
     "publisher": "한국정보 과학회",
     "year": 2012,
     "month": 6,
@@ -4973,15 +5023,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "빨대이터 기술 및 분석 기법의 연구 동학",
+    "title": "빅데이터 기술 및 분석 기법의 연구 동향",
     "authors": [
-      "회성우",
+      "최성우",
       "김호영",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 2012 가을 학술발표는문집(A)",
+    "venue": "한국정보과학회 2012 가을 학술발표논문집 (A)",
     "publisher": "한국정보 과학회",
     "year": 2012,
     "month": 11,
@@ -4992,15 +5042,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "DBMS 기반의 국방 M&S 분산 시물래이션 연동 구조",
+    "title": "DBMS 기반의 국방 M&S 분산 시뮬레이션 연동 구조",
     "authors": [
       "성백열",
-      "회미선",
+      "최미선",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 2012 가을 학술발표는문집(C)",
+    "venue": "한국정보과학회 2012 가을 학술발표논문집 (C)",
     "publisher": "한국정보 과학회",
     "year": 2012,
     "month": 11,
@@ -5011,7 +5061,7 @@
     "section": "dom_conference"
   },
   {
-    "title": "트위터에서 에르되스 수와 비트위크 구조에 관한 연구",
+    "title": "트위터에서 에르되스 수와 네트워크 구조에 관한 연구",
     "authors": [
       "이지민",
       "이정",
@@ -5033,53 +5083,53 @@
     "section": "dom_conference"
   },
   {
-    "title": "추천 시스템에서 Sigmoid 함수를 사용한 유사도 층정 개선 방안",
+    "title": "추천 시스템에서 Sigmoid 함수를 사용한 유사도 측정 개선 방안",
     "authors": [
-      "김롬",
+      "김룡",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 2013 추천 학술발표는문집",
+    "venue": "한국정보과학회 2013 추계 학술발표논문집",
     "publisher": "한국정보 과학회",
     "year": 2013,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.672-674",
+    "volume_info": "pp.672-67 4",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
     "title": "국방 M&S 가상 시험 연동을 위한 효율적인 DB설계",
     "authors": [
-      "회성우",
-      "이에니",
-      "회미선",
+      "최성우",
+      "이예나",
+      "최미선",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 2013 추천 학술발표는문집",
+    "venue": "한국정보과학회 2013 추계 학술발표논문집",
     "publisher": "한국정보 과학회",
     "year": 2013,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.304-306",
+    "volume_info": "pp.304-30 6",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "분산 하덕 시스템의 성능 비교 분석",
+    "title": "분산 하둡 시스템의 성능 비교 분석",
     "authors": [
-      "백명진",
+      "배병진",
       "김영주",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보통신 층합학술대회 눈문집 (2014 추천)",
+    "venue": "한국정보통신 종합학술대회 논문집 (2014 춘계)",
     "publisher": "한국정보 통신학회",
     "year": 2014,
     "month": 5,
@@ -5090,68 +5140,65 @@
     "section": "dom_conference"
   },
   {
-    "title": "그림 의사 결정을 위한 AHP기반 영화 추천 기법",
+    "title": "그룹 의사 결정을 위한 AHP기반 영화 추천 기법",
     "authors": [
       "안두철",
-      "율시현",
+      "윤서현",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 2014 한국검표터종합학 순대회 눈문집",
+    "venue": "한국정보과학회 2014 한국컴퓨터종합학 술대회 논문집",
     "publisher": "한국정보 과학회",
     "year": 2014,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.758-760",
+    "volume_info": "pp.758-76 0",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "추천시스템에서 사용자 편가欲의 Sigmoid 함수欲을 사용한 개선된 유사도 층정",
+    "title": "추천시스템에서 사용자 평가값의 Sigmoid 함수값을 사용한 개선된 유사도 측정",
     "authors": [
-      "김롬",
+      "김룡",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 2014 한국검표터종합학 순대회 눈문집",
+    "venue": "한국정보과학회 2014 한국컴퓨터종합학 술대회 논문집",
     "publisher": "한국정보 과학회",
     "year": 2014,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.777-779",
+    "volume_info": "pp.777-77 9",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
     "title": "Interactive book cover design based on language resources",
     "authors": [
-      "이기석",
-      "박수란",
-      "김현민",
-      "김영국"
+      "김김영국"
     ],
     "type": "conference",
     "is_international": false,
     "venue": "ICCC 2014",
-    "publisher": "한국문테 스학회",
+    "publisher": "한국콘텐 츠학회",
     "year": 2014,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.361-362",
+    "volume_info": "pp. 361-362",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "모발 변형을 위한 3D 케릭터형태 분석 기법(3D Shape Analysis based Character Model Deformation)",
+    "title": "모델 변형을 위한 3D 캐릭터 형태 분석 기법 (3D Shape Analysis based Character Model Deformation)",
     "authors": [
       "Ki Suk Lee",
       "Su Ran Park",
-      "Young-Kuk Kim"
+      "Young-K uk Kim"
     ],
     "type": "conference",
     "is_international": false,
@@ -5161,42 +5208,42 @@
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.132-134",
+    "volume_info": "pp. 132-134",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "국방 M&S 분산 시물래이선의HLA/RTI 연동 데이터 저장을위한 FOM-DBMS 때타 모발변환 방법(우수발포는문상)",
+    "title": "국방 M&S 분산 시뮬레이션의 HLA/RTI 연동 데이터 저장을 위한 FOM-DBMS 메타 모델 변환 방법 (우수발표논문상)",
     "authors": [
-      "회성우",
-      "이에나",
-      "회미선",
+      "최성우",
+      "이예나",
+      "최미선",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회2014 동계학술발포되는문집",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 2014 동계 학술발표회논문집",
+    "publisher": "한국정보 과학회",
     "year": 2014,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.102-104",
+    "volume_info": "pp. 102-104",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "HLA/RTI 기반 국방 가상시험페더래이선과 DBMS 연동 방법",
+    "title": "HLA/RTI 기반 국방 가상시험 페더레이션과 DBMS 연동 방법",
     "authors": [
-      "이에나",
+      "이예나",
       "손진혁",
-      "회미선",
+      "최미선",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2015한국대이터배이스학술대회 눈문집(KDBC 2015)",
-    "publisher": "한국정보과학회대이터배이스소사이어티",
+    "venue": "2015 한국데이터베이스 학술대회 논문집 (KDBC 2015)",
+    "publisher": "한국정보 과학회 데이터베 이스소사 이어티",
     "year": 2015,
     "month": 5,
     "doi": null,
@@ -5206,36 +5253,36 @@
     "section": "dom_conference"
   },
   {
-    "title": "모발일 환경에서 상황인지를통한 개인화된동적 인터페이스 제공 시스템",
+    "title": "모바일 환경에서 상황인지를 통한 개인화된 동적 인터페이스 제공 시스템",
     "authors": [
-      "웃서현",
+      "윤서현",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회2015한국검희터종합학술대회 눈문집",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 2015 한국컴퓨터종합학 술대회 논문집",
+    "publisher": "한국정보 과학회",
     "year": 2015,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.368-370",
+    "volume_info": "pp. 368-370",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "미래 유망아이템 발굴을 위한분석 풍력품 연구-LOD 활용을 중심으로-",
+    "title": "미래 유망아이템 발굴을 위한 분석 플랫폼 연구 - LOD 활용을 중심으로 -",
     "authors": [
-      "권이닐",
-      "이방태",
-      "박준한",
+      "권이남",
+      "이방래",
+      "박준환",
       "문영호",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국기술형신학회2015추계학술대회",
-    "publisher": "한국기술형신학회",
+    "venue": "한국기술혁신학회 2015 추계학술대회",
+    "publisher": "한국기술 혁신학회",
     "year": 2015,
     "month": 11,
     "doi": null,
@@ -5245,17 +5292,17 @@
     "section": "dom_conference"
   },
   {
-    "title": "HLA/RTI 기반 국방 M&S가상시험을 위한 DB 연동 및분산 DB 설계 방법",
+    "title": "HLA/RTI 기반 국방 M&S 가상시험을 위한 DB 연동 및 분산 DB 설계 방법",
     "authors": [
-      "이에나",
+      "이예나",
       "손진혁",
-      "회미선",
+      "최미선",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회2015동계학술발포되는문집",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 2015 동계 학술발표회논문집",
+    "publisher": "한국정보 과학회",
     "year": 2015,
     "month": 12,
     "doi": null,
@@ -5265,91 +5312,91 @@
     "section": "dom_conference"
   },
   {
-    "title": "멀티모님 채서 기반 상황인지를통한 스마트폰 개인화 스케준럽시스템",
+    "title": "멀티모달 센서 기반 상황인지를 통한 스마트폰 개인화 스케줄링 시스템",
     "authors": [
-      "웃서현",
+      "윤서현",
       "정수연",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회2015동계학술발포되는문집",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 2015 동계 학술발표회논문집",
+    "publisher": "한국정보 과학회",
     "year": 2015,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.324-326",
+    "volume_info": "pp. 324-326",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "시물래이선에 기반한 원전계추제어 제동의 시험검종 방법",
+    "title": "시뮬레이션에 기반한 원전 계측제어 계통의 시험검증 방법",
     "authors": [
       "이영준",
-      "금종통",
+      "금종룡",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보처리학회2016년추계학술발포대회",
-    "publisher": "한국정보처리학회",
+    "venue": "한국정보처리학회 2016년 춘계학술발표대회",
+    "publisher": "한국정보 처리학회",
     "year": 2016,
     "month": 4,
     "doi": null,
     "index_type": null,
-    "volume_info": "계23권계1호479-481",
+    "volume_info": "제23권 제1호 479-481",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "HLA/RTI 기반 국방 M&S가상시험을 위한 분산 DB코딩내이터 프로토플 설계",
+    "title": "HLA/RTI 기반 국방 M&S 가상시험을 위한 분산 DB 코디네이터 프로토콜 설계",
     "authors": [
       "손진혁",
-      "이에나",
-      "회미선",
+      "이예나",
+      "최미선",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회2016한국검희터종합학술대회 눈문집",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 2016 한국컴퓨터종합학 술대회 논문집",
+    "publisher": "한국정보 과학회",
     "year": 2016,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.146-148",
+    "volume_info": "pp. 146-148",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "원검으로 콘텐츠 제어가 가능한 디지털 앱자 시스템",
+    "title": "원격으로 콘텐츠 제어가 가능한 디지털 액자 시스템",
     "authors": [
       "김태호",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 2016 한국검异터중합학술대회 논문집",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 2016 한국컴퓨터종합학 술대회 논문집",
+    "publisher": "한국정보 과학회",
     "year": 2016,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.557-559",
+    "volume_info": "pp. 557-559",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "IoT 환경에서의 배이지안 비트워크를 이용한 추천시스템",
+    "title": "IoT 환경에서의 베이지안 네트워크를 이용한 추천시스템",
     "authors": [
       "정수연",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국검异터정보학회 하계학술대회 논문집",
-    "publisher": "한국검异터정보학회",
+    "venue": "한국컴퓨터정보학 회 하계학술대회 논문집",
+    "publisher": "한국컴퓨 터정보학 회",
     "year": 2016,
     "month": 7,
     "doi": null,
@@ -5359,18 +5406,18 @@
     "section": "dom_conference"
   },
   {
-    "title": "HLA/RTI 기반 분산 시물래이선 연동 확경을 위한 데이터 관리 도구",
+    "title": "HLA/RTI 기반 분산 시뮬레이션 연동 환경을 위한 데이터 관리 도구",
     "authors": [
-      "회승한",
+      "최승환",
       "김병수",
-      "확석구",
-      "회미선",
+      "황석규",
+      "최미선",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "국방SW연구회 추계위크샵",
-    "publisher": "한국정보과학회",
+    "venue": "국방SW연구회 추계워크샵",
+    "publisher": "한국정보 과학회",
     "year": 2016,
     "month": 9,
     "doi": null,
@@ -5382,129 +5429,130 @@
   {
     "title": "REST API를 이용한 3D프린터 제어 시스템 구현",
     "authors": [
-      "장현철",
-      "김영국 의 5명"
+      "강현철",
+      "김영국",
+      "외 5명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2016년 한국통신학회 추계중합학술대회 논문집",
-    "publisher": "한국통신학회",
+    "venue": "2016년 한국통신학회 추계종합학술대회 논문집",
+    "publisher": "한국통신 학회",
     "year": 2016,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.238-239",
+    "volume_info": "pp. 238-239",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "안드로이드 어플리케이션에서 회승적인 개인 프로파일 데이터 저장을 위한 라이브러리",
+    "title": "안드로이드 어플리케이션에서 효율적인 개인 프로파일 데이터 저장을 위한 라이브러리",
     "authors": [
-      "장진구",
+      "장진규",
       "김진학",
-      "바지현",
+      "박지혜",
       "김영국",
       "정수연"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 2016 동계 학술발포회 논문집",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 2016 동계 학술발표회논문집",
+    "publisher": "한국정보 과학회",
     "year": 2016,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.1644-1646",
+    "volume_info": "pp. 1644-1646",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "결추강용기술(PSR)과 결용제어(SAC) PIR 기술이 결용된 제안 방계 시스템 개발",
+    "title": "접촉감응기술(PSR)과 적응제어(SAC) PIR 기술이 적용된 재난 방재 시스템 개발",
     "authors": [
       "김태호",
       "김영국",
-      "확제용"
+      "황재용"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 2016 동계 학술발포회 논문집",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 2016 동계 학술발표회논문집",
+    "publisher": "한국정보 과학회",
     "year": 2016,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.362-364",
+    "volume_info": "pp. 362-364",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "IoT 환경을 지원하는 스마트 자동관매기를 위한 사용자 메측 모바일 열",
+    "title": "IoT 환경을 지원하는 스마트 자동판매기를 위한 사용자 맞춤 모바일 앱",
     "authors": [
-      "이에한",
-      "이슈기",
+      "이예찬",
+      "이슬기",
       "윤연주",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "대한전자공학회 학술싱포지움 논문집",
-    "publisher": "대한전자공학회",
+    "venue": "대한전자공학회 학술심포지움 논문집",
+    "publisher": "대한전자 공학회",
     "year": 2016,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.117-119",
+    "volume_info": "pp. 117-119",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "BLE 비콜 기반 전자 출검 시스템에서의 상황인지를 기반으로 한 사용자 인식 기반",
+    "title": "BLE 비콘 기반 전자 출결 시스템에서의 상황인지를 기반으로 한 사용자 인식 기법",
     "authors": [
-      "장승원",
+      "강승완",
+      "김영국"
+    ],
+    "type": "conference",
+    "is_international": false,
+    "venue": "한국정보통신학회 2017년 춘계학술대회",
+    "publisher": "한국정보 통신학회",
+    "year": 2017,
+    "month": 6,
+    "doi": null,
+    "index_type": null,
+    "volume_info": "pp. 609-610",
+    "is_featured": false,
+    "section": "dom_conference"
+  },
+  {
+    "title": "개인화 제조 서비스를 위한 IoT기반 멀티 3D프린터 관리 방안 연구",
+    "authors": [
+      "강현철",
       "김영국",
-      "의",
-      "5명"
+      "외 5명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보통신학회 2017년 추계학술대회",
-    "publisher": "한국정보통신학회",
+    "venue": "한국정보통신학회 2017년 춘계학술대회",
+    "publisher": "한국정보 통신학회",
     "year": 2017,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.609-610",
+    "volume_info": "pp. 570-571",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "개인화 제조 서비스를 위한 IoT기반 메티 3D프린터 관리 방안 열구",
+    "title": "스마트 제조 환경에서 IoT기반 로봇의 상태 분류방법에 대한 연구",
     "authors": [
-      "장현철",
-      "김영국 의 5명"
+      "강현철",
+      "김영국",
+      "외 5명"
     ],
     "type": "conference",
     "is_international": false,
     "venue": "한국정보통신학회 2017년 추계학술대회",
-    "publisher": "한국정보통신학회",
-    "year": 2017,
-    "month": 6,
-    "doi": null,
-    "index_type": null,
-    "volume_info": "pp.570-571",
-    "is_featured": false,
-    "section": "dom_conference"
-  },
-  {
-    "title": "스마트 제조 환경에서 IoT기반 로빔의 상태 분류방법에 대한 연구",
-    "authors": [
-      "장현철",
-      "김영국 의 5명"
-    ],
-    "type": "conference",
-    "is_international": false,
-    "venue": "한국정보통신학회 2017년 추계학술대회",
-    "publisher": "한국정보통신학회",
+    "publisher": "한국정보 통신학회",
     "year": 2017,
     "month": 10,
     "doi": null,
@@ -5514,168 +5562,169 @@
     "section": "dom_conference"
   },
   {
-    "title": "일라이트 기능성 적대와 연동하는 IoT 기반의 웹스케어 시스템 개발",
+    "title": "일라이트 기능성 침대와 연동하는 IoT 기반의 헬스케어 시스템 개발",
     "authors": [
       "서정현",
-      "심에인 박성호",
+      "심예인",
+      "박성호",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "제19회 전자정보통신 학술대회(CEIC2017)",
-    "publisher": "대한전자공학회/ 한국통신학회",
+    "venue": "제19회 전자정보통신 학술대회(CEIC20 17)",
+    "publisher": "대한전자 공학회/ 한국통신 학회",
     "year": 2017,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.201-204",
+    "volume_info": "pp. 201-204",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "게임 콘텐츠를 포함한 법용 드립시물래이터개발",
+    "title": "게임 콘텐츠를 포함한 범용 드론 시뮬레이터 개발",
     "authors": [
       "김진식",
-      "이지해",
-      "황에은",
+      "이지혜",
+      "황예은",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "제19회전자정보통신학술대회(CEIC2017)",
-    "publisher": "대한전자공학회/한국통신학회",
+    "venue": "제19회 전자정보통신 학술대회(CEIC20 17)",
+    "publisher": "대한전자 공학회/ 한국통신 학회",
     "year": 2017,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.53-56",
+    "volume_info": "pp. 53-56",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "멀티모님 데이터 기반 교통 호림에추시스템 설계",
+    "title": "멀티모달 데이터 기반 교통 흐름 예측 시스템 설계",
     "authors": [
       "김성수",
-      "민육기",
+      "민옥기",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2018한국지능시스템학회 총계학술대회는문집",
-    "publisher": "한국지능시스템학회",
+    "venue": "2018 한국지능시스템학 회 춘계학술대회 논문집",
+    "publisher": "한국지능 시스템학 회",
     "year": 2018,
     "month": 4,
     "doi": null,
     "index_type": null,
-    "volume_info": "제28권제1호224-225",
+    "volume_info": "제28권 제1호 224-225",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "멀소스코팅 트래팅시물래이선을위한실시간 가시화 시스템 구현",
+    "title": "메소스코픽 트래픽 시뮬레이션을 위한 실시간 가시화 시스템 구현",
     "authors": [
       "김성수",
-      "민육기",
+      "민옥기",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2018년대한전자공학회추계학술대회는문집",
-    "publisher": "대한전자공학회",
+    "venue": "2018년 대한전자공학회 추계학술대회 논문집",
+    "publisher": "대한전자 공학회",
     "year": 2018,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.779-782",
+    "volume_info": "pp. 779-782",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "모바일 환경에서 크로스 풀매품실행을위한 OCTOPUS프래임위크 설계",
+    "title": "모바일 환경에서 크로스 플랫폼 실행을 위한 OCTOPUS 프레임워크 설계",
     "authors": [
       "김재식",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2018년대한전자공학회추계학술대회는문집",
-    "publisher": "대한전자공학회",
+    "venue": "2018년 대한전자공학회 추계학술대회 논문집",
+    "publisher": "대한전자 공학회",
     "year": 2018,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.894-896",
+    "volume_info": "pp. 894-896",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "사용자 컨텐스트 기반 주기적인구매 데이터를 위한추천시스템",
+    "title": "사용자 컨텍스트 기반 주기적인 구매 데이터를 위한 추천시스템",
     "authors": [
       "정수연",
-      "속진형",
+      "손진혁",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2018년대한전자공학회추계학술대회는문집",
-    "publisher": "대한전자공학회",
+    "venue": "2018년 대한전자공학회 추계학술대회 논문집",
+    "publisher": "대한전자 공학회",
     "year": 2018,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.897-899",
+    "volume_info": "pp. 897-899",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "자동차용 누동소음계여 시스템류님을 위한 실시간 데이터 관리 도구",
+    "title": "자동차용 능동소음제어 시스템 튜닝을 위한 실시간 데이터 관리 도구",
     "authors": [
       "심지수",
       "안정은",
       "김영국",
-      "김현식"
+      "김현석"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2018년대한전자공학회추계학술대회는문집",
-    "publisher": "대한전자공학회",
+    "venue": "2018년 대한전자공학회 추계학술대회 논문집",
+    "publisher": "대한전자 공학회",
     "year": 2018,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.905-908",
+    "volume_info": "pp. 905-908",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "유연생산을 위한 모두형 FaaS미니어처 공정계여 시스템",
+    "title": "산을 위한 모듈형 FaaS 공정제어 템",
     "authors": [
       "김민기",
       "김영국",
-      "외5명"
+      "외 5명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국CDE학회2020동계학술대회는문집",
-    "publisher": "한국CDE학회",
+    "venue": "대회 논문집",
+    "publisher": "",
     "year": 2020,
     "month": 2,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.352-354(P-83)",
+    "volume_info": "352 (P-8",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "병령 음달종을 사용한오트인코딩 모두 경란화",
+    "title": "병렬 은닉층을 사용한 오토인코더 모델 경량화",
     "authors": [
-      "문하김",
+      "문하겸",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국김권티비전학회제32회 영상처리몇 이해에 관한외크삼(IPIU2020)",
-    "publisher": "한국김권티비전학회",
+    "venue": "한국컴퓨터비전학회 제32회 영상처리 및 이해에 관한 워크샵(IPIU2020)",
+    "publisher": "한국컴퓨터 비전학회",
     "year": 2020,
     "month": 2,
     "doi": null,
@@ -5685,74 +5734,74 @@
     "section": "dom_conference"
   },
   {
-    "title": "사용자 체대 데이터를 활용한스트리맥 방송 하이라이트 구간자동추출 시스템",
+    "title": "사용자 채팅 데이터를 활용한 스트리밍 방송 하이라이트 구간 자동추출 시스템",
     "authors": [
-      "문하김",
+      "문하겸",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회2020한국김권티중합학술대회는문집",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 2020 한국컴퓨터종합학 술대회 논문집",
+    "publisher": "한국정보 과학회",
     "year": 2020,
     "month": 7,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.856-858",
+    "volume_info": "pp. 856-858",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "적외선 영상 기반 신경망 구조와근집 분석을 이용한 고속 피플카운트",
+    "title": "적외선 영상 기반 신경망 구조와 군집 분석을 이용한 고속 피플 카운팅",
     "authors": [
-      "권현손",
+      "권현송",
       "이종화",
       "구호근",
-      "이버주",
+      "이범주",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "대한전자공학회2020년도하계종합학술대회",
-    "publisher": "대한전자공학회",
+    "venue": "대한전자공학회 2020년도 하계종합학술대회",
+    "publisher": "대한전자 공학회",
     "year": 2020,
     "month": 8,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.2193-2197",
+    "volume_info": "pp. 2193-2197",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "기계학술을 활용한 국화 작물의정식기 및 수학 시기 자동조절시스템",
+    "title": "기계학습을 활용한 국화 작물의 정식기 및 수확 시기 자동조절 시스템",
     "authors": [
       "김정환",
       "김성진",
-      "박종식",
+      "박종석",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국통신학회추계종합학술발포회",
-    "publisher": "한국통신학회",
+    "venue": "한국통신학회 추계종합학술발표 회",
+    "publisher": "한국통신 학회",
     "year": 2020,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.313-314",
+    "volume_info": "pp. 313-314",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "그림 기반 심리검사에 인공지능기술을 적용하기 위한 지식태이터베이스 구축 방법과 평가",
+    "title": "그림 기반 심리검사에 인공지능 기술을 적용하기 위한 지식 데이터베이스 구축 방법과 평가",
     "authors": [
       "김영국",
       "김영호"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2021한국테이터베이스학습대회 눈문점(KDBC 2021)",
-    "publisher": "한국정보과학회태이터베이스소사이어터",
+    "venue": "2021 한국데이터베이스 학술대회 논문집 (KDBC 2021)",
+    "publisher": "한국정보 과학회 데이터베 이스소사 이어티",
     "year": 2021,
     "month": 11,
     "doi": null,
@@ -5762,7 +5811,7 @@
     "section": "dom_conference"
   },
   {
-    "title": "디러닝 음성합성기술을 활용한동영상 콘텐츠의 음성 오디오부분 교체 프로그램 개발",
+    "title": "딥러닝 음성합성기술을 활용한 동영상 콘텐츠의 음성 오디오 부분 교체 프로그램 개발",
     "authors": [
       "조다민",
       "김성현",
@@ -5772,8 +5821,8 @@
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2021한국테이터베이스학습대회 눈문점(KDBC 2021)",
-    "publisher": "한국정보과학회태이터베이스소사이어터",
+    "venue": "2021 한국데이터베이스 학술대회 논문집 (KDBC 2021)",
+    "publisher": "한국정보 과학회 데이터베 이스소사 이어티",
     "year": 2021,
     "month": 11,
     "doi": null,
@@ -5783,38 +5832,38 @@
     "section": "dom_conference"
   },
   {
-    "title": "차량 음형 태이터의 디러닝을동한 실시간 위협 음전 행동에추시스템",
+    "title": "차량 운행 데이터의 딥러닝을 통한 실시간 위험 운전 행동 예측 시스템",
     "authors": [
       "김지현",
       "김아영",
       "송현진",
       "김영국",
-      "이구현"
+      "이규현"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KSC2021(한국소프트웨어종합학습대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KSC2021 (한국소프트웨어 종합학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2021,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.1487-1489",
+    "volume_info": "pp.1487-14 89",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "개인화된 TTS 구현 가능성을위한 디러닝 모태 비교",
+    "title": "개인화된 TTS 구현 가능성을 위한 딥러닝 모델 비교",
     "authors": [
       "권세영",
-      "명지연",
-      "백에슬",
+      "맹지연",
+      "백예슬",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2021한국정보기술학회추계종합학습대회",
-    "publisher": "한국정보기술학회",
+    "venue": "2021 한국정보기술학회 추계종합학술대회",
+    "publisher": "한국정보 기술학회",
     "year": 2021,
     "month": 11,
     "doi": null,
@@ -5824,16 +5873,16 @@
     "section": "dom_conference"
   },
   {
-    "title": "EfficientDet 기반 음실 내 해추과해 예방을위한 실시간 해추결제 감지",
+    "title": "EfficientDet 기반 온실 내 해충 피해 예방을 위한 실시간 해충 객체 감지",
     "authors": [
-      "강체영",
-      "박종식",
+      "강채영",
+      "박종석",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KCC2022(한국검희팀종합학습대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KCC2022 (한국컴퓨터종합 학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2022,
     "month": 6,
     "doi": null,
@@ -5843,15 +5892,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "인공지능 연어 모태을 이용한 인실리코 알물 발굴에서의태이터 전처리와 도정 사이트발포",
+    "title": "인공지능 언어 모델을 이용한 인 실리코 약물 발굴에서의 데이터 전처리와 도킹 사이트 발견",
     "authors": [
-      "윤유경의",
-      "8인"
+      "윤유경",
+      "외 8인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KCC2022(한국검희팀종합학습대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KCC2022 (한국컴퓨터종합 학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2022,
     "month": 6,
     "doi": null,
@@ -5861,16 +5910,16 @@
     "section": "dom_conference"
   },
   {
-    "title": "특정 추출과 디러닝을 활용한행원 결정기 예추",
+    "title": "특징 추출과 딥러닝을 활용한 항원 결정기 예측",
     "authors": [
       "하정민",
-      "조원극",
+      "조원근",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2022한국테이터베이스학습대회 눈문점(KDBC 2022)",
-    "publisher": "한국정보과학회태이터베이스소사이어터",
+    "venue": "2022 한국데이터베이스 학술대회 논문집 (KDBC 2022)",
+    "publisher": "한국정보 과학회 데이터베 이스소사 이어티",
     "year": 2022,
     "month": 11,
     "doi": null,
@@ -5880,15 +5929,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "디러닝을 활용한 아동 집 그림심리 분석표 작성 모태",
+    "title": "딥러닝을 활용한 아동 집 그림 심리 분석표 작성 모듈",
     "authors": [
-      "이문영의",
-      "4인"
+      "이문영",
+      "외 4인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2022한국테이터베이스학습대회 눈문점(KDBC 2022)",
-    "publisher": "한국정보과학회태이터베이스소사이어터",
+    "venue": "2022 한국데이터베이스 학술대회 논문집 (KDBC 2022)",
+    "publisher": "한국정보 과학회 데이터베 이스소사 이어티",
     "year": 2022,
     "month": 11,
     "doi": null,
@@ -5898,15 +5947,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "디러닝을 활용한 차량 태이터기반의 고장 예추 시스템",
+    "title": "딥러닝을 활용한 차량 데이터 기반의 고장 예측 시스템",
     "authors": [
-      "주상현의",
-      "4명"
+      "주상현",
+      "외 4명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2022한국테이터베이스학습대회 눈문점(KDBC 2022)",
-    "publisher": "한국정보과학회태이터베이스소사이어터",
+    "venue": "2022 한국데이터베이스 학술대회 논문집 (KDBC 2022)",
+    "publisher": "한국정보 과학회 데이터베 이스소사 이어티",
     "year": 2022,
     "month": 11,
     "doi": null,
@@ -5916,14 +5965,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "IoT 기반의 독지 계고 자동가운탕과 이상형동 감지 시스템 개발",
+    "title": "IoT 기반의 돼지 재고 자동 카운팅과 이상행동 감지 시스템 개발",
     "authors": [
-      "김태우의4명"
+      "김태우",
+      "외 4명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2022한국대이터배이스학습대회 눈문점(KDBC 2022)",
-    "publisher": "한국정보과학회대이터배이스소사이어티",
+    "venue": "2022 한국데이터베이스 학술대회 논문집 (KDBC 2022)",
+    "publisher": "한국정보 과학회 데이터베 이스소사 이어티",
     "year": 2022,
     "month": 11,
     "doi": null,
@@ -5933,99 +5983,105 @@
     "section": "dom_conference"
   },
   {
-    "title": "담러님 기반 식품 이미지 인식을통한 당도방 환자 대상 식품영양정보 제공 시스템",
+    "title": "딥러닝 기반 식품 이미지 인식을 통한 당뇨병 환자 대상 식품 영양정보 제공 시스템",
     "authors": [
-      "문혜림의4인"
+      "문혜림",
+      "외 4인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KSC2022(한국소프트웨어중학학습대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KSC2022 (한국소프트웨어 종합학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2022,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.1334-1336",
+    "volume_info": "pp. 1334-1336",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "담러님 기반 어린이 손글씨 담안자동 제점 시스템",
+    "title": "딥러닝 기반 어린이 손글씨 답안 자동 채점 시스템",
     "authors": [
-      "김문혜의4인"
+      "김문현",
+      "외 4인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KSC2022(한국소프트웨어중학학습대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KSC2022 (한국소프트웨어 종합학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2022,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.1661-1663",
+    "volume_info": "pp. 1661-1663",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "특정 추출을 활용한단백질-단백질 수소 결합 거리에추",
+    "title": "특징 추출을 활용한 단백질-단백질 수소 결합 거리 예측",
     "authors": [
-      "하정민의3인"
+      "하정",
+      "민",
+      "외 3인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "AAICON2023https://aifrenz.notion.site/2023-2-d0181ac65149461cba3c5fa4271b0128",
-    "publisher": "에이아이프레스학회",
+    "venue": "AAICON2023 http://aifrenz.notion.sit /2023-2-d0181ac6514946 1cba3c5fa4271b0128",
+    "publisher": "에이아이 프렌즈학 회",
     "year": 2023,
     "month": 2,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.1-3",
+    "volume_info": "pp. 1-3",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "담러님 기반과학기술문서자동분류(우수눈문상 수상)",
+    "title": "딥러닝 기반 과학기술문서 자동분류 (우수논문상 수상)",
     "authors": [
-      "이은진의3명"
+      "이은진",
+      "외 3명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2023한국스마트미디어학회중학학습대회",
-    "publisher": "한국스마트미디어학회",
+    "venue": "2023 한국스마트미디어 학회 종합학술대회",
+    "publisher": "한국스마 트미디어 학회",
     "year": 2023,
     "month": 4,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.224-225",
+    "volume_info": "pp. 224-225",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "XAI 모발 해석 기반의PDF문서형 알성코드 분석 강화",
+    "title": "XAI 모델 해석 기반의 PDF 문서형 악성코드 분석 강화",
     "authors": [
-      "손건혁의"
+      "손진혁",
+      "외"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KCC2023(한국권권터중학학습대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KCC2023 (한국컴퓨터종합 학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2023,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.1274-1276",
+    "volume_info": "pp. 1274-1276",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "A genome-wide associationstudy for chicken plumage colorusing image analysis",
+    "title": "A genome-wide association study for chicken plumage color using image analysis",
     "authors": [
-      "외9인"
+      "외 9인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2023한국동물유전육축학회중학학습대회",
-    "publisher": "(사)한국동물유전육축학회",
+    "venue": "2023 한국동물유전육종 학회 종합학술대회",
+    "publisher": "(사)한국 동물유전 육종학회",
     "year": 2023,
     "month": 6,
     "doi": null,
@@ -6035,50 +6091,51 @@
     "section": "dom_conference"
   },
   {
-    "title": "차량 데이터를 활용한LSTM-Autoencoder 기반 차량고장 예측 모발의 성능 개선",
+    "title": "차량 데이터를 활용한 LSTM-Autoencoder 기반 차량 고장 예측 모델의 성능 개선",
     "authors": [
-      "손유지의"
+      "손유지",
+      "외"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "대한전자공학회2023년도하게중학학습대회",
-    "publisher": "대한전자공학회",
+    "venue": "대한전자공학회 2023년도 하계종합학술대회",
+    "publisher": "대한전자 공학회",
     "year": 2023,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.2084-2087",
+    "volume_info": "pp. 2084-2087",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "화학직 지문을 이용한 지문자생체할성 예측",
+    "title": "화학적 지문을 이용한 저분자 생체활성 예측",
     "authors": [
       "배당기",
-      "수니아",
-      "니의"
+      "수니야",
+      "니외"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "대한전자공학회2023년도하게중학학습대회",
-    "publisher": "대한전자공학회",
+    "venue": "대한전자공학회 2023년도 하계종합학술대회",
+    "publisher": "대한전자 공학회",
     "year": 2023,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.2079-2083",
+    "volume_info": "pp. 2079-2083",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
     "title": "Digital image-based phenotyping for genetic studies on chicken feathers",
     "authors": [
-      "외8명"
+      "외 8명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2023년도(사)한국종산학회학술발포회",
-    "publisher": "(사)한국종산학회",
+    "venue": "2023년도 (사)한국축산학회 학술발표회",
+    "publisher": "(사)한국 축산학회",
     "year": 2023,
     "month": 7,
     "doi": null,
@@ -6088,14 +6145,15 @@
     "section": "dom_conference"
   },
   {
-    "title": "광안대교 온영관리를 위한 상세공간 바람정보 생산 기술연구 및 인공지능 분석 정보 표출시스템 구현",
+    "title": "광안대교 운영관리를 위한 상세 공간 바람정보 생산 기술 연구 및 인공지능 분석 정보 표출 시스템 구현",
     "authors": [
-      "정회석의6인"
+      "정희석",
+      "외 6인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2023한국기상학회가을학술대회",
-    "publisher": "한국기상학회",
+    "venue": "2023 한국기상학회 가을학술대회",
+    "publisher": "한국기상 학회",
     "year": 2023,
     "month": 11,
     "doi": null,
@@ -6105,394 +6163,399 @@
     "section": "dom_conference"
   },
   {
-    "title": "북국형한 감귤 방해추태이터분류를 위한 담리님 기반오버석플릿 기법",
+    "title": "불균형한 감귤 병해충 데이터 분류를 위한 딥러닝 기반 오버샘플링 기법",
     "authors": [
-      "이동연의5인"
+      "이동연",
+      "외 5인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2023한국대이터배이스학술대회 눈문점(KDBC 2023)",
-    "publisher": "한국정보과학회대이터배이스소사이어티",
+    "venue": "2023 한국데이터베이스 학술대회 논문집 (KDBC 2023)",
+    "publisher": "한국정보 과학회 데이터베 이스소사 이어티",
     "year": 2023,
     "month": 11,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.119-121",
+    "volume_info": "pp. 119-121",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "담리님 기반 인상 자동 분류서비스",
+    "title": "딥러닝 기반 인삼 자동 분류 서비스",
     "authors": [
       "반연",
-      "김문형",
+      "김문현",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KSC2023(한국소프트웨어종합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KSC2023 (한국소프트웨어 종합학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2023,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.683-685",
+    "volume_info": "pp. 683-685",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "담리님 기반 참외 앞의 방해추이미지 분류",
+    "title": "딥러닝 기반 참외 잎의 병해충 이미지 분류",
     "authors": [
-      "박진수의5인"
+      "박진수",
+      "외 5인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KSC2023(한국소프트웨어종합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KSC2023 (한국소프트웨어 종합학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2023,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.490-492",
+    "volume_info": "pp. 490-492",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "Swin Transformer 모델을적용한 한우 발정 탐지",
+    "title": "Swin Transformer 모델을 적용한 한우 발정 탐지",
     "authors": [
-      "이형석의3명"
+      "이형석",
+      "외 3명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KSC2023(한국소프트웨어종합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KSC2023 (한국소프트웨어 종합학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2023,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.609-611",
+    "volume_info": "pp. 609-611",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "차랑 온형 대이터를 합용한담리님 기반 고장 유형 분류 및에추",
+    "title": "차량 운행 데이터를 활용한 딥러닝 기반 고장 유형 분류 및 예측",
     "authors": [
-      "손유지의5명"
+      "손유지",
+      "외 5명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KSC2023(한국소프트웨어종합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KSC2023 (한국소프트웨어 종합학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2023,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.597-599",
+    "volume_info": "pp. 597-599",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "과의 질병 분류를 위한 담리님모델 성능 비교",
+    "title": "파의 질병 분류를 위한 딥러닝 모델 성능 비교",
     "authors": [
-      "이민재의4인"
+      "이민재",
+      "외 4인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KSC2023(한국소프트웨어종합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KSC2023 (한국소프트웨어 종합학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2023,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.1021-1023",
+    "volume_info": "pp. 1021-1023",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "발전소 메이터에서 이상 패턴 탐지 방법을 이용한 고장시점 예측 및 원인 탐지",
+    "title": "발전소 데이터에서 이상 패턴 탐지 방법을 이용한 고장시점 예측 및 원인 탐지",
     "authors": [
       "김영현",
       "외 3인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 KSC2023 (한국소프트웨어 중합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KSC2023 (한국소프트웨어 종합학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2023,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.1021-1023",
+    "volume_info": "pp. 1021-1023",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "AI 레시피 기반 자울재배를 위한 통합 메이터 관리 체계와 제배시스템 설계 및 구현",
+    "title": "AI 레시피 기반 자율재배를 위한 통합 데이터 관리 체계와 재배 시스템 설계 및 구현",
     "authors": [
       "송유진",
       "외 2명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국통신학회 2024년도 동계중합학술발표회",
-    "publisher": "한국통신학회",
+    "venue": "한국통신학회 2024년도 동계종합학술발표 회",
+    "publisher": "한국통신 학회",
     "year": 2024,
     "month": 1,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.903-904",
+    "volume_info": "pp. 903-904",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "닐러님 기반 결제 탐지를 활용한 비셜 방해종 예측 시스템",
+    "title": "딥러닝 기반 객체 탐지를 활용한 버섯 병해충 예측 시스템",
     "authors": [
-      "닐민지",
+      "남민지",
       "외 4명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 KCC2024 (한국결제티중합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KCC2024 (한국컴퓨터종합 학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2024,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.1259-1261",
+    "volume_info": "pp. 1259-1261",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "배추 중자의 발아에종을 위한 닐러님 모둘 성능비교",
+    "title": "배추 종자의 발아예측을 위한 딥러닝 모델 성능비교",
     "authors": [
       "이민재",
       "외 5명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 KCC2024 (한국결제티중합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KCC2024 (한국컴퓨터종합 학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2024,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.1230-1232",
+    "volume_info": "pp. 1230-1232",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "위험드-랭키-영커 조합 최적화를 통한 PROTAC 설계 자동화 알고리즘",
+    "title": "워헤드-링커-앵커 조합 최적화를 통한 PROTAC 설계 자동화 알고리즘",
     "authors": [
       "정연주",
       "외 2명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 KCC2024 (한국결제티중합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KCC2024 (한국컴퓨터종합 학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2024,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.435-437",
+    "volume_info": "pp. 435-437",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "XAI를 활용한 BERT 기반 유해사이트 분류 모둘의 신되성 결종 기법 (우수눈문상 수상)",
+    "title": "XAI를 활용한 BERT 기반 유해사이트 분류 모델의 신뢰성 검증 기법 (우수논문상 수상)",
     "authors": [
-      "송진혁",
+      "손진혁",
       "외 4명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 KCC2024 (한국결제티중합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KCC2024 (한국컴퓨터종합 학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2024,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.870-872",
+    "volume_info": "pp. 870-872",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "제로샷 결종 탐지 모둘과 경로 최적화를 통한 생활 페기물 수거 효율화 시스템 (우수발표는문상)",
+    "title": "제로샷 객체 탐지 모델과 경로 최적화를 통한 생활 폐기물 수거 효율화 시스템 (우수발표논문상)",
     "authors": [
       "정연주",
       "외 6인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 KSC2024 (한국소프트웨어 중합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KSC2024 (한국소프트웨어 종합학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2024,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.426-428",
+    "volume_info": "pp. 426-428",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "시계열 분석을 통한 칫랙 OBD 전서 메이터 고장 예측",
+    "title": "시계열 분석을 통한 차량 OBD 센서 데이터 고장 예측",
     "authors": [
-      "이관회",
+      "이관희",
       "김영국"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 KSC2024 (한국소프트웨어 중합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KSC2024 (한국소프트웨어 종합학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2024,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.713-715",
+    "volume_info": "pp. 713-715",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "한만 물류 활성에서 이미지 항상 및 원인 기법을 활용한 건태이니 ID 자동 인식 성능 항상",
+    "title": "항만 물류 환경에서 이미지 향상 및 복원 기법을 활용한 컨테이너 ID 자동 인식 성능 향상",
     "authors": [
-      "확민",
+      "황민",
       "외 4인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회 KSC2024 (한국소프트웨어 중합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KSC2024 (한국소프트웨어 종합학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2024,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.399-401",
+    "volume_info": "pp. 399-401",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "모바일 계임 어플리케이션리뷰의 분식 자동화: 토피모바림과 감성 분식을 통한 시장동향과약",
+    "title": "모바일 게임 어플리케이션 리뷰의 분석 자동화: 토픽 모델링과 감성 분석을 통한 시장 동향 파악",
     "authors": [
-      "임세먼",
-      "외4인"
+      "임세빈",
+      "외 4인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KSC2024(한국소프트웨어종합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KSC2024 (한국소프트웨어 종합학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2024,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.1328-1330",
+    "volume_info": "pp. 1328-1330",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "디러닝 기반 확단보도 및과속방지터 인식 및 회속여부탑지",
+    "title": "딥러닝 기반 횡단보도 및 과속방지턱 인식 및 훼손여부 탐지",
     "authors": [
       "이동현",
-      "외4인"
+      "외 4인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KSC2024(한국소프트웨어종합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KSC2024 (한국소프트웨어 종합학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2024,
     "month": 12,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.1466-1468",
+    "volume_info": "pp. 1466-1468",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "Contextual Protein Function Interpretation viaStructure-Guided Annotation and Large Language Model Integration",
+    "title": "Contextual Protein Function Interpretation via Structure-Guided Annotation and Large Language Model Integration",
     "authors": [
-      "이상윤",
-      "외5명"
+      "이상운",
+      "외 5명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2025년한국구조생물학회하계연령학술대회",
-    "publisher": "한국구조생물학회",
+    "venue": "2025년 한국구조생물학회 하계연례학술대회",
+    "publisher": "한국구조 생물학회",
     "year": 2025,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.-",
+    "volume_info": "pp.",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "Structure-Based Deep LearningDesign of Dual-Target InhibitorCandidates for Galactosemia",
+    "title": "Structure-Based Deep Learning Design of Dual-Target Inhibitor Candidates for Galactosemia",
     "authors": [
       "윤윤기",
-      "외5명"
+      "외 5명"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "2025년한국구조생물학회하계연령학술대회",
-    "publisher": "한국구조생물학회",
+    "venue": "2025년 한국구조생물학회 하계연례학술대회",
+    "publisher": "한국구조 생물학회",
     "year": 2025,
     "month": 6,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.-",
+    "volume_info": "pp.",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "GNN 기반 PROTAC 면커 길이예종",
+    "title": "GNN 기반 PROTAC 링커 길이 예측",
     "authors": [
       "정연주",
-      "외4인"
+      "외 4인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KCC2025(한국검희티종합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KCC2025 (한국컴퓨터종합 학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2025,
     "month": 7,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.946-948",
+    "volume_info": "pp. 946-948",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "RNA 언어모발 프롤리트 트닝을통한 tRNA 서염 생성 및 평가",
+    "title": "RNA 언어모델 프롬프트 튜닝을 통한 tRNA 서열 생성 및 평가",
     "authors": [
-      "이상윤",
-      "외3인"
+      "이상운",
+      "외 3인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KCC2025(한국검희티종합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KCC2025 (한국컴퓨터종합 학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2025,
     "month": 7,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.979-981",
+    "volume_info": "pp. 979-981",
     "is_featured": false,
     "section": "dom_conference"
   },
   {
-    "title": "SMILES 중강을 이용한Molecular AttentionTransformer 기반 고리형레타이드의 세포막 투과성 예종모발 성능 함상",
+    "title": "SMILES 증강을 이용한 Molecular Attention Transformer 기반 고리형 펩타이드의 세포막 투과성 예측 모델 성능 향상",
     "authors": [
       "윤윤기",
-      "외3인"
+      "외 3인"
     ],
     "type": "conference",
     "is_international": false,
-    "venue": "한국정보과학회KCC2025(한국검희티종합학술대회)",
-    "publisher": "한국정보과학회",
+    "venue": "한국정보과학회 KCC2025 (한국컴퓨터종합 학술대회)",
+    "publisher": "한국정보 과학회",
     "year": 2025,
     "month": 7,
     "doi": null,
     "index_type": null,
-    "volume_info": "pp.985-987",
+    "volume_info": "pp. 985-987",
     "is_featured": false,
     "section": "dom_conference"
   }
