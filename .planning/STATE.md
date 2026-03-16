@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: 실적 데이터 등록 및 표시 개선
 status: executing
-stopped_at: Completed 05-01-PLAN.md — Phase 5 DB Schema complete
-last_updated: "2026-03-15T23:30:58.633Z"
+stopped_at: Completed 06-01-PLAN.md — Publication parser script
+last_updated: "2026-03-16T00:10:16.005Z"
 last_activity: 2026-03-16 — Completed 05-01 DB Schema (patents table + publications columns)
 progress:
   total_phases: 8
   completed_phases: 5
-  total_plans: 13
-  completed_plans: 13
+  total_plans: 15
+  completed_plans: 14
   percent: 57
 ---
 
@@ -46,6 +46,8 @@ Progress: [█████░░░░░] 57% (v1.0 4/4 phases complete; v1.1 1
 - **v1.1**: 논문 데이터는 실적 문서(md) 파싱 스크립트로 자동 삽입 (수동 입력 없음)
 - **05-01**: Patent TypeScript type separated from Publication — different field structure (inventors/status/patentNumber vs authors/venue/year)
 - **05-01**: Professor patent management pages stubbed with amber notice — Phase 8 will rebuild against new patents table
+- [Phase 06-01]: No npm dependencies — pure Node.js built-ins for publication parser
+- [Phase 06-01]: Concatenated Korean names split greedily 3-then-2-char tokens in parser
 
 ### Pending Todos
 
@@ -59,6 +61,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16
-Stopped at: Completed 05-01-PLAN.md — Phase 5 DB Schema complete
+Last session: 2026-03-16T00:10:16.002Z
+Stopped at: Completed 06-01-PLAN.md — Publication parser script
 Resume file: None

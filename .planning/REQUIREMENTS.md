@@ -47,7 +47,7 @@ Requirements for milestone v1.1. Each maps to roadmap phases.
 
 ### Data Pipeline
 
-- [ ] **DATA-01**: 실적 문서(md) 논문 섹션 파싱 스크립트 (국제저널/국제학회/국내저널/국내학회)
+- [x] **DATA-01**: 실적 문서(md) 논문 섹션 파싱 스크립트 (국제저널/국제학회/국내저널/국내학회)
 - [ ] **DATA-02**: 파싱된 논문 JSON → Supabase INSERT 시드 스크립트
 
 ### Publications UI
@@ -112,7 +112,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SCHEMA-02   | Phase 5 | Complete |
 | SCHEMA-03   | Phase 5 | Complete |
 | SCHEMA-04   | Phase 5 | Complete |
-| DATA-01     | Phase 6 | Pending  |
+| DATA-01     | Phase 6 | Complete |
 | DATA-02     | Phase 6 | Pending  |
 | PUB-01      | Phase 7 | Pending  |
 | PUB-02      | Phase 7 | Pending  |
