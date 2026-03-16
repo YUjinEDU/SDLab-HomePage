@@ -111,7 +111,7 @@ Plans:
 
 Plans:
 
-- [ ] 05-01-PLAN.md — patents table + publications columns (index_type, volume_info) + patent data cleanup + TS types + query updates
+- [x] 05-01-PLAN.md — patents table + publications columns (index_type, volume_info) + patent data cleanup + TS types + query updates
 
 ### Phase 6: Data Pipeline
 
@@ -124,12 +124,12 @@ Plans:
 2. 파싱 스크립트가 OCR 아티팩트(깨진 문자, 불규칙 공백)를 처리하고 구조화된 JSON을 출력한다
 3. 시드 스크립트 실행 후 Supabase publications 테이블에 논문 데이터가 삽입되어 홈페이지 목록에 표시된다
 
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 
-- [ ] 06-01-PLAN.md — 실적 문서 파싱 스크립트 (md → JSON, 4개 카테고리)
-- [ ] 06-02-PLAN.md — Supabase 시드 스크립트 (JSON → publications INSERT)
+- [ ] 06-01-PLAN.md — 실적 문서 파싱 스크립트 (md -> JSON, 4개 카테고리)
+- [ ] 06-02-PLAN.md — Supabase 시드 스크립트 (JSON -> publications INSERT)
 
 ### Phase 7: Publications UI
 
@@ -180,7 +180,7 @@ Plans:
 | 2. Content Visibility     | v1.0      | 3/3            | Complete    | 2026-03-15 |
 | 3. Project–Output Linking | v1.0      | 3/3            | Complete    | 2026-03-15 |
 | 4. Professor Portal UX    | v1.0      | 2/2            | Complete    | 2026-03-15 |
-| 5. DB Schema              | 1/1       | Complete       | 2026-03-15  | -          |
+| 5. DB Schema              | v1.1      | 1/1            | Complete    | 2026-03-15 |
 | 6. Data Pipeline          | v1.1      | 0/2            | Not started | -          |
 | 7. Publications UI        | v1.1      | 0/2            | Not started | -          |
 | 8. Patents UI             | v1.1      | 0/2            | Not started | -          |
