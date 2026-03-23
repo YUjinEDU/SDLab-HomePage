@@ -56,7 +56,7 @@ export function ProfileForm({ member }: Props) {
 
   return (
     <div className="max-w-3xl">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">내 프로필</h1>
+      <h1 className="text-2xl font-bold text-foreground mb-6">내 프로필</h1>
 
       {error && (
         <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
@@ -65,32 +65,32 @@ export function ProfileForm({ member }: Props) {
       )}
 
       {success && (
-        <div className="mb-4 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+        <div className="mb-4 rounded-lg border border-primary/20 bg-primary-muted px-4 py-3 text-sm text-primary-dark">
           프로필이 저장되었습니다.
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Section 1: Read-only basic info */}
-        <fieldset className="rounded-xl border border-gray-200 bg-white p-6 space-y-4">
-          <legend className="text-sm font-semibold text-gray-700 px-2">
+        <fieldset className="rounded-xl border border-border bg-white p-6 space-y-4">
+          <legend className="text-sm font-semibold text-text-secondary px-2">
             기본 정보 (읽기 전용)
           </legend>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 이름 (한국어)
               </label>
-              <div className="w-full rounded-lg border border-gray-200 bg-gray-100 px-3 py-2 text-sm text-gray-700">
+              <div className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-secondary">
                 {member.nameKo}
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 이름 (영어)
               </label>
-              <div className="w-full rounded-lg border border-gray-200 bg-gray-100 px-3 py-2 text-sm text-gray-700">
+              <div className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-secondary">
                 {member.nameEn}
               </div>
             </div>
@@ -98,39 +98,39 @@ export function ProfileForm({ member }: Props) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 소속
               </label>
-              <div className="w-full rounded-lg border border-gray-200 bg-gray-100 px-3 py-2 text-sm text-gray-700">
+              <div className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-secondary">
                 {GROUP_LABELS[member.group] ?? member.group} /{" "}
                 {member.department}
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-text-secondary mb-1">
                 직위
               </label>
-              <div className="w-full rounded-lg border border-gray-200 bg-gray-100 px-3 py-2 text-sm text-gray-700">
+              <div className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-secondary">
                 {member.position}
               </div>
             </div>
           </div>
 
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-text-secondary">
             이름, 소속, 직위 변경은 관리자에게 요청하세요.
           </p>
         </fieldset>
 
         {/* Section 2: Editable profile */}
-        <fieldset className="rounded-xl border border-gray-200 bg-white p-6 space-y-4">
-          <legend className="text-sm font-semibold text-gray-700 px-2">
+        <fieldset className="rounded-xl border border-border bg-white p-6 space-y-4">
+          <legend className="text-sm font-semibold text-text-secondary px-2">
             프로필 편집
           </legend>
 
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-text-secondary mb-1"
             >
               이메일
             </label>
@@ -140,14 +140,14 @@ export function ProfileForm({ member }: Props) {
               type="email"
               placeholder="example@email.com"
               defaultValue={member.email ?? ""}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+              className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
             />
           </div>
 
           <div>
             <label
               htmlFor="image"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-text-secondary mb-1"
             >
               프로필 이미지 URL
             </label>
@@ -158,7 +158,7 @@ export function ProfileForm({ member }: Props) {
                   alt="현재 프로필 이미지"
                   width={80}
                   height={80}
-                  className="w-20 h-20 rounded-full object-cover border border-gray-200"
+                  className="w-20 h-20 rounded-full object-cover border border-border"
                 />
               </div>
             )}
@@ -168,14 +168,14 @@ export function ProfileForm({ member }: Props) {
               type="url"
               placeholder="https://example.com/photo.jpg"
               defaultValue={member.image ?? ""}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+              className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
             />
           </div>
 
           <div>
             <label
               htmlFor="bio"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-text-secondary mb-1"
             >
               자기소개
             </label>
@@ -184,14 +184,14 @@ export function ProfileForm({ member }: Props) {
               name="bio"
               rows={3}
               defaultValue={member.bio ?? ""}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none resize-y"
+              className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-y"
             />
           </div>
 
           <div>
             <label
               htmlFor="researchKeywords"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-text-secondary mb-1"
             >
               연구 키워드
             </label>
@@ -201,17 +201,17 @@ export function ProfileForm({ member }: Props) {
               type="text"
               placeholder="쉼표로 구분 (예: NLP, LLM, RAG)"
               defaultValue={member.researchKeywords?.join(", ") ?? ""}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+              className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
             />
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-text-secondary">
               쉼표(,)로 구분하여 입력
             </p>
           </div>
         </fieldset>
 
         {/* Section 3: Links */}
-        <fieldset className="rounded-xl border border-gray-200 bg-white p-6 space-y-4">
-          <legend className="text-sm font-semibold text-gray-700 px-2">
+        <fieldset className="rounded-xl border border-border bg-white p-6 space-y-4">
+          <legend className="text-sm font-semibold text-text-secondary px-2">
             링크 (선택)
           </legend>
 
@@ -228,7 +228,7 @@ export function ProfileForm({ member }: Props) {
               <div key={field.key}>
                 <label
                   htmlFor={field.key}
-                  className="block text-sm font-medium text-gray-700 mb-1"
+                  className="block text-sm font-medium text-text-secondary mb-1"
                 >
                   {field.label}
                 </label>
@@ -238,7 +238,7 @@ export function ProfileForm({ member }: Props) {
                   type="url"
                   placeholder="https://..."
                   defaultValue={member.links?.[field.key] ?? ""}
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                  className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                 />
               </div>
             ))}
@@ -254,22 +254,24 @@ export function ProfileForm({ member }: Props) {
         <input type="hidden" name="career" value={JSON.stringify(careerList)} />
 
         {/* Section 4: Education */}
-        <fieldset className="rounded-xl border border-gray-200 bg-white p-6 space-y-4">
-          <legend className="text-sm font-semibold text-gray-700 px-2">
+        <fieldset className="rounded-xl border border-border bg-white p-6 space-y-4">
+          <legend className="text-sm font-semibold text-text-secondary px-2">
             학력 (선택)
           </legend>
 
           {educationList.length === 0 && (
-            <p className="text-sm text-gray-400">등록된 학력이 없습니다.</p>
+            <p className="text-sm text-text-secondary">
+              등록된 학력이 없습니다.
+            </p>
           )}
 
           {educationList.map((entry, idx) => (
             <div
               key={idx}
-              className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] gap-3 items-end border-b border-gray-100 pb-4 last:border-0"
+              className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] gap-3 items-end border-b border-border pb-4 last:border-0"
             >
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   학위
                 </label>
                 <input
@@ -281,11 +283,11 @@ export function ProfileForm({ member }: Props) {
                     setEducationList(next);
                   }}
                   placeholder="학사 / 석사 / 박사"
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                  className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   학교
                 </label>
                 <input
@@ -297,11 +299,11 @@ export function ProfileForm({ member }: Props) {
                     setEducationList(next);
                   }}
                   placeholder="충남대학교"
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                  className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   전공
                 </label>
                 <input
@@ -313,11 +315,11 @@ export function ProfileForm({ member }: Props) {
                     setEducationList(next);
                   }}
                   placeholder="컴퓨터공학"
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                  className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                 />
               </div>
               <div className="sm:col-span-1">
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   기간
                 </label>
                 <div className="flex items-center gap-2">
@@ -330,7 +332,7 @@ export function ProfileForm({ member }: Props) {
                       setEducationList(next);
                     }}
                     placeholder="2020 - 2024"
-                    className="w-full min-w-[120px] rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                    className="w-full min-w-[120px] rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                   />
                   <button
                     type="button"
@@ -371,7 +373,7 @@ export function ProfileForm({ member }: Props) {
                 { degree: "", institution: "", field: "", year: "" },
               ])
             }
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-slate-800 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary-dark transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -393,22 +395,24 @@ export function ProfileForm({ member }: Props) {
         </fieldset>
 
         {/* Section 5: Career */}
-        <fieldset className="rounded-xl border border-gray-200 bg-white p-6 space-y-4">
-          <legend className="text-sm font-semibold text-gray-700 px-2">
+        <fieldset className="rounded-xl border border-border bg-white p-6 space-y-4">
+          <legend className="text-sm font-semibold text-text-secondary px-2">
             경력 (선택)
           </legend>
 
           {careerList.length === 0 && (
-            <p className="text-sm text-gray-400">등록된 경력이 없습니다.</p>
+            <p className="text-sm text-text-secondary">
+              등록된 경력이 없습니다.
+            </p>
           )}
 
           {careerList.map((entry, idx) => (
             <div
               key={idx}
-              className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-3 items-end border-b border-gray-100 pb-4 last:border-0"
+              className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-3 items-end border-b border-border pb-4 last:border-0"
             >
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   직책/역할
                 </label>
                 <input
@@ -420,11 +424,11 @@ export function ProfileForm({ member }: Props) {
                     setCareerList(next);
                   }}
                   placeholder="연구원"
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                  className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   소속
                 </label>
                 <input
@@ -436,11 +440,11 @@ export function ProfileForm({ member }: Props) {
                     setCareerList(next);
                   }}
                   placeholder="KAIST"
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                  className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   기간
                 </label>
                 <div className="flex items-center gap-2">
@@ -453,7 +457,7 @@ export function ProfileForm({ member }: Props) {
                       setCareerList(next);
                     }}
                     placeholder="2020 - 2023"
-                    className="w-full min-w-[120px] rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-slate-500 focus:ring-1 focus:ring-slate-500 outline-none"
+                    className="w-full min-w-[120px] rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                   />
                   <button
                     type="button"
@@ -492,7 +496,7 @@ export function ProfileForm({ member }: Props) {
                 { period: "", role: "", organization: "" },
               ])
             }
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-slate-800 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary-dark transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -518,14 +522,14 @@ export function ProfileForm({ member }: Props) {
           <button
             type="submit"
             disabled={isPending}
-            className="rounded-lg bg-slate-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-800 focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 disabled:opacity-50 transition-colors"
+            className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-dark focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 transition-colors"
           >
             {isPending ? "저장 중..." : "저장"}
           </button>
           <button
             type="button"
             onClick={() => router.push("/internal")}
-            className="rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="rounded-lg border border-border bg-white px-5 py-2.5 text-sm font-medium text-text-secondary hover:bg-surface transition-colors"
           >
             취소
           </button>

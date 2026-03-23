@@ -51,7 +51,7 @@ export function MemberForm({ member, action, title }: Props) {
 
   return (
     <div className="max-w-3xl">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">{title}</h1>
+      <h1 className="text-2xl font-bold text-foreground mb-6">{title}</h1>
 
       {error && (
         <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
@@ -61,8 +61,8 @@ export function MemberForm({ member, action, title }: Props) {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Basic Info */}
-        <fieldset className="rounded-xl border border-gray-200 bg-white p-6 space-y-4">
-          <legend className="text-sm font-semibold text-gray-700 px-2">
+        <fieldset className="rounded-xl border border-border bg-white p-6 space-y-4">
+          <legend className="text-sm font-semibold text-text-secondary px-2">
             기본 정보
           </legend>
 
@@ -70,7 +70,7 @@ export function MemberForm({ member, action, title }: Props) {
             <div>
               <label
                 htmlFor="nameKo"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-text-secondary mb-1"
               >
                 이름 (한국어) <span className="text-red-500">*</span>
               </label>
@@ -80,13 +80,13 @@ export function MemberForm({ member, action, title }: Props) {
                 type="text"
                 required
                 defaultValue={member?.nameKo ?? ""}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
               />
             </div>
             <div>
               <label
                 htmlFor="nameEn"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-text-secondary mb-1"
               >
                 이름 (영어) <span className="text-red-500">*</span>
               </label>
@@ -96,7 +96,7 @@ export function MemberForm({ member, action, title }: Props) {
                 type="text"
                 required
                 defaultValue={member?.nameEn ?? ""}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
               />
             </div>
           </div>
@@ -105,7 +105,7 @@ export function MemberForm({ member, action, title }: Props) {
             <div>
               <label
                 htmlFor="group"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-text-secondary mb-1"
               >
                 그룹 <span className="text-red-500">*</span>
               </label>
@@ -114,7 +114,7 @@ export function MemberForm({ member, action, title }: Props) {
                 name="group"
                 required
                 defaultValue={member?.group ?? "ms"}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none bg-white"
+                className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-white"
               >
                 {GROUP_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -126,7 +126,7 @@ export function MemberForm({ member, action, title }: Props) {
             <div>
               <label
                 htmlFor="position"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-text-secondary mb-1"
               >
                 직위 <span className="text-red-500">*</span>
               </label>
@@ -137,7 +137,7 @@ export function MemberForm({ member, action, title }: Props) {
                 required
                 placeholder="예: 석사과정, 교수"
                 defaultValue={member?.position ?? ""}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
               />
             </div>
           </div>
@@ -146,7 +146,7 @@ export function MemberForm({ member, action, title }: Props) {
             <div>
               <label
                 htmlFor="department"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-text-secondary mb-1"
               >
                 학과 <span className="text-red-500">*</span>
               </label>
@@ -156,13 +156,13 @@ export function MemberForm({ member, action, title }: Props) {
                 type="text"
                 required
                 defaultValue={member?.department ?? ""}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
               />
             </div>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-text-secondary mb-1"
               >
                 이메일
               </label>
@@ -171,7 +171,7 @@ export function MemberForm({ member, action, title }: Props) {
                 name="email"
                 type="email"
                 defaultValue={member?.email ?? ""}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
               />
             </div>
           </div>
@@ -179,7 +179,7 @@ export function MemberForm({ member, action, title }: Props) {
           <div>
             <label
               htmlFor="image"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-text-secondary mb-1"
             >
               프로필 이미지 URL
             </label>
@@ -189,14 +189,14 @@ export function MemberForm({ member, action, title }: Props) {
               type="url"
               placeholder="https://example.com/photo.jpg"
               defaultValue={member?.image ?? ""}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+              className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
             />
           </div>
 
           <div>
             <label
               htmlFor="bio"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-text-secondary mb-1"
             >
               소개
             </label>
@@ -205,7 +205,7 @@ export function MemberForm({ member, action, title }: Props) {
               name="bio"
               rows={3}
               defaultValue={member?.bio ?? ""}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none resize-y"
+              className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-y"
             />
           </div>
 
@@ -213,7 +213,7 @@ export function MemberForm({ member, action, title }: Props) {
             <div>
               <label
                 htmlFor="researchKeywords"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-text-secondary mb-1"
               >
                 연구 키워드
               </label>
@@ -223,16 +223,16 @@ export function MemberForm({ member, action, title }: Props) {
                 type="text"
                 placeholder="쉼표로 구분 (예: NLP, LLM, RAG)"
                 defaultValue={member?.researchKeywords?.join(", ") ?? ""}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
               />
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 쉼표(,)로 구분하여 입력
               </p>
             </div>
             <div>
               <label
                 htmlFor="displayOrder"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-text-secondary mb-1"
               >
                 표시 순서
               </label>
@@ -242,15 +242,15 @@ export function MemberForm({ member, action, title }: Props) {
                 type="number"
                 min={0}
                 defaultValue={member?.displayOrder ?? 0}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
               />
             </div>
           </div>
         </fieldset>
 
         {/* Links */}
-        <fieldset className="rounded-xl border border-gray-200 bg-white p-6 space-y-4">
-          <legend className="text-sm font-semibold text-gray-700 px-2">
+        <fieldset className="rounded-xl border border-border bg-white p-6 space-y-4">
+          <legend className="text-sm font-semibold text-text-secondary px-2">
             외부 링크 (선택)
           </legend>
 
@@ -260,7 +260,7 @@ export function MemberForm({ member, action, title }: Props) {
                 <div key={field}>
                   <label
                     htmlFor={field}
-                    className="block text-sm font-medium text-gray-700 mb-1 capitalize"
+                    className="block text-sm font-medium text-text-secondary mb-1 capitalize"
                   >
                     {field === "scholar"
                       ? "Google Scholar"
@@ -272,7 +272,7 @@ export function MemberForm({ member, action, title }: Props) {
                     type="url"
                     placeholder="https://..."
                     defaultValue={member?.links?.[field] ?? ""}
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                    className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                   />
                 </div>
               ),
@@ -289,22 +289,24 @@ export function MemberForm({ member, action, title }: Props) {
         <input type="hidden" name="career" value={JSON.stringify(careerList)} />
 
         {/* Education */}
-        <fieldset className="rounded-xl border border-gray-200 bg-white p-6 space-y-4">
-          <legend className="text-sm font-semibold text-gray-700 px-2">
+        <fieldset className="rounded-xl border border-border bg-white p-6 space-y-4">
+          <legend className="text-sm font-semibold text-text-secondary px-2">
             학력 (선택)
           </legend>
 
           {educationList.length === 0 && (
-            <p className="text-sm text-gray-400">등록된 학력이 없습니다.</p>
+            <p className="text-sm text-text-secondary">
+              등록된 학력이 없습니다.
+            </p>
           )}
 
           {educationList.map((entry, idx) => (
             <div
               key={idx}
-              className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] gap-2 sm:gap-3 items-end border-b border-gray-100 pb-4 last:border-0"
+              className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] gap-2 sm:gap-3 items-end border-b border-border pb-4 last:border-0"
             >
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   학위
                 </label>
                 <input
@@ -316,11 +318,11 @@ export function MemberForm({ member, action, title }: Props) {
                     setEducationList(next);
                   }}
                   placeholder="학사 / 석사 / 박사"
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                  className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   학교
                 </label>
                 <input
@@ -332,11 +334,11 @@ export function MemberForm({ member, action, title }: Props) {
                     setEducationList(next);
                   }}
                   placeholder="충남대학교"
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                  className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   전공
                 </label>
                 <input
@@ -348,11 +350,11 @@ export function MemberForm({ member, action, title }: Props) {
                     setEducationList(next);
                   }}
                   placeholder="컴퓨터공학"
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                  className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                 />
               </div>
               <div className="sm:col-span-1">
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   기간
                 </label>
                 <div className="flex items-center gap-2">
@@ -365,7 +367,7 @@ export function MemberForm({ member, action, title }: Props) {
                       setEducationList(next);
                     }}
                     placeholder="2020 - 2024"
-                    className="w-full min-w-[120px] rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                    className="w-full min-w-[120px] rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                   />
                   <button
                     type="button"
@@ -406,7 +408,7 @@ export function MemberForm({ member, action, title }: Props) {
                 { degree: "", institution: "", field: "", year: "" },
               ])
             }
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-emerald-600 hover:text-emerald-800 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary-dark transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -428,23 +430,25 @@ export function MemberForm({ member, action, title }: Props) {
         </fieldset>
 
         {/* Career */}
-        <fieldset className="rounded-xl border border-gray-200 bg-white p-6 space-y-4">
-          <legend className="text-sm font-semibold text-gray-700 px-2">
+        <fieldset className="rounded-xl border border-border bg-white p-6 space-y-4">
+          <legend className="text-sm font-semibold text-text-secondary px-2">
             경력 (선택)
           </legend>
 
           {careerList.length === 0 && (
-            <p className="text-sm text-gray-400">등록된 경력이 없습니다.</p>
+            <p className="text-sm text-text-secondary">
+              등록된 경력이 없습니다.
+            </p>
           )}
 
           {careerList.map((entry, idx) => (
             <div
               key={idx}
-              className="grid grid-cols-1 lg:grid-cols-[120px_1fr_1fr_1fr_auto] gap-2 sm:gap-3 items-end border-b border-gray-100 pb-4 last:border-0"
+              className="grid grid-cols-1 lg:grid-cols-[120px_1fr_1fr_1fr_auto] gap-2 sm:gap-3 items-end border-b border-border pb-4 last:border-0"
             >
               {/* 구분 */}
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   구분
                 </label>
                 <select
@@ -457,7 +461,7 @@ export function MemberForm({ member, action, title }: Props) {
                     };
                     setCareerList(next);
                   }}
-                  className="w-full rounded-lg border border-gray-300 px-2 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none bg-white"
+                  className="w-full rounded-lg border border-border px-2 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-white"
                 >
                   <option value="career">경력</option>
                   <option value="award">수상</option>
@@ -466,7 +470,7 @@ export function MemberForm({ member, action, title }: Props) {
               </div>
               {/* 기간 */}
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   기간
                 </label>
                 <input
@@ -478,12 +482,12 @@ export function MemberForm({ member, action, title }: Props) {
                     setCareerList(next);
                   }}
                   placeholder="2020 - 2023"
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                  className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                 />
               </div>
               {/* 직책/역할 */}
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   직책/역할
                 </label>
                 <input
@@ -495,12 +499,12 @@ export function MemberForm({ member, action, title }: Props) {
                     setCareerList(next);
                   }}
                   placeholder="연구원"
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                  className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                 />
               </div>
               {/* 소속 */}
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">
+                <label className="block text-xs font-medium text-text-secondary mb-1">
                   소속
                 </label>
                 <input
@@ -512,12 +516,12 @@ export function MemberForm({ member, action, title }: Props) {
                     setCareerList(next);
                   }}
                   placeholder="충남대학교"
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none"
+                  className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                 />
               </div>
               {/* 삭제 */}
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1 invisible">
+                <label className="block text-xs font-medium text-text-secondary mb-1 invisible">
                   삭제
                 </label>
                 <button
@@ -556,7 +560,7 @@ export function MemberForm({ member, action, title }: Props) {
                 { period: "", role: "", organization: "" },
               ])
             }
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-emerald-600 hover:text-emerald-800 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary-dark transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -582,14 +586,14 @@ export function MemberForm({ member, action, title }: Props) {
           <button
             type="submit"
             disabled={isPending}
-            className="rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-50 transition-colors"
+            className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-dark focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 transition-colors"
           >
             {isPending ? "저장 중..." : "저장"}
           </button>
           <button
             type="button"
             onClick={() => router.push("/professor/members")}
-            className="rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="rounded-lg border border-border bg-white px-5 py-2.5 text-sm font-medium text-text-secondary hover:bg-surface transition-colors"
           >
             취소
           </button>

@@ -60,12 +60,14 @@ export default function NewsForm({
 
       {/* 기본 정보 */}
       <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">기본 정보</h2>
+        <h2 className="mb-4 text-lg font-semibold text-foreground">
+          기본 정보
+        </h2>
         <div className="space-y-4">
           <div>
             <label
               htmlFor="title"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               제목 *
             </label>
@@ -75,14 +77,14 @@ export default function NewsForm({
               type="text"
               required
               defaultValue={newsItem?.title ?? ""}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
           <div>
             <label
               htmlFor="summary"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               요약 *
             </label>
@@ -92,7 +94,7 @@ export default function NewsForm({
               rows={3}
               required
               defaultValue={newsItem?.summary ?? ""}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
@@ -100,7 +102,7 @@ export default function NewsForm({
             <div>
               <label
                 htmlFor="category"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 카테고리 *
               </label>
@@ -109,7 +111,7 @@ export default function NewsForm({
                 name="category"
                 required
                 defaultValue={newsItem?.category ?? "notice"}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               >
                 {CATEGORY_OPTIONS.map((c) => (
                   <option key={c.value} value={c.value}>
@@ -121,7 +123,7 @@ export default function NewsForm({
             <div>
               <label
                 htmlFor="date"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 날짜 *
               </label>
@@ -133,7 +135,7 @@ export default function NewsForm({
                 defaultValue={
                   newsItem?.date ?? new Date().toISOString().slice(0, 10)
                 }
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
           </div>
@@ -144,11 +146,11 @@ export default function NewsForm({
               name="isPinned"
               type="checkbox"
               defaultChecked={newsItem?.isPinned ?? false}
-              className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+              className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
             />
             <label
               htmlFor="isPinned"
-              className="text-sm font-medium text-gray-700"
+              className="text-sm font-medium text-text-secondary"
             >
               상단 고정
             </label>
@@ -158,10 +160,12 @@ export default function NewsForm({
 
       {/* 관계 설정 */}
       <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">관계 설정</h2>
+        <h2 className="mb-4 text-lg font-semibold text-foreground">
+          관계 설정
+        </h2>
         <div className="space-y-6">
           <div>
-            <p className="mb-2 text-sm font-medium text-gray-700">
+            <p className="mb-2 text-sm font-medium text-text-secondary">
               관련 프로젝트
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
@@ -177,21 +181,23 @@ export default function NewsForm({
                     defaultChecked={newsItem?.relatedProjectIds.includes(
                       proj.id,
                     )}
-                    className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+                    className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                   />
                   {proj.title}
                 </label>
               ))}
             </div>
             {projects.length === 0 && (
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-text-secondary">
                 등록된 프로젝트가 없습니다.
               </p>
             )}
           </div>
 
           <div>
-            <p className="mb-2 text-sm font-medium text-gray-700">관련 논문</p>
+            <p className="mb-2 text-sm font-medium text-text-secondary">
+              관련 논문
+            </p>
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               {publications.map((pub) => (
                 <label key={pub.id} className="flex items-center gap-2 text-sm">
@@ -202,7 +208,7 @@ export default function NewsForm({
                     defaultChecked={newsItem?.relatedPublicationIds.includes(
                       pub.id,
                     )}
-                    className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+                    className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                   />
                   <span className="truncate">
                     {pub.title} ({pub.year})
@@ -211,7 +217,9 @@ export default function NewsForm({
               ))}
             </div>
             {publications.length === 0 && (
-              <p className="text-sm text-gray-500">등록된 논문이 없습니다.</p>
+              <p className="text-sm text-text-secondary">
+                등록된 논문이 없습니다.
+              </p>
             )}
           </div>
         </div>
@@ -222,14 +230,14 @@ export default function NewsForm({
         <button
           type="button"
           onClick={() => router.push("/professor/news")}
-          className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          className="rounded-md border border-border bg-white px-4 py-2 text-sm font-medium text-text-secondary hover:bg-surface"
         >
           취소
         </button>
         <button
           type="submit"
           disabled={submitting}
-          className="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 disabled:opacity-50"
+          className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark disabled:opacity-50"
         >
           {submitting ? "저장 중..." : isEdit ? "수정" : "등록"}
         </button>

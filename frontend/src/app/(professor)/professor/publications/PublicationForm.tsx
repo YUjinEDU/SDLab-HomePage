@@ -70,12 +70,14 @@ export default function PublicationForm({
 
       {/* 기본 정보 */}
       <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">기본 정보</h2>
+        <h2 className="mb-4 text-lg font-semibold text-foreground">
+          기본 정보
+        </h2>
         <div className="space-y-4">
           <div>
             <label
               htmlFor="title"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               제목 *
             </label>
@@ -85,14 +87,14 @@ export default function PublicationForm({
               type="text"
               required
               defaultValue={publication?.title ?? ""}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
           <div>
             <label
               htmlFor="authors"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               저자 (쉼표로 구분) *
             </label>
@@ -103,7 +105,7 @@ export default function PublicationForm({
               required
               defaultValue={publication?.authors.join(", ") ?? ""}
               placeholder="홍길동, John Doe, ..."
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
@@ -111,7 +113,7 @@ export default function PublicationForm({
             <div>
               <label
                 htmlFor="type"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 유형 *
               </label>
@@ -120,7 +122,7 @@ export default function PublicationForm({
                 name="type"
                 required
                 defaultValue={publication?.type ?? defaultType ?? "journal"}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               >
                 {PUBLICATION_TYPES.map((t) => (
                   <option key={t.value} value={t.value}>
@@ -132,7 +134,7 @@ export default function PublicationForm({
             <div>
               <label
                 htmlFor="year"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 연도 *
               </label>
@@ -142,13 +144,13 @@ export default function PublicationForm({
                 type="number"
                 required
                 defaultValue={publication?.year ?? new Date().getFullYear()}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <div>
               <label
                 htmlFor="month"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 월
               </label>
@@ -159,7 +161,7 @@ export default function PublicationForm({
                 min={1}
                 max={12}
                 defaultValue={publication?.month ?? ""}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
           </div>
@@ -167,7 +169,7 @@ export default function PublicationForm({
           <div>
             <label
               htmlFor="venue"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               학술지/학회명 *
             </label>
@@ -177,7 +179,7 @@ export default function PublicationForm({
               type="text"
               required
               defaultValue={publication?.venue ?? defaultVenue ?? ""}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
         </div>
@@ -185,13 +187,15 @@ export default function PublicationForm({
 
       {/* 상세 정보 */}
       <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">상세 정보</h2>
+        <h2 className="mb-4 text-lg font-semibold text-foreground">
+          상세 정보
+        </h2>
         <div className="space-y-4">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label
                 htmlFor="doi"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 DOI
               </label>
@@ -200,13 +204,13 @@ export default function PublicationForm({
                 name="doi"
                 type="text"
                 defaultValue={publication?.doi ?? ""}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <div>
               <label
                 htmlFor="pdfUrl"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 PDF URL
               </label>
@@ -215,7 +219,7 @@ export default function PublicationForm({
                 name="pdfUrl"
                 type="url"
                 defaultValue={publication?.pdfUrl ?? ""}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
           </div>
@@ -223,7 +227,7 @@ export default function PublicationForm({
           <div>
             <label
               htmlFor="abstract"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               초록
             </label>
@@ -232,14 +236,14 @@ export default function PublicationForm({
               name="abstract"
               rows={4}
               defaultValue={publication?.abstract ?? ""}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
           <div>
             <label
               htmlFor="keywords"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               키워드 (쉼표로 구분)
             </label>
@@ -248,14 +252,14 @@ export default function PublicationForm({
               name="keywords"
               type="text"
               defaultValue={publication?.keywords.join(", ") ?? ""}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
           <div>
             <label
               htmlFor="bibtex"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               BibTeX
             </label>
@@ -264,7 +268,7 @@ export default function PublicationForm({
               name="bibtex"
               rows={4}
               defaultValue={publication?.bibtex ?? ""}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-mono text-xs focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm font-mono text-xs focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
@@ -274,11 +278,11 @@ export default function PublicationForm({
               name="isFeatured"
               type="checkbox"
               defaultChecked={publication?.isFeatured ?? false}
-              className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+              className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
             />
             <label
               htmlFor="isFeatured"
-              className="text-sm font-medium text-gray-700"
+              className="text-sm font-medium text-text-secondary"
             >
               주요 논문으로 표시
             </label>
@@ -288,10 +292,12 @@ export default function PublicationForm({
 
       {/* 관계 설정 */}
       <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">관계 설정</h2>
+        <h2 className="mb-4 text-lg font-semibold text-foreground">
+          관계 설정
+        </h2>
         <div className="space-y-6">
           <div>
-            <p className="mb-2 text-sm font-medium text-gray-700">
+            <p className="mb-2 text-sm font-medium text-text-secondary">
               연구실 저자 (멤버)
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
@@ -302,19 +308,23 @@ export default function PublicationForm({
                     name="authorMemberIds"
                     value={m.id}
                     defaultChecked={publication?.authorMemberIds.includes(m.id)}
-                    className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+                    className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                   />
                   {m.nameKo} ({m.nameEn})
                 </label>
               ))}
             </div>
             {members.length === 0 && (
-              <p className="text-sm text-gray-500">등록된 멤버가 없습니다.</p>
+              <p className="text-sm text-text-secondary">
+                등록된 멤버가 없습니다.
+              </p>
             )}
           </div>
 
           <div>
-            <p className="mb-2 text-sm font-medium text-gray-700">연구 분야</p>
+            <p className="mb-2 text-sm font-medium text-text-secondary">
+              연구 분야
+            </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
               {researchAreas.map((area) => (
                 <label
@@ -328,21 +338,21 @@ export default function PublicationForm({
                     defaultChecked={publication?.researchAreaIds.includes(
                       area.id,
                     )}
-                    className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+                    className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                   />
                   {area.title}
                 </label>
               ))}
             </div>
             {researchAreas.length === 0 && (
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-text-secondary">
                 등록된 연구 분야가 없습니다.
               </p>
             )}
           </div>
 
           <div>
-            <p className="mb-2 text-sm font-medium text-gray-700">
+            <p className="mb-2 text-sm font-medium text-text-secondary">
               관련 프로젝트
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
@@ -356,14 +366,14 @@ export default function PublicationForm({
                     name="projectIds"
                     value={proj.id}
                     defaultChecked={publication?.projectIds.includes(proj.id)}
-                    className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+                    className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                   />
                   {proj.title}
                 </label>
               ))}
             </div>
             {projects.length === 0 && (
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-text-secondary">
                 등록된 프로젝트가 없습니다.
               </p>
             )}
@@ -376,14 +386,14 @@ export default function PublicationForm({
         <button
           type="button"
           onClick={() => router.push(redirectPath)}
-          className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          className="rounded-md border border-border bg-white px-4 py-2 text-sm font-medium text-text-secondary hover:bg-surface"
         >
           취소
         </button>
         <button
           type="submit"
           disabled={submitting}
-          className="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 disabled:opacity-50"
+          className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark disabled:opacity-50"
         >
           {submitting ? "저장 중..." : isEdit ? "수정" : "등록"}
         </button>

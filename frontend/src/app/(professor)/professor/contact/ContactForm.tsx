@@ -38,14 +38,14 @@ export default function ContactForm({ contact }: ContactFormProps) {
         </div>
       )}
       {success && (
-        <div className="rounded-lg bg-green-50 p-4 text-sm text-green-700">
+        <div className="rounded-lg bg-primary-muted p-4 text-sm text-primary-dark">
           연락처 정보가 업데이트되었습니다.
         </div>
       )}
 
       {/* 연구실 정보 */}
       <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">
+        <h2 className="mb-4 text-lg font-semibold text-foreground">
           연구실 정보
         </h2>
         <div className="space-y-4">
@@ -53,7 +53,7 @@ export default function ContactForm({ contact }: ContactFormProps) {
             <div>
               <label
                 htmlFor="labNameKo"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 연구실명 (한국어) *
               </label>
@@ -63,13 +63,13 @@ export default function ContactForm({ contact }: ContactFormProps) {
                 type="text"
                 required
                 defaultValue={contact.labName.ko}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <div>
               <label
                 htmlFor="labNameEn"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 연구실명 (영어) *
               </label>
@@ -79,7 +79,7 @@ export default function ContactForm({ contact }: ContactFormProps) {
                 type="text"
                 required
                 defaultValue={contact.labName.en}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
           </div>
@@ -87,7 +87,7 @@ export default function ContactForm({ contact }: ContactFormProps) {
             <div>
               <label
                 htmlFor="university"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 대학교 *
               </label>
@@ -97,13 +97,13 @@ export default function ContactForm({ contact }: ContactFormProps) {
                 type="text"
                 required
                 defaultValue={contact.university}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <div>
               <label
                 htmlFor="department"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 학과 *
               </label>
@@ -113,7 +113,7 @@ export default function ContactForm({ contact }: ContactFormProps) {
                 type="text"
                 required
                 defaultValue={contact.department}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
           </div>
@@ -122,13 +122,15 @@ export default function ContactForm({ contact }: ContactFormProps) {
 
       {/* 교수 정보 */}
       <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">교수 정보</h2>
+        <h2 className="mb-4 text-lg font-semibold text-foreground">
+          교수 정보
+        </h2>
         <div className="space-y-4">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
             <div>
               <label
                 htmlFor="professorName"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 이름 *
               </label>
@@ -138,13 +140,13 @@ export default function ContactForm({ contact }: ContactFormProps) {
                 type="text"
                 required
                 defaultValue={contact.professor.name}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <div>
               <label
                 htmlFor="professorTitle"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 직함 *
               </label>
@@ -154,13 +156,13 @@ export default function ContactForm({ contact }: ContactFormProps) {
                 type="text"
                 required
                 defaultValue={contact.professor.title}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <div>
               <label
                 htmlFor="professorEmail"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 이메일 *
               </label>
@@ -170,7 +172,7 @@ export default function ContactForm({ contact }: ContactFormProps) {
                 type="email"
                 required
                 defaultValue={contact.professor.email}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
           </div>
@@ -179,13 +181,15 @@ export default function ContactForm({ contact }: ContactFormProps) {
 
       {/* 위치 정보 */}
       <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">위치 정보</h2>
+        <h2 className="mb-4 text-lg font-semibold text-foreground">
+          위치 정보
+        </h2>
         <div className="space-y-4">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
             <div>
               <label
                 htmlFor="building"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 건물 *
               </label>
@@ -195,13 +199,13 @@ export default function ContactForm({ contact }: ContactFormProps) {
                 type="text"
                 required
                 defaultValue={contact.location.building}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <div>
               <label
                 htmlFor="professorOffice"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 교수실 *
               </label>
@@ -211,13 +215,13 @@ export default function ContactForm({ contact }: ContactFormProps) {
                 type="text"
                 required
                 defaultValue={contact.location.professorOffice}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <div>
               <label
                 htmlFor="labRoom"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 연구실 *
               </label>
@@ -227,7 +231,7 @@ export default function ContactForm({ contact }: ContactFormProps) {
                 type="text"
                 required
                 defaultValue={contact.location.lab}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
           </div>
@@ -236,7 +240,7 @@ export default function ContactForm({ contact }: ContactFormProps) {
             <div>
               <label
                 htmlFor="professorPhone"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 교수실 전화 *
               </label>
@@ -246,13 +250,13 @@ export default function ContactForm({ contact }: ContactFormProps) {
                 type="tel"
                 required
                 defaultValue={contact.location.professorPhone}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <div>
               <label
                 htmlFor="labPhone"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 연구실 전화 *
               </label>
@@ -262,7 +266,7 @@ export default function ContactForm({ contact }: ContactFormProps) {
                 type="tel"
                 required
                 defaultValue={contact.location.labPhone}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
           </div>
@@ -270,7 +274,7 @@ export default function ContactForm({ contact }: ContactFormProps) {
           <div>
             <label
               htmlFor="address"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               주소 *
             </label>
@@ -280,14 +284,14 @@ export default function ContactForm({ contact }: ContactFormProps) {
               type="text"
               required
               defaultValue={contact.address}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
           <div>
             <label
               htmlFor="mapEmbedUrl"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               지도 Embed URL
             </label>
@@ -296,7 +300,7 @@ export default function ContactForm({ contact }: ContactFormProps) {
               name="mapEmbedUrl"
               type="url"
               defaultValue={contact.mapEmbedUrl ?? ""}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
         </div>
@@ -307,7 +311,7 @@ export default function ContactForm({ contact }: ContactFormProps) {
         <button
           type="submit"
           disabled={submitting}
-          className="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 disabled:opacity-50"
+          className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark disabled:opacity-50"
         >
           {submitting ? "저장 중..." : "저장"}
         </button>

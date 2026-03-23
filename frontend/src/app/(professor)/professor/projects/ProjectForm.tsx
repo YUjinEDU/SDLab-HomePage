@@ -59,12 +59,14 @@ export default function ProjectForm({
 
       {/* 기본 정보 */}
       <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">기본 정보</h2>
+        <h2 className="mb-4 text-lg font-semibold text-foreground">
+          기본 정보
+        </h2>
         <div className="space-y-4">
           <div>
             <label
               htmlFor="title"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               프로젝트명 *
             </label>
@@ -74,7 +76,7 @@ export default function ProjectForm({
               type="text"
               required
               defaultValue={project?.title ?? ""}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
@@ -82,7 +84,7 @@ export default function ProjectForm({
             <div>
               <label
                 htmlFor="status"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 상태 *
               </label>
@@ -91,7 +93,7 @@ export default function ProjectForm({
                 name="status"
                 required
                 defaultValue={project?.status ?? "active"}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               >
                 {STATUS_OPTIONS.map((s) => (
                   <option key={s.value} value={s.value}>
@@ -103,7 +105,7 @@ export default function ProjectForm({
             <div>
               <label
                 htmlFor="category"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 분류 *
               </label>
@@ -113,7 +115,7 @@ export default function ProjectForm({
                 type="text"
                 required
                 defaultValue={project?.category ?? ""}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
           </div>
@@ -121,7 +123,7 @@ export default function ProjectForm({
           <div>
             <label
               htmlFor="shortDescription"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               짧은 설명 *
             </label>
@@ -131,14 +133,14 @@ export default function ProjectForm({
               type="text"
               required
               defaultValue={project?.shortDescription ?? ""}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
           <div>
             <label
               htmlFor="fullDescription"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               상세 설명
             </label>
@@ -147,7 +149,7 @@ export default function ProjectForm({
               name="fullDescription"
               rows={5}
               defaultValue={project?.fullDescription ?? ""}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
         </div>
@@ -155,12 +157,14 @@ export default function ProjectForm({
 
       {/* 사업 정보 */}
       <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">사업 정보</h2>
+        <h2 className="mb-4 text-lg font-semibold text-foreground">
+          사업 정보
+        </h2>
         <div className="space-y-4">
           <div>
             <label
               htmlFor="organization"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               수행 기관 *
             </label>
@@ -170,7 +174,7 @@ export default function ProjectForm({
               type="text"
               required
               defaultValue={project?.organization ?? ""}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
@@ -178,7 +182,7 @@ export default function ProjectForm({
             <div>
               <label
                 htmlFor="programType"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 사업 유형
               </label>
@@ -187,13 +191,13 @@ export default function ProjectForm({
                 name="programType"
                 type="text"
                 defaultValue={project?.programType ?? ""}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <div>
               <label
                 htmlFor="budget"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 예산
               </label>
@@ -202,7 +206,7 @@ export default function ProjectForm({
                 name="budget"
                 type="text"
                 defaultValue={project?.budget ?? ""}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
           </div>
@@ -211,7 +215,7 @@ export default function ProjectForm({
             <div>
               <label
                 htmlFor="startDate"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 시작일 *
               </label>
@@ -221,13 +225,13 @@ export default function ProjectForm({
                 type="date"
                 required
                 defaultValue={project?.startDate ?? ""}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <div>
               <label
                 htmlFor="endDate"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text-secondary"
               >
                 종료일
               </label>
@@ -236,7 +240,7 @@ export default function ProjectForm({
                 name="endDate"
                 type="date"
                 defaultValue={project?.endDate ?? ""}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
           </div>
@@ -244,7 +248,7 @@ export default function ProjectForm({
           <div>
             <label
               htmlFor="tags"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               태그 (쉼표로 구분)
             </label>
@@ -253,14 +257,14 @@ export default function ProjectForm({
               name="tags"
               type="text"
               defaultValue={project?.tags.join(", ") ?? ""}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
           <div>
             <label
               htmlFor="demoUrl"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-text-secondary"
             >
               데모 URL
             </label>
@@ -269,7 +273,7 @@ export default function ProjectForm({
               name="demoUrl"
               type="url"
               defaultValue={project?.demoUrl ?? ""}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              className="mt-1 block w-full rounded-md border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
 
@@ -279,11 +283,11 @@ export default function ProjectForm({
               name="isFeatured"
               type="checkbox"
               defaultChecked={project?.isFeatured ?? false}
-              className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+              className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
             />
             <label
               htmlFor="isFeatured"
-              className="text-sm font-medium text-gray-700"
+              className="text-sm font-medium text-text-secondary"
             >
               주요 프로젝트로 표시
             </label>
@@ -293,10 +297,14 @@ export default function ProjectForm({
 
       {/* 관계 설정 */}
       <section className="rounded-lg bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">관계 설정</h2>
+        <h2 className="mb-4 text-lg font-semibold text-foreground">
+          관계 설정
+        </h2>
         <div className="space-y-6">
           <div>
-            <p className="mb-2 text-sm font-medium text-gray-700">참여 멤버</p>
+            <p className="mb-2 text-sm font-medium text-text-secondary">
+              참여 멤버
+            </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
               {members.map((m) => (
                 <label key={m.id} className="flex items-center gap-2 text-sm">
@@ -305,19 +313,23 @@ export default function ProjectForm({
                     name="memberIds"
                     value={m.id}
                     defaultChecked={project?.memberIds.includes(m.id)}
-                    className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+                    className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                   />
                   {m.nameKo} ({m.nameEn})
                 </label>
               ))}
             </div>
             {members.length === 0 && (
-              <p className="text-sm text-gray-500">등록된 멤버가 없습니다.</p>
+              <p className="text-sm text-text-secondary">
+                등록된 멤버가 없습니다.
+              </p>
             )}
           </div>
 
           <div>
-            <p className="mb-2 text-sm font-medium text-gray-700">연구 분야</p>
+            <p className="mb-2 text-sm font-medium text-text-secondary">
+              연구 분야
+            </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
               {researchAreas.map((area) => (
                 <label
@@ -329,14 +341,14 @@ export default function ProjectForm({
                     name="researchAreaIds"
                     value={area.id}
                     defaultChecked={project?.researchAreaIds.includes(area.id)}
-                    className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+                    className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                   />
                   {area.title}
                 </label>
               ))}
             </div>
             {researchAreas.length === 0 && (
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-text-secondary">
                 등록된 연구 분야가 없습니다.
               </p>
             )}
@@ -349,14 +361,14 @@ export default function ProjectForm({
         <button
           type="button"
           onClick={() => router.push("/professor/projects")}
-          className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          className="rounded-md border border-border bg-white px-4 py-2 text-sm font-medium text-text-secondary hover:bg-surface"
         >
           취소
         </button>
         <button
           type="submit"
           disabled={submitting}
-          className="rounded-md bg-green-700 px-4 py-2 text-sm font-medium text-white hover:bg-green-800 disabled:opacity-50"
+          className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark disabled:opacity-50"
         >
           {submitting ? "저장 중..." : isEdit ? "수정" : "등록"}
         </button>
