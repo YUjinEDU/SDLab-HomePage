@@ -34,3 +34,5 @@ export { getResearchAreas } from "./research-areas";
 export { getNews, getNewsById, getNewsBySlug, getLatestNews } from "./news";
 
 export { getContactInfo } from "./contact";
+
+export { getServerMonitorData } from "./server-monitor";

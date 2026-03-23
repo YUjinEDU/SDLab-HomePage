@@ -55,8 +55,8 @@ const navItems: NavItem[] = [
     ),
   },
   {
-    href: "/internal/gpu",
-    label: "GPU 모니터",
+    href: "/internal/server-monitor",
+    label: "서버 모니터링",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
