@@ -306,7 +306,7 @@ def collect_server_metrics():
     return {
         "server_id": SERVER_ID,
         "cpu_percent": cpu_pct,
-        "cpu_per_core": json.dumps(cpu_per_core),
+        "cpu_per_core": cpu_per_core,
         "memory_total_bytes": mem.total,
         "memory_used_bytes": mem.used,
         "memory_percent": mem.percent,

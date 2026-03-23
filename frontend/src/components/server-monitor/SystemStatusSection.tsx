@@ -50,6 +50,10 @@ function MiniCoreBar({ percent }: { percent: number }) {
 
 export function SystemStatusSection({ metrics }: SystemStatusSectionProps) {
   const memPercent = metrics.memory_percent;
+  const cpuPerCore: number[] =
+    typeof metrics.cpu_per_core === "string"
+      ? JSON.parse(metrics.cpu_per_core)
+      : (metrics.cpu_per_core ?? []);
 
   return (
     <div className="px-5 py-4">
@@ -61,11 +65,11 @@ export function SystemStatusSection({ metrics }: SystemStatusSectionProps) {
         <UsageBar percent={metrics.cpu_percent} label="CPU" />
 
         {/* Per-core mini bars */}
-        {metrics.cpu_per_core && metrics.cpu_per_core.length > 0 && (
+        {cpuPerCore.length > 0 && (
           <div>
             <p className="text-xs text-gray-400 mb-1">코어별 사용률</p>
             <div className="flex gap-0.5 flex-wrap">
-              {metrics.cpu_per_core.map((core, idx) => (
+              {cpuPerCore.map((core, idx) => (
                 <MiniCoreBar key={idx} percent={core} />
               ))}
             </div>
