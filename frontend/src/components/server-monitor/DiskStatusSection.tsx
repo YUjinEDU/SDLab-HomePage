@@ -70,10 +70,31 @@ function UserUsageTable({
   );
 }
 
+const VISIBLE_MOUNTS = [
+  "/",
+  "/home",
+  "/mnt/hdd1",
+  "/mnt/hdd2",
+  "/mnt/hdd3",
+  "/mnt/ssd1",
+  "/data",
+];
+
+function isVisiblePartition(mountPoint: string): boolean {
+  return VISIBLE_MOUNTS.some(
+    (vm) =>
+      mountPoint === vm || (vm !== "/" && mountPoint.startsWith(vm + "/")),
+  );
+}
+
 export function DiskStatusSection({
   partitions,
   userUsage,
 }: DiskStatusSectionProps) {
+  const visiblePartitions = partitions.filter((p) =>
+    isVisiblePartition(p.mount_point),
+  );
+
   // Group user usage by mount point
   const usersByMount = new Map<string, DiskUsageUser[]>();
   for (const u of userUsage) {
@@ -94,7 +115,7 @@ export function DiskStatusSection({
         디스크
       </h3>
       <div className="space-y-2">
-        {partitions.map((partition) => (
+        {visiblePartitions.map((partition) => (
           <div key={partition.mount_point}>
             <PartitionBar partition={partition} />
             <UserUsageTable
