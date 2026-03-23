@@ -54,7 +54,7 @@ export const getProjects = unstable_cache(
       .eq("is_public", true)
       .order("start_date", { ascending: false });
 
-    if (error) throw error;
+    if (error) return [];
     return (data ?? []).map(toProject);
   },
   ["projects-public"],
@@ -89,7 +89,7 @@ export const getFeaturedProjects = unstable_cache(
       .order("start_date", { ascending: false })
       .limit(3);
 
-    if (error) throw error;
+    if (error) return [];
     return (data ?? []).map(toProject);
   },
   ["projects-featured"],
@@ -106,7 +106,7 @@ export const getActiveProjects = unstable_cache(
       .eq("status", "active")
       .order("start_date", { ascending: false });
 
-    if (error) throw error;
+    if (error) return [];
     return (data ?? []).map(toProject);
   },
   ["projects-active"],
@@ -123,7 +123,7 @@ export const getDemoProjects = unstable_cache(
       .not("demo_url", "is", null)
       .order("is_featured", { ascending: false });
 
-    if (error) throw error;
+    if (error) return [];
     return (data ?? []).map(toProject);
   },
   ["projects-demos"],
@@ -149,7 +149,7 @@ export async function getAllProjects(): Promise<Project[]> {
     .select(PROJ_SELECT)
     .order("start_date", { ascending: false });
 
-  if (error) throw error;
+  if (error) return [];
   return (data ?? []).map(toProject);
 }
 
@@ -172,6 +172,6 @@ export async function getProjectsByMember(
     .in("id", projIds)
     .order("start_date", { ascending: false });
 
-  if (error) throw error;
+  if (error) return [];
   return (data ?? []).map(toProject);
 }

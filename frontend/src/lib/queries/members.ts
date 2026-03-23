@@ -1,23 +1,41 @@
 import { createClient } from "@/lib/db/supabase-server";
 import type { Member } from "@/types";
 
-function toMember(row: Record<string, unknown>): Member {
+type MemberRow = {
+  id: string;
+  slug: string;
+  name_ko: string;
+  name_en: string;
+  group: Member["group"];
+  position: string;
+  department: string;
+  image: string | null;
+  email: string | null;
+  links: Member["links"] | null;
+  research_keywords: string[] | null;
+  bio: string | null;
+  education: Member["education"] | null;
+  career: Member["career"] | null;
+  display_order: number;
+};
+
+function toMember(row: MemberRow): Member {
   return {
-    id: row.id as string,
-    slug: row.slug as string,
-    nameKo: row.name_ko as string,
-    nameEn: row.name_en as string,
-    group: row.group as Member["group"],
-    position: row.position as string,
-    department: row.department as string,
-    image: (row.image as string) ?? null,
-    email: (row.email as string) ?? null,
-    links: (row.links as Member["links"]) ?? {},
-    researchKeywords: (row.research_keywords as string[]) ?? [],
-    bio: (row.bio as string) ?? null,
-    education: (row.education as Member["education"]) ?? [],
-    career: (row.career as Member["career"]) ?? [],
-    displayOrder: row.display_order as number,
+    id: row.id,
+    slug: row.slug,
+    nameKo: row.name_ko,
+    nameEn: row.name_en,
+    group: row.group,
+    position: row.position,
+    department: row.department,
+    image: row.image ?? null,
+    email: row.email ?? null,
+    links: row.links ?? {},
+    researchKeywords: row.research_keywords ?? [],
+    bio: row.bio ?? null,
+    education: row.education ?? [],
+    career: row.career ?? [],
+    displayOrder: row.display_order,
   };
 }
 
@@ -28,7 +46,7 @@ export async function getMembers(): Promise<Member[]> {
     .select("*")
     .order("display_order");
 
-  if (error) throw error;
+  if (error) return [];
   return (data ?? []).map(toMember);
 }
 
@@ -90,7 +108,7 @@ export async function getMemberStubs(): Promise<
     .select("id, name_ko, name_en, slug")
     .order("display_order");
 
-  if (error) throw error;
+  if (error) return [];
   return (data ?? []).map((r) => ({
     id: r.id as string,
     nameKo: r.name_ko as string,
@@ -107,6 +125,6 @@ export async function getStudents(): Promise<Member[]> {
     .neq("group", "professor")
     .order("display_order");
 
-  if (error) throw error;
+  if (error) return [];
   return (data ?? []).map(toMember);
 }

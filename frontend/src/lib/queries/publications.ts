@@ -62,7 +62,7 @@ export const getPublications = unstable_cache(
       .order("year", { ascending: false })
       .order("month", { ascending: false });
 
-    if (error) throw error;
+    if (error) return [];
     return (data ?? []).map(toPublication);
   },
   ["publications-public"],
@@ -97,7 +97,7 @@ export const getFeaturedPublications = unstable_cache(
       .order("year", { ascending: false })
       .limit(3);
 
-    if (error) throw error;
+    if (error) return [];
     return (data ?? []).map(toPublication);
   },
   ["publications-featured"],
@@ -131,7 +131,7 @@ export const getProjectOutputs = (projectId: string) =>
         .in("id", pubIds)
         .order("year", { ascending: false });
 
-      if (error) throw error;
+      if (error) return [];
       return (data ?? []).map(toPublication);
     },
     ["project-outputs", projectId],
@@ -146,7 +146,7 @@ export async function getAllPublications(): Promise<Publication[]> {
     .order("year", { ascending: false })
     .order("month", { ascending: false });
 
-  if (error) throw error;
+  if (error) return [];
   return (data ?? []).map(toPublication);
 }
 
@@ -183,6 +183,6 @@ export async function getPublicationsByMember(
     .in("id", pubIds)
     .order("year", { ascending: false });
 
-  if (error) throw error;
+  if (error) return [];
   return (data ?? []).map(toPublication);
 }

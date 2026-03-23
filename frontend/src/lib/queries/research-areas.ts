@@ -1,18 +1,31 @@
 import { createClient } from "@/lib/db/supabase-server";
 import type { ResearchArea } from "@/types";
 
-function toResearchArea(row: Record<string, unknown>): ResearchArea {
+type ResearchAreaRow = {
+  id: string;
+  slug: string;
+  title: string;
+  short_description: string;
+  full_description: string;
+  icon: string;
+  image: string | null;
+  keywords: string[] | null;
+  applications: string[] | null;
+  display_order: number;
+};
+
+function toResearchArea(row: ResearchAreaRow): ResearchArea {
   return {
-    id: row.id as string,
-    slug: row.slug as string,
-    title: row.title as string,
-    shortDescription: row.short_description as string,
-    fullDescription: row.full_description as string,
-    icon: row.icon as string,
-    image: (row.image as string) ?? null,
-    keywords: (row.keywords as string[]) ?? [],
-    applications: (row.applications as string[]) ?? [],
-    displayOrder: row.display_order as number,
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    shortDescription: row.short_description,
+    fullDescription: row.full_description,
+    icon: row.icon,
+    image: row.image ?? null,
+    keywords: row.keywords ?? [],
+    applications: row.applications ?? [],
+    displayOrder: row.display_order,
   };
 }
 
@@ -23,6 +36,6 @@ export async function getResearchAreas(): Promise<ResearchArea[]> {
     .select("*")
     .order("display_order");
 
-  if (error) throw error;
+  if (error) return [];
   return (data ?? []).map(toResearchArea);
 }

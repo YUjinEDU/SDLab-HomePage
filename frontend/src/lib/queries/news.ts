@@ -36,7 +36,7 @@ export async function getNews(): Promise<NewsItem[]> {
     .order("is_pinned", { ascending: false })
     .order("date", { ascending: false });
 
-  if (error) throw error;
+  if (error) return [];
   return (data ?? []).map(toNewsItem);
 }
 
@@ -73,6 +73,6 @@ export async function getLatestNews(limit = 4): Promise<NewsItem[]> {
     .order("date", { ascending: false })
     .limit(limit);
 
-  if (error) throw error;
+  if (error) return [];
   return (data ?? []).map(toNewsItem);
 }

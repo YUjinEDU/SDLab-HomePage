@@ -57,14 +57,24 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
+  // 역할 기반 접근 제어를 위해 프로필을 한 번만 조회
+  const needsProfile =
+    user &&
+    (request.nextUrl.pathname.startsWith("/professor") ||
+      request.nextUrl.pathname === "/login");
+
+  const profile = needsProfile
+    ? (
+        await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", user!.id)
+          .single()
+      ).data
+    : null;
+
   // /professor 경로는 professor 또는 admin 역할만 접근 가능
   if (user && request.nextUrl.pathname.startsWith("/professor")) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", user.id)
-      .single();
-
     const role = profile?.role;
     if (role !== "professor" && role !== "admin") {
       return NextResponse.redirect(new URL("/internal", request.url));
@@ -73,12 +83,6 @@ export async function updateSession(request: NextRequest) {
 
   // 이미 로그인된 사용자가 로그인 페이지 접근 시 역할에 따라 리다이렉트
   if (request.nextUrl.pathname === "/login" && user) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", user.id)
-      .single();
-
     const role = profile?.role;
     const redirectTo =
       role === "professor" || role === "admin" ? "/professor" : "/internal";
