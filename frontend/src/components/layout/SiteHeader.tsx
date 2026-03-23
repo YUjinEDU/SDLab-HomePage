@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { Container } from "./Container";
 import { MainNavigation } from "@/components/navigation/MainNavigation";
 import { MobileNavigationDrawer } from "@/components/navigation/MobileNavigationDrawer";
+import Image from "next/image";
 import { AuthButton } from "@/components/navigation/AuthButton";
 import { LanguageToggle } from "@/components/navigation/LanguageToggle";
 
@@ -18,8 +19,7 @@ export function SiteHeader() {
       <Container>
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-3">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/logo.png"
               alt="Smart Data Lab"
               width={130}

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -83,9 +84,11 @@ export function MembersPageClient({ professor, students }: Props) {
             <article className="relative max-w-2xl rounded-2xl border border-border bg-white p-6 card-hover group">
               <div className="flex items-start gap-5">
                 {professor.image ? (
-                  <img
+                  <Image
                     src={professor.image}
                     alt={professor.nameKo}
+                    width={80}
+                    height={80}
                     className="w-20 h-20 rounded-2xl object-cover shrink-0 shadow-sm border border-border"
                   />
                 ) : (

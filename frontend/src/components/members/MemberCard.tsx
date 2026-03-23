@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Member, MemberGroup } from "@/types";
@@ -48,9 +49,11 @@ export function MemberCard({ member }: Props) {
       {/* Header: avatar + name/position */}
       <div className="flex items-start gap-3 sm:gap-5">
         {member.image ? (
-          <img
+          <Image
             src={member.image}
             alt={member.nameKo}
+            width={80}
+            height={80}
             className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover shrink-0 shadow-sm border border-border"
           />
         ) : (

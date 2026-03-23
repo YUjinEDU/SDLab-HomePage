@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { NetworkBackground } from "./NetworkBackground";
@@ -6,14 +7,13 @@ export async function HomeHeroSection() {
   const t = await getTranslations("hero");
 
   return (
-    <section className="relative bg-[#fafdfb] text-foreground overflow-hidden min-h-[640px] flex items-center border-b border-border">
+    <section className="relative bg-background text-foreground overflow-hidden min-h-[640px] flex items-center border-b border-border">
       {/* Interactive Node/Network Pattern mapping to "AI in various domains" */}
       <NetworkBackground />
 
       <div className="relative z-10 w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
         <div className="max-w-3xl">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/images/logo.png"
             alt="Smart Data Lab"
             width={160}

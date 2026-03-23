@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import type { Member } from "@/types";
@@ -152,9 +153,11 @@ export function ProfileForm({ member }: Props) {
             </label>
             {member.image && (
               <div className="mb-2">
-                <img
+                <Image
                   src={member.image}
                   alt="현재 프로필 이미지"
+                  width={80}
+                  height={80}
                   className="w-20 h-20 rounded-full object-cover border border-gray-200"
                 />
               </div>

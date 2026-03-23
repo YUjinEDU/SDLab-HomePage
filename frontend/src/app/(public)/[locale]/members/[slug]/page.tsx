@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -112,9 +113,11 @@ export default async function MemberDetailPage({ params }: Props) {
             {/* 사진 */}
             <div className="mb-5">
               {member.image ? (
-                <img
+                <Image
                   src={member.image}
                   alt={member.nameKo}
+                  width={224}
+                  height={224}
                   className="w-40 h-40 sm:w-56 sm:h-56 rounded-2xl object-cover shadow-sm border border-border"
                 />
               ) : (

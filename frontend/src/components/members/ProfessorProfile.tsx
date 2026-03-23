@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Member } from "@/types";
 import { TagBadge } from "@/components/shared/TagBadge";
 import { MemberEducationTimeline } from "./MemberEducationTimeline";
@@ -19,12 +20,12 @@ export function ProfessorProfile({ member }: Props) {
           <div className="absolute -inset-3 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl -z-10 blur-xl"></div>
 
           <div className="w-48 h-60 sm:w-56 sm:h-72 md:w-[280px] md:h-[360px] rounded-2xl overflow-hidden border border-border/80 shadow-2xl shadow-primary/5 bg-surface relative">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/professor.png"
               alt={member.nameKo}
               width={280}
               height={360}
+              priority
               className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
             />
             {/* Inner gradient overlay for depth */}
