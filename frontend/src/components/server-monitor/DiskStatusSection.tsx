@@ -95,19 +95,35 @@ export function DiskStatusSection({
     isVisiblePartition(p.mount_point),
   );
 
-  // Group user usage by mount point
-  const usersByMount = new Map<string, DiskUsageUser[]>();
+  // Group user usage by base_path (e.g. /home, /mnt/hdd1, /mnt/hdd2)
+  const usersByBasePath = new Map<string, DiskUsageUser[]>();
   for (const u of userUsage) {
-    const list = usersByMount.get(u.base_path) ?? [];
+    const list = usersByBasePath.get(u.base_path) ?? [];
     list.push(u);
-    usersByMount.set(u.base_path, list);
+    usersByBasePath.set(u.base_path, list);
   }
 
-  // Build a map of partition total bytes by mount point
-  const totalByMount = new Map<string, number>();
-  for (const p of partitions) {
-    totalByMount.set(p.mount_point, p.total_bytes);
+  // Find the best matching partition for a base_path to get totalBytes
+  // e.g. /home → matches / partition, /mnt/hdd1 → matches /mnt/hdd1 partition
+  function findTotalBytes(basePath: string): number {
+    // Exact match first
+    const exact = partitions.find((p) => p.mount_point === basePath);
+    if (exact) return exact.total_bytes;
+    // Find longest matching parent mount
+    let best: DiskPartition | null = null;
+    for (const p of partitions) {
+      if (
+        basePath.startsWith(p.mount_point) &&
+        (!best || p.mount_point.length > best.mount_point.length)
+      ) {
+        best = p;
+      }
+    }
+    return best?.total_bytes ?? 0;
   }
+
+  // Collect base_paths that are already shown as partitions (to avoid duplicate user tables)
+  const shownUserPaths = new Set<string>();
 
   return (
     <div className="px-5 py-4">
@@ -115,16 +131,33 @@ export function DiskStatusSection({
         디스크
       </h3>
       <div className="space-y-2">
-        {visiblePartitions.map((partition) => (
-          <div key={partition.mount_point}>
-            <PartitionBar partition={partition} />
+        {/* Partition bars + inline user tables for matching base_paths */}
+        {visiblePartitions.map((partition) => {
+          const users = usersByBasePath.get(partition.mount_point) ?? [];
+          if (users.length > 0) shownUserPaths.add(partition.mount_point);
+          return (
+            <div key={partition.mount_point}>
+              <PartitionBar partition={partition} />
+              <UserUsageTable
+                mountPoint={partition.mount_point}
+                users={users}
+                totalBytes={partition.total_bytes}
+              />
+            </div>
+          );
+        })}
+
+        {/* Standalone user tables for base_paths without matching partitions (e.g. /home on root) */}
+        {Array.from(usersByBasePath.entries())
+          .filter(([basePath]) => !shownUserPaths.has(basePath))
+          .map(([basePath, users]) => (
             <UserUsageTable
-              mountPoint={partition.mount_point}
-              users={usersByMount.get(partition.mount_point) ?? []}
-              totalBytes={totalByMount.get(partition.mount_point) ?? 0}
+              key={basePath}
+              mountPoint={basePath}
+              users={users}
+              totalBytes={findTotalBytes(basePath)}
             />
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
