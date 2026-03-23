@@ -1,12 +1,12 @@
 import Link from "next/link";
 
-interface SectionHeaderProps {
+type SectionHeaderProps = {
   title: string;
   description?: string;
   actionLabel?: string;
   actionHref?: string;
   showDivider?: boolean;
-}
+};
 
 export function SectionHeader({
   title,

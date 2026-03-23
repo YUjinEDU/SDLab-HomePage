@@ -1,7 +1,7 @@
-interface TagBadgeProps {
+type TagBadgeProps = {
   label: string;
   variant?: "default" | "primary" | "muted";
-}
+};
 
 const variantStyles: Record<string, string> = {
   default: "text-text-secondary bg-surface px-2 py-0.5 rounded",

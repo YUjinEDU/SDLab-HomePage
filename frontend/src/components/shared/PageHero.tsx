@@ -1,11 +1,11 @@
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/layout/Container";
 
-interface PageHeroProps {
+type PageHeroProps = {
   title: string;
   description?: string;
   breadcrumb?: string;
-}
+};
 
 export function PageHero({ title, description, breadcrumb }: PageHeroProps) {
   const parts = title.split(" ");

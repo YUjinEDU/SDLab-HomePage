@@ -1,10 +1,10 @@
 "use client";
 
-interface FilterBarProps {
+type FilterBarProps = {
   filters: { key: string; label: string; options: string[] }[];
   selected: Record<string, string>;
   onChange: (key: string, value: string) => void;
-}
+};
 
 export function FilterBar({ filters, selected, onChange }: FilterBarProps) {
   return (

@@ -1,6 +1,6 @@
-interface StatusBadgeProps {
+type StatusBadgeProps = {
   status: "active" | "completed" | "planned" | "archived";
-}
+};
 
 const statusConfig: Record<
   string,

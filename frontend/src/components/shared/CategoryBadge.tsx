@@ -1,6 +1,6 @@
-interface CategoryBadgeProps {
+type CategoryBadgeProps = {
   category: string;
-}
+};
 
 export function CategoryBadge({ category }: CategoryBadgeProps) {
   return (

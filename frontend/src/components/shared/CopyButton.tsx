@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-interface CopyButtonProps {
+type CopyButtonProps = {
   text: string;
   label?: string;
-}
+};
 
 export function CopyButton({ text, label = "복사" }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);

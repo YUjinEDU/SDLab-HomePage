@@ -1,7 +1,7 @@
-interface ExternalLinkButtonProps {
+type ExternalLinkButtonProps = {
   href: string;
   label: string;
-}
+};
 
 export function ExternalLinkButton({ href, label }: ExternalLinkButtonProps) {
   return (

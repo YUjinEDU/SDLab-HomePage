@@ -2,12 +2,12 @@
 
 import { useTranslations } from "next-intl";
 
-interface PaginationProps {
+type PaginationProps = {
   total: number;
   page: number;
   perPage: number;
   onChange: (page: number) => void;
-}
+};
 
 export function Pagination({
   total,

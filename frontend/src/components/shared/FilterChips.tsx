@@ -1,10 +1,10 @@
 "use client";
 
-interface FilterChipsProps {
+type FilterChipsProps = {
   chips: { key: string; label: string; value: string }[];
   onRemove: (key: string) => void;
   onClear: () => void;
-}
+};
 
 export function FilterChips({ chips, onRemove, onClear }: FilterChipsProps) {
   if (chips.length === 0) return null;
