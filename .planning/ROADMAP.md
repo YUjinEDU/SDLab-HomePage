@@ -169,23 +169,50 @@ Plans:
 - [ ] 08-01-PLAN.md — PatentCard 컴포넌트 + patents 쿼리 함수 (새 테이블 기반)
 - [ ] 08-02-PLAN.md — 특허 페이지 탭 필터 + 특허 상세 페이지
 
+### Phase 9: Comprehensive code quality, security, and convention fixes
+
+**Goal:** 코드 리뷰에서 발견된 CRITICAL/IMPORTANT 보안 취약점, 컨벤션 위반, 코드 품질 이슈를 모두 수정하여 코드베이스를 강화한다
+**Depends on:** Independent (can run in parallel with Phases 6-8)
+**Requirements**: CQ-01, CQ-02, CQ-03, CQ-04, CQ-05, CQ-06, CQ-07, CQ-08, CQ-09, CQ-10, CQ-11, CQ-12, CQ-13, CQ-14, CQ-15, CQ-16, CQ-17, CQ-18, CQ-19, CQ-20, CQ-21, CQ-22, CQ-23, CQ-24, CQ-25, CQ-26
+**Success Criteria** (what must be TRUE):
+
+1. Middleware returns 503 when Supabase URL is missing instead of silently passing requests
+2. Next.js CVEs patched (>=16.1.7), security headers configured
+3. All server actions return consistent ActionResult type with input validation
+4. All shared components use `type` (not `interface`) per project convention
+5. Query mappers use typed parameters instead of Record<string, unknown>
+6. Login redirect is role-aware, profile update uses FK, middleware deduped
+
+**Plans**: 5 plans
+
+Plans:
+
+- [ ] 09-01-PLAN.md — Security critical fixes (middleware bypass, CVE upgrade, .gitignore, security headers, env validation)
+- [ ] 09-02-PLAN.md — Convention & style fixes (interface->type, color tokens, hardcoded colors)
+- [ ] 09-03-PLAN.md — HTML/accessibility fixes (lang attribute, next/image migration, duplicate ContactForm)
+- [ ] 09-04-PLAN.md — Server action hardening (ActionResult type, input validation, revalidateTag wrapper, error fixes)
+- [ ] 09-05-PLAN.md — Auth & data layer cleanup (login redirect, profile FK, middleware dedup, typed mappers)
+
 ## Progress
 
 **Execution Order:** 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 (Phase 8 can start after Phase 5; Phases 7 and 8 are independent after their dependencies)
+(Phase 9 is independent — can run in parallel with Phases 6-8)
 
-| Phase                     | Milestone | Plans Complete | Status      | Completed  |
-| ------------------------- | --------- | -------------- | ----------- | ---------- |
-| 1. Security Foundation    | v1.0      | 4/4            | Complete    | 2026-03-15 |
-| 2. Content Visibility     | v1.0      | 3/3            | Complete    | 2026-03-15 |
-| 3. Project–Output Linking | v1.0      | 3/3            | Complete    | 2026-03-15 |
-| 4. Professor Portal UX    | v1.0      | 2/2            | Complete    | 2026-03-15 |
-| 5. DB Schema              | v1.1      | 1/1            | Complete    | 2026-03-15 |
-| 6. Data Pipeline          | 1/2       | In Progress    |             | -          |
-| 7. Publications UI        | v1.1      | 0/2            | Not started | -          |
-| 8. Patents UI             | v1.1      | 0/2            | Not started | -          |
+| Phase                      | Milestone | Plans Complete | Status      | Completed  |
+| -------------------------- | --------- | -------------- | ----------- | ---------- |
+| 1. Security Foundation     | v1.0      | 4/4            | Complete    | 2026-03-15 |
+| 2. Content Visibility      | v1.0      | 3/3            | Complete    | 2026-03-15 |
+| 3. Project–Output Linking  | v1.0      | 3/3            | Complete    | 2026-03-15 |
+| 4. Professor Portal UX     | v1.0      | 2/2            | Complete    | 2026-03-15 |
+| 5. DB Schema               | v1.1      | 1/1            | Complete    | 2026-03-15 |
+| 6. Data Pipeline           | v1.1      | 0/2            | In Progress | -          |
+| 7. Publications UI         | v1.1      | 0/2            | Not started | -          |
+| 8. Patents UI              | v1.1      | 0/2            | Not started | -          |
+| 9. Code Quality & Security | v1.1      | 0/5            | Not started | -          |
 
 ---
 
 _Roadmap created: 2026-03-15 (v1.0)_
 _v1.1 phases added: 2026-03-16_
+_Phase 9 planned: 2026-03-23_
