@@ -6,7 +6,17 @@ const PROTECTED_PATHS = ["/professor", "/internal"];
 export async function updateSession(request: NextRequest) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   if (!supabaseUrl || !supabaseUrl.startsWith("http")) {
-    return NextResponse.next({ request });
+    console.error(
+      "CRITICAL: NEXT_PUBLIC_SUPABASE_URL is missing or invalid. " +
+        "Set this environment variable before starting the server. " +
+        "See .env.example for required variables.",
+    );
+    return new NextResponse(
+      "Service Unavailable: Database configuration error",
+      {
+        status: 503,
+      },
+    );
   }
 
   let supabaseResponse = NextResponse.next({ request });
