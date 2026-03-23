@@ -387,25 +387,28 @@ def collect_disk_usage_users():
         if not subdirs:
             continue
 
-        cmd = ["du", "-sb", "--"] + subdirs
-        try:
-            result = subprocess.run(
-                cmd, capture_output=True, text=True, timeout=600
-            )
-        except FileNotFoundError:
-            logger.warning("du command not found; skipping disk usage collection.")
-            break
-        except subprocess.TimeoutExpired:
-            logger.warning("du timed out on %s", base_path)
-            continue
+        # Run du per-directory to avoid timeout on large filesystems
+        for subdir in subdirs:
+            username = Path(subdir).name
+            cmd = ["du", "-sb", "--", subdir]
+            try:
+                result = subprocess.run(
+                    cmd, capture_output=True, text=True, timeout=300
+                )
+            except FileNotFoundError:
+                logger.warning("du command not found; skipping disk usage collection.")
+                break
+            except subprocess.TimeoutExpired:
+                logger.warning("du timed out on %s/%s", base_path, username)
+                continue
 
-        for line in result.stdout.strip().splitlines():
+            line = result.stdout.strip()
+            if not line:
+                continue
             parts = line.split("\t", 1)
             if len(parts) < 2:
                 continue
             bytes_used = _safe_int(parts[0])
-            dir_path = parts[1].strip()
-            username = Path(dir_path).name
             rows.append({
                 "server_id": SERVER_ID,
                 "base_path": base_path,
