@@ -57,7 +57,7 @@ frontend/src/
 ### Styling
 
 - Tailwind CSS utility-first (v4 @theme inline 사용)
-- 밝은 배경(#FAFAF8) + 차분한 포레스트 그린(#2D6A4F) 포인트
+- 밝은 배경(#FAFAF8) + 에메랄드 그린(#059669) 포인트
 - 카드형 정보 구조, 반응형 필수 (모바일 우선)
 - 다크 테마 지원 안 함 (밝은 테마만)
 
