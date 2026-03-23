@@ -94,6 +94,68 @@ def supabase_post(table, data):
         return None
 
 
+def supabase_post_upsert(table, data, on_conflict):
+    """POST with upsert (ON CONFLICT DO NOTHING) via Prefer header."""
+    url = "{}/rest/v1/{}".format(SUPABASE_URL, table)
+    headers = _headers()
+    headers["Prefer"] = "resolution=ignore-duplicates,return=minimal"
+    try:
+        resp = requests.post(
+            url,
+            headers=headers,
+            json=data,
+            params={"on_conflict": on_conflict},
+            timeout=15,
+        )
+        if resp.status_code >= 400:
+            logger.error(
+                "Supabase UPSERT %s failed (HTTP %s): %s",
+                table,
+                resp.status_code,
+                resp.text[:200],
+            )
+        return resp
+    except requests.RequestException as exc:
+        logger.error("Supabase UPSERT %s request error: %s", table, exc)
+        return None
+
+
+def supabase_patch(table, params, data):
+    """PATCH rows in a Supabase table matching *params*."""
+    url = "{}/rest/v1/{}".format(SUPABASE_URL, table)
+    try:
+        resp = requests.patch(url, headers=_headers(), params=params, json=data, timeout=15)
+        if resp.status_code >= 400:
+            logger.error(
+                "Supabase PATCH %s failed (HTTP %s): %s",
+                table,
+                resp.status_code,
+                resp.text[:200],
+            )
+        return resp
+    except requests.RequestException as exc:
+        logger.error("Supabase PATCH %s request error: %s", table, exc)
+        return None
+
+
+def supabase_get(table, params):
+    """GET rows from a Supabase table matching *params*. Returns list or None."""
+    url = "{}/rest/v1/{}".format(SUPABASE_URL, table)
+    try:
+        resp = requests.get(url, headers=_headers(), params=params, timeout=15)
+        if resp.status_code >= 400:
+            logger.error(
+                "Supabase GET %s failed (HTTP %s)",
+                table,
+                resp.status_code,
+            )
+            return None
+        return resp.json()
+    except requests.RequestException as exc:
+        logger.error("Supabase GET %s request error: %s", table, exc)
+        return None
+
+
 def supabase_delete(table, params):
     """DELETE rows from a Supabase table matching *params* (query string dict)."""
     url = "{}/rest/v1/{}".format(SUPABASE_URL, table)
@@ -285,6 +347,42 @@ def collect_gpu_processes():
     return rows
 
 
+def log_gpu_usage(gpu_procs):
+    """Insert aggregated GPU usage into gpu_usage_log (one row per user per GPU)."""
+    if not gpu_procs:
+        return
+
+    ts = now_iso()
+    # Aggregate memory per (username, gpu_index)
+    agg = {}
+    for proc in gpu_procs:
+        username = proc.get("username", "")
+        if not username:
+            continue
+        gpu_index = proc.get("gpu_index", 0)
+        key = (username, gpu_index)
+        if key not in agg:
+            agg[key] = {
+                "memory_used_mb": 0,
+                "process_name": proc.get("process_name", ""),
+            }
+        agg[key]["memory_used_mb"] += int(proc.get("gpu_memory_used_mb") or 0)
+
+    rows = [
+        {
+            "server_id": SERVER_ID,
+            "username": username,
+            "gpu_index": gpu_index,
+            "recorded_at": ts,
+            "memory_used_mb": data["memory_used_mb"],
+            "process_name": data["process_name"],
+        }
+        for (username, gpu_index), data in agg.items()
+    ]
+    if rows:
+        supabase_post("gpu_usage_log", rows)
+
+
 # ---------------------------------------------------------------------------
 # CPU / Memory metrics
 # ---------------------------------------------------------------------------
@@ -424,8 +522,40 @@ def collect_disk_usage_users():
 
 
 # ---------------------------------------------------------------------------
-# SSH sessions
+# SSH sessions (snapshot + history tracking)
 # ---------------------------------------------------------------------------
+
+# In-memory state: maps (username, terminal, remote_host) → login_at ISO string
+_prev_ssh_sessions = {}
+
+
+def _init_ssh_session_state():
+    """Load open SSH sessions from history table to initialise diff state on startup.
+
+    This prevents duplicate inserts if the agent is restarted while users are
+    logged in.
+    """
+    global _prev_ssh_sessions
+    rows = supabase_get(
+        "ssh_session_history",
+        {
+            "server_id": "eq." + SERVER_ID,
+            "logout_at": "is.null",
+            "select": "username,terminal,remote_host,login_at",
+        },
+    )
+    if rows:
+        _prev_ssh_sessions = {
+            (
+                r.get("username", ""),
+                r.get("terminal") or "",
+                r.get("remote_host") or "",
+            ): r["login_at"]
+            for r in rows
+        }
+        logger.info(
+            "Loaded %d open SSH sessions from history.", len(_prev_ssh_sessions)
+        )
 
 
 def collect_ssh_sessions():
@@ -451,6 +581,61 @@ def collect_ssh_sessions():
             "recorded_at": ts,
         })
     return rows
+
+
+def update_ssh_session_history(current_sessions):
+    """Diff current SSH sessions against previous state, recording events.
+
+    Inserts rows for new logins (with upsert to handle restarts gracefully)
+    and patches logout_at for ended sessions.
+    """
+    global _prev_ssh_sessions
+
+    ts = now_iso()
+    current = {
+        (
+            r["username"],
+            r.get("terminal", "") or "",
+            r.get("remote_host", "") or "",
+        ): r["login_at"]
+        for r in current_sessions
+    }
+
+    # New sessions: present now but not before
+    for key, login_at in current.items():
+        if key not in _prev_ssh_sessions:
+            username, terminal, remote_host = key
+            supabase_post_upsert(
+                "ssh_session_history",
+                {
+                    "server_id": SERVER_ID,
+                    "username": username,
+                    "terminal": terminal,
+                    "remote_host": remote_host,
+                    "login_at": login_at,
+                },
+                on_conflict="server_id,username,terminal,login_at",
+            )
+            logger.info("SSH login: %s from %s", username, remote_host or "local")
+
+    # Ended sessions: present before but not now
+    for key, login_at in _prev_ssh_sessions.items():
+        if key not in current:
+            username, terminal, remote_host = key
+            supabase_patch(
+                "ssh_session_history",
+                {
+                    "server_id": "eq." + SERVER_ID,
+                    "username": "eq." + username,
+                    "terminal": "eq." + terminal,
+                    "login_at": "eq." + login_at,
+                    "logout_at": "is.null",
+                },
+                {"logout_at": ts},
+            )
+            logger.info("SSH logout: %s", username)
+
+    _prev_ssh_sessions = current
 
 
 # ---------------------------------------------------------------------------
@@ -493,10 +678,11 @@ def run_collection_cycle():
     except Exception as exc:
         logger.error("gpu_metrics collection failed: %s", exc)
 
-    # ---- GPU processes (snapshot) ----
+    # ---- GPU processes (snapshot) + usage log ----
     try:
         gpu_procs = collect_gpu_processes()
         _replace_snapshot("gpu_processes", gpu_procs)
+        log_gpu_usage(gpu_procs)
     except Exception as exc:
         logger.error("gpu_processes collection failed: %s", exc)
 
@@ -508,10 +694,11 @@ def run_collection_cycle():
     except Exception as exc:
         logger.error("disk_partitions collection failed: %s", exc)
 
-    # ---- SSH sessions (snapshot) ----
+    # ---- SSH sessions (snapshot) + history tracking ----
     try:
         ssh_rows = collect_ssh_sessions()
         _replace_snapshot("ssh_sessions", ssh_rows)
+        update_ssh_session_history(ssh_rows)
     except Exception as exc:
         logger.error("ssh_sessions collection failed: %s", exc)
 
@@ -571,6 +758,9 @@ def main():
     logger.info("  Interval     : %ds", COLLECTION_INTERVAL)
     logger.info("  Disk paths   : %s", ", ".join(DISK_USAGE_PATHS))
     logger.info("  Disk interval: %ds", DISK_USAGE_INTERVAL)
+
+    # Initialise SSH session diff state from DB to handle restarts gracefully
+    _init_ssh_session_state()
 
     while True:
         try:

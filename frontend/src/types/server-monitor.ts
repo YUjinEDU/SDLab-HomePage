@@ -96,3 +96,32 @@ export type ServerMonitorData = {
   diskUsageByUser: DiskUsageUser[];
   sshSessions: SshSession[];
 };
+
+export type SshSessionHistory = {
+  id: number;
+  server_id: string;
+  username: string;
+  terminal: string;
+  remote_host: string;
+  login_at: string;
+  logout_at: string | null;
+  created_at: string;
+};
+
+export type GpuUsageLog = {
+  id: number;
+  server_id: string;
+  username: string;
+  gpu_index: number;
+  recorded_at: string;
+  memory_used_mb: number | null;
+  process_name: string | null;
+};
+
+export type GpuUserRanking = {
+  username: string;
+  server_name: string;
+  server_id: string;
+  minutes_used: number;
+  max_memory_mb: number;
+};

@@ -8,6 +8,9 @@ import type {
   DiskUsageUser,
   SshSession,
   ServerMonitorData,
+  SshSessionHistory,
+  GpuUsageLog,
+  GpuUserRanking,
 } from "@/types/server-monitor";
 
 export async function getServers(): Promise<Server[]> {
@@ -141,6 +144,107 @@ export async function getSshSessions(serverId: string): Promise<SshSession[]> {
 
   if (error) return [];
   return (data ?? []) as SshSession[];
+}
+
+// ---------------------------------------------------------------------------
+// Usage history queries (admin-only analytics)
+// ---------------------------------------------------------------------------
+
+type UsagePeriod = "week" | "month" | "prev_month";
+
+function getPeriodBounds(period: UsagePeriod): {
+  since: string;
+  until?: string;
+} {
+  const now = new Date();
+  if (period === "week") {
+    const d = new Date(now);
+    d.setDate(d.getDate() - 7);
+    return { since: d.toISOString() };
+  }
+  if (period === "month") {
+    const start = new Date(now.getFullYear(), now.getMonth(), 1);
+    return { since: start.toISOString() };
+  }
+  // prev_month
+  const start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const end = new Date(now.getFullYear(), now.getMonth(), 1);
+  return { since: start.toISOString(), until: end.toISOString() };
+}
+
+export async function getGpuUsageRanking(
+  period: UsagePeriod,
+  serverId?: string,
+): Promise<GpuUserRanking[]> {
+  const supabase = await createClient();
+  const { since, until } = getPeriodBounds(period);
+
+  let query = supabase
+    .from("gpu_usage_log")
+    .select("username,server_id,memory_used_mb")
+    .gte("recorded_at", since);
+
+  if (until) query = query.lt("recorded_at", until);
+  if (serverId) query = query.eq("server_id", serverId);
+
+  const { data, error } = await query;
+  if (error || !data) return [];
+
+  const servers = await getServers();
+  const serverMap = new Map(servers.map((s) => [s.id, s.name]));
+
+  // Aggregate by (server_id, username): count minutes, track max memory
+  const agg = new Map<
+    string,
+    { minutes: number; maxMemory: number; sid: string }
+  >();
+  for (const row of data as GpuUsageLog[]) {
+    const key = `${row.server_id}:${row.username}`;
+    const existing = agg.get(key);
+    const mem = row.memory_used_mb ?? 0;
+    if (existing) {
+      existing.minutes += 1;
+      if (mem > existing.maxMemory) existing.maxMemory = mem;
+    } else {
+      agg.set(key, { minutes: 1, maxMemory: mem, sid: row.server_id });
+    }
+  }
+
+  return Array.from(agg.entries())
+    .map(([key, val]) => ({
+      username: key.split(":")[1],
+      server_id: val.sid,
+      server_name: serverMap.get(val.sid) ?? val.sid,
+      minutes_used: val.minutes,
+      max_memory_mb: val.maxMemory,
+    }))
+    .sort((a, b) => b.minutes_used - a.minutes_used);
+}
+
+export async function getSshSessionHistory(
+  serverId?: string,
+  limit = 200,
+): Promise<(SshSessionHistory & { server_name: string })[]> {
+  const supabase = await createClient();
+
+  let query = supabase
+    .from("ssh_session_history")
+    .select("*")
+    .order("login_at", { ascending: false })
+    .limit(limit);
+
+  if (serverId) query = query.eq("server_id", serverId);
+
+  const { data, error } = await query;
+  if (error || !data) return [];
+
+  const servers = await getServers();
+  const serverMap = new Map(servers.map((s) => [s.id, s.name]));
+
+  return (data as SshSessionHistory[]).map((row) => ({
+    ...row,
+    server_name: serverMap.get(row.server_id) ?? row.server_id,
+  }));
 }
 
 export async function getServerMonitorData(): Promise<ServerMonitorData[]> {
