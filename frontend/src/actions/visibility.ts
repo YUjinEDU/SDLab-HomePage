@@ -1,13 +1,14 @@
 "use server";
 
 import { createClient } from "@/lib/db/supabase-server";
-import { revalidateTag } from "next/cache";
+import { safeRevalidateTag } from "@/lib/utils/revalidate";
 import { assertRole } from "@/lib/permissions";
+import type { ActionResult } from "@/types/action";
 
 export async function togglePublicationVisibility(
   id: string,
   isPublic: boolean,
-) {
+): Promise<ActionResult> {
   const authError = await assertRole("professor");
   if (authError) return authError;
 
@@ -19,12 +20,14 @@ export async function togglePublicationVisibility(
 
   if (error) return { error: error.message };
 
-  // @ts-expect-error: Next.js 16 type requires 2 args but revalidateTag("tag") works at runtime
-  revalidateTag("publications");
+  safeRevalidateTag("publications");
   return { success: true };
 }
 
-export async function toggleProjectVisibility(id: string, isPublic: boolean) {
+export async function toggleProjectVisibility(
+  id: string,
+  isPublic: boolean,
+): Promise<ActionResult> {
   const authError = await assertRole("professor");
   if (authError) return authError;
 
@@ -36,7 +39,6 @@ export async function toggleProjectVisibility(id: string, isPublic: boolean) {
 
   if (error) return { error: error.message };
 
-  // @ts-expect-error: Next.js 16 type requires 2 args but revalidateTag("tag") works at runtime
-  revalidateTag("projects");
+  safeRevalidateTag("projects");
   return { success: true };
 }

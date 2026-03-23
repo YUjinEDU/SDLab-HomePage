@@ -2,24 +2,45 @@
 
 import { createClient } from "@/lib/db/supabase-server";
 import { generateSlug } from "@/lib/utils/slug";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
+import { safeRevalidateTag } from "@/lib/utils/revalidate";
 import { assertRole } from "@/lib/permissions";
+import type { ActionResult } from "@/types/action";
 
-export async function createProject(formData: FormData) {
+function requireString(formData: FormData, key: string): string {
+  const value = formData.get(key);
+  if (typeof value !== "string" || !value.trim()) {
+    throw new Error(`${key} is required`);
+  }
+  return value.trim();
+}
+
+export async function createProject(formData: FormData): Promise<ActionResult> {
   const authError = await assertRole("professor");
   if (authError) return authError;
 
   const supabase = await createClient();
 
-  const title = formData.get("title") as string;
-  const status = formData.get("status") as string;
-  const category = formData.get("category") as string;
-  const shortDescription = formData.get("shortDescription") as string;
+  let title: string;
+  let status: string;
+  let category: string;
+  let shortDescription: string;
+  let organization: string;
+  let startDate: string;
+  try {
+    title = requireString(formData, "title");
+    status = requireString(formData, "status");
+    category = requireString(formData, "category");
+    shortDescription = requireString(formData, "shortDescription");
+    organization = requireString(formData, "organization");
+    startDate = requireString(formData, "startDate");
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
+
   const fullDescription = (formData.get("fullDescription") as string) || null;
-  const organization = formData.get("organization") as string;
   const programType = (formData.get("programType") as string) || null;
   const budget = (formData.get("budget") as string) || null;
-  const startDate = formData.get("startDate") as string;
   const endDate = (formData.get("endDate") as string) || null;
   const tagsRaw = formData.get("tags") as string;
   const demoUrl = (formData.get("demoUrl") as string) || null;
@@ -76,28 +97,41 @@ export async function createProject(formData: FormData) {
     );
   }
 
-  // @ts-expect-error: Next.js 16 type requires 2 args but revalidateTag("tag") works at runtime
-  revalidateTag("projects");
+  safeRevalidateTag("projects");
   revalidatePath("/professor/projects");
   revalidatePath("/projects");
-  return { success: true, id };
+  return { success: true };
 }
 
-export async function updateProject(id: string, formData: FormData) {
+export async function updateProject(
+  id: string,
+  formData: FormData,
+): Promise<ActionResult> {
   const authError = await assertRole("professor");
   if (authError) return authError;
 
   const supabase = await createClient();
 
-  const title = formData.get("title") as string;
-  const status = formData.get("status") as string;
-  const category = formData.get("category") as string;
-  const shortDescription = formData.get("shortDescription") as string;
+  let title: string;
+  let status: string;
+  let category: string;
+  let shortDescription: string;
+  let organization: string;
+  let startDate: string;
+  try {
+    title = requireString(formData, "title");
+    status = requireString(formData, "status");
+    category = requireString(formData, "category");
+    shortDescription = requireString(formData, "shortDescription");
+    organization = requireString(formData, "organization");
+    startDate = requireString(formData, "startDate");
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
+
   const fullDescription = (formData.get("fullDescription") as string) || null;
-  const organization = formData.get("organization") as string;
   const programType = (formData.get("programType") as string) || null;
   const budget = (formData.get("budget") as string) || null;
-  const startDate = formData.get("startDate") as string;
   const endDate = (formData.get("endDate") as string) || null;
   const tagsRaw = formData.get("tags") as string;
   const demoUrl = (formData.get("demoUrl") as string) || null;
@@ -154,14 +188,13 @@ export async function updateProject(id: string, formData: FormData) {
     );
   }
 
-  // @ts-expect-error: Next.js 16 type requires 2 args but revalidateTag("tag") works at runtime
-  revalidateTag("projects");
+  safeRevalidateTag("projects");
   revalidatePath("/professor/projects");
   revalidatePath("/projects");
   return { success: true };
 }
 
-export async function deleteProject(id: string) {
+export async function deleteProject(id: string): Promise<ActionResult> {
   const authError = await assertRole("professor");
   if (authError) return authError;
 
@@ -174,8 +207,7 @@ export async function deleteProject(id: string) {
 
   if (error) return { error: error.message };
 
-  // @ts-expect-error: Next.js 16 type requires 2 args but revalidateTag("tag") works at runtime
-  revalidateTag("projects");
+  safeRevalidateTag("projects");
   revalidatePath("/professor/projects");
   revalidatePath("/projects");
   return { success: true };

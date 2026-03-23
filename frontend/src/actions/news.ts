@@ -4,17 +4,34 @@ import { createClient } from "@/lib/db/supabase-server";
 import { generateSlug } from "@/lib/utils/slug";
 import { revalidatePath } from "next/cache";
 import { assertRole } from "@/lib/permissions";
+import type { ActionResult } from "@/types/action";
 
-export async function createNews(formData: FormData) {
+function requireString(formData: FormData, key: string): string {
+  const value = formData.get(key);
+  if (typeof value !== "string" || !value.trim()) {
+    throw new Error(`${key} is required`);
+  }
+  return value.trim();
+}
+
+export async function createNews(formData: FormData): Promise<ActionResult> {
   const authError = await assertRole("professor");
   if (authError) return authError;
 
   const supabase = await createClient();
 
-  const title = formData.get("title") as string;
-  const summary = formData.get("summary") as string;
-  const category = formData.get("category") as string;
-  const date = formData.get("date") as string;
+  let title: string;
+  let category: string;
+  let date: string;
+  try {
+    title = requireString(formData, "title");
+    category = requireString(formData, "category");
+    date = requireString(formData, "date");
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
+
+  const summary = (formData.get("summary") as string) || "";
   const isPinned = formData.get("isPinned") === "on";
 
   const projectIds = formData.getAll("projectIds") as string[];
@@ -55,19 +72,30 @@ export async function createNews(formData: FormData) {
 
   revalidatePath("/professor/news");
   revalidatePath("/");
-  return { success: true, id };
+  return { success: true };
 }
 
-export async function updateNews(id: string, formData: FormData) {
+export async function updateNews(
+  id: string,
+  formData: FormData,
+): Promise<ActionResult> {
   const authError = await assertRole("professor");
   if (authError) return authError;
 
   const supabase = await createClient();
 
-  const title = formData.get("title") as string;
-  const summary = formData.get("summary") as string;
-  const category = formData.get("category") as string;
-  const date = formData.get("date") as string;
+  let title: string;
+  let category: string;
+  let date: string;
+  try {
+    title = requireString(formData, "title");
+    category = requireString(formData, "category");
+    date = requireString(formData, "date");
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
+
+  const summary = (formData.get("summary") as string) || "";
   const isPinned = formData.get("isPinned") === "on";
 
   const projectIds = formData.getAll("projectIds") as string[];
@@ -111,15 +139,13 @@ export async function updateNews(id: string, formData: FormData) {
   return { success: true };
 }
 
-export async function deleteNews(id: string) {
+export async function deleteNews(id: string): Promise<ActionResult> {
   const authError = await assertRole("professor");
   if (authError) return authError;
 
   const supabase = await createClient();
 
-  await supabase.from("news_projects").delete().eq("news_id", id);
-  await supabase.from("news_publications").delete().eq("news_id", id);
-
+  // Join tables use ON DELETE CASCADE — no manual deletion needed
   const { error } = await supabase.from("news").delete().eq("id", id);
 
   if (error) return { error: error.message };

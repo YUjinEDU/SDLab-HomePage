@@ -165,7 +165,13 @@ describe("VIS-02 — revalidateTag cache invalidation on mutation", () => {
   describe("publications cache tag", () => {
     it("createPublication() must call revalidateTag('publications')", async () => {
       await createPublication(
-        makeFormData({ title: "Test", year: "2024", type: "journal" }),
+        makeFormData({
+          title: "Test",
+          year: "2024",
+          type: "journal",
+          authors: "Author A",
+          venue: "ICSE",
+        }),
       );
       expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("publications");
     });
@@ -173,7 +179,13 @@ describe("VIS-02 — revalidateTag cache invalidation on mutation", () => {
     it("updatePublication() must call revalidateTag('publications')", async () => {
       await updatePublication(
         "some-id",
-        makeFormData({ title: "Test", year: "2024", type: "journal" }),
+        makeFormData({
+          title: "Test",
+          year: "2024",
+          type: "journal",
+          authors: "Author A",
+          venue: "ICSE",
+        }),
       );
       expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("publications");
     });

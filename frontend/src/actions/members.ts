@@ -3,6 +3,15 @@
 import { createClient } from "@/lib/db/supabase-server";
 import { revalidatePath } from "next/cache";
 import { assertRole } from "@/lib/permissions";
+import type { ActionResult } from "@/types/action";
+
+function requireString(formData: FormData, key: string): string {
+  const value = formData.get(key);
+  if (typeof value !== "string" || !value.trim()) {
+    throw new Error(`${key} is required`);
+  }
+  return value.trim();
+}
 
 function extractLinks(formData: FormData) {
   const links: Record<string, string> = {};
@@ -41,17 +50,27 @@ function generateSlug(nameEn: string): string {
     .replace(/-+/g, "-");
 }
 
-export async function createMember(formData: FormData) {
+export async function createMember(formData: FormData): Promise<ActionResult> {
   const authError = await assertRole("professor");
   if (authError) return authError;
 
   const supabase = await createClient();
 
-  const nameKo = formData.get("nameKo") as string;
-  const nameEn = formData.get("nameEn") as string;
-  const group = formData.get("group") as string;
-  const position = formData.get("position") as string;
-  const department = formData.get("department") as string;
+  let nameKo: string;
+  let nameEn: string;
+  let group: string;
+  let position: string;
+  let department: string;
+  try {
+    nameKo = requireString(formData, "nameKo");
+    nameEn = requireString(formData, "nameEn");
+    group = requireString(formData, "group");
+    position = requireString(formData, "position");
+    department = requireString(formData, "department");
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
+
   const email = (formData.get("email") as string) || null;
   const image = (formData.get("image") as string) || null;
   const bio = (formData.get("bio") as string) || null;
@@ -102,17 +121,30 @@ export async function createMember(formData: FormData) {
   return { success: true };
 }
 
-export async function updateMember(id: string, formData: FormData) {
+export async function updateMember(
+  id: string,
+  formData: FormData,
+): Promise<ActionResult> {
   const authError = await assertRole("professor");
   if (authError) return authError;
 
   const supabase = await createClient();
 
-  const nameKo = formData.get("nameKo") as string;
-  const nameEn = formData.get("nameEn") as string;
-  const group = formData.get("group") as string;
-  const position = formData.get("position") as string;
-  const department = formData.get("department") as string;
+  let nameKo: string;
+  let nameEn: string;
+  let group: string;
+  let position: string;
+  let department: string;
+  try {
+    nameKo = requireString(formData, "nameKo");
+    nameEn = requireString(formData, "nameEn");
+    group = requireString(formData, "group");
+    position = requireString(formData, "position");
+    department = requireString(formData, "department");
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
+
   const email = (formData.get("email") as string) || null;
   const image = (formData.get("image") as string) || null;
   const bio = (formData.get("bio") as string) || null;
@@ -161,7 +193,7 @@ export async function updateMember(id: string, formData: FormData) {
   return { success: true };
 }
 
-export async function deleteMember(id: string) {
+export async function deleteMember(id: string): Promise<ActionResult> {
   const authError = await assertRole("professor");
   if (authError) return authError;
 

@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/db/supabase-server";
 import { getSession } from "./auth";
 import { revalidatePath } from "next/cache";
+import type { ActionResult } from "@/types/action";
 
 function extractLinks(formData: FormData) {
   const links: Record<string, string> = {};
@@ -32,7 +33,9 @@ function parseJsonField(value: string | null): unknown[] {
   }
 }
 
-export async function updateMyProfile(formData: FormData) {
+export async function updateMyProfile(
+  formData: FormData,
+): Promise<ActionResult> {
   const user = await getSession();
   if (!user) {
     return { error: "로그인이 필요합니다." };
@@ -40,11 +43,21 @@ export async function updateMyProfile(formData: FormData) {
 
   const supabase = await createClient();
 
-  // Find the member record matching user's email
+  // Find the member record via profile's member_id FK
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("member_id")
+    .eq("id", user.id)
+    .single();
+
+  if (profileError || !profile?.member_id) {
+    return { error: "연결된 프로필 정보가 없습니다." };
+  }
+
   const { data: member, error: fetchError } = await supabase
     .from("members")
     .select("id, slug")
-    .eq("email", user.email!)
+    .eq("id", profile.member_id)
     .single();
 
   if (fetchError || !member) {

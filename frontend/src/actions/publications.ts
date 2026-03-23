@@ -2,19 +2,40 @@
 
 import { createClient } from "@/lib/db/supabase-server";
 import { generateSlug } from "@/lib/utils/slug";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
+import { safeRevalidateTag } from "@/lib/utils/revalidate";
 import { assertRole } from "@/lib/permissions";
+import type { ActionResult } from "@/types/action";
 
-export async function createPublication(formData: FormData) {
+function requireString(formData: FormData, key: string): string {
+  const value = formData.get(key);
+  if (typeof value !== "string" || !value.trim()) {
+    throw new Error(`${key} is required`);
+  }
+  return value.trim();
+}
+
+export async function createPublication(
+  formData: FormData,
+): Promise<ActionResult> {
   const authError = await assertRole("professor");
   if (authError) return authError;
 
   const supabase = await createClient();
 
-  const title = formData.get("title") as string;
-  const authorsRaw = formData.get("authors") as string;
-  const type = formData.get("type") as string;
-  const venue = formData.get("venue") as string;
+  let title: string;
+  let authorsRaw: string;
+  let type: string;
+  let venue: string;
+  try {
+    title = requireString(formData, "title");
+    authorsRaw = requireString(formData, "authors");
+    type = requireString(formData, "type");
+    venue = requireString(formData, "venue");
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
+
   const year = Number(formData.get("year"));
   const monthRaw = formData.get("month") as string;
   const doi = (formData.get("doi") as string) || null;
@@ -25,11 +46,9 @@ export async function createPublication(formData: FormData) {
   const isFeatured = formData.get("isFeatured") === "on";
 
   const authors = authorsRaw
-    ? authorsRaw
-        .split(",")
-        .map((a) => a.trim())
-        .filter(Boolean)
-    : [];
+    .split(",")
+    .map((a) => a.trim())
+    .filter(Boolean);
   const keywords = keywordsRaw
     ? keywordsRaw
         .split(",")
@@ -92,24 +111,35 @@ export async function createPublication(formData: FormData) {
     );
   }
 
-  // @ts-expect-error: Next.js 16 type requires 2 args but revalidateTag("tag") works at runtime
-  revalidateTag("publications");
+  safeRevalidateTag("publications");
   revalidatePath("/professor/publications");
   revalidatePath("/professor/patents");
   revalidatePath("/publications");
-  return { success: true, id };
+  return { success: true };
 }
 
-export async function updatePublication(id: string, formData: FormData) {
+export async function updatePublication(
+  id: string,
+  formData: FormData,
+): Promise<ActionResult> {
   const authError = await assertRole("professor");
   if (authError) return authError;
 
   const supabase = await createClient();
 
-  const title = formData.get("title") as string;
-  const authorsRaw = formData.get("authors") as string;
-  const type = formData.get("type") as string;
-  const venue = formData.get("venue") as string;
+  let title: string;
+  let authorsRaw: string;
+  let type: string;
+  let venue: string;
+  try {
+    title = requireString(formData, "title");
+    authorsRaw = requireString(formData, "authors");
+    type = requireString(formData, "type");
+    venue = requireString(formData, "venue");
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
+
   const year = Number(formData.get("year"));
   const monthRaw = formData.get("month") as string;
   const doi = (formData.get("doi") as string) || null;
@@ -120,11 +150,9 @@ export async function updatePublication(id: string, formData: FormData) {
   const isFeatured = formData.get("isFeatured") === "on";
 
   const authors = authorsRaw
-    ? authorsRaw
-        .split(",")
-        .map((a) => a.trim())
-        .filter(Boolean)
-    : [];
+    .split(",")
+    .map((a) => a.trim())
+    .filter(Boolean);
   const keywords = keywordsRaw
     ? keywordsRaw
         .split(",")
@@ -195,15 +223,14 @@ export async function updatePublication(id: string, formData: FormData) {
     );
   }
 
-  // @ts-expect-error: Next.js 16 type requires 2 args but revalidateTag("tag") works at runtime
-  revalidateTag("publications");
+  safeRevalidateTag("publications");
   revalidatePath("/professor/publications");
   revalidatePath("/professor/patents");
   revalidatePath("/publications");
   return { success: true };
 }
 
-export async function deletePublication(id: string) {
+export async function deletePublication(id: string): Promise<ActionResult> {
   const authError = await assertRole("professor");
   if (authError) return authError;
 
@@ -220,8 +247,7 @@ export async function deletePublication(id: string) {
 
   if (error) return { error: error.message };
 
-  // @ts-expect-error: Next.js 16 type requires 2 args but revalidateTag("tag") works at runtime
-  revalidateTag("publications");
+  safeRevalidateTag("publications");
   revalidatePath("/professor/publications");
   revalidatePath("/professor/patents");
   revalidatePath("/publications");
