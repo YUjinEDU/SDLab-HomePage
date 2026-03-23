@@ -68,20 +68,20 @@ Requirements for milestone v1.1. Each maps to roadmap phases.
 
 - [ ] **CQ-01**: Middleware silent bypass 수정 — Supabase URL 누락 시 503 반환
 - [ ] **CQ-02**: Profile INSERT policy 확인 및 문서화
-- [ ] **CQ-03**: 중복 ContactForm 삭제 (orphaned copy)
+- [x] **CQ-03**: 중복 ContactForm 삭제 (orphaned copy)
 - [ ] **CQ-04**: 모든 Server Action에 ActionResult 타입 통일
 - [ ] **CQ-05**: Join-table 변경 시 에러 체크 추가 (비원자적 mutation 수정)
 - [ ] **CQ-06**: Server Action 입력 검증 추가 (필수 필드, 숫자 형식)
 - [ ] **CQ-07**: Next.js CVE 패치 (>=16.1.7 업그레이드)
 - [ ] **CQ-08**: supabase/.temp/ 등 .gitignore 보강
-- [ ] **CQ-09**: 루트 html에 lang 속성 추가
+- [x] **CQ-09**: 루트 html에 lang 속성 추가
 - [ ] **CQ-10**: 로그인 에러 메시지 일반화 (사용자 열거 방지)
 - [ ] **CQ-11**: next.config.ts에 보안 헤더 추가
 - [ ] **CQ-12**: 12개 shared 컴포넌트 interface→type 변환
 - [ ] **CQ-13**: CLAUDE.md와 globals.css 기본 색상 일치화
 - [ ] **CQ-14**: 하드코딩된 hex 색상을 디자인 토큰으로 교체
 - [ ] **CQ-15**: Professor/internal 폼에서 raw Tailwind 색상 대신 토큰 사용 (문서화)
-- [ ] **CQ-16**: img 태그를 next/image로 마이그레이션 (주요 이미지)
+- [x] **CQ-16**: img 태그를 next/image로 마이그레이션 (주요 이미지)
 - [ ] **CQ-17**: revalidateTag 래퍼 함수로 8개 @ts-expect-error 제거
 - [ ] **CQ-18**: 로그인 후 역할별 리다이렉트 (/professor vs /internal)
 - [ ] **CQ-19**: Profile 업데이트에서 email 대신 member_id FK 사용
@@ -153,20 +153,20 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PAT-03      | Phase 8 | Pending  |
 | CQ-01       | Phase 9 | Pending  |
 | CQ-02       | Phase 9 | Pending  |
-| CQ-03       | Phase 9 | Pending  |
+| CQ-03       | Phase 9 | Complete |
 | CQ-04       | Phase 9 | Pending  |
 | CQ-05       | Phase 9 | Pending  |
 | CQ-06       | Phase 9 | Pending  |
 | CQ-07       | Phase 9 | Pending  |
 | CQ-08       | Phase 9 | Pending  |
-| CQ-09       | Phase 9 | Pending  |
+| CQ-09       | Phase 9 | Complete |
 | CQ-10       | Phase 9 | Pending  |
 | CQ-11       | Phase 9 | Pending  |
 | CQ-12       | Phase 9 | Pending  |
 | CQ-13       | Phase 9 | Pending  |
 | CQ-14       | Phase 9 | Pending  |
 | CQ-15       | Phase 9 | Pending  |
-| CQ-16       | Phase 9 | Pending  |
+| CQ-16       | Phase 9 | Complete |
 | CQ-17       | Phase 9 | Pending  |
 | CQ-18       | Phase 9 | Pending  |
 | CQ-19       | Phase 9 | Pending  |

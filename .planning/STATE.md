@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: 실적 데이터 등록 및 표시 개선
 status: executing
-stopped_at: Completed 06-01-PLAN.md — Publication parser script
-last_updated: "2026-03-16T00:10:16.005Z"
+stopped_at: Completed 09-03-PLAN.md — HTML accessibility, image optimization, dead code removal
+last_updated: "2026-03-23T06:14:56.108Z"
 last_activity: 2026-03-16 — Completed 05-01 DB Schema (patents table + publications columns)
 progress:
-  total_phases: 8
+  total_phases: 9
   completed_phases: 5
-  total_plans: 15
-  completed_plans: 14
+  total_plans: 20
+  completed_plans: 15
   percent: 57
 ---
 
@@ -34,6 +34,10 @@ Progress: [█████░░░░░] 57% (v1.0 4/4 phases complete; v1.1 1
 
 ## Accumulated Context
 
+### Roadmap Evolution
+
+- Phase 9 added: Comprehensive code quality, security, and convention fixes (2026-03-23)
+
 ### Decisions
 
 - **v1.0 01-01**: assertRole returns null|{error:'unauthorized'} — inline conditional checks in Server Actions
@@ -48,6 +52,8 @@ Progress: [█████░░░░░] 57% (v1.0 4/4 phases complete; v1.1 1
 - **05-01**: Professor patent management pages stubbed with amber notice — Phase 8 will rebuild against new patents table
 - [Phase 06-01]: No npm dependencies — pure Node.js built-ins for publication parser
 - [Phase 06-01]: Concatenated Korean names split greedily 3-then-2-char tokens in parser
+- [Phase 09-03]: lang=ko hardcoded on root html — root layout has no locale param; ko is the primary language
+- [Phase 09-03]: Supabase remotePatterns added to next.config.ts — enables Next.js image optimization for member photos
 
 ### Pending Todos
 
@@ -61,6 +67,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T00:10:16.002Z
-Stopped at: Completed 06-01-PLAN.md — Publication parser script
+Last session: 2026-03-23T06:14:56.105Z
+Stopped at: Completed 09-03-PLAN.md — HTML accessibility, image optimization, dead code removal
 Resume file: None

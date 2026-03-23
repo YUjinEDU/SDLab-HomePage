@@ -209,7 +209,7 @@ Plans:
 | 6. Data Pipeline           | v1.1      | 0/2            | In Progress | -          |
 | 7. Publications UI         | v1.1      | 0/2            | Not started | -          |
 | 8. Patents UI              | v1.1      | 0/2            | Not started | -          |
-| 9. Code Quality & Security | v1.1      | 0/5            | Not started | -          |
+| 9. Code Quality & Security | 1/5 | In Progress|  | -          |
 
 ---
 
