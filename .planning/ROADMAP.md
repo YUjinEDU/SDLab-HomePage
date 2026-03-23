@@ -188,7 +188,7 @@ Plans:
 Plans:
 
 - [ ] 09-01-PLAN.md — Security critical fixes (middleware bypass, CVE upgrade, .gitignore, security headers, env validation)
-- [ ] 09-02-PLAN.md — Convention & style fixes (interface->type, color tokens, hardcoded colors)
+- [x] 09-02-PLAN.md — Convention & style fixes (interface->type, color tokens, hardcoded colors)
 - [ ] 09-03-PLAN.md — HTML/accessibility fixes (lang attribute, next/image migration, duplicate ContactForm)
 - [ ] 09-04-PLAN.md — Server action hardening (ActionResult type, input validation, revalidateTag wrapper, error fixes)
 - [ ] 09-05-PLAN.md — Auth & data layer cleanup (login redirect, profile FK, middleware dedup, typed mappers)
@@ -209,7 +209,7 @@ Plans:
 | 6. Data Pipeline           | v1.1      | 0/2            | In Progress | -          |
 | 7. Publications UI         | v1.1      | 0/2            | Not started | -          |
 | 8. Patents UI              | v1.1      | 0/2            | Not started | -          |
-| 9. Code Quality & Security | 1/5 | In Progress|  | -          |
+| 9. Code Quality & Security | -         | 2/5            | In Progress | -          |
 
 ---
 

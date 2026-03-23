@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: 실적 데이터 등록 및 표시 개선
 status: executing
-stopped_at: Completed 09-03-PLAN.md — HTML accessibility, image optimization, dead code removal
-last_updated: "2026-03-23T06:14:56.108Z"
+stopped_at: Completed 09-02-PLAN.md — Convention & style fixes (interface->type, color tokens, hardcoded colors)
+last_updated: "2026-03-23T06:20:27Z"
 last_activity: 2026-03-16 — Completed 05-01 DB Schema (patents table + publications columns)
 progress:
   total_phases: 9
@@ -54,6 +54,9 @@ Progress: [█████░░░░░] 57% (v1.0 4/4 phases complete; v1.1 1
 - [Phase 06-01]: Concatenated Korean names split greedily 3-then-2-char tokens in parser
 - [Phase 09-03]: lang=ko hardcoded on root html — root layout has no locale param; ko is the primary language
 - [Phase 09-03]: Supabase remotePatterns added to next.config.ts — enables Next.js image optimization for member photos
+- [Phase 09-02]: Primary color documented as #059669 (emerald-600) in CLAUDE.md, matching globals.css --primary token
+- [Phase 09-02]: Red error classes preserved without substitution — no red design token exists
+- [Phase 09-02]: bg-white kept in form card backgrounds — white is not a design-token candidate
 
 ### Pending Todos
 
