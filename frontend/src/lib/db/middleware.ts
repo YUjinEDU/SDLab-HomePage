@@ -57,36 +57,10 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // 역할 기반 접근 제어를 위해 프로필을 한 번만 조회
-  const needsProfile =
-    user &&
-    (request.nextUrl.pathname.startsWith("/professor") ||
-      request.nextUrl.pathname === "/login");
-
-  const profile = needsProfile
-    ? (
-        await supabase
-          .from("profiles")
-          .select("role")
-          .eq("id", user!.id)
-          .single()
-      ).data
-    : null;
-
-  // /professor 경로는 professor 또는 admin 역할만 접근 가능
-  if (user && request.nextUrl.pathname.startsWith("/professor")) {
-    const role = profile?.role;
-    if (role !== "professor" && role !== "admin") {
-      return NextResponse.redirect(new URL("/internal", request.url));
-    }
-  }
-
-  // 이미 로그인된 사용자가 로그인 페이지 접근 시 역할에 따라 리다이렉트
+  // 이미 로그인된 사용자가 로그인 페이지 접근 시 내부 포털로 리다이렉트
+  // 역할별 세부 분기는 레이아웃(Server Component)에서 처리 — 미들웨어 DB 조회 제거
   if (request.nextUrl.pathname === "/login" && user) {
-    const role = profile?.role;
-    const redirectTo =
-      role === "professor" || role === "admin" ? "/professor" : "/internal";
-    return NextResponse.redirect(new URL(redirectTo, request.url));
+    return NextResponse.redirect(new URL("/internal", request.url));
   }
 
   return supabaseResponse;
