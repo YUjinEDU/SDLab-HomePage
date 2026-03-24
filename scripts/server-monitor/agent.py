@@ -307,7 +307,7 @@ def collect_gpu_processes():
 
         gpu_uuid = parts[0]
         pid = _safe_int(parts[1])
-        mem_mb = _safe_float(parts[2])
+        mem_mb = _safe_int(parts[2])
         gpu_index = uuid_map.get(gpu_uuid, -1)
 
         username = ""
@@ -328,6 +328,8 @@ def collect_gpu_processes():
             ).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
             pass
+        except Exception as exc:
+            logger.debug("psutil lookup failed for pid %d: %s", pid, exc)
 
         row = {
             "server_id": SERVER_ID,
