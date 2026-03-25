@@ -1,21 +1,14 @@
-import { getSession } from "@/actions/auth";
 import { redirect } from "next/navigation";
 import { ProfessorSidebar } from "@/components/layout/ProfessorSidebar";
-import { requireRole } from "@/lib/permissions";
+import { getSessionWithRole } from "@/lib/permissions";
 
 export default async function ProfessorLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getSession();
-  if (!user) redirect("/login");
-
-  try {
-    await requireRole("professor");
-  } catch {
-    redirect("/login");
-  }
+  const { user, error } = await getSessionWithRole("professor");
+  if (error || !user) redirect("/login");
 
   return (
     <div className="min-h-screen bg-gray-50 flex">

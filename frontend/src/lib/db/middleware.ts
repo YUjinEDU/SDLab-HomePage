@@ -42,9 +42,13 @@ export async function updateSession(request: NextRequest) {
     },
   );
 
+  // getSession(): 쿠키에서 JWT를 로컬 파싱 — 네트워크 호출 없음.
+  // Edge 타임아웃(1.5s) 방지용. 실제 보안 검증(role 체크 등)은
+  // 각 레이아웃의 requireRole()에서 getUser()로 처리.
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    data: { session },
+  } = await supabase.auth.getSession();
+  const user = session?.user ?? null;
 
   // 보호된 경로 접근 시 로그인 필요
   const isProtected = PROTECTED_PATHS.some((path) =>
