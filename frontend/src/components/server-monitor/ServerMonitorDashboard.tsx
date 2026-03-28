@@ -6,11 +6,11 @@ import { ServerCard } from "./ServerCard";
 import { timeAgo } from "@/lib/utils/format";
 
 type ServerMonitorDashboardProps = {
-  initialData: ServerMonitorData[];
+  initialData?: ServerMonitorData[];
 };
 
 export function ServerMonitorDashboard({
-  initialData,
+  initialData = [],
 }: ServerMonitorDashboardProps) {
   const [data, setData] = useState<ServerMonitorData[]>(initialData);
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
@@ -36,6 +36,11 @@ export function ServerMonitorDashboard({
       setIsRefreshing(false);
     }
   }, []);
+
+  // initialData 없이 렌더된 경우 마운트 즉시 fetch (SSR 제거로 인한 빈 상태 처리)
+  useEffect(() => {
+    if (data.length === 0) refresh();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Auto-refresh every 30 seconds
   useEffect(() => {
