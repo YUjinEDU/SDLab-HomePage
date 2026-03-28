@@ -123,7 +123,8 @@ export async function getSshSessions(serverId: string): Promise<SshSession[]> {
     .from("ssh_sessions")
     .select("*")
     .eq("server_id", serverId)
-    .order("login_at", { ascending: false });
+    .order("login_at", { ascending: false })
+    .limit(200); // 다른 per-server 쿼리와 동일하게 limit 적용 (무제한 성장 방어)
 
   if (error) return [];
   return (data ?? []) as SshSession[];
