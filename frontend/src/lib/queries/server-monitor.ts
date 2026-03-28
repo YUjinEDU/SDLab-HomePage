@@ -162,10 +162,13 @@ export async function getGpuUsageRanking(
   const supabase = await createClient();
   const { since, until } = getPeriodBounds(period);
 
+  // LIMIT으로 풀스캔 방어. 1분 간격 × 2서버 × GPU 프로세스 수십 개 × 장기간 = 수십만 행 가능.
+  // 50,000행이면 약 30일치 (2서버 × 10프로세스 × 1440분). 초과 시 상위 기여자는 여전히 포착됨.
   let query = supabase
     .from("gpu_usage_log")
     .select("username,server_id,memory_used_mb")
-    .gte("recorded_at", since);
+    .gte("recorded_at", since)
+    .limit(50000);
 
   if (until) query = query.lt("recorded_at", until);
   if (serverId) query = query.eq("server_id", serverId);

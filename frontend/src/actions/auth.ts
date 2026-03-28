@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/db/supabase-server";
+import { getAuthUser } from "@/lib/auth/get-user";
 import { redirect } from "next/navigation";
 import type { ActionResult } from "@/types/action";
 
@@ -57,9 +58,5 @@ export async function logout() {
 }
 
 export async function getSession() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  return user;
+  return getAuthUser();
 }

@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/db/supabase-server";
+import { getAuthUser } from "@/lib/auth/get-user";
 
 export type Role = "member" | "professor" | "admin";
 
@@ -16,10 +17,7 @@ export async function assertRole(
   minRole: Role,
 ): Promise<{ error: "unauthorized" } | null> {
   const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
 
   if (!user) {
     return { error: "unauthorized" };
@@ -71,10 +69,7 @@ export async function getSessionWithRole(
   | { user: null; error: "unauthorized" }
 > {
   const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
 
   if (!user) return { user: null, error: "unauthorized" };
 

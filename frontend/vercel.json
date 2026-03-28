@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "src/app/api/server-monitor/route.ts": {
+      "maxDuration": 30
+    },
+    "src/app/(professor)/professor/usage/page.tsx": {
+      "maxDuration": 30
+    }
+  }
+}
