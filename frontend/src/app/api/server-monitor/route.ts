@@ -1,17 +1,11 @@
 import { NextResponse } from "next/server";
 import { getServerMonitorData } from "@/lib/queries/server-monitor";
-import { getSession } from "@/actions/auth";
-import { assertRole } from "@/lib/permissions";
+import { getSessionWithRole } from "@/lib/permissions";
 
 export async function GET() {
-  const user = await getSession();
-  if (!user) {
+  const { error } = await getSessionWithRole("member");
+  if (error) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  const roleError = await assertRole("member");
-  if (roleError) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
   try {

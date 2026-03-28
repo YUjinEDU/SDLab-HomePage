@@ -46,25 +46,20 @@ export async function getLatestGpuMetrics(
 ): Promise<GpuMetrics[]> {
   const supabase = await createClient();
 
-  const { data: latest, error: latestError } = await supabase
-    .from("gpu_metrics")
-    .select("recorded_at")
-    .eq("server_id", serverId)
-    .order("recorded_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-
-  if (latestError || !latest) return [];
-
+  // 단일 쿼리: 최근 20행 가져와서 클라이언트에서 latest batch만 필터 (2-step → 1-step)
   const { data, error } = await supabase
     .from("gpu_metrics")
     .select("*")
     .eq("server_id", serverId)
-    .eq("recorded_at", latest.recorded_at)
-    .order("gpu_index");
+    .order("recorded_at", { ascending: false })
+    .limit(20);
 
-  if (error) return [];
-  return (data ?? []) as GpuMetrics[];
+  if (error || !data || data.length === 0) return [];
+
+  const latest = (data[0] as GpuMetrics).recorded_at;
+  return (data as GpuMetrics[])
+    .filter((r) => r.recorded_at === latest)
+    .sort((a, b) => a.gpu_index - b.gpu_index);
 }
 
 export async function getGpuProcesses(serverId: string): Promise<GpuProcess[]> {
@@ -86,25 +81,19 @@ export async function getLatestDiskPartitions(
 ): Promise<DiskPartition[]> {
   const supabase = await createClient();
 
-  const { data: latest, error: latestError } = await supabase
-    .from("disk_partitions")
-    .select("recorded_at")
-    .eq("server_id", serverId)
-    .order("recorded_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-
-  if (latestError || !latest) return [];
-
   const { data, error } = await supabase
     .from("disk_partitions")
     .select("*")
     .eq("server_id", serverId)
-    .eq("recorded_at", latest.recorded_at)
-    .order("mount_point");
+    .order("recorded_at", { ascending: false })
+    .limit(50);
 
-  if (error) return [];
-  return (data ?? []) as DiskPartition[];
+  if (error || !data || data.length === 0) return [];
+
+  const latest = (data[0] as DiskPartition).recorded_at;
+  return (data as DiskPartition[])
+    .filter((r) => r.recorded_at === latest)
+    .sort((a, b) => a.mount_point.localeCompare(b.mount_point));
 }
 
 export async function getDiskUsageByUser(
@@ -112,25 +101,19 @@ export async function getDiskUsageByUser(
 ): Promise<DiskUsageUser[]> {
   const supabase = await createClient();
 
-  const { data: latest, error: latestError } = await supabase
-    .from("disk_usage_users")
-    .select("recorded_at")
-    .eq("server_id", serverId)
-    .order("recorded_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-
-  if (latestError || !latest) return [];
-
   const { data, error } = await supabase
     .from("disk_usage_users")
     .select("*")
     .eq("server_id", serverId)
-    .eq("recorded_at", latest.recorded_at)
-    .order("bytes_used", { ascending: false });
+    .order("recorded_at", { ascending: false })
+    .limit(100);
 
-  if (error) return [];
-  return (data ?? []) as DiskUsageUser[];
+  if (error || !data || data.length === 0) return [];
+
+  const latest = (data[0] as DiskUsageUser).recorded_at;
+  return (data as DiskUsageUser[])
+    .filter((r) => r.recorded_at === latest)
+    .sort((a, b) => b.bytes_used - a.bytes_used);
 }
 
 export async function getSshSessions(serverId: string): Promise<SshSession[]> {
