@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { getSession } from "@/actions/auth";
+import { auth } from "@/lib/auth/auth";
 
 export default async function InternalHome() {
-  const user = await getSession();
+  const session = await auth();
 
   const quickLinks = [
     { href: "/internal/calendar", label: "일정" },
@@ -23,7 +23,7 @@ export default async function InternalHome() {
       <div>
         <h1 className="text-2xl font-bold text-gray-900">내부 포털</h1>
         <p className="text-sm text-gray-500 mt-1">
-          {user?.email ?? "사용자"}님, 안녕하세요.
+          {session?.user?.email ?? "사용자"}님, 안녕하세요.
         </p>
       </div>
 

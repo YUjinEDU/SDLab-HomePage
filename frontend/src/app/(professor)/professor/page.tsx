@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { auth } from "@/lib/auth/auth";
-import { createClient } from "@/lib/db/supabase-server";
+import { db } from "@/lib/db/drizzle";
+import { members as membersTable, publications as publicationsTable, projects as projectsTable, news as newsTable } from "@/lib/db/schema";
+import { count } from "drizzle-orm";
 
 type StatCard = {
   label: string;
@@ -10,14 +12,18 @@ type StatCard = {
 
 export default async function ProfessorDashboard() {
   const session = await auth();
-  const supabase = await createClient();
 
-  const [members, publications, projects, news] = await Promise.all([
-    supabase.from("members").select("id", { count: "exact", head: true }),
-    supabase.from("publications").select("id", { count: "exact", head: true }),
-    supabase.from("projects").select("id", { count: "exact", head: true }),
-    supabase.from("news").select("id", { count: "exact", head: true }),
+  const [membersResult, publicationsResult, projectsResult, newsResult] = await Promise.all([
+    db.select({ count: count() }).from(membersTable),
+    db.select({ count: count() }).from(publicationsTable),
+    db.select({ count: count() }).from(projectsTable),
+    db.select({ count: count() }).from(newsTable),
   ]);
+
+  const members = { count: membersResult[0]?.count ?? 0 };
+  const publications = { count: publicationsResult[0]?.count ?? 0 };
+  const projects = { count: projectsResult[0]?.count ?? 0 };
+  const news = { count: newsResult[0]?.count ?? 0 };
 
   const stats: StatCard[] = [
     {

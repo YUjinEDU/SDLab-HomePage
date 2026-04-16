@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import { getServerMonitorData } from "@/lib/queries/server-monitor";
-import { getSessionWithRole } from "@/lib/permissions";
+import { auth } from "@/lib/auth/auth";
 
 export async function GET() {
-  const { error } = await getSessionWithRole("member");
-  if (error) {
+  const session = await auth();
+  if (!session?.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

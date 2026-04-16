@@ -27,7 +27,7 @@ export function AuthButton() {
 
   const user = session.user;
   const displayName =
-    user.name ?? user.email?.split("@")[0] ?? "사용자";
+    user.email?.split("@")[0] ?? "사용자";
   const role = user.role;
 
   async function handleLogout() {

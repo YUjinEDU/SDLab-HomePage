@@ -1,11 +1,11 @@
-import { getSession } from "@/actions/auth";
+import { auth } from "@/lib/auth/auth";
 
 export const metadata = {
   title: "계정 관리 | SD Lab Internal",
 };
 
 export default async function AccountPage() {
-  const user = await getSession();
+  const session = await auth();
 
   return (
     <div className="max-w-3xl mx-auto space-y-8">
@@ -29,7 +29,7 @@ export default async function AccountPage() {
           <input
             type="email"
             readOnly
-            value={user?.email ?? ""}
+            value={session?.user?.email ?? ""}
             className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-600 cursor-default"
           />
         </div>
