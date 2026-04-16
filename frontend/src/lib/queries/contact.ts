@@ -14,15 +14,16 @@ export async function getContactInfo(): Promise<ContactInfo> {
     },
     professor: {
       name: row.professorName ?? "",
+      // TODO: Add professor_title, professor_office, lab_room, lab_phone columns to contact_info table in schema
       title: "",
       email: row.professorEmail ?? "",
     },
     location: {
       building: row.building ?? "",
-      professorOffice: "",
-      lab: "",
+      professorOffice: "", // TODO: Add professor_title, professor_office, lab_room, lab_phone columns to contact_info table in schema
+      lab: "", // TODO: Add professor_title, professor_office, lab_room, lab_phone columns to contact_info table in schema
       professorPhone: row.professorPhone ?? "",
-      labPhone: "",
+      labPhone: "", // TODO: Add professor_title, professor_office, lab_room, lab_phone columns to contact_info table in schema
     },
     department: row.department ?? "",
     university: row.university ?? "",

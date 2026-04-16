@@ -33,7 +33,7 @@ async function enrichPublication(row: PubRow): Promise<Publication> {
     id: String(row.id),
     slug: row.slug,
     title: row.title,
-    authors: row.authors ? [row.authors] : [],
+    authors: row.authors ? row.authors.split(", ") : [],
     authorMemberIds: authorRows.map((a) => String(a.memberId)),
     type: row.type as Publication["type"],
     isInternational: row.isInternational ?? true,
@@ -124,13 +124,17 @@ export const getProjectOutputs = (projectId: string) =>
     { tags: ["projects", "publications"] },
   )();
 
-export async function getAllPublications(): Promise<Publication[]> {
-  const rows = await db
-    .select()
-    .from(publications)
-    .orderBy(desc(publications.year), desc(publications.month));
-  return Promise.all(rows.map(enrichPublication));
-}
+export const getAllPublications = unstable_cache(
+  async (): Promise<Publication[]> => {
+    const rows = await db
+      .select()
+      .from(publications)
+      .orderBy(desc(publications.year), desc(publications.month));
+    return Promise.all(rows.map(enrichPublication));
+  },
+  ["all-publications"],
+  { tags: ["publications"] },
+);
 
 export async function getPublicationById(id: string): Promise<Publication | null> {
   const [row] = await db
@@ -141,19 +145,24 @@ export async function getPublicationById(id: string): Promise<Publication | null
   return row ? enrichPublication(row) : null;
 }
 
-export async function getPublicationsByMember(memberId: string): Promise<Publication[]> {
-  const authorRows = await db
-    .select({ publicationId: publicationAuthors.publicationId })
-    .from(publicationAuthors)
-    .where(eq(publicationAuthors.memberId, Number(memberId)));
+export const getPublicationsByMember = (memberId: string) =>
+  unstable_cache(
+    async (): Promise<Publication[]> => {
+      const authorRows = await db
+        .select({ publicationId: publicationAuthors.publicationId })
+        .from(publicationAuthors)
+        .where(eq(publicationAuthors.memberId, Number(memberId)));
 
-  if (!authorRows.length) return [];
+      if (!authorRows.length) return [];
 
-  const pubIds = authorRows.map((r) => r.publicationId);
-  const rows = await db
-    .select()
-    .from(publications)
-    .where(and(eq(publications.isPublic, true), inArray(publications.id, pubIds)))
-    .orderBy(desc(publications.year));
-  return Promise.all(rows.map(enrichPublication));
-}
+      const pubIds = authorRows.map((r) => r.publicationId);
+      const rows = await db
+        .select()
+        .from(publications)
+        .where(and(eq(publications.isPublic, true), inArray(publications.id, pubIds)))
+        .orderBy(desc(publications.year));
+      return Promise.all(rows.map(enrichPublication));
+    },
+    ["publications-by-member", memberId],
+    { tags: ["publications"] },
+  )();

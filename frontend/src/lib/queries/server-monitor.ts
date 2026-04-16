@@ -49,16 +49,16 @@ function toServerMetrics(row: typeof serverMetrics.$inferSelect): ServerMetrics 
     id: String(row.id),
     server_id: String(row.serverId),
     cpu_percent: row.cpuUsage ?? 0,
-    cpu_per_core: [],
+    cpu_per_core: [], // not collected — column not in schema
     memory_total_bytes: row.memoryTotal ?? 0,
     memory_used_bytes: row.memoryUsed ?? 0,
     memory_percent:
       row.memoryTotal && row.memoryTotal > 0
         ? ((row.memoryUsed ?? 0) / row.memoryTotal) * 100
         : 0,
-    load_avg_1m: 0,
-    load_avg_5m: 0,
-    load_avg_15m: 0,
+    load_avg_1m: 0, // not collected — column not in schema
+    load_avg_5m: 0, // not collected — column not in schema
+    load_avg_15m: 0, // not collected — column not in schema
     recorded_at: row.recordedAt?.toISOString() ?? new Date().toISOString(),
   };
 }
@@ -77,9 +77,9 @@ function toGpuMetrics(row: typeof gpuMetrics.$inferSelect): GpuMetrics {
         ? ((row.memoryUsed ?? 0) / row.memoryTotal) * 100
         : 0,
     temperature_c: row.temperatureGpu ?? 0,
-    power_draw_w: 0,
-    power_limit_w: 0,
-    fan_speed_percent: 0,
+    power_draw_w: 0, // not collected — column not in schema
+    power_limit_w: 0, // not collected — column not in schema
+    fan_speed_percent: 0, // not collected — column not in schema
     recorded_at: row.recordedAt?.toISOString() ?? new Date().toISOString(),
   };
 }

@@ -126,13 +126,17 @@ export async function getProjectById(id: string): Promise<Project | null> {
   return row ? enrichProject(row) : null;
 }
 
-export async function getAllProjects(): Promise<Project[]> {
-  const rows = await db
-    .select()
-    .from(projects)
-    .orderBy(desc(projects.startDate));
-  return Promise.all(rows.map(enrichProject));
-}
+export const getAllProjects = unstable_cache(
+  async (): Promise<Project[]> => {
+    const rows = await db
+      .select()
+      .from(projects)
+      .orderBy(desc(projects.startDate));
+    return Promise.all(rows.map(enrichProject));
+  },
+  ["all-projects"],
+  { tags: ["projects"] },
+);
 
 export async function getProjectsByMember(memberId: string): Promise<Project[]> {
   const memberRows = await db
