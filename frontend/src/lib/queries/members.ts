@@ -1,130 +1,97 @@
-import { createClient } from "@/lib/db/supabase-server";
+import { db } from "@/lib/db/drizzle";
+import { members } from "@/lib/db/schema";
+import { eq, asc, ne, count } from "drizzle-orm";
 import type { Member } from "@/types";
 
-type MemberRow = {
-  id: string;
-  slug: string;
-  name_ko: string;
-  name_en: string;
-  group: Member["group"];
-  position: string;
-  department: string;
-  image: string | null;
-  email: string | null;
-  links: Member["links"] | null;
-  research_keywords: string[] | null;
-  bio: string | null;
-  education: Member["education"] | null;
-  career: Member["career"] | null;
-  display_order: number;
-};
-
-function toMember(row: MemberRow): Member {
+function toMember(row: typeof members.$inferSelect): Member {
   return {
-    id: row.id,
+    id: String(row.id),
     slug: row.slug,
-    nameKo: row.name_ko,
-    nameEn: row.name_en,
-    group: row.group,
-    position: row.position,
-    department: row.department,
+    nameKo: row.nameKo,
+    nameEn: row.nameEn ?? "",
+    group: row.group as Member["group"],
+    position: row.position ?? "",
+    department: row.department ?? "",
     image: row.image ?? null,
     email: row.email ?? null,
-    links: row.links ?? {},
-    researchKeywords: row.research_keywords ?? [],
+    links: (row.links as Member["links"]) ?? {},
+    researchKeywords: row.researchKeywords ?? [],
     bio: row.bio ?? null,
-    education: row.education ?? [],
-    career: row.career ?? [],
-    displayOrder: row.display_order,
+    education: (row.education as Member["education"]) ?? [],
+    career: (row.career as Member["career"]) ?? [],
+    displayOrder: row.displayOrder ?? 0,
   };
 }
 
 export async function getMembers(): Promise<Member[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("members")
-    .select("*")
-    .order("display_order");
-
-  if (error) return [];
-  return (data ?? []).map(toMember);
+  const rows = await db
+    .select()
+    .from(members)
+    .orderBy(asc(members.displayOrder));
+  return rows.map(toMember);
 }
 
 export async function getMemberBySlug(slug: string): Promise<Member | null> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("members")
-    .select("*")
-    .eq("slug", slug)
-    .single();
-
-  if (error) return null;
-  return toMember(data);
+  const [row] = await db
+    .select()
+    .from(members)
+    .where(eq(members.slug, slug))
+    .limit(1);
+  return row ? toMember(row) : null;
 }
 
 export async function getMemberById(id: string): Promise<Member | null> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("members")
-    .select("*")
-    .eq("id", id)
-    .single();
-
-  if (error) return null;
-  return toMember(data);
+  const [row] = await db
+    .select()
+    .from(members)
+    .where(eq(members.id, Number(id)))
+    .limit(1);
+  return row ? toMember(row) : null;
 }
 
 export async function getProfessor(): Promise<Member | null> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("members")
-    .select("*")
-    .eq("group", "professor")
-    .order("display_order")
-    .limit(1)
-    .single();
-
-  if (error) return null;
-  return toMember(data);
+  const [row] = await db
+    .select()
+    .from(members)
+    .where(eq(members.group, "professor"))
+    .orderBy(asc(members.displayOrder))
+    .limit(1);
+  return row ? toMember(row) : null;
 }
 
 export async function getAlumniCount(): Promise<number> {
-  const supabase = await createClient();
-  const { count, error } = await supabase
-    .from("members")
-    .select("*", { count: "exact", head: true })
-    .eq("group", "alumni");
-
-  if (error) return 0;
-  return count ?? 0;
+  const [result] = await db
+    .select({ count: count() })
+    .from(members)
+    .where(eq(members.group, "alumni"));
+  return result?.count ?? 0;
 }
 
 export async function getMemberStubs(): Promise<
   Pick<Member, "id" | "nameKo" | "nameEn" | "slug">[]
 > {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("members")
-    .select("id, name_ko, name_en, slug")
-    .order("display_order");
-
-  if (error) return [];
-  return (data ?? []).map((r) => ({
-    id: r.id as string,
-    nameKo: r.name_ko as string,
-    nameEn: r.name_en as string,
-    slug: r.slug as string,
+  const rows = await db
+    .select({
+      id: members.id,
+      nameKo: members.nameKo,
+      nameEn: members.nameEn,
+      slug: members.slug,
+    })
+    .from(members)
+    .orderBy(asc(members.displayOrder));
+  return rows.map((r) => ({
+    id: String(r.id),
+    nameKo: r.nameKo,
+    nameEn: r.nameEn ?? "",
+    slug: r.slug,
   }));
 }
 
 export async function getStudents(): Promise<Member[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("members")
-    .select("*")
-    .neq("group", "professor")
-    .order("display_order");
-
-  if (error) return [];
-  return (data ?? []).map(toMember);
+  const rows = await db
+    .select()
+    .from(members)
+    .where(ne(members.group, "professor"))
+    .orderBy(asc(members.displayOrder));
+  return rows.map(toMember);
 }

@@ -1,78 +1,66 @@
-import { createClient } from "@/lib/db/supabase-server";
+import { db } from "@/lib/db/drizzle";
+import { news, newsProjects, newsPublications } from "@/lib/db/schema";
+import { desc, eq } from "drizzle-orm";
 import type { NewsItem } from "@/types";
 
-type NewsRow = Record<string, unknown> & {
-  news_projects?: { project_id: string }[];
-  news_publications?: { publication_id: string }[];
-};
+type NewsRow = typeof news.$inferSelect;
 
-const NEWS_SELECT = `
-  *,
-  news_projects(project_id),
-  news_publications(publication_id)
-`;
+async function enrichNewsItem(row: NewsRow): Promise<NewsItem> {
+  const [projectRows, publicationRows] = await Promise.all([
+    db
+      .select({ projectId: newsProjects.projectId })
+      .from(newsProjects)
+      .where(eq(newsProjects.newsId, row.id)),
+    db
+      .select({ publicationId: newsPublications.publicationId })
+      .from(newsPublications)
+      .where(eq(newsPublications.newsId, row.id)),
+  ]);
 
-function toNewsItem(row: NewsRow): NewsItem {
   return {
-    id: row.id as string,
-    slug: row.slug as string,
-    title: row.title as string,
-    summary: row.summary as string,
+    id: String(row.id),
+    slug: row.slug,
+    title: row.title,
+    summary: row.summary ?? "",
     category: row.category as NewsItem["category"],
-    date: row.date as string,
-    isPinned: (row.is_pinned as boolean) ?? false,
-    relatedProjectIds: (row.news_projects ?? []).map((p) => p.project_id),
-    relatedPublicationIds: (row.news_publications ?? []).map(
-      (p) => p.publication_id,
-    ),
+    date: row.date instanceof Date ? row.date.toISOString() : String(row.date),
+    isPinned: row.isPinned ?? false,
+    relatedProjectIds: projectRows.map((p) => String(p.projectId)),
+    relatedPublicationIds: publicationRows.map((p) => String(p.publicationId)),
   };
 }
 
 export async function getNews(): Promise<NewsItem[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("news")
-    .select(NEWS_SELECT)
-    .order("is_pinned", { ascending: false })
-    .order("date", { ascending: false });
-
-  if (error) return [];
-  return (data ?? []).map(toNewsItem);
+  const rows = await db
+    .select()
+    .from(news)
+    .orderBy(desc(news.isPinned), desc(news.date));
+  return Promise.all(rows.map(enrichNewsItem));
 }
 
 export async function getNewsById(id: string): Promise<NewsItem | null> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("news")
-    .select(NEWS_SELECT)
-    .eq("id", id)
-    .single();
-
-  if (error) return null;
-  return toNewsItem(data);
+  const [row] = await db
+    .select()
+    .from(news)
+    .where(eq(news.id, Number(id)))
+    .limit(1);
+  return row ? enrichNewsItem(row) : null;
 }
 
 export async function getNewsBySlug(slug: string): Promise<NewsItem | null> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("news")
-    .select(NEWS_SELECT)
-    .eq("slug", slug)
-    .single();
-
-  if (error) return null;
-  return toNewsItem(data);
+  const [row] = await db
+    .select()
+    .from(news)
+    .where(eq(news.slug, slug))
+    .limit(1);
+  return row ? enrichNewsItem(row) : null;
 }
 
 export async function getLatestNews(limit = 4): Promise<NewsItem[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("news")
-    .select(NEWS_SELECT)
-    .order("is_pinned", { ascending: false })
-    .order("date", { ascending: false })
+  const rows = await db
+    .select()
+    .from(news)
+    .orderBy(desc(news.isPinned), desc(news.date))
     .limit(limit);
-
-  if (error) return [];
-  return (data ?? []).map(toNewsItem);
+  return Promise.all(rows.map(enrichNewsItem));
 }

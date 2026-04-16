@@ -1,36 +1,32 @@
-import { createClient } from "@/lib/db/supabase-server";
+import { db } from "@/lib/db/drizzle";
+import { contactInfo } from "@/lib/db/schema";
 import type { ContactInfo } from "@/types";
 
 export async function getContactInfo(): Promise<ContactInfo> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("contact_info")
-    .select("*")
-    .eq("id", "main")
-    .single();
+  const [row] = await db.select().from(contactInfo).limit(1);
 
-  if (error) throw error;
+  if (!row) throw new Error("Contact info not found");
 
   return {
     labName: {
-      ko: data.lab_name_ko,
-      en: data.lab_name_en,
+      ko: row.labNameKo ?? "",
+      en: row.labNameEn ?? "",
     },
     professor: {
-      name: data.professor_name,
-      title: data.professor_title,
-      email: data.professor_email,
+      name: row.professorName ?? "",
+      title: "",
+      email: row.professorEmail ?? "",
     },
     location: {
-      building: data.building,
-      professorOffice: data.professor_office,
-      lab: data.lab_room,
-      professorPhone: data.professor_phone,
-      labPhone: data.lab_phone,
+      building: row.building ?? "",
+      professorOffice: "",
+      lab: "",
+      professorPhone: row.professorPhone ?? "",
+      labPhone: "",
     },
-    department: data.department,
-    university: data.university,
-    address: data.address,
-    mapEmbedUrl: data.map_embed_url ?? null,
+    department: row.department ?? "",
+    university: row.university ?? "",
+    address: row.address ?? "",
+    mapEmbedUrl: row.mapEmbedUrl ?? null,
   };
 }
