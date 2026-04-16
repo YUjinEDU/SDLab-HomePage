@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { auth } from "@/lib/auth/auth";
 import { createClient } from "@/lib/db/supabase-server";
-import { getSession } from "@/actions/auth";
 
 type StatCard = {
   label: string;
@@ -9,8 +9,8 @@ type StatCard = {
 };
 
 export default async function ProfessorDashboard() {
+  const session = await auth();
   const supabase = await createClient();
-  const user = await getSession();
 
   const [members, publications, projects, news] = await Promise.all([
     supabase.from("members").select("id", { count: "exact", head: true }),
@@ -57,7 +57,7 @@ export default async function ProfessorDashboard() {
       <div>
         <h1 className="text-2xl font-bold text-gray-900">대시보드</h1>
         <p className="text-sm text-gray-500 mt-1">
-          {user?.email ?? "관리자"}님, 안녕하세요.
+          {session?.user?.email ?? "관리자"}님, 안녕하세요.
         </p>
       </div>
 

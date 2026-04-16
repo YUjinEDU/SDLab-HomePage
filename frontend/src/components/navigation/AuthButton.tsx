@@ -1,47 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/db/supabase-client";
-import type { User } from "@supabase/supabase-js";
+import { useSession, signOut } from "next-auth/react";
 
 export function AuthButton() {
-  const [user, setUser] = useState<User | null>(null);
-  const [role, setRole] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { data: session, status } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
-  const supabase = createClient();
 
-  useEffect(() => {
-    supabase.auth.getUser().then(async ({ data }) => {
-      setUser(data.user);
-      if (data.user) {
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("role")
-          .eq("id", data.user.id)
-          .single();
-        setRole(profile?.role ?? null);
-      }
-      setLoading(false);
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  if (loading) {
+  if (status === "loading") {
     return <div className="w-16 h-8" />;
   }
 
-  if (!user) {
+  if (!session) {
     return (
       <Link
         href="/login"
@@ -52,11 +25,13 @@ export function AuthButton() {
     );
   }
 
+  const user = session.user;
   const displayName =
-    user.user_metadata?.name ?? user.email?.split("@")[0] ?? "사용자";
+    user.name ?? user.email?.split("@")[0] ?? "사용자";
+  const role = user.role;
 
   async function handleLogout() {
-    await supabase.auth.signOut();
+    await signOut({ redirect: false });
     setMenuOpen(false);
     router.push("/");
     router.refresh();
