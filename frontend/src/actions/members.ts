@@ -1,6 +1,8 @@
 "use server";
 
-import { createClient } from "@/lib/db/supabase-server";
+import { db } from "@/lib/db/drizzle";
+import { members } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { assertRole } from "@/lib/permissions";
 import type { ActionResult } from "@/types/action";
@@ -51,10 +53,7 @@ function generateSlug(nameEn: string): string {
 }
 
 export async function createMember(formData: FormData): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
-
-  const supabase = await createClient();
+  await assertRole("professor");
 
   let nameKo: string;
   let nameEn: string;
@@ -92,28 +91,26 @@ export async function createMember(formData: FormData): Promise<ActionResult> {
   const career = parseJsonField(formData.get("career") as string);
 
   const slug = generateSlug(nameEn);
-  const id = crypto.randomUUID();
 
-  const { error } = await supabase.from("members").insert({
-    id,
-    slug,
-    name_ko: nameKo,
-    name_en: nameEn,
-    group,
-    position,
-    department,
-    email,
-    image,
-    bio,
-    display_order: displayOrder,
-    research_keywords: researchKeywords,
-    links,
-    education,
-    career,
-  });
-
-  if (error) {
-    return { error: error.message };
+  try {
+    await db.insert(members).values({
+      slug,
+      nameKo,
+      nameEn,
+      group,
+      position,
+      department,
+      email,
+      image,
+      bio,
+      displayOrder,
+      researchKeywords,
+      links,
+      education,
+      career,
+    });
+  } catch (e) {
+    return { error: (e as Error).message };
   }
 
   revalidatePath("/professor/members");
@@ -125,10 +122,7 @@ export async function updateMember(
   id: string,
   formData: FormData,
 ): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
-
-  const supabase = await createClient();
+  await assertRole("professor");
 
   let nameKo: string;
   let nameEn: string;
@@ -165,27 +159,27 @@ export async function updateMember(
   const education = parseJsonField(formData.get("education") as string);
   const career = parseJsonField(formData.get("career") as string);
 
-  const { error } = await supabase
-    .from("members")
-    .update({
-      name_ko: nameKo,
-      name_en: nameEn,
-      group,
-      position,
-      department,
-      email,
-      image,
-      bio,
-      display_order: displayOrder,
-      research_keywords: researchKeywords,
-      links,
-      education,
-      career,
-    })
-    .eq("id", id);
-
-  if (error) {
-    return { error: error.message };
+  try {
+    await db
+      .update(members)
+      .set({
+        nameKo,
+        nameEn,
+        group,
+        position,
+        department,
+        email,
+        image,
+        bio,
+        displayOrder,
+        researchKeywords,
+        links,
+        education,
+        career,
+      })
+      .where(eq(members.id, parseInt(id, 10)));
+  } catch (e) {
+    return { error: (e as Error).message };
   }
 
   revalidatePath("/professor/members");
@@ -194,15 +188,12 @@ export async function updateMember(
 }
 
 export async function deleteMember(id: string): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
+  await assertRole("professor");
 
-  const supabase = await createClient();
-
-  const { error } = await supabase.from("members").delete().eq("id", id);
-
-  if (error) {
-    return { error: error.message };
+  try {
+    await db.delete(members).where(eq(members.id, parseInt(id, 10)));
+  } catch (e) {
+    return { error: (e as Error).message };
   }
 
   revalidatePath("/professor/members");

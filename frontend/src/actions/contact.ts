@@ -1,6 +1,8 @@
 "use server";
 
-import { createClient } from "@/lib/db/supabase-server";
+import { db } from "@/lib/db/drizzle";
+import { contactInfo } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { assertRole } from "@/lib/permissions";
 import type { ActionResult } from "@/types/action";
@@ -14,19 +16,13 @@ function requireString(formData: FormData, key: string): string {
 }
 
 export async function updateContact(formData: FormData): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
-
-  const supabase = await createClient();
+  await assertRole("professor");
 
   let labNameKo: string;
   let labNameEn: string;
   let professorName: string;
-  let professorTitle: string;
   let professorEmail: string;
   let building: string;
-  let professorOffice: string;
-  let labRoom: string;
   let department: string;
   let university: string;
   let address: string;
@@ -34,11 +30,8 @@ export async function updateContact(formData: FormData): Promise<ActionResult> {
     labNameKo = requireString(formData, "labNameKo");
     labNameEn = requireString(formData, "labNameEn");
     professorName = requireString(formData, "professorName");
-    professorTitle = requireString(formData, "professorTitle");
     professorEmail = requireString(formData, "professorEmail");
     building = requireString(formData, "building");
-    professorOffice = requireString(formData, "professorOffice");
-    labRoom = requireString(formData, "labRoom");
     department = requireString(formData, "department");
     university = requireString(formData, "university");
     address = requireString(formData, "address");
@@ -48,29 +41,26 @@ export async function updateContact(formData: FormData): Promise<ActionResult> {
 
   const professorPhone =
     ((formData.get("professorPhone") as string) || "").trim() || null;
-  const labPhone = ((formData.get("labPhone") as string) || "").trim() || null;
 
-  const { error } = await supabase
-    .from("contact_info")
-    .update({
-      lab_name_ko: labNameKo,
-      lab_name_en: labNameEn,
-      professor_name: professorName,
-      professor_title: professorTitle,
-      professor_email: professorEmail,
-      building,
-      professor_office: professorOffice,
-      lab_room: labRoom,
-      professor_phone: professorPhone,
-      lab_phone: labPhone,
-      department,
-      university,
-      address,
-      map_embed_url: (formData.get("mapEmbedUrl") as string) || null,
-    })
-    .eq("id", "main");
-
-  if (error) return { error: error.message };
+  try {
+    await db
+      .update(contactInfo)
+      .set({
+        labNameKo,
+        labNameEn,
+        professorName,
+        professorEmail,
+        building,
+        professorPhone,
+        department,
+        university,
+        address,
+        mapEmbedUrl: (formData.get("mapEmbedUrl") as string) || null,
+      })
+      .where(eq(contactInfo.id, 1));
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
 
   revalidatePath("/professor/contact");
   revalidatePath("/contact");

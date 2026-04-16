@@ -1,6 +1,13 @@
 "use server";
 
-import { createClient } from "@/lib/db/supabase-server";
+import { db } from "@/lib/db/drizzle";
+import {
+  publications,
+  publicationAuthors,
+  publicationResearchAreas,
+  publicationProjects,
+} from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 import { generateSlug } from "@/lib/utils/slug";
 import { revalidatePath } from "next/cache";
 import { safeRevalidateTag } from "@/lib/utils/revalidate";
@@ -18,10 +25,7 @@ function requireString(formData: FormData, key: string): string {
 export async function createPublication(
   formData: FormData,
 ): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
-
-  const supabase = await createClient();
+  await assertRole("professor");
 
   let title: string;
   let authorsRaw: string;
@@ -45,10 +49,8 @@ export async function createPublication(
   const bibtex = (formData.get("bibtex") as string) || null;
   const isFeatured = formData.get("isFeatured") === "on";
 
-  const authors = authorsRaw
-    .split(",")
-    .map((a) => a.trim())
-    .filter(Boolean);
+  // schema: authors is text (comma-separated string), not array
+  const authors = authorsRaw;
   const keywords = keywordsRaw
     ? keywordsRaw
         .split(",")
@@ -61,54 +63,63 @@ export async function createPublication(
   const researchAreaIds = formData.getAll("researchAreaIds") as string[];
   const projectIds = formData.getAll("projectIds") as string[];
 
-  const id = crypto.randomUUID();
   const slug = generateSlug(title);
 
-  const { error } = await supabase.from("publications").insert({
-    id,
-    slug,
-    title,
-    authors,
-    type,
-    venue,
-    year,
-    month,
-    doi,
-    pdf_url: pdfUrl,
-    abstract,
-    keywords,
-    bibtex,
-    is_featured: isFeatured,
-  });
-
-  if (error) return { error: error.message };
-
-  if (authorMemberIds.length > 0) {
-    await supabase.from("publication_authors").insert(
-      authorMemberIds.map((memberId, index) => ({
-        publication_id: id,
-        member_id: memberId,
-        author_order: index,
-      })),
-    );
+  let newId: number;
+  try {
+    const [inserted] = await db
+      .insert(publications)
+      .values({
+        slug,
+        title,
+        authors,
+        type,
+        venue,
+        year,
+        month,
+        doi,
+        pdfUrl,
+        abstract,
+        keywords,
+        bibtex,
+        isFeatured,
+      })
+      .returning({ id: publications.id });
+    newId = inserted.id;
+  } catch (e) {
+    return { error: (e as Error).message };
   }
 
-  if (researchAreaIds.length > 0) {
-    await supabase.from("publication_research_areas").insert(
-      researchAreaIds.map((areaId) => ({
-        publication_id: id,
-        research_area_id: areaId,
-      })),
-    );
-  }
+  try {
+    if (authorMemberIds.length > 0) {
+      await db.insert(publicationAuthors).values(
+        authorMemberIds.map((memberId, index) => ({
+          publicationId: newId,
+          memberId: parseInt(memberId, 10),
+          authorOrder: index,
+        })),
+      );
+    }
 
-  if (projectIds.length > 0) {
-    await supabase.from("publication_projects").insert(
-      projectIds.map((projectId) => ({
-        publication_id: id,
-        project_id: projectId,
-      })),
-    );
+    if (researchAreaIds.length > 0) {
+      await db.insert(publicationResearchAreas).values(
+        researchAreaIds.map((areaId) => ({
+          publicationId: newId,
+          researchAreaId: parseInt(areaId, 10),
+        })),
+      );
+    }
+
+    if (projectIds.length > 0) {
+      await db.insert(publicationProjects).values(
+        projectIds.map((projectId) => ({
+          publicationId: newId,
+          projectId: parseInt(projectId, 10),
+        })),
+      );
+    }
+  } catch (e) {
+    return { error: (e as Error).message };
   }
 
   safeRevalidateTag("publications");
@@ -122,10 +133,7 @@ export async function updatePublication(
   id: string,
   formData: FormData,
 ): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
-
-  const supabase = await createClient();
+  await assertRole("professor");
 
   let title: string;
   let authorsRaw: string;
@@ -149,10 +157,7 @@ export async function updatePublication(
   const bibtex = (formData.get("bibtex") as string) || null;
   const isFeatured = formData.get("isFeatured") === "on";
 
-  const authors = authorsRaw
-    .split(",")
-    .map((a) => a.trim())
-    .filter(Boolean);
+  const authors = authorsRaw;
   const keywords = keywordsRaw
     ? keywordsRaw
         .split(",")
@@ -165,62 +170,70 @@ export async function updatePublication(
   const researchAreaIds = formData.getAll("researchAreaIds") as string[];
   const projectIds = formData.getAll("projectIds") as string[];
 
-  const { error } = await supabase
-    .from("publications")
-    .update({
-      title,
-      authors,
-      type,
-      venue,
-      year,
-      month,
-      doi,
-      pdf_url: pdfUrl,
-      abstract,
-      keywords,
-      bibtex,
-      is_featured: isFeatured,
-    })
-    .eq("id", id);
+  const numId = parseInt(id, 10);
 
-  if (error) return { error: error.message };
-
-  // Update join tables: delete then re-insert
-  await supabase.from("publication_authors").delete().eq("publication_id", id);
-
-  if (authorMemberIds.length > 0) {
-    await supabase.from("publication_authors").insert(
-      authorMemberIds.map((memberId, index) => ({
-        publication_id: id,
-        member_id: memberId,
-        author_order: index,
-      })),
-    );
+  try {
+    await db
+      .update(publications)
+      .set({
+        title,
+        authors,
+        type,
+        venue,
+        year,
+        month,
+        doi,
+        pdfUrl,
+        abstract,
+        keywords,
+        bibtex,
+        isFeatured,
+      })
+      .where(eq(publications.id, numId));
+  } catch (e) {
+    return { error: (e as Error).message };
   }
 
-  await supabase
-    .from("publication_research_areas")
-    .delete()
-    .eq("publication_id", id);
+  try {
+    // Update join tables: delete then re-insert
+    await db
+      .delete(publicationAuthors)
+      .where(eq(publicationAuthors.publicationId, numId));
+    if (authorMemberIds.length > 0) {
+      await db.insert(publicationAuthors).values(
+        authorMemberIds.map((memberId, index) => ({
+          publicationId: numId,
+          memberId: parseInt(memberId, 10),
+          authorOrder: index,
+        })),
+      );
+    }
 
-  if (researchAreaIds.length > 0) {
-    await supabase.from("publication_research_areas").insert(
-      researchAreaIds.map((areaId) => ({
-        publication_id: id,
-        research_area_id: areaId,
-      })),
-    );
-  }
+    await db
+      .delete(publicationResearchAreas)
+      .where(eq(publicationResearchAreas.publicationId, numId));
+    if (researchAreaIds.length > 0) {
+      await db.insert(publicationResearchAreas).values(
+        researchAreaIds.map((areaId) => ({
+          publicationId: numId,
+          researchAreaId: parseInt(areaId, 10),
+        })),
+      );
+    }
 
-  await supabase.from("publication_projects").delete().eq("publication_id", id);
-
-  if (projectIds.length > 0) {
-    await supabase.from("publication_projects").insert(
-      projectIds.map((projectId) => ({
-        publication_id: id,
-        project_id: projectId,
-      })),
-    );
+    await db
+      .delete(publicationProjects)
+      .where(eq(publicationProjects.publicationId, numId));
+    if (projectIds.length > 0) {
+      await db.insert(publicationProjects).values(
+        projectIds.map((projectId) => ({
+          publicationId: numId,
+          projectId: parseInt(projectId, 10),
+        })),
+      );
+    }
+  } catch (e) {
+    return { error: (e as Error).message };
   }
 
   safeRevalidateTag("publications");
@@ -231,21 +244,24 @@ export async function updatePublication(
 }
 
 export async function deletePublication(id: string): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
+  await assertRole("professor");
 
-  const supabase = await createClient();
+  const numId = parseInt(id, 10);
 
-  await supabase.from("publication_authors").delete().eq("publication_id", id);
-  await supabase
-    .from("publication_research_areas")
-    .delete()
-    .eq("publication_id", id);
-  await supabase.from("publication_projects").delete().eq("publication_id", id);
-
-  const { error } = await supabase.from("publications").delete().eq("id", id);
-
-  if (error) return { error: error.message };
+  try {
+    await db
+      .delete(publicationAuthors)
+      .where(eq(publicationAuthors.publicationId, numId));
+    await db
+      .delete(publicationResearchAreas)
+      .where(eq(publicationResearchAreas.publicationId, numId));
+    await db
+      .delete(publicationProjects)
+      .where(eq(publicationProjects.publicationId, numId));
+    await db.delete(publications).where(eq(publications.id, numId));
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
 
   safeRevalidateTag("publications");
   revalidatePath("/professor/publications");
