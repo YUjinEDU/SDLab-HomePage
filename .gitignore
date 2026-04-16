@@ -61,3 +61,4 @@ frontend/supabase/.temp/
 
 # Local image assets
 images/faces/
+.worktrees/
