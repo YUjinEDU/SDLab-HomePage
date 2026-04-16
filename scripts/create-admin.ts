@@ -1,0 +1,26 @@
+// Usage: DATABASE_URL=... npx tsx scripts/create-admin.ts <email> <password>
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
+import { users } from "./frontend/src/lib/db/schema";
+import bcrypt from "bcryptjs";
+
+const email = process.argv[2];
+const password = process.argv[3];
+
+if (!email || !password) {
+  console.error("Usage: npx tsx scripts/create-admin.ts <email> <password>");
+  process.exit(1);
+}
+
+const client = postgres(process.env.DATABASE_URL!);
+const db = drizzle(client);
+
+const hashedPassword = await bcrypt.hash(password, 12);
+await db.insert(users).values({
+  email,
+  hashedPassword,
+  role: "admin",
+});
+
+console.log(`Admin created: ${email}`);
+await client.end();
