@@ -1,4 +1,16 @@
-import { createClient } from "@/lib/db/supabase-server";
+import { db } from "@/lib/db/drizzle";
+import {
+  servers,
+  serverMetrics,
+  gpuMetrics,
+  gpuProcesses,
+  diskPartitions,
+  diskUsageUsers,
+  sshSessions,
+  sshSessionHistory,
+  gpuUsageLog,
+} from "@/lib/db/schema";
+import { eq, desc, asc, gte, lt, and } from "drizzle-orm";
 import type {
   Server,
   ServerMetrics,
@@ -13,121 +25,234 @@ import type {
   GpuUserRanking,
 } from "@/types/server-monitor";
 
-export async function getServers(): Promise<Server[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("servers")
-    .select("*")
-    .eq("is_active", true)
-    .order("name");
+// ---------------------------------------------------------------------------
+// Adapters: map Drizzle rows to the existing TypeScript types
+// ---------------------------------------------------------------------------
 
-  if (error) throw error;
-  return (data ?? []) as Server[];
+function toServer(row: typeof servers.$inferSelect): Server {
+  return {
+    id: String(row.id),
+    name: row.name,
+    hostname: row.host,
+    ip_address: row.host,
+    description: null,
+    gpu_models: null,
+    storage_paths: null,
+    is_active: row.isOnline ?? false,
+    created_at: row.updatedAt?.toISOString() ?? new Date().toISOString(),
+    updated_at: row.updatedAt?.toISOString() ?? new Date().toISOString(),
+  };
+}
+
+function toServerMetrics(row: typeof serverMetrics.$inferSelect): ServerMetrics {
+  return {
+    id: String(row.id),
+    server_id: String(row.serverId),
+    cpu_percent: row.cpuUsage ?? 0,
+    cpu_per_core: [], // not collected — column not in schema
+    memory_total_bytes: row.memoryTotal ?? 0,
+    memory_used_bytes: row.memoryUsed ?? 0,
+    memory_percent:
+      row.memoryTotal && row.memoryTotal > 0
+        ? ((row.memoryUsed ?? 0) / row.memoryTotal) * 100
+        : 0,
+    load_avg_1m: 0, // not collected — column not in schema
+    load_avg_5m: 0, // not collected — column not in schema
+    load_avg_15m: 0, // not collected — column not in schema
+    recorded_at: row.recordedAt?.toISOString() ?? new Date().toISOString(),
+  };
+}
+
+function toGpuMetrics(row: typeof gpuMetrics.$inferSelect): GpuMetrics {
+  return {
+    id: String(row.id),
+    server_id: String(row.serverId),
+    gpu_index: row.gpuIndex,
+    gpu_name: row.gpuName ?? "",
+    gpu_util_percent: row.utilizationGpu ?? 0,
+    memory_total_mb: row.memoryTotal ?? 0,
+    memory_used_mb: row.memoryUsed ?? 0,
+    memory_percent:
+      row.memoryTotal && row.memoryTotal > 0
+        ? ((row.memoryUsed ?? 0) / row.memoryTotal) * 100
+        : 0,
+    temperature_c: row.temperatureGpu ?? 0,
+    power_draw_w: 0, // not collected — column not in schema
+    power_limit_w: 0, // not collected — column not in schema
+    fan_speed_percent: 0, // not collected — column not in schema
+    recorded_at: row.recordedAt?.toISOString() ?? new Date().toISOString(),
+  };
+}
+
+function toGpuProcess(row: typeof gpuProcesses.$inferSelect): GpuProcess {
+  return {
+    id: String(row.id),
+    server_id: String(row.serverId),
+    gpu_index: row.gpuIndex,
+    pid: row.pid ?? 0,
+    username: row.username ?? "",
+    process_name: row.processName ?? "",
+    gpu_memory_used_mb: row.usedMemory ?? 0,
+    cpu_percent: 0,
+    command: row.processName ?? "",
+    started_at: null,
+    recorded_at: row.recordedAt?.toISOString() ?? new Date().toISOString(),
+  };
+}
+
+function toDiskPartition(row: typeof diskPartitions.$inferSelect): DiskPartition {
+  return {
+    id: String(row.id),
+    server_id: String(row.serverId),
+    device: row.device ?? "",
+    mount_point: row.mountpoint ?? "",
+    fs_type: "",
+    total_bytes: row.total ?? 0,
+    used_bytes: row.used ?? 0,
+    free_bytes: (row.total ?? 0) - (row.used ?? 0),
+    percent:
+      row.total && row.total > 0 ? ((row.used ?? 0) / row.total) * 100 : 0,
+    recorded_at: row.recordedAt?.toISOString() ?? new Date().toISOString(),
+  };
+}
+
+function toDiskUsageUser(row: typeof diskUsageUsers.$inferSelect): DiskUsageUser {
+  return {
+    id: String(row.id),
+    server_id: String(row.serverId),
+    base_path: "",
+    username: row.username ?? "",
+    bytes_used: row.usageBytes ?? 0,
+    recorded_at: row.recordedAt?.toISOString() ?? new Date().toISOString(),
+  };
+}
+
+function toSshSession(row: typeof sshSessions.$inferSelect): SshSession {
+  return {
+    id: String(row.id),
+    server_id: String(row.serverId),
+    username: row.username ?? "",
+    terminal: "",
+    remote_host: row.fromHost ?? "",
+    login_at: row.loginAt?.toISOString() ?? new Date().toISOString(),
+    recorded_at: row.loginAt?.toISOString() ?? new Date().toISOString(),
+  };
+}
+
+function toSshSessionHistory(
+  row: typeof sshSessionHistory.$inferSelect,
+): SshSessionHistory {
+  return {
+    id: row.id,
+    server_id: String(row.serverId),
+    username: row.username ?? "",
+    terminal: "",
+    remote_host: row.fromHost ?? "",
+    login_at: row.loginAt?.toISOString() ?? new Date().toISOString(),
+    logout_at: row.logoutAt?.toISOString() ?? null,
+    created_at: row.loginAt?.toISOString() ?? new Date().toISOString(),
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Query functions — identical signatures to the original
+// ---------------------------------------------------------------------------
+
+export async function getServers(): Promise<Server[]> {
+  const rows = await db
+    .select()
+    .from(servers)
+    .where(eq(servers.isOnline, true))
+    .orderBy(asc(servers.name));
+  return rows.map(toServer);
 }
 
 export async function getLatestServerMetrics(
   serverId: string,
 ): Promise<ServerMetrics | null> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("server_metrics")
-    .select("*")
-    .eq("server_id", serverId)
-    .order("recorded_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-
-  if (error) return null;
-  return data as ServerMetrics | null;
+  const [row] = await db
+    .select()
+    .from(serverMetrics)
+    .where(eq(serverMetrics.serverId, Number(serverId)))
+    .orderBy(desc(serverMetrics.recordedAt))
+    .limit(1);
+  return row ? toServerMetrics(row) : null;
 }
 
 export async function getLatestGpuMetrics(
   serverId: string,
 ): Promise<GpuMetrics[]> {
-  const supabase = await createClient();
-
-  // 단일 쿼리: 최근 20행 가져와서 클라이언트에서 latest batch만 필터 (2-step → 1-step)
-  const { data, error } = await supabase
-    .from("gpu_metrics")
-    .select("*")
-    .eq("server_id", serverId)
-    .order("recorded_at", { ascending: false })
+  const rows = await db
+    .select()
+    .from(gpuMetrics)
+    .where(eq(gpuMetrics.serverId, Number(serverId)))
+    .orderBy(desc(gpuMetrics.recordedAt))
     .limit(20);
 
-  if (error || !data || data.length === 0) return [];
+  if (!rows.length) return [];
 
-  const latest = (data[0] as GpuMetrics).recorded_at;
-  return (data as GpuMetrics[])
-    .filter((r) => r.recorded_at === latest)
-    .sort((a, b) => a.gpu_index - b.gpu_index);
+  const latest = rows[0].recordedAt?.toISOString();
+  return rows
+    .filter((r) => r.recordedAt?.toISOString() === latest)
+    .sort((a, b) => a.gpuIndex - b.gpuIndex)
+    .map(toGpuMetrics);
 }
 
 export async function getGpuProcesses(serverId: string): Promise<GpuProcess[]> {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase
-    .from("gpu_processes")
-    .select("*")
-    .eq("server_id", serverId)
-    .order("gpu_index")
-    .order("gpu_memory_used_mb", { ascending: false });
-
-  if (error) return [];
-  return (data ?? []) as GpuProcess[];
+  const rows = await db
+    .select()
+    .from(gpuProcesses)
+    .where(eq(gpuProcesses.serverId, Number(serverId)))
+    .orderBy(asc(gpuProcesses.gpuIndex), desc(gpuProcesses.usedMemory));
+  return rows.map(toGpuProcess);
 }
 
 export async function getLatestDiskPartitions(
   serverId: string,
 ): Promise<DiskPartition[]> {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase
-    .from("disk_partitions")
-    .select("*")
-    .eq("server_id", serverId)
-    .order("recorded_at", { ascending: false })
+  const rows = await db
+    .select()
+    .from(diskPartitions)
+    .where(eq(diskPartitions.serverId, Number(serverId)))
+    .orderBy(desc(diskPartitions.recordedAt))
     .limit(50);
 
-  if (error || !data || data.length === 0) return [];
+  if (!rows.length) return [];
 
-  const latest = (data[0] as DiskPartition).recorded_at;
-  return (data as DiskPartition[])
-    .filter((r) => r.recorded_at === latest)
-    .sort((a, b) => a.mount_point.localeCompare(b.mount_point));
+  const latest = rows[0].recordedAt?.toISOString();
+  return rows
+    .filter((r) => r.recordedAt?.toISOString() === latest)
+    .sort((a, b) => (a.mountpoint ?? "").localeCompare(b.mountpoint ?? ""))
+    .map(toDiskPartition);
 }
 
 export async function getDiskUsageByUser(
   serverId: string,
 ): Promise<DiskUsageUser[]> {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase
-    .from("disk_usage_users")
-    .select("*")
-    .eq("server_id", serverId)
-    .order("recorded_at", { ascending: false })
+  const rows = await db
+    .select()
+    .from(diskUsageUsers)
+    .where(eq(diskUsageUsers.serverId, Number(serverId)))
+    .orderBy(desc(diskUsageUsers.recordedAt))
     .limit(100);
 
-  if (error || !data || data.length === 0) return [];
+  if (!rows.length) return [];
 
-  const latest = (data[0] as DiskUsageUser).recorded_at;
-  return (data as DiskUsageUser[])
-    .filter((r) => r.recorded_at === latest)
-    .sort((a, b) => b.bytes_used - a.bytes_used);
+  const latest = rows[0].recordedAt?.toISOString();
+  return rows
+    .filter((r) => r.recordedAt?.toISOString() === latest)
+    .sort((a, b) => (b.usageBytes ?? 0) - (a.usageBytes ?? 0))
+    .map(toDiskUsageUser);
 }
 
 export async function getSshSessions(serverId: string): Promise<SshSession[]> {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase
-    .from("ssh_sessions")
-    .select("*")
-    .eq("server_id", serverId)
-    .order("login_at", { ascending: false })
-    .limit(200); // 다른 per-server 쿼리와 동일하게 limit 적용 (무제한 성장 방어)
-
-  if (error) return [];
-  return (data ?? []) as SshSession[];
+  const rows = await db
+    .select()
+    .from(sshSessions)
+    .where(eq(sshSessions.serverId, Number(serverId)))
+    .orderBy(desc(sshSessions.loginAt))
+    .limit(200);
+  return rows.map(toSshSession);
 }
 
 // ---------------------------------------------------------------------------
@@ -137,63 +262,64 @@ export async function getSshSessions(serverId: string): Promise<SshSession[]> {
 type UsagePeriod = "week" | "month" | "prev_month";
 
 function getPeriodBounds(period: UsagePeriod): {
-  since: string;
-  until?: string;
+  since: Date;
+  until?: Date;
 } {
   const now = new Date();
   if (period === "week") {
     const d = new Date(now);
     d.setDate(d.getDate() - 7);
-    return { since: d.toISOString() };
+    return { since: d };
   }
   if (period === "month") {
     const start = new Date(now.getFullYear(), now.getMonth(), 1);
-    return { since: start.toISOString() };
+    return { since: start };
   }
   // prev_month
   const start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
   const end = new Date(now.getFullYear(), now.getMonth(), 1);
-  return { since: start.toISOString(), until: end.toISOString() };
+  return { since: start, until: end };
 }
 
 export async function getGpuUsageRanking(
   period: UsagePeriod,
   serverId?: string,
 ): Promise<GpuUserRanking[]> {
-  const supabase = await createClient();
   const { since, until } = getPeriodBounds(period);
 
-  // LIMIT으로 풀스캔 방어. 1분 간격 × 2서버 × GPU 프로세스 수십 개 × 장기간 = 수십만 행 가능.
-  // 50,000행이면 약 30일치 (2서버 × 10프로세스 × 1440분). 초과 시 상위 기여자는 여전히 포착됨.
-  let query = supabase
-    .from("gpu_usage_log")
-    .select("username,server_id,memory_used_mb")
-    .gte("recorded_at", since)
+  const conditions = [gte(gpuUsageLog.recordedAt, since)];
+  if (until) conditions.push(lt(gpuUsageLog.recordedAt, until));
+  if (serverId) conditions.push(eq(gpuUsageLog.serverId, Number(serverId)));
+
+  const rows = await db
+    .select({
+      username: gpuUsageLog.username,
+      serverId: gpuUsageLog.serverId,
+      usedMemory: gpuUsageLog.usedMemory,
+    })
+    .from(gpuUsageLog)
+    .where(and(...(conditions as [typeof conditions[0], ...typeof conditions])))
     .limit(50000);
 
-  if (until) query = query.lt("recorded_at", until);
-  if (serverId) query = query.eq("server_id", serverId);
+  if (!rows.length) return [];
 
-  const { data, error } = await query;
-  if (error || !data) return [];
+  const allServers = await getServers();
+  const serverMap = new Map(allServers.map((s) => [s.id, s.name]));
 
-  const servers = await getServers();
-  const serverMap = new Map(servers.map((s) => [s.id, s.name]));
-
-  // Aggregate by (server_id, username): count minutes, track max memory
   const agg = new Map<
     string,
     { minutes: number; maxMemory: number; sid: string }
   >();
-  for (const row of data as GpuUsageLog[]) {
-    const key = `${row.server_id}:${row.username}`;
+  for (const row of rows) {
+    const sid = String(row.serverId);
+    const key = `${sid}:${row.username}`;
     const existing = agg.get(key);
-    const mem = row.memory_used_mb ?? 0;
+    const mem = row.usedMemory ?? 0;
     if (existing) {
       existing.minutes += 1;
       if (mem > existing.maxMemory) existing.maxMemory = mem;
     } else {
-      agg.set(key, { minutes: 1, maxMemory: mem, sid: row.server_id });
+      agg.set(key, { minutes: 1, maxMemory: mem, sid });
     }
   }
 
@@ -212,40 +338,38 @@ export async function getSshSessionHistory(
   serverId?: string,
   limit = 200,
 ): Promise<(SshSessionHistory & { server_name: string })[]> {
-  const supabase = await createClient();
+  const conditions = serverId
+    ? [eq(sshSessionHistory.serverId, Number(serverId))]
+    : [];
 
-  let query = supabase
-    .from("ssh_session_history")
-    .select("*")
-    .order("login_at", { ascending: false })
+  const rows = await db
+    .select()
+    .from(sshSessionHistory)
+    .where(conditions.length ? conditions[0] : undefined)
+    .orderBy(desc(sshSessionHistory.loginAt))
     .limit(limit);
 
-  if (serverId) query = query.eq("server_id", serverId);
+  const allServers = await getServers();
+  const serverMap = new Map(allServers.map((s) => [s.id, s.name]));
 
-  const { data, error } = await query;
-  if (error || !data) return [];
-
-  const servers = await getServers();
-  const serverMap = new Map(servers.map((s) => [s.id, s.name]));
-
-  return (data as SshSessionHistory[]).map((row) => ({
-    ...row,
-    server_name: serverMap.get(row.server_id) ?? row.server_id,
+  return rows.map((row) => ({
+    ...toSshSessionHistory(row),
+    server_name: serverMap.get(String(row.serverId)) ?? String(row.serverId),
   }));
 }
 
 export async function getServerMonitorData(): Promise<ServerMonitorData[]> {
-  const servers = await getServers();
+  const allServers = await getServers();
 
   const results = await Promise.all(
-    servers.map(async (server) => {
+    allServers.map(async (server) => {
       const [
         metrics,
         gpus,
-        gpuProcesses,
-        diskPartitions,
+        gpuProcs,
+        diskParts,
         diskUsageByUser,
-        sshSessions,
+        sshSess,
       ] = await Promise.all([
         getLatestServerMetrics(server.id),
         getLatestGpuMetrics(server.id),
@@ -259,10 +383,10 @@ export async function getServerMonitorData(): Promise<ServerMonitorData[]> {
         server,
         metrics,
         gpus,
-        gpuProcesses,
-        diskPartitions,
+        gpuProcesses: gpuProcs,
+        diskPartitions: diskParts,
         diskUsageByUser,
-        sshSessions,
+        sshSessions: sshSess,
       };
     }),
   );

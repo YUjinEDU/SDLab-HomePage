@@ -1,35 +1,50 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import * as permissions from "@/lib/permissions";
 
-// Mock lib/permissions so assertRole always returns { error: 'unauthorized' }
+// ─── Permissions mock ──────────────────────────────────────────────────────
 vi.mock("@/lib/permissions", () => ({
-  assertRole: vi.fn().mockResolvedValue({ error: "unauthorized" }),
+  assertRole: vi.fn(),
 }));
 
-// Mock next/cache to avoid server-only errors in test environment
+// ─── next/cache mock ───────────────────────────────────────────────────────
 vi.mock("next/cache", () => ({
   revalidatePath: vi.fn(),
   revalidateTag: vi.fn(),
 }));
 
-// Mock Supabase server client — should not be reached when guard fires first
-vi.mock("@/lib/db/supabase-server", () => ({
-  createClient: vi.fn().mockResolvedValue({
-    from: vi.fn().mockReturnThis(),
-    insert: vi.fn().mockResolvedValue({ error: null }),
-    update: vi.fn().mockReturnThis(),
-    delete: vi.fn().mockReturnThis(),
-    eq: vi.fn().mockResolvedValue({ error: null }),
-    auth: { getUser: vi.fn().mockResolvedValue({ data: { user: null } }) },
-  }),
+// ─── Drizzle mock ───────────────────────────────────────────────────────────
+// insert().values().returning() → [{ id: 1 }]
+// update().set().where()        → []
+// delete().where()              → []
+const mockReturning = vi.hoisted(() => vi.fn().mockResolvedValue([{ id: 1 }]));
+const mockValues    = vi.hoisted(() => vi.fn().mockReturnValue({ returning: mockReturning }));
+const mockInsert    = vi.hoisted(() => vi.fn().mockReturnValue({ values: mockValues }));
+const mockWhere     = vi.hoisted(() => vi.fn().mockResolvedValue([]));
+const mockSet       = vi.hoisted(() => vi.fn().mockReturnValue({ where: mockWhere }));
+const mockUpdate    = vi.hoisted(() => vi.fn().mockReturnValue({ set: mockSet }));
+const mockDelWhere  = vi.hoisted(() => vi.fn().mockResolvedValue([]));
+const mockDelete    = vi.hoisted(() => vi.fn().mockReturnValue({ where: mockDelWhere }));
+
+vi.mock("@/lib/db/drizzle", () => ({
+  db: {
+    insert: mockInsert,
+    update: mockUpdate,
+    delete: mockDelete,
+  },
 }));
 
-// Mock slug util
+// ─── Slug util mock ────────────────────────────────────────────────────────
 vi.mock("@/lib/utils/slug", () => ({
   generateSlug: vi.fn().mockReturnValue("test-slug"),
 }));
 
+// ─── safeRevalidateTag mock ────────────────────────────────────────────────
+vi.mock("@/lib/utils/revalidate", () => ({
+  safeRevalidateTag: vi.fn(),
+}));
+
 import { revalidateTag } from "next/cache";
+import { safeRevalidateTag } from "@/lib/utils/revalidate";
 import {
   createPublication,
   updatePublication,
@@ -50,120 +65,137 @@ function makeFormData(entries: Record<string, string> = {}): FormData {
   return fd;
 }
 
+function resetDbMocks() {
+  mockReturning.mockResolvedValue([{ id: 1 }]);
+  mockValues.mockReturnValue({ returning: mockReturning });
+  mockInsert.mockReturnValue({ values: mockValues });
+  mockWhere.mockResolvedValue([]);
+  mockSet.mockReturnValue({ where: mockWhere });
+  mockUpdate.mockReturnValue({ set: mockSet });
+  mockDelWhere.mockResolvedValue([]);
+  mockDelete.mockReturnValue({ where: mockDelWhere });
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Role Guard — assertRole throws → action rejects, DB never called
+// ══════════════════════════════════════════════════════════════════════════════
 describe("Professor Server Actions — role guard", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    // Reset mock to always return unauthorized
-    vi.mocked(permissions.assertRole).mockResolvedValue({
-      error: "unauthorized",
-    });
+    resetDbMocks();
+    // Unauthorized: assertRole throws (mirrors redirect() behaviour)
+    vi.mocked(permissions.assertRole).mockRejectedValue(
+      new Error("NEXT_REDIRECT"),
+    );
   });
 
   describe("publications.ts", () => {
-    it("createPublication returns { error: 'unauthorized' } when assertRole fails", async () => {
-      const result = await createPublication(
-        makeFormData({ title: "Test", year: "2024" }),
-      );
-      expect(result).toEqual({ error: "unauthorized" });
+    it("createPublication rejects and does not call DB when unauthorized", async () => {
+      await expect(
+        createPublication(makeFormData({ title: "Test", year: "2024" })),
+      ).rejects.toThrow();
+      expect(mockInsert).not.toHaveBeenCalled();
     });
 
-    it("updatePublication returns { error: 'unauthorized' } when assertRole fails", async () => {
-      const result = await updatePublication(
-        "some-id",
-        makeFormData({ title: "Test" }),
-      );
-      expect(result).toEqual({ error: "unauthorized" });
+    it("updatePublication rejects and does not call DB when unauthorized", async () => {
+      await expect(
+        updatePublication("1", makeFormData({ title: "Test" })),
+      ).rejects.toThrow();
+      expect(mockUpdate).not.toHaveBeenCalled();
     });
 
-    it("deletePublication returns { error: 'unauthorized' } when assertRole fails", async () => {
-      const result = await deletePublication("some-id");
-      expect(result).toEqual({ error: "unauthorized" });
+    it("deletePublication rejects and does not call DB when unauthorized", async () => {
+      await expect(deletePublication("1")).rejects.toThrow();
+      expect(mockDelete).not.toHaveBeenCalled();
     });
   });
 
   describe("projects.ts", () => {
-    it("createProject returns { error: 'unauthorized' } when assertRole fails", async () => {
-      const result = await createProject(
-        makeFormData({ title: "Test Project" }),
-      );
-      expect(result).toEqual({ error: "unauthorized" });
+    it("createProject rejects and does not call DB when unauthorized", async () => {
+      await expect(
+        createProject(makeFormData({ title: "Test Project" })),
+      ).rejects.toThrow();
+      expect(mockInsert).not.toHaveBeenCalled();
     });
 
-    it("updateProject returns { error: 'unauthorized' } when assertRole fails", async () => {
-      const result = await updateProject(
-        "some-id",
-        makeFormData({ title: "Test" }),
-      );
-      expect(result).toEqual({ error: "unauthorized" });
+    it("updateProject rejects and does not call DB when unauthorized", async () => {
+      await expect(
+        updateProject("1", makeFormData({ title: "Test" })),
+      ).rejects.toThrow();
+      expect(mockUpdate).not.toHaveBeenCalled();
     });
 
-    it("deleteProject returns { error: 'unauthorized' } when assertRole fails", async () => {
-      const result = await deleteProject("some-id");
-      expect(result).toEqual({ error: "unauthorized" });
+    it("deleteProject rejects and does not call DB when unauthorized", async () => {
+      await expect(deleteProject("1")).rejects.toThrow();
+      expect(mockDelete).not.toHaveBeenCalled();
     });
   });
 
   describe("members.ts", () => {
-    it("createMember returns { error: 'unauthorized' } when assertRole fails", async () => {
-      const result = await createMember(
-        makeFormData({ nameEn: "Test Member" }),
-      );
-      expect(result).toEqual({ error: "unauthorized" });
+    it("createMember rejects and does not call DB when unauthorized", async () => {
+      await expect(
+        createMember(makeFormData({ nameEn: "Test Member" })),
+      ).rejects.toThrow();
+      expect(mockInsert).not.toHaveBeenCalled();
     });
 
-    it("updateMember returns { error: 'unauthorized' } when assertRole fails", async () => {
-      const result = await updateMember(
-        "some-id",
-        makeFormData({ nameEn: "Test" }),
-      );
-      expect(result).toEqual({ error: "unauthorized" });
+    it("updateMember rejects and does not call DB when unauthorized", async () => {
+      await expect(
+        updateMember("1", makeFormData({ nameEn: "Test" })),
+      ).rejects.toThrow();
+      expect(mockUpdate).not.toHaveBeenCalled();
     });
 
-    it("deleteMember returns { error: 'unauthorized' } when assertRole fails", async () => {
-      const result = await deleteMember("some-id");
-      expect(result).toEqual({ error: "unauthorized" });
+    it("deleteMember rejects and does not call DB when unauthorized", async () => {
+      await expect(deleteMember("1")).rejects.toThrow();
+      expect(mockDelete).not.toHaveBeenCalled();
     });
   });
 
   describe("news.ts", () => {
-    it("createNews returns { error: 'unauthorized' } when assertRole fails", async () => {
-      const result = await createNews(makeFormData({ title: "Test News" }));
-      expect(result).toEqual({ error: "unauthorized" });
+    it("createNews rejects and does not call DB when unauthorized", async () => {
+      await expect(
+        createNews(makeFormData({ title: "Test News" })),
+      ).rejects.toThrow();
+      expect(mockInsert).not.toHaveBeenCalled();
     });
 
-    it("updateNews returns { error: 'unauthorized' } when assertRole fails", async () => {
-      const result = await updateNews(
-        "some-id",
-        makeFormData({ title: "Test" }),
-      );
-      expect(result).toEqual({ error: "unauthorized" });
+    it("updateNews rejects and does not call DB when unauthorized", async () => {
+      await expect(
+        updateNews("1", makeFormData({ title: "Test" })),
+      ).rejects.toThrow();
+      expect(mockUpdate).not.toHaveBeenCalled();
     });
 
-    it("deleteNews returns { error: 'unauthorized' } when assertRole fails", async () => {
-      const result = await deleteNews("some-id");
-      expect(result).toEqual({ error: "unauthorized" });
+    it("deleteNews rejects and does not call DB when unauthorized", async () => {
+      await expect(deleteNews("1")).rejects.toThrow();
+      expect(mockDelete).not.toHaveBeenCalled();
     });
   });
 
   describe("contact.ts", () => {
-    it("updateContact returns { error: 'unauthorized' } when assertRole fails", async () => {
-      const result = await updateContact(
-        makeFormData({ labNameKo: "Test Lab" }),
-      );
-      expect(result).toEqual({ error: "unauthorized" });
+    it("updateContact rejects and does not call DB when unauthorized", async () => {
+      await expect(
+        updateContact(makeFormData({ labNameKo: "Test Lab" })),
+      ).rejects.toThrow();
+      expect(mockUpdate).not.toHaveBeenCalled();
     });
   });
 });
 
+// ══════════════════════════════════════════════════════════════════════════════
+// VIS-02 — revalidateTag cache invalidation on mutation
+// ══════════════════════════════════════════════════════════════════════════════
 describe("VIS-02 — revalidateTag cache invalidation on mutation", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    // Allow actions to proceed past the role guard
-    vi.mocked(permissions.assertRole).mockResolvedValue(null);
+    resetDbMocks();
+    // Authorized: assertRole resolves
+    vi.mocked(permissions.assertRole).mockResolvedValue(undefined);
   });
 
   describe("publications cache tag", () => {
-    it("createPublication() must call revalidateTag('publications')", async () => {
+    it("createPublication() calls safeRevalidateTag('publications')", async () => {
       await createPublication(
         makeFormData({
           title: "Test",
@@ -173,12 +205,12 @@ describe("VIS-02 — revalidateTag cache invalidation on mutation", () => {
           venue: "ICSE",
         }),
       );
-      expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("publications");
+      expect(vi.mocked(safeRevalidateTag)).toHaveBeenCalledWith("publications");
     });
 
-    it("updatePublication() must call revalidateTag('publications')", async () => {
+    it("updatePublication() calls safeRevalidateTag('publications')", async () => {
       await updatePublication(
-        "some-id",
+        "1",
         makeFormData({
           title: "Test",
           year: "2024",
@@ -187,17 +219,17 @@ describe("VIS-02 — revalidateTag cache invalidation on mutation", () => {
           venue: "ICSE",
         }),
       );
-      expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("publications");
+      expect(vi.mocked(safeRevalidateTag)).toHaveBeenCalledWith("publications");
     });
 
-    it("deletePublication() must call revalidateTag('publications')", async () => {
-      await deletePublication("some-id");
-      expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("publications");
+    it("deletePublication() calls safeRevalidateTag('publications')", async () => {
+      await deletePublication("1");
+      expect(vi.mocked(safeRevalidateTag)).toHaveBeenCalledWith("publications");
     });
   });
 
   describe("projects cache tag", () => {
-    it("createProject() must call revalidateTag('projects')", async () => {
+    it("createProject() calls safeRevalidateTag('projects')", async () => {
       await createProject(
         makeFormData({
           title: "Test Project",
@@ -208,12 +240,12 @@ describe("VIS-02 — revalidateTag cache invalidation on mutation", () => {
           startDate: "2024-01-01",
         }),
       );
-      expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("projects");
+      expect(vi.mocked(safeRevalidateTag)).toHaveBeenCalledWith("projects");
     });
 
-    it("updateProject() must call revalidateTag('projects')", async () => {
+    it("updateProject() calls safeRevalidateTag('projects')", async () => {
       await updateProject(
-        "some-id",
+        "1",
         makeFormData({
           title: "Test Project",
           status: "active",
@@ -223,12 +255,12 @@ describe("VIS-02 — revalidateTag cache invalidation on mutation", () => {
           startDate: "2024-01-01",
         }),
       );
-      expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("projects");
+      expect(vi.mocked(safeRevalidateTag)).toHaveBeenCalledWith("projects");
     });
 
-    it("deleteProject() must call revalidateTag('projects')", async () => {
-      await deleteProject("some-id");
-      expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("projects");
+    it("deleteProject() calls safeRevalidateTag('projects')", async () => {
+      await deleteProject("1");
+      expect(vi.mocked(safeRevalidateTag)).toHaveBeenCalledWith("projects");
     });
   });
 });

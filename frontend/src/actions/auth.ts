@@ -1,62 +1,31 @@
 "use server";
 
-import { createClient } from "@/lib/db/supabase-server";
-import { getAuthUser } from "@/lib/auth/get-user";
-import { redirect } from "next/navigation";
-import type { ActionResult } from "@/types/action";
+import { signIn, signOut, auth } from "@/lib/auth/auth";
+import { AuthError } from "next-auth";
+import type { ActionResult } from "@/types";
 
-function requireString(formData: FormData, key: string): string {
-  const value = formData.get(key);
-  if (typeof value !== "string" || !value.trim()) {
-    throw new Error(`${key} is required`);
-  }
-  return value.trim();
-}
+export async function login(
+  _prevState: ActionResult,
+  formData: FormData
+): Promise<ActionResult> {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+  const redirectTo = (formData.get("redirect") as string) || "/internal";
 
-export async function login(formData: FormData): Promise<ActionResult> {
-  const supabase = await createClient();
-
-  let email: string;
-  let password: string;
   try {
-    email = requireString(formData, "email");
-    password = requireString(formData, "password");
-  } catch {
-    return { error: "이메일 또는 비밀번호가 올바르지 않습니다." };
-  }
-
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
-
-  if (error) {
-    return { error: "이메일 또는 비밀번호가 올바르지 않습니다." };
-  }
-
-  // Determine redirect based on user role
-  let redirectTo = "/internal";
-  if (data.user) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", data.user.id)
-      .single();
-
-    if (profile?.role === "professor" || profile?.role === "admin") {
-      redirectTo = "/professor";
+    await signIn("credentials", { email, password, redirectTo });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      return { success: false, error: "이메일 또는 비밀번호가 올바르지 않습니다." };
     }
+    throw error;
   }
-
-  redirect(redirectTo);
+  return { success: true };
 }
 
-export async function logout() {
-  const supabase = await createClient();
-  await supabase.auth.signOut();
-  redirect("/");
+export async function logout(): Promise<void> {
+  await signOut({ redirectTo: "/" });
 }
 
-export async function getSession() {
-  return getAuthUser();
-}
+// NOTE: Use auth() directly in Server Components/layouts, or useSession() in Client Components.
+// Do not re-expose auth() as a public Server Action.

@@ -1,89 +1,55 @@
-import { createClient } from "@/lib/db/supabase-server";
-import { getAuthUser } from "@/lib/auth/get-user";
+import { auth } from "@/lib/auth/auth";
+import { redirect } from "next/navigation";
 
 export type Role = "member" | "professor" | "admin";
 
 const ROLE_HIERARCHY: Record<Role, number> = {
-  member: 0,
-  professor: 1,
-  admin: 2,
+  member: 1,
+  professor: 2,
+  admin: 3,
 };
 
 /**
- * Checks if the current authenticated user has at least `minRole`.
- * Returns null on success, { error: 'unauthorized' } on failure.
+ * Asserts the current user has at least `minRole`.
+ * Redirects to "/" if unauthorized.
  */
-export async function assertRole(
-  minRole: Role,
-): Promise<{ error: "unauthorized" } | null> {
-  const supabase = await createClient();
-  const user = await getAuthUser();
+export async function assertRole(required: Role): Promise<void> {
+  const session = await auth();
+  if (!session?.user) redirect("/login");
 
-  if (!user) {
-    return { error: "unauthorized" };
+  const userRole = session.user.role as Role;
+  if (ROLE_HIERARCHY[userRole] < ROLE_HIERARCHY[required]) {
+    redirect("/");
   }
-
-  const { data: profile, error } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .single();
-
-  if (error || !profile) {
-    return { error: "unauthorized" };
-  }
-
-  const userRank = ROLE_HIERARCHY[profile.role as Role] ?? -1;
-  const minRank = ROLE_HIERARCHY[minRole];
-
-  if (userRank < minRank) {
-    return { error: "unauthorized" };
-  }
-
-  return null;
 }
 
 /**
- * Asserts the current user has at least `minRole`.
- * Throws Error('unauthorized') if the check fails.
- * Use inside Server Actions; caller handles redirect/AccessDenied.
+ * Returns the current user from Auth.js session, or null if not authenticated.
+ */
+export async function getCurrentUser() {
+  const session = await auth();
+  return session?.user ?? null;
+}
+
+/**
+ * Checks if a given user role meets the required role level.
+ */
+export function hasRole(userRole: Role, required: Role): boolean {
+  return ROLE_HIERARCHY[userRole] >= ROLE_HIERARCHY[required];
+}
+
+/**
+ * requireRole() for Server Actions — throws Error if role check fails.
+ * Caller handles error handling / redirect.
  */
 export async function requireRole(minRole: Role): Promise<void> {
-  const result = await assertRole(minRole);
-  if (result !== null) {
+  const session = await auth();
+  if (!session?.user) {
     throw new Error("unauthorized");
   }
-}
 
-/**
- * getUser() + role check in a single Supabase round-trip pair.
- * Use in layouts that need both the user object and role enforcement,
- * avoiding the double getUser() from calling getSession() + requireRole() separately.
- *
- * Returns { user, error: null } on success, { user: null, error: "unauthorized" } on failure.
- */
-export async function getSessionWithRole(
-  minRole: Role,
-): Promise<
-  | { user: import("@supabase/supabase-js").User; error: null }
-  | { user: null; error: "unauthorized" }
-> {
-  const supabase = await createClient();
-  const user = await getAuthUser();
-
-  if (!user) return { user: null, error: "unauthorized" };
-
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .single();
-
-  if (!profile) return { user: null, error: "unauthorized" };
-
-  const userRank = ROLE_HIERARCHY[profile.role as Role] ?? -1;
-  if (userRank < ROLE_HIERARCHY[minRole])
-    return { user: null, error: "unauthorized" };
-
-  return { user, error: null };
+  const userRole = session.user.role as Role;
+  if (ROLE_HIERARCHY[userRole] < ROLE_HIERARCHY[minRole]) {
+    throw new Error("unauthorized");
+  }
 }

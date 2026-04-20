@@ -1,8 +1,11 @@
 "use server";
 
-import { createClient } from "@/lib/db/supabase-server";
-import { revalidatePath } from "next/cache";
-import { assertRole } from "@/lib/permissions";
+import { db } from "@/lib/db/drizzle";
+import { members, users } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
+import bcrypt from "bcryptjs";
+import { safeRevalidateTag } from "@/lib/utils/revalidate";
+import { requireRole } from "@/lib/permissions";
 import type { ActionResult } from "@/types/action";
 
 function requireString(formData: FormData, key: string): string {
@@ -51,10 +54,7 @@ function generateSlug(nameEn: string): string {
 }
 
 export async function createMember(formData: FormData): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
-
-  const supabase = await createClient();
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
 
   let nameKo: string;
   let nameEn: string;
@@ -74,17 +74,17 @@ export async function createMember(formData: FormData): Promise<ActionResult> {
   const email = (formData.get("email") as string) || null;
   const image = (formData.get("image") as string) || null;
   const bio = (formData.get("bio") as string) || null;
-  const displayOrder = parseInt(
-    (formData.get("displayOrder") as string) || "0",
-    10,
-  );
+  const displayOrderParsed = parseInt((formData.get("displayOrder") as string) || "0", 10);
+  const displayOrder = isNaN(displayOrderParsed) ? 0 : displayOrderParsed;
+  const nasFolderNameRaw = ((formData.get("nasFolderName") as string) || "").trim();
+  if (nasFolderNameRaw && !/^[a-zA-Z0-9가-힣_\- ]+$/.test(nasFolderNameRaw)) {
+    return { error: "NAS 폴더명에 허용되지 않는 문자가 포함되어 있습니다. (허용: 한글, 영문, 숫자, _, -, 공백)" };
+  }
+  const nasFolderName = nasFolderNameRaw || null;
 
   const keywordsRaw = formData.get("researchKeywords") as string;
   const researchKeywords = keywordsRaw
-    ? keywordsRaw
-        .split(",")
-        .map((k) => k.trim())
-        .filter(Boolean)
+    ? keywordsRaw.split(",").map((k) => k.trim()).filter(Boolean)
     : [];
 
   const links = extractLinks(formData);
@@ -92,32 +92,40 @@ export async function createMember(formData: FormData): Promise<ActionResult> {
   const career = parseJsonField(formData.get("career") as string);
 
   const slug = generateSlug(nameEn);
-  const id = crypto.randomUUID();
 
-  const { error } = await supabase.from("members").insert({
-    id,
-    slug,
-    name_ko: nameKo,
-    name_en: nameEn,
-    group,
-    position,
-    department,
-    email,
-    image,
-    bio,
-    display_order: displayOrder,
-    research_keywords: researchKeywords,
-    links,
-    education,
-    career,
-  });
-
-  if (error) {
-    return { error: error.message };
+  let newMemberId: number;
+  try {
+    const [inserted] = await db.insert(members).values({
+      slug, nameKo, nameEn, group, position, department,
+      email, image, bio, displayOrder, researchKeywords, links, education, career, nasFolderName,
+    }).returning({ id: members.id });
+    if (!inserted) return { error: "멤버 생성에 실패했습니다." };
+    newMemberId = inserted.id;
+  } catch (e) {
+    return { error: (e as Error).message };
   }
 
-  revalidatePath("/professor/members");
-  revalidatePath("/members");
+  // ── Optional login account creation ───────────────────────────────────────
+  const loginPassword = ((formData.get("loginPassword") as string) || "").trim();
+  if (loginPassword) {
+    const loginPasswordConfirm = ((formData.get("loginPasswordConfirm") as string) || "").trim();
+    const loginRole = ((formData.get("loginRole") as string) || "member") as "member" | "professor" | "admin";
+    const loginEmailRaw = ((formData.get("loginEmail") as string) || "").trim();
+    const loginEmail = loginEmailRaw || email;
+
+    if (!loginEmail) return { error: "로그인 계정 생성을 위해 이메일을 입력해주세요." };
+    if (loginPassword.length < 6) return { error: "비밀번호는 6자 이상이어야 합니다." };
+    if (loginPassword !== loginPasswordConfirm) return { error: "비밀번호가 일치하지 않습니다." };
+
+    const hashedPassword = await bcrypt.hash(loginPassword, 12);
+    try {
+      await db.insert(users).values({ email: loginEmail, hashedPassword, role: loginRole, memberId: newMemberId });
+    } catch (e) {
+      return { error: `멤버는 생성됐지만 계정 생성 실패: ${(e as Error).message}` };
+    }
+  }
+
+  safeRevalidateTag("members");
   return { success: true };
 }
 
@@ -125,10 +133,7 @@ export async function updateMember(
   id: string,
   formData: FormData,
 ): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
-
-  const supabase = await createClient();
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
 
   let nameKo: string;
   let nameEn: string;
@@ -145,67 +150,84 @@ export async function updateMember(
     return { error: (e as Error).message };
   }
 
+  const numId = parseInt(id, 10);
+  if (isNaN(numId)) return { error: "Invalid member ID" };
+
   const email = (formData.get("email") as string) || null;
   const image = (formData.get("image") as string) || null;
   const bio = (formData.get("bio") as string) || null;
-  const displayOrder = parseInt(
-    (formData.get("displayOrder") as string) || "0",
-    10,
-  );
+  const displayOrderParsed = parseInt((formData.get("displayOrder") as string) || "0", 10);
+  const displayOrder = isNaN(displayOrderParsed) ? 0 : displayOrderParsed;
+  const nasFolderNameRaw2 = ((formData.get("nasFolderName") as string) || "").trim();
+  if (nasFolderNameRaw2 && !/^[a-zA-Z0-9가-힣_\- ]+$/.test(nasFolderNameRaw2)) {
+    return { error: "NAS 폴더명에 허용되지 않는 문자가 포함되어 있습니다. (허용: 한글, 영문, 숫자, _, -, 공백)" };
+  }
+  const nasFolderName = nasFolderNameRaw2 || null;
 
   const keywordsRaw = formData.get("researchKeywords") as string;
   const researchKeywords = keywordsRaw
-    ? keywordsRaw
-        .split(",")
-        .map((k) => k.trim())
-        .filter(Boolean)
+    ? keywordsRaw.split(",").map((k) => k.trim()).filter(Boolean)
     : [];
 
   const links = extractLinks(formData);
   const education = parseJsonField(formData.get("education") as string);
   const career = parseJsonField(formData.get("career") as string);
 
-  const { error } = await supabase
-    .from("members")
-    .update({
-      name_ko: nameKo,
-      name_en: nameEn,
-      group,
-      position,
-      department,
-      email,
-      image,
-      bio,
-      display_order: displayOrder,
-      research_keywords: researchKeywords,
-      links,
-      education,
-      career,
-    })
-    .eq("id", id);
-
-  if (error) {
-    return { error: error.message };
+  try {
+    await db.update(members).set({
+      nameKo, nameEn, group, position, department,
+      email, image, bio, displayOrder, researchKeywords, links, education, career, nasFolderName,
+    }).where(eq(members.id, numId));
+  } catch (e) {
+    return { error: (e as Error).message };
   }
 
-  revalidatePath("/professor/members");
-  revalidatePath("/members");
+  // ── Optional login account create / update ────────────────────────────────
+  const loginPassword = ((formData.get("loginPassword") as string) || "").trim();
+  if (loginPassword) {
+    const loginPasswordConfirm = ((formData.get("loginPasswordConfirm") as string) || "").trim();
+    const loginRole = ((formData.get("loginRole") as string) || "member") as "member" | "professor" | "admin";
+
+    if (loginPassword.length < 6) return { error: "비밀번호는 6자 이상이어야 합니다." };
+    if (loginPassword !== loginPasswordConfirm) return { error: "비밀번호가 일치하지 않습니다." };
+
+    const hashedPassword = await bcrypt.hash(loginPassword, 12);
+    const [existingUser] = await db
+      .select({ id: users.id, email: users.email })
+      .from(users)
+      .where(eq(users.memberId, numId))
+      .limit(1);
+
+    try {
+      if (existingUser) {
+        const patch: { hashedPassword: string; email?: string } = { hashedPassword };
+        if (email && email !== existingUser.email) patch.email = email;
+        await db.update(users).set(patch).where(eq(users.id, existingUser.id));
+      } else {
+        if (!email) return { error: "계정 생성을 위해 이메일을 입력해주세요." };
+        await db.insert(users).values({ email, hashedPassword, role: loginRole, memberId: numId });
+      }
+    } catch (e) {
+      return { error: `계정 업데이트 실패: ${(e as Error).message}` };
+    }
+  }
+
+  safeRevalidateTag("members");
   return { success: true };
 }
 
 export async function deleteMember(id: string): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
 
-  const supabase = await createClient();
+  const numId = parseInt(id, 10);
+  if (isNaN(numId)) return { error: "Invalid member ID" };
 
-  const { error } = await supabase.from("members").delete().eq("id", id);
-
-  if (error) {
-    return { error: error.message };
+  try {
+    await db.delete(members).where(eq(members.id, numId));
+  } catch (e) {
+    return { error: (e as Error).message };
   }
 
-  revalidatePath("/professor/members");
-  revalidatePath("/members");
+  safeRevalidateTag("members");
   return { success: true };
 }

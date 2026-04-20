@@ -1,36 +1,37 @@
-import { createClient } from "@/lib/db/supabase-server";
+import { unstable_cache } from "next/cache";
+import { db } from "@/lib/db/drizzle";
+import { contactInfo } from "@/lib/db/schema";
 import type { ContactInfo } from "@/types";
 
-export async function getContactInfo(): Promise<ContactInfo> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("contact_info")
-    .select("*")
-    .eq("id", "main")
-    .single();
+export const getContactInfo = unstable_cache(
+  async (): Promise<ContactInfo | null> => {
+    const [row] = await db.select().from(contactInfo).limit(1);
 
-  if (error) throw error;
+    if (!row) return null;
 
-  return {
-    labName: {
-      ko: data.lab_name_ko,
-      en: data.lab_name_en,
-    },
-    professor: {
-      name: data.professor_name,
-      title: data.professor_title,
-      email: data.professor_email,
-    },
-    location: {
-      building: data.building,
-      professorOffice: data.professor_office,
-      lab: data.lab_room,
-      professorPhone: data.professor_phone,
-      labPhone: data.lab_phone,
-    },
-    department: data.department,
-    university: data.university,
-    address: data.address,
-    mapEmbedUrl: data.map_embed_url ?? null,
-  };
-}
+    return {
+      labName: {
+        ko: row.labNameKo ?? "",
+        en: row.labNameEn ?? "",
+      },
+      professor: {
+        name: row.professorName ?? "",
+        title: row.professorTitle ?? "",
+        email: row.professorEmail ?? "",
+      },
+      location: {
+        building: row.building ?? "",
+        professorOffice: row.professorOffice ?? "",
+        lab: row.labRoom ?? "",
+        professorPhone: row.professorPhone ?? "",
+        labPhone: row.labPhone ?? "",
+      },
+      department: row.department ?? "",
+      university: row.university ?? "",
+      address: row.address ?? "",
+      mapEmbedUrl: row.mapEmbedUrl ?? null,
+    };
+  },
+  ["contact-info"],
+  { tags: ["contact"] },
+);

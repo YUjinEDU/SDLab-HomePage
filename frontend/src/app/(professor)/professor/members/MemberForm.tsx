@@ -10,6 +10,8 @@ type Props = {
     formData: FormData,
   ) => Promise<{ error?: string; success?: boolean }>;
   title: string;
+  hasAccount?: boolean;
+  accountEmail?: string | null;
 };
 
 const GROUP_OPTIONS: { value: MemberGroup; label: string }[] = [
@@ -23,16 +25,45 @@ const GROUP_OPTIONS: { value: MemberGroup; label: string }[] = [
 type EducationEntry = Member["education"][number];
 type CareerEntry = Member["career"][number];
 
-export function MemberForm({ member, action, title }: Props) {
+export function MemberForm({ member, action, title, hasAccount = false, accountEmail }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string>(member?.image ?? "");
+  const [showPasswordFields, setShowPasswordFields] = useState(!hasAccount);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
   const [educationList, setEducationList] = useState<EducationEntry[]>(
     member?.education?.length ? member.education : [],
   );
   const [careerList, setCareerList] = useState<CareerEntry[]>(
     member?.career?.length ? member.career : [],
   );
+
+  async function handlePhotoUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadError(null);
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      if (member?.id) fd.append("memberId", member.id);
+      const res = await fetch("/api/files/profile-photo", { method: "POST", body: fd });
+      const json = await res.json();
+      if (!res.ok) {
+        setUploadError(json.error ?? "업로드에 실패했습니다.");
+      } else {
+        setImageUrl(json.url as string);
+      }
+    } catch {
+      setUploadError("업로드 중 오류가 발생했습니다.");
+    } finally {
+      setUploading(false);
+      // Reset file input so the same file can be re-selected
+      e.target.value = "";
+    }
+  }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -183,14 +214,37 @@ export function MemberForm({ member, action, title }: Props) {
             >
               프로필 이미지 URL
             </label>
-            <input
-              id="image"
-              name="image"
-              type="url"
-              placeholder="https://example.com/photo.jpg"
-              defaultValue={member?.image ?? ""}
-              className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
-            />
+            <div className="flex gap-2 items-center">
+              <input
+                id="image"
+                name="image"
+                type="text"
+                placeholder="https://example.com/photo.jpg 또는 /api/public/profiles/..."
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                className="flex-1 rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+              />
+              <label
+                className={`shrink-0 cursor-pointer rounded-lg border border-border bg-white px-3 py-2 text-sm font-medium text-text-secondary hover:bg-surface transition-colors ${uploading ? "opacity-50 pointer-events-none" : ""}`}
+              >
+                {uploading ? "업로드 중..." : "사진 업로드"}
+                <input
+                  type="file"
+                  accept=".jpg,.jpeg,.png,.webp,.gif"
+                  className="sr-only"
+                  onChange={handlePhotoUpload}
+                  disabled={uploading}
+                />
+              </label>
+            </div>
+            {uploadError && (
+              <p className="mt-1 text-xs text-red-600">{uploadError}</p>
+            )}
+            {imageUrl && imageUrl.startsWith("/api/public/profiles/") && (
+              <p className="mt-1 text-xs text-text-secondary">
+                NAS 업로드 파일이 사용됩니다.
+              </p>
+            )}
           </div>
 
           <div>
@@ -207,6 +261,26 @@ export function MemberForm({ member, action, title }: Props) {
               defaultValue={member?.bio ?? ""}
               className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-y"
             />
+          </div>
+
+          <div>
+            <label
+              htmlFor="nasFolderName"
+              className="block text-sm font-medium text-text-secondary mb-1"
+            >
+              NAS 개인 폴더명
+            </label>
+            <input
+              id="nasFolderName"
+              name="nasFolderName"
+              type="text"
+              placeholder="예: 김민건 (개인 NAS 폴더 접근 허용 시 입력)"
+              defaultValue={(member as (typeof member & { nasFolderName?: string | null }))?.nasFolderName ?? ""}
+              className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+            />
+            <p className="mt-1 text-xs text-text-secondary">
+              비워두면 개인 NAS 접근이 비활성화됩니다.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -579,6 +653,100 @@ export function MemberForm({ member, action, title }: Props) {
             </svg>
             경력 추가
           </button>
+        </fieldset>
+
+        {/* Login Account */}
+        <fieldset className="rounded-xl border border-border bg-white p-6 space-y-4">
+          <legend className="text-sm font-semibold text-text-secondary px-2">
+            로그인 계정
+          </legend>
+
+          {hasAccount ? (
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-1 text-sm font-medium text-emerald-700">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  계정 있음
+                </span>
+                {accountEmail && <span className="text-sm text-text-secondary">({accountEmail})</span>}
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowPasswordFields(!showPasswordFields)}
+                className="text-sm text-primary hover:text-primary-dark font-medium transition-colors"
+              >
+                {showPasswordFields ? "취소" : "비밀번호 변경"}
+              </button>
+            </div>
+          ) : (
+            <p className="text-sm text-text-secondary">아직 로그인 계정이 없습니다. 비밀번호를 설정하면 계정이 생성됩니다.</p>
+          )}
+
+          {showPasswordFields && (
+            <div className="space-y-4 pt-2 border-t border-border">
+              {!hasAccount && (
+                <>
+                  <div>
+                    <label htmlFor="loginEmail" className="block text-sm font-medium text-text-secondary mb-1">
+                      로그인 이메일
+                    </label>
+                    <input
+                      id="loginEmail"
+                      name="loginEmail"
+                      type="email"
+                      placeholder="비워두면 위의 이메일 사용"
+                      className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+                    />
+                    <p className="mt-1 text-xs text-text-secondary">비워두면 이메일 필드의 주소를 사용합니다.</p>
+                  </div>
+                  <div>
+                    <label htmlFor="loginRole" className="block text-sm font-medium text-text-secondary mb-1">
+                      역할
+                    </label>
+                    <select
+                      id="loginRole"
+                      name="loginRole"
+                      defaultValue="member"
+                      className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-white"
+                    >
+                      <option value="member">일반 멤버</option>
+                      <option value="professor">교수</option>
+                      <option value="admin">관리자</option>
+                    </select>
+                  </div>
+                </>
+              )}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="loginPassword" className="block text-sm font-medium text-text-secondary mb-1">
+                    {hasAccount ? "새 비밀번호" : "초기 비밀번호"} <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="loginPassword"
+                    name="loginPassword"
+                    type="password"
+                    minLength={6}
+                    placeholder="6자 이상"
+                    className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="loginPasswordConfirm" className="block text-sm font-medium text-text-secondary mb-1">
+                    비밀번호 확인 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="loginPasswordConfirm"
+                    name="loginPasswordConfirm"
+                    type="password"
+                    placeholder="비밀번호 재입력"
+                    className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
         </fieldset>
 
         {/* Actions */}

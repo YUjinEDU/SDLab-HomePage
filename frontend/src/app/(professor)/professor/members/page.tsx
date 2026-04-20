@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { getMembers } from "@/lib/queries/members";
 import { DeleteMemberButton } from "./DeleteMemberButton";
+import { db } from "@/lib/db/drizzle";
+import { users } from "@/lib/db/schema";
+import { isNotNull } from "drizzle-orm";
 
 const groupBadgeColors: Record<string, string> = {
   professor: "bg-emerald-100 text-emerald-800",
@@ -19,7 +22,13 @@ const groupLabels: Record<string, string> = {
 };
 
 export default async function ProfessorMembersPage() {
-  const members = await getMembers();
+  const [members, accountRows] = await Promise.all([
+    getMembers(),
+    db.select({ memberId: users.memberId, email: users.email })
+      .from(users)
+      .where(isNotNull(users.memberId)),
+  ]);
+  const accountMap = new Map(accountRows.map((r) => [r.memberId, r.email]));
 
   return (
     <div>
@@ -61,6 +70,9 @@ export default async function ProfessorMembersPage() {
                   <th className="text-left px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-700 hidden md:table-cell">
                     이메일
                   </th>
+                  <th className="text-center px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-700 hidden sm:table-cell">
+                    계정
+                  </th>
                   <th className="text-right px-2 sm:px-4 py-2 sm:py-3 font-semibold text-gray-700">
                     관리
                   </th>
@@ -92,6 +104,13 @@ export default async function ProfessorMembersPage() {
                     </td>
                     <td className="px-2 sm:px-4 py-2 sm:py-3 text-gray-600 hidden md:table-cell">
                       {member.email ?? <span className="text-gray-400">-</span>}
+                    </td>
+                    <td className="px-2 sm:px-4 py-2 sm:py-3 text-center hidden sm:table-cell">
+                      {accountMap.has(Number(member.id)) ? (
+                        <span title={accountMap.get(Number(member.id)) ?? ""} className="text-emerald-600 text-base">🔑</span>
+                      ) : (
+                        <span className="text-xs text-gray-400">없음</span>
+                      )}
                     </td>
                     <td className="px-2 sm:px-4 py-2 sm:py-3 text-right">
                       <div className="flex items-center justify-end gap-3">

@@ -1,104 +1,137 @@
 import { unstable_cache } from "next/cache";
-import { createClient } from "@/lib/db/supabase-server";
-import { createStaticClient } from "@/lib/db/supabase-static";
+import { db } from "@/lib/db/drizzle";
+import {
+  publications,
+  publicationAuthors,
+  publicationResearchAreas,
+  publicationProjects,
+} from "@/lib/db/schema";
+import { eq, desc, inArray, and } from "drizzle-orm";
 import type { Publication, Patent } from "@/types";
 
-type PubRow = Record<string, unknown> & {
-  publication_authors?: { member_id: string; author_order: number }[];
-  publication_research_areas?: { research_area_id: string }[];
-  publication_projects?: { project_id: string }[];
-};
+type PubRow = typeof publications.$inferSelect;
 
-function toPublication(row: PubRow): Publication {
-  const authorMemberIds = (row.publication_authors ?? [])
-    .sort((a, b) => a.author_order - b.author_order)
-    .map((a) => a.member_id);
+/** Batch-fetches all join-table rows in 3 queries regardless of list size (avoids N+1). */
+async function bulkEnrichPublications(rows: PubRow[]): Promise<Publication[]> {
+  if (!rows.length) return [];
+  const ids = rows.map((r) => r.id);
 
-  const researchAreaIds = (row.publication_research_areas ?? []).map(
-    (r) => r.research_area_id,
-  );
+  const [authorRows, researchAreaRows, projectRows] = await Promise.all([
+    db
+      .select({
+        publicationId: publicationAuthors.publicationId,
+        memberId: publicationAuthors.memberId,
+        authorOrder: publicationAuthors.authorOrder,
+      })
+      .from(publicationAuthors)
+      .where(inArray(publicationAuthors.publicationId, ids))
+      .orderBy(publicationAuthors.authorOrder),
+    db
+      .select({
+        publicationId: publicationResearchAreas.publicationId,
+        researchAreaId: publicationResearchAreas.researchAreaId,
+      })
+      .from(publicationResearchAreas)
+      .where(inArray(publicationResearchAreas.publicationId, ids)),
+    db
+      .select({
+        publicationId: publicationProjects.publicationId,
+        projectId: publicationProjects.projectId,
+      })
+      .from(publicationProjects)
+      .where(inArray(publicationProjects.publicationId, ids)),
+  ]);
 
-  const projectIds = (row.publication_projects ?? []).map((p) => p.project_id);
+  // Group by publicationId, preserving authorOrder sort from DB
+  const authorMap = new Map<number, Array<{ memberId: number; authorOrder: number }>>();
+  for (const r of authorRows) {
+    const arr = authorMap.get(r.publicationId) ?? [];
+    arr.push({ memberId: r.memberId, authorOrder: r.authorOrder });
+    authorMap.set(r.publicationId, arr);
+  }
 
-  return {
-    id: row.id as string,
-    slug: row.slug as string,
-    title: row.title as string,
-    authors: (row.authors as string[]) ?? [],
-    authorMemberIds,
+  const areaMap = new Map<number, string[]>();
+  for (const r of researchAreaRows) {
+    const arr = areaMap.get(r.publicationId) ?? [];
+    arr.push(String(r.researchAreaId));
+    areaMap.set(r.publicationId, arr);
+  }
+
+  const projMap = new Map<number, string[]>();
+  for (const r of projectRows) {
+    const arr = projMap.get(r.publicationId) ?? [];
+    arr.push(String(r.projectId));
+    projMap.set(r.publicationId, arr);
+  }
+
+  return rows.map((row) => ({
+    id: String(row.id),
+    slug: row.slug,
+    title: row.title,
+    authors: row.authors ? row.authors.split(", ") : [],
+    authorMemberIds: (authorMap.get(row.id) ?? []).map((a) => String(a.memberId)),
     type: row.type as Publication["type"],
-    isInternational: (row.is_international as boolean) ?? true,
-    venue: row.venue as string,
-    year: row.year as number,
-    month: (row.month as number) ?? null,
-    doi: (row.doi as string) ?? null,
-    pdfUrl: (row.pdf_url as string) ?? null,
-    abstract: (row.abstract as string) ?? null,
-    keywords: (row.keywords as string[]) ?? [],
-    bibtex: (row.bibtex as string) ?? null,
-    researchAreaIds,
-    projectIds,
-    isFeatured: (row.is_featured as boolean) ?? false,
-    isPublic: (row.is_public as boolean) ?? true,
-    indexType: (row.index_type as string) ?? null,
-    volumeInfo: (row.volume_info as string) ?? null,
-  };
+    isInternational: row.isInternational ?? true,
+    venue: row.venue ?? "",
+    year: row.year,
+    month: row.month ?? null,
+    doi: row.doi ?? null,
+    pdfUrl: row.pdfUrl ?? null,
+    abstract: row.abstract ?? null,
+    keywords: row.keywords ?? [],
+    bibtex: row.bibtex ?? null,
+    researchAreaIds: areaMap.get(row.id) ?? [],
+    projectIds: projMap.get(row.id) ?? [],
+    isFeatured: row.isFeatured ?? false,
+    isPublic: row.isPublic ?? true,
+    indexType: row.indexType ?? null,
+    volumeInfo: row.volumeInfo ?? null,
+  }));
 }
 
-const PUB_SELECT = `
-  *,
-  publication_authors(member_id, author_order),
-  publication_research_areas(research_area_id),
-  publication_projects(project_id)
-`;
+async function enrichPublication(row: PubRow): Promise<Publication> {
+  const [result] = await bulkEnrichPublications([row]);
+  return result;
+}
 
 export const getPublications = unstable_cache(
   async (): Promise<Publication[]> => {
-    const supabase = createStaticClient();
-    const { data, error } = await supabase
-      .from("publications")
-      .select(PUB_SELECT)
-      .eq("is_public", true)
-      .order("year", { ascending: false })
-      .order("month", { ascending: false });
-
-    if (error) return [];
-    return (data ?? []).map(toPublication);
+    const rows = await db
+      .select()
+      .from(publications)
+      .where(eq(publications.isPublic, true))
+      .orderBy(desc(publications.year), desc(publications.month));
+    return bulkEnrichPublications(rows);
   },
   ["publications-public"],
   { tags: ["publications"] },
 );
 
-export const getPublicationBySlug = unstable_cache(
-  async (slug: string): Promise<Publication | null> => {
-    const supabase = createStaticClient();
-    const { data, error } = await supabase
-      .from("publications")
-      .select(PUB_SELECT)
-      .eq("is_public", true)
-      .eq("slug", slug)
-      .single();
-
-    if (error) return null;
-    return toPublication(data);
-  },
-  ["publication-slug"],
-  { tags: ["publications"] },
-);
+/** Per-slug cache: each slug gets its own cache entry (fixes static-key collision bug). */
+export function getPublicationBySlug(slug: string): Promise<Publication | null> {
+  return unstable_cache(
+    async (): Promise<Publication | null> => {
+      const [row] = await db
+        .select()
+        .from(publications)
+        .where(and(eq(publications.isPublic, true), eq(publications.slug, slug)))
+        .limit(1);
+      return row ? enrichPublication(row) : null;
+    },
+    ["publication-slug", slug],
+    { tags: ["publications"] },
+  )();
+}
 
 export const getFeaturedPublications = unstable_cache(
   async (): Promise<Publication[]> => {
-    const supabase = createStaticClient();
-    const { data, error } = await supabase
-      .from("publications")
-      .select(PUB_SELECT)
-      .eq("is_public", true)
-      .eq("is_featured", true)
-      .order("year", { ascending: false })
+    const rows = await db
+      .select()
+      .from(publications)
+      .where(and(eq(publications.isPublic, true), eq(publications.isFeatured, true)))
+      .orderBy(desc(publications.year))
       .limit(3);
-
-    if (error) return [];
-    return (data ?? []).map(toPublication);
+    return bulkEnrichPublications(rows);
   },
   ["publications-featured"],
   { tags: ["publications"] },
@@ -115,74 +148,64 @@ export const getPatentBySlug = async (_slug: string): Promise<Patent | null> =>
 export const getProjectOutputs = (projectId: string) =>
   unstable_cache(
     async (): Promise<Publication[]> => {
-      const supabase = createStaticClient();
-      const { data: joinRows } = await supabase
-        .from("publication_projects")
-        .select("publication_id")
-        .eq("project_id", projectId);
+      const joinRows = await db
+        .select({ publicationId: publicationProjects.publicationId })
+        .from(publicationProjects)
+        .where(eq(publicationProjects.projectId, Number(projectId)));
 
-      if (!joinRows?.length) return [];
+      if (!joinRows.length) return [];
 
-      const pubIds = joinRows.map((r) => r.publication_id);
-      const { data, error } = await supabase
-        .from("publications")
-        .select(PUB_SELECT)
-        .eq("is_public", true)
-        .in("id", pubIds)
-        .order("year", { ascending: false });
-
-      if (error) return [];
-      return (data ?? []).map(toPublication);
+      const pubIds = joinRows.map((r) => r.publicationId);
+      const rows = await db
+        .select()
+        .from(publications)
+        .where(and(eq(publications.isPublic, true), inArray(publications.id, pubIds)))
+        .orderBy(desc(publications.year));
+      return bulkEnrichPublications(rows);
     },
     ["project-outputs", projectId],
     { tags: ["projects", "publications"] },
   )();
 
-export async function getAllPublications(): Promise<Publication[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("publications")
-    .select(PUB_SELECT)
-    .order("year", { ascending: false })
-    .order("month", { ascending: false });
+export const getAllPublications = unstable_cache(
+  async (): Promise<Publication[]> => {
+    const rows = await db
+      .select()
+      .from(publications)
+      .orderBy(desc(publications.year), desc(publications.month));
+    return bulkEnrichPublications(rows);
+  },
+  ["all-publications"],
+  { tags: ["publications"] },
+);
 
-  if (error) return [];
-  return (data ?? []).map(toPublication);
+export async function getPublicationById(id: string): Promise<Publication | null> {
+  const [row] = await db
+    .select()
+    .from(publications)
+    .where(eq(publications.id, Number(id)))
+    .limit(1);
+  return row ? enrichPublication(row) : null;
 }
 
-export async function getPublicationById(
-  id: string,
-): Promise<Publication | null> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("publications")
-    .select(PUB_SELECT)
-    .eq("id", id)
-    .single();
+export const getPublicationsByMember = (memberId: string) =>
+  unstable_cache(
+    async (): Promise<Publication[]> => {
+      const authorRows = await db
+        .select({ publicationId: publicationAuthors.publicationId })
+        .from(publicationAuthors)
+        .where(eq(publicationAuthors.memberId, Number(memberId)));
 
-  if (error) return null;
-  return toPublication(data);
-}
+      if (!authorRows.length) return [];
 
-export async function getPublicationsByMember(
-  memberId: string,
-): Promise<Publication[]> {
-  const supabase = createStaticClient();
-  const { data: authorRows } = await supabase
-    .from("publication_authors")
-    .select("publication_id")
-    .eq("member_id", memberId);
-
-  if (!authorRows?.length) return [];
-
-  const pubIds = authorRows.map((r) => r.publication_id);
-  const { data, error } = await supabase
-    .from("publications")
-    .select(PUB_SELECT)
-    .eq("is_public", true)
-    .in("id", pubIds)
-    .order("year", { ascending: false });
-
-  if (error) return [];
-  return (data ?? []).map(toPublication);
-}
+      const pubIds = authorRows.map((r) => r.publicationId);
+      const rows = await db
+        .select()
+        .from(publications)
+        .where(and(eq(publications.isPublic, true), inArray(publications.id, pubIds)))
+        .orderBy(desc(publications.year));
+      return bulkEnrichPublications(rows);
+    },
+    ["publications-by-member", memberId],
+    { tags: ["publications"] },
+  )();

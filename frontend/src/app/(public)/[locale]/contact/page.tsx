@@ -32,15 +32,21 @@ export default async function ContactPage({ params }: PageProps) {
       <section className="py-16">
         <Container>
           <div className="flex flex-col gap-8">
-            <ContactInfoCard info={contactInfo} />
-            <MapSection
-              address={contactInfo.address}
-              embedUrl={contactInfo.mapEmbedUrl}
-            />
-            <DirectionsSection
-              address={contactInfo.address}
-              building={contactInfo.location.building}
-            />
+            {contactInfo ? (
+              <>
+                <ContactInfoCard info={contactInfo} />
+                <MapSection
+                  address={contactInfo.address}
+                  embedUrl={contactInfo.mapEmbedUrl}
+                />
+                <DirectionsSection
+                  address={contactInfo.address}
+                  building={contactInfo.location.building}
+                />
+              </>
+            ) : (
+              <p className="text-center text-gray-500 py-16">연락처 정보를 준비 중입니다.</p>
+            )}
           </div>
         </Container>
       </section>

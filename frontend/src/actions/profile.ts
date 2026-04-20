@@ -1,7 +1,9 @@
 "use server";
 
-import { createClient } from "@/lib/db/supabase-server";
-import { getSession } from "./auth";
+import { auth } from "@/lib/auth/auth";
+import { db } from "@/lib/db/drizzle";
+import { members } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import type { ActionResult } from "@/types/action";
 
@@ -36,32 +38,25 @@ function parseJsonField(value: string | null): unknown[] {
 export async function updateMyProfile(
   formData: FormData,
 ): Promise<ActionResult> {
-  const user = await getSession();
-  if (!user) {
-    return { error: "로그인이 필요합니다." };
+  const session = await auth();
+  if (!session?.user) {
+    return { success: false, error: "로그인 필요" };
   }
 
-  const supabase = await createClient();
-
-  // Find the member record via profile's member_id FK
-  const { data: profile, error: profileError } = await supabase
-    .from("profiles")
-    .select("member_id")
-    .eq("id", user.id)
-    .single();
-
-  if (profileError || !profile?.member_id) {
-    return { error: "연결된 프로필 정보가 없습니다." };
+  const memberId = session.user.memberId;
+  if (!memberId) {
+    return { success: false, error: "연결된 프로필 정보가 없습니다." };
   }
 
-  const { data: member, error: fetchError } = await supabase
-    .from("members")
-    .select("id, slug")
-    .eq("id", profile.member_id)
-    .single();
+  // Fetch slug for revalidation
+  const [member] = await db
+    .select({ id: members.id, slug: members.slug })
+    .from(members)
+    .where(eq(members.id, memberId))
+    .limit(1);
 
-  if (fetchError || !member) {
-    return { error: "연결된 멤버 정보가 없습니다." };
+  if (!member) {
+    return { success: false, error: "연결된 멤버 정보가 없습니다." };
   }
 
   const email = (formData.get("email") as string)?.trim() || null;
@@ -80,21 +75,21 @@ export async function updateMyProfile(
   const education = parseJsonField(formData.get("education") as string);
   const career = parseJsonField(formData.get("career") as string);
 
-  const { error } = await supabase
-    .from("members")
-    .update({
-      email,
-      image,
-      bio,
-      research_keywords: researchKeywords,
-      links,
-      education,
-      career,
-    })
-    .eq("id", member.id);
-
-  if (error) {
-    return { error: error.message };
+  try {
+    await db
+      .update(members)
+      .set({
+        email,
+        image,
+        bio,
+        researchKeywords,
+        links,
+        education,
+        career,
+      })
+      .where(eq(members.id, member.id));
+  } catch (e) {
+    return { success: false, error: (e as Error).message };
   }
 
   revalidatePath("/internal/profile");

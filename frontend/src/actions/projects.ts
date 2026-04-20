@@ -1,10 +1,16 @@
 "use server";
 
-import { createClient } from "@/lib/db/supabase-server";
+import { db } from "@/lib/db/drizzle";
+import {
+  projects,
+  projectMembers,
+  projectResearchAreas,
+} from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 import { generateSlug } from "@/lib/utils/slug";
 import { revalidatePath } from "next/cache";
 import { safeRevalidateTag } from "@/lib/utils/revalidate";
-import { assertRole } from "@/lib/permissions";
+import { requireRole } from "@/lib/permissions";
 import type { ActionResult } from "@/types/action";
 
 function requireString(formData: FormData, key: string): string {
@@ -16,10 +22,7 @@ function requireString(formData: FormData, key: string): string {
 }
 
 export async function createProject(formData: FormData): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
-
-  const supabase = await createClient();
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
 
   let title: string;
   let status: string;
@@ -40,7 +43,8 @@ export async function createProject(formData: FormData): Promise<ActionResult> {
 
   const fullDescription = (formData.get("fullDescription") as string) || null;
   const programType = (formData.get("programType") as string) || null;
-  const budget = (formData.get("budget") as string) || null;
+  const budgetRaw = (formData.get("budget") as string) || null;
+  const budget = budgetRaw ? parseInt(budgetRaw, 10) : null;
   const endDate = (formData.get("endDate") as string) || null;
   const tagsRaw = formData.get("tags") as string;
   const demoUrl = (formData.get("demoUrl") as string) || null;
@@ -56,45 +60,55 @@ export async function createProject(formData: FormData): Promise<ActionResult> {
   const memberIds = formData.getAll("memberIds") as string[];
   const researchAreaIds = formData.getAll("researchAreaIds") as string[];
 
-  const id = crypto.randomUUID();
   const slug = generateSlug(title);
 
-  const { error } = await supabase.from("projects").insert({
-    id,
-    slug,
-    title,
-    status,
-    category,
-    short_description: shortDescription,
-    full_description: fullDescription,
-    organization,
-    program_type: programType,
-    budget,
-    start_date: startDate,
-    end_date: endDate,
-    tags,
-    demo_url: demoUrl,
-    is_featured: isFeatured,
-  });
-
-  if (error) return { error: error.message };
-
-  if (memberIds.length > 0) {
-    await supabase.from("project_members").insert(
-      memberIds.map((memberId) => ({
-        project_id: id,
-        member_id: memberId,
-      })),
-    );
+  let newId: number;
+  try {
+    const [inserted] = await db
+      .insert(projects)
+      .values({
+        slug,
+        title,
+        status,
+        category,
+        shortDescription,
+        fullDescription,
+        organization,
+        programType,
+        budget,
+        startDate: new Date(startDate),
+        endDate: endDate ? new Date(endDate) : null,
+        tags,
+        demoUrl,
+        isFeatured,
+      })
+      .returning({ id: projects.id });
+    if (!inserted) return { error: "프로젝트 생성에 실패했습니다." };
+    newId = inserted.id;
+  } catch (e) {
+    return { error: (e as Error).message };
   }
 
-  if (researchAreaIds.length > 0) {
-    await supabase.from("project_research_areas").insert(
-      researchAreaIds.map((areaId) => ({
-        project_id: id,
-        research_area_id: areaId,
-      })),
-    );
+  try {
+    if (memberIds.length > 0) {
+      await db.insert(projectMembers).values(
+        memberIds.map((memberId) => ({
+          projectId: newId,
+          memberId: parseInt(memberId, 10),
+        })),
+      );
+    }
+
+    if (researchAreaIds.length > 0) {
+      await db.insert(projectResearchAreas).values(
+        researchAreaIds.map((areaId) => ({
+          projectId: newId,
+          researchAreaId: parseInt(areaId, 10),
+        })),
+      );
+    }
+  } catch (e) {
+    return { error: (e as Error).message };
   }
 
   safeRevalidateTag("projects");
@@ -107,10 +121,7 @@ export async function updateProject(
   id: string,
   formData: FormData,
 ): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
-
-  const supabase = await createClient();
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
 
   let title: string;
   let status: string;
@@ -131,7 +142,8 @@ export async function updateProject(
 
   const fullDescription = (formData.get("fullDescription") as string) || null;
   const programType = (formData.get("programType") as string) || null;
-  const budget = (formData.get("budget") as string) || null;
+  const budgetRaw = (formData.get("budget") as string) || null;
+  const budget = budgetRaw ? parseInt(budgetRaw, 10) : null;
   const endDate = (formData.get("endDate") as string) || null;
   const tagsRaw = formData.get("tags") as string;
   const demoUrl = (formData.get("demoUrl") as string) || null;
@@ -147,45 +159,56 @@ export async function updateProject(
   const memberIds = formData.getAll("memberIds") as string[];
   const researchAreaIds = formData.getAll("researchAreaIds") as string[];
 
-  const { error } = await supabase
-    .from("projects")
-    .update({
-      title,
-      status,
-      category,
-      short_description: shortDescription,
-      full_description: fullDescription,
-      organization,
-      program_type: programType,
-      budget,
-      start_date: startDate,
-      end_date: endDate,
-      tags,
-      demo_url: demoUrl,
-      is_featured: isFeatured,
-    })
-    .eq("id", id);
+  const numId = parseInt(id, 10);
+  if (isNaN(numId)) return { error: "Invalid project ID" };
 
-  if (error) return { error: error.message };
-
-  await supabase.from("project_members").delete().eq("project_id", id);
-  if (memberIds.length > 0) {
-    await supabase.from("project_members").insert(
-      memberIds.map((memberId) => ({
-        project_id: id,
-        member_id: memberId,
-      })),
-    );
+  try {
+    await db
+      .update(projects)
+      .set({
+        title,
+        status,
+        category,
+        shortDescription,
+        fullDescription,
+        organization,
+        programType,
+        budget,
+        startDate: new Date(startDate),
+        endDate: endDate ? new Date(endDate) : null,
+        tags,
+        demoUrl,
+        isFeatured,
+      })
+      .where(eq(projects.id, numId));
+  } catch (e) {
+    return { error: (e as Error).message };
   }
 
-  await supabase.from("project_research_areas").delete().eq("project_id", id);
-  if (researchAreaIds.length > 0) {
-    await supabase.from("project_research_areas").insert(
-      researchAreaIds.map((areaId) => ({
-        project_id: id,
-        research_area_id: areaId,
-      })),
-    );
+  try {
+    await db.delete(projectMembers).where(eq(projectMembers.projectId, numId));
+    if (memberIds.length > 0) {
+      await db.insert(projectMembers).values(
+        memberIds.map((memberId) => ({
+          projectId: numId,
+          memberId: parseInt(memberId, 10),
+        })),
+      );
+    }
+
+    await db
+      .delete(projectResearchAreas)
+      .where(eq(projectResearchAreas.projectId, numId));
+    if (researchAreaIds.length > 0) {
+      await db.insert(projectResearchAreas).values(
+        researchAreaIds.map((areaId) => ({
+          projectId: numId,
+          researchAreaId: parseInt(areaId, 10),
+        })),
+      );
+    }
+  } catch (e) {
+    return { error: (e as Error).message };
   }
 
   safeRevalidateTag("projects");
@@ -195,17 +218,20 @@ export async function updateProject(
 }
 
 export async function deleteProject(id: string): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
 
-  const supabase = await createClient();
+  const numId = parseInt(id, 10);
+  if (isNaN(numId)) return { error: "Invalid project ID" };
 
-  await supabase.from("project_members").delete().eq("project_id", id);
-  await supabase.from("project_research_areas").delete().eq("project_id", id);
-
-  const { error } = await supabase.from("projects").delete().eq("id", id);
-
-  if (error) return { error: error.message };
+  try {
+    await db.delete(projectMembers).where(eq(projectMembers.projectId, numId));
+    await db
+      .delete(projectResearchAreas)
+      .where(eq(projectResearchAreas.projectId, numId));
+    await db.delete(projects).where(eq(projects.id, numId));
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
 
   safeRevalidateTag("projects");
   revalidatePath("/professor/projects");

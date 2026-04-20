@@ -1,0 +1,24 @@
+# Git
+.git
+.gitignore
+
+# 환경변수 (호스트 .env 가 빌드 컨텍스트에 들어가면 안 됨)
+.env
+.env.*
+frontend/.env.local
+frontend/.env.production
+
+# Next.js 빌드 캐시 (로컬 빌드 결과가 이미지에 섞이지 않도록)
+frontend/.next
+frontend/node_modules
+
+# 문서 / 에셋 (Docker 이미지에 불필요)
+docs
+video
+images
+scripts
+*.md
+CLAUDE.md
+
+# 로컬 테스트용 NAS 폴더
+test-nas

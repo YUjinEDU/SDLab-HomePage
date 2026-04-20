@@ -1,41 +1,34 @@
-import { createClient } from "@/lib/db/supabase-server";
+import { unstable_cache } from "next/cache";
+import { db } from "@/lib/db/drizzle";
+import { researchAreas } from "@/lib/db/schema";
+import { asc } from "drizzle-orm";
 import type { ResearchArea } from "@/types";
 
-type ResearchAreaRow = {
-  id: string;
-  slug: string;
-  title: string;
-  short_description: string;
-  full_description: string;
-  icon: string;
-  image: string | null;
-  keywords: string[] | null;
-  applications: string[] | null;
-  display_order: number;
-};
+type ResearchAreaRow = typeof researchAreas.$inferSelect;
 
 function toResearchArea(row: ResearchAreaRow): ResearchArea {
   return {
-    id: row.id,
+    id: String(row.id),
     slug: row.slug,
     title: row.title,
-    shortDescription: row.short_description,
-    fullDescription: row.full_description,
-    icon: row.icon,
+    shortDescription: row.shortDescription ?? "",
+    fullDescription: row.fullDescription ?? "",
+    icon: row.icon ?? "",
     image: row.image ?? null,
     keywords: row.keywords ?? [],
     applications: row.applications ?? [],
-    displayOrder: row.display_order,
+    displayOrder: row.displayOrder ?? 0,
   };
 }
 
-export async function getResearchAreas(): Promise<ResearchArea[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("research_areas")
-    .select("*")
-    .order("display_order");
-
-  if (error) return [];
-  return (data ?? []).map(toResearchArea);
-}
+export const getResearchAreas = unstable_cache(
+  async (): Promise<ResearchArea[]> => {
+    const rows = await db
+      .select()
+      .from(researchAreas)
+      .orderBy(asc(researchAreas.displayOrder));
+    return rows.map(toResearchArea);
+  },
+  ["research-areas"],
+  { tags: ["research-areas"] },
+);
