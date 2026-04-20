@@ -11,22 +11,12 @@ import type { Project } from "@/types";
 
 type ProjRow = typeof projects.$inferSelect;
 
-async function enrichProject(row: ProjRow): Promise<Project> {
-  const [memberRows, researchAreaRows, publicationRows] = await Promise.all([
-    db
-      .select({ memberId: projectMembers.memberId })
-      .from(projectMembers)
-      .where(eq(projectMembers.projectId, row.id)),
-    db
-      .select({ researchAreaId: projectResearchAreas.researchAreaId })
-      .from(projectResearchAreas)
-      .where(eq(projectResearchAreas.projectId, row.id)),
-    db
-      .select({ publicationId: publicationProjects.publicationId })
-      .from(publicationProjects)
-      .where(eq(publicationProjects.projectId, row.id)),
-  ]);
-
+function toProject(
+  row: ProjRow,
+  memberIds: string[],
+  researchAreaIds: string[],
+  publicationIds: string[],
+): Project {
   return {
     id: String(row.id),
     slug: row.slug,
@@ -42,13 +32,75 @@ async function enrichProject(row: ProjRow): Promise<Project> {
     endDate: row.endDate ? row.endDate.toISOString() : null,
     thumbnail: row.thumbnail ?? null,
     tags: row.tags ?? [],
-    memberIds: memberRows.map((m) => String(m.memberId)),
-    publicationIds: publicationRows.map((p) => String(p.publicationId)),
-    researchAreaIds: researchAreaRows.map((r) => String(r.researchAreaId)),
+    memberIds,
+    publicationIds,
+    researchAreaIds,
     demoUrl: row.demoUrl ?? null,
     isFeatured: row.isFeatured ?? false,
     isPublic: row.isPublic ?? false,
   };
+}
+
+/** Batch-fetches all join-table rows in 3 queries regardless of list size (avoids N+1). */
+async function bulkEnrichProjects(rows: ProjRow[]): Promise<Project[]> {
+  if (!rows.length) return [];
+  const ids = rows.map((r) => r.id);
+
+  const [memberRows, researchAreaRows, publicationRows] = await Promise.all([
+    db
+      .select({ projectId: projectMembers.projectId, memberId: projectMembers.memberId })
+      .from(projectMembers)
+      .where(inArray(projectMembers.projectId, ids)),
+    db
+      .select({
+        projectId: projectResearchAreas.projectId,
+        researchAreaId: projectResearchAreas.researchAreaId,
+      })
+      .from(projectResearchAreas)
+      .where(inArray(projectResearchAreas.projectId, ids)),
+    db
+      .select({
+        projectId: publicationProjects.projectId,
+        publicationId: publicationProjects.publicationId,
+      })
+      .from(publicationProjects)
+      .where(inArray(publicationProjects.projectId, ids)),
+  ]);
+
+  const memberMap = new Map<number, string[]>();
+  for (const r of memberRows) {
+    const arr = memberMap.get(r.projectId) ?? [];
+    arr.push(String(r.memberId));
+    memberMap.set(r.projectId, arr);
+  }
+
+  const areaMap = new Map<number, string[]>();
+  for (const r of researchAreaRows) {
+    const arr = areaMap.get(r.projectId) ?? [];
+    arr.push(String(r.researchAreaId));
+    areaMap.set(r.projectId, arr);
+  }
+
+  const pubMap = new Map<number, string[]>();
+  for (const r of publicationRows) {
+    const arr = pubMap.get(r.projectId) ?? [];
+    arr.push(String(r.publicationId));
+    pubMap.set(r.projectId, arr);
+  }
+
+  return rows.map((row) =>
+    toProject(
+      row,
+      memberMap.get(row.id) ?? [],
+      areaMap.get(row.id) ?? [],
+      pubMap.get(row.id) ?? [],
+    ),
+  );
+}
+
+async function enrichProject(row: ProjRow): Promise<Project> {
+  const [result] = await bulkEnrichProjects([row]);
+  return result;
 }
 
 export const getProjects = unstable_cache(
@@ -58,24 +110,27 @@ export const getProjects = unstable_cache(
       .from(projects)
       .where(eq(projects.isPublic, true))
       .orderBy(desc(projects.startDate));
-    return Promise.all(rows.map(enrichProject));
+    return bulkEnrichProjects(rows);
   },
   ["projects-public"],
   { tags: ["projects"] },
 );
 
-export const getProjectBySlug = unstable_cache(
-  async (slug: string): Promise<Project | null> => {
-    const [row] = await db
-      .select()
-      .from(projects)
-      .where(and(eq(projects.isPublic, true), eq(projects.slug, slug)))
-      .limit(1);
-    return row ? enrichProject(row) : null;
-  },
-  ["project-slug"],
-  { tags: ["projects"] },
-);
+/** Per-slug cache: each slug gets its own cache entry (fixes static-key collision bug). */
+export function getProjectBySlug(slug: string): Promise<Project | null> {
+  return unstable_cache(
+    async (): Promise<Project | null> => {
+      const [row] = await db
+        .select()
+        .from(projects)
+        .where(and(eq(projects.isPublic, true), eq(projects.slug, slug)))
+        .limit(1);
+      return row ? enrichProject(row) : null;
+    },
+    ["project-slug", slug],
+    { tags: ["projects"] },
+  )();
+}
 
 export const getFeaturedProjects = unstable_cache(
   async (): Promise<Project[]> => {
@@ -85,7 +140,7 @@ export const getFeaturedProjects = unstable_cache(
       .where(and(eq(projects.isPublic, true), eq(projects.isFeatured, true)))
       .orderBy(desc(projects.startDate))
       .limit(3);
-    return Promise.all(rows.map(enrichProject));
+    return bulkEnrichProjects(rows);
   },
   ["projects-featured"],
   { tags: ["projects"] },
@@ -98,7 +153,7 @@ export const getActiveProjects = unstable_cache(
       .from(projects)
       .where(and(eq(projects.isPublic, true), eq(projects.status, "active")))
       .orderBy(desc(projects.startDate));
-    return Promise.all(rows.map(enrichProject));
+    return bulkEnrichProjects(rows);
   },
   ["projects-active"],
   { tags: ["projects"] },
@@ -111,7 +166,7 @@ export const getDemoProjects = unstable_cache(
       .from(projects)
       .where(and(eq(projects.isPublic, true), isNotNull(projects.demoUrl)))
       .orderBy(desc(projects.isFeatured));
-    return Promise.all(rows.map(enrichProject));
+    return bulkEnrichProjects(rows);
   },
   ["projects-demos"],
   { tags: ["projects"] },
@@ -132,7 +187,7 @@ export const getAllProjects = unstable_cache(
       .select()
       .from(projects)
       .orderBy(desc(projects.startDate));
-    return Promise.all(rows.map(enrichProject));
+    return bulkEnrichProjects(rows);
   },
   ["all-projects"],
   { tags: ["projects"] },
@@ -152,5 +207,5 @@ export async function getProjectsByMember(memberId: string): Promise<Project[]> 
     .from(projects)
     .where(and(eq(projects.isPublic, true), inArray(projects.id, projIds)))
     .orderBy(desc(projects.startDate));
-  return Promise.all(rows.map(enrichProject));
+  return bulkEnrichProjects(rows);
 }

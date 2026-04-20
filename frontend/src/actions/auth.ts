@@ -27,7 +27,5 @@ export async function logout(): Promise<void> {
   await signOut({ redirectTo: "/" });
 }
 
-export async function getSession() {
-  const session = await auth();
-  return session;
-}
+// NOTE: Use auth() directly in Server Components/layouts, or useSession() in Client Components.
+// Do not re-expose auth() as a public Server Action.

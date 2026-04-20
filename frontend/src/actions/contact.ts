@@ -4,7 +4,8 @@ import { db } from "@/lib/db/drizzle";
 import { contactInfo } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-import { assertRole } from "@/lib/permissions";
+import { safeRevalidateTag } from "@/lib/utils/revalidate";
+import { requireRole } from "@/lib/permissions";
 import type { ActionResult } from "@/types/action";
 
 function requireString(formData: FormData, key: string): string {
@@ -16,7 +17,7 @@ function requireString(formData: FormData, key: string): string {
 }
 
 export async function updateContact(formData: FormData): Promise<ActionResult> {
-  await assertRole("professor");
+  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
 
   let labNameKo: string;
   let labNameEn: string;
@@ -62,6 +63,7 @@ export async function updateContact(formData: FormData): Promise<ActionResult> {
     return { error: (e as Error).message };
   }
 
+  safeRevalidateTag("contact");
   revalidatePath("/professor/contact");
   revalidatePath("/contact");
   return { success: true };

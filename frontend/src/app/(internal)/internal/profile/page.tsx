@@ -1,43 +1,47 @@
 import { redirect } from "next/navigation";
-import { getSession } from "@/actions/auth";
-import { createClient } from "@/lib/db/supabase-server";
+import { auth } from "@/lib/auth/auth";
+import { db } from "@/lib/db/drizzle";
+import { members } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 import type { Member } from "@/types";
 import { ProfileForm } from "./ProfileForm";
 
-function toMember(row: Record<string, unknown>): Member {
+function toMember(row: typeof members.$inferSelect): Member {
   return {
-    id: row.id as string,
-    slug: row.slug as string,
-    nameKo: row.name_ko as string,
-    nameEn: row.name_en as string,
+    id: String(row.id),
+    slug: row.slug,
+    nameKo: row.nameKo,
+    nameEn: row.nameEn ?? "",
     group: row.group as Member["group"],
-    position: row.position as string,
-    department: row.department as string,
-    image: (row.image as string) ?? null,
-    email: (row.email as string) ?? null,
+    position: row.position ?? "",
+    department: row.department ?? "",
+    image: row.image ?? null,
+    email: row.email ?? null,
     links: (row.links as Member["links"]) ?? {},
-    researchKeywords: (row.research_keywords as string[]) ?? [],
-    bio: (row.bio as string) ?? null,
+    researchKeywords: row.researchKeywords ?? [],
+    bio: row.bio ?? null,
     education: (row.education as Member["education"]) ?? [],
     career: (row.career as Member["career"]) ?? [],
-    displayOrder: row.display_order as number,
+    displayOrder: row.displayOrder ?? 0,
   };
 }
 
 export default async function ProfilePage() {
-  const user = await getSession();
-  if (!user) {
-    redirect("/login");
-  }
+  const session = await auth();
+  if (!session?.user) redirect("/login");
 
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("members")
-    .select("*")
-    .eq("email", user.email!)
-    .single();
+  // Use memberId FK — reliable link between users and members tables
+  const memberId = (session.user as { memberId?: number }).memberId;
 
-  if (error || !data) {
+  const rows = await db
+    .select()
+    .from(members)
+    .where(eq(members.id, memberId ?? -1))
+    .limit(1);
+
+  const data = rows[0];
+
+  if (!data) {
     return (
       <div className="max-w-3xl">
         <h1 className="text-2xl font-bold text-gray-900 mb-6">내 프로필</h1>

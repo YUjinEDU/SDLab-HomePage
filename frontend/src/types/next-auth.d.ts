@@ -8,6 +8,7 @@ declare module "next-auth" {
       email: string;
       role: "member" | "professor" | "admin";
       memberId: number | null;
+      nasFolderName: string | null;
     };
   }
 }
@@ -16,5 +17,6 @@ declare module "next-auth/jwt" {
   interface JWT {
     role: "member" | "professor" | "admin";
     memberId: number | null;
+    nasFolderName: string | null;
   }
 }

@@ -10,7 +10,7 @@ import { eq } from "drizzle-orm";
 import { generateSlug } from "@/lib/utils/slug";
 import { revalidatePath } from "next/cache";
 import { safeRevalidateTag } from "@/lib/utils/revalidate";
-import { assertRole } from "@/lib/permissions";
+import { requireRole } from "@/lib/permissions";
 import type { ActionResult } from "@/types/action";
 
 function requireString(formData: FormData, key: string): string {
@@ -22,7 +22,7 @@ function requireString(formData: FormData, key: string): string {
 }
 
 export async function createProject(formData: FormData): Promise<ActionResult> {
-  await assertRole("professor");
+  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
 
   let title: string;
   let status: string;
@@ -83,6 +83,7 @@ export async function createProject(formData: FormData): Promise<ActionResult> {
         isFeatured,
       })
       .returning({ id: projects.id });
+    if (!inserted) return { error: "프로젝트 생성에 실패했습니다." };
     newId = inserted.id;
   } catch (e) {
     return { error: (e as Error).message };
@@ -120,7 +121,7 @@ export async function updateProject(
   id: string,
   formData: FormData,
 ): Promise<ActionResult> {
-  await assertRole("professor");
+  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
 
   let title: string;
   let status: string;
@@ -159,6 +160,7 @@ export async function updateProject(
   const researchAreaIds = formData.getAll("researchAreaIds") as string[];
 
   const numId = parseInt(id, 10);
+  if (isNaN(numId)) return { error: "Invalid project ID" };
 
   try {
     await db
@@ -216,9 +218,10 @@ export async function updateProject(
 }
 
 export async function deleteProject(id: string): Promise<ActionResult> {
-  await assertRole("professor");
+  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
 
   const numId = parseInt(id, 10);
+  if (isNaN(numId)) return { error: "Invalid project ID" };
 
   try {
     await db.delete(projectMembers).where(eq(projectMembers.projectId, numId));

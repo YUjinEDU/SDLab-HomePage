@@ -1,135 +1,124 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-// Use vi.hoisted so mockChain is available when vi.mock factory runs
-const mockChain = vi.hoisted(() => {
-  const chain: Record<string, ReturnType<typeof vi.fn>> = {
-    from: vi.fn(),
-    select: vi.fn(),
-    update: vi.fn(),
-    eq: vi.fn(),
-  };
+// ─── Drizzle mock ───────────────────────────────────────────────────────────
+const mockWhere = vi.hoisted(() => vi.fn().mockResolvedValue([]));
+const mockSet   = vi.hoisted(() => vi.fn().mockReturnValue({ where: mockWhere }));
+const mockUpdate = vi.hoisted(() => vi.fn().mockReturnValue({ set: mockSet }));
 
-  chain.from.mockReturnValue(chain);
-  chain.select.mockReturnValue(chain);
-  chain.update.mockReturnValue(chain);
-  chain.eq.mockResolvedValue({ data: null, error: null });
-
-  return chain;
-});
-
-vi.mock("@/lib/db/supabase-server", () => ({
-  createClient: vi.fn().mockResolvedValue(mockChain),
+vi.mock("@/lib/db/drizzle", () => ({
+  db: { update: mockUpdate },
 }));
 
+// ─── Permissions mock ──────────────────────────────────────────────────────
+vi.mock("@/lib/permissions", () => ({
+  requireRole: vi.fn().mockResolvedValue(undefined),
+}));
+
+// ─── next/cache mock ───────────────────────────────────────────────────────
 vi.mock("next/cache", () => ({
   revalidateTag: vi.fn(),
-}));
-
-vi.mock("@/lib/permissions", () => ({
-  assertRole: vi.fn().mockResolvedValue(null),
 }));
 
 import {
   togglePublicationVisibility,
   toggleProjectVisibility,
 } from "@/actions/visibility";
-import { revalidateTag } from "next/cache";
-import { assertRole } from "@/lib/permissions";
+import { requireRole } from "@/lib/permissions";
 
 describe("VIS-03 — visibility Server Actions", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-
-    // Re-wire chain after clearAllMocks
-    mockChain.from.mockReturnValue(mockChain);
-    mockChain.select.mockReturnValue(mockChain);
-    mockChain.update.mockReturnValue(mockChain);
-    mockChain.eq.mockResolvedValue({ data: null, error: null });
-
-    // Default: authorized
-    vi.mocked(assertRole).mockResolvedValue(null);
+    vi.mocked(requireRole).mockResolvedValue(undefined);
+    mockUpdate.mockReturnValue({ set: mockSet });
+    mockSet.mockReturnValue({ where: mockWhere });
+    mockWhere.mockResolvedValue([]);
   });
 
+  // ─── togglePublicationVisibility ─────────────────────────────────────────
   describe("togglePublicationVisibility", () => {
-    it("calls supabase update with is_public: true on publications table", async () => {
-      const result = await togglePublicationVisibility("pub-123", true);
-
-      expect(mockChain.from).toHaveBeenCalledWith("publications");
-      expect(mockChain.update).toHaveBeenCalledWith({ is_public: true });
-      expect(mockChain.eq).toHaveBeenCalledWith("id", "pub-123");
+    it("returns { success: true } when update succeeds with isPublic: true", async () => {
+      const result = await togglePublicationVisibility("123", true);
       expect(result).toEqual({ success: true });
     });
 
-    it("calls supabase update with is_public: false on publications table", async () => {
-      const result = await togglePublicationVisibility("pub-456", false);
-
-      expect(mockChain.from).toHaveBeenCalledWith("publications");
-      expect(mockChain.update).toHaveBeenCalledWith({ is_public: false });
-      expect(mockChain.eq).toHaveBeenCalledWith("id", "pub-456");
+    it("returns { success: true } when update succeeds with isPublic: false", async () => {
+      const result = await togglePublicationVisibility("456", false);
       expect(result).toEqual({ success: true });
     });
 
-    it("calls revalidateTag('publications') on success", async () => {
-      await togglePublicationVisibility("pub-123", true);
-      expect(revalidateTag).toHaveBeenCalledWith("publications");
+    it("calls db.update on publications table", async () => {
+      await togglePublicationVisibility("123", true);
+      expect(mockUpdate).toHaveBeenCalledTimes(1);
+      expect(mockSet).toHaveBeenCalledWith({ isPublic: true });
     });
 
-    it("returns error without touching DB when assertRole returns error", async () => {
-      vi.mocked(assertRole).mockResolvedValue({ error: "unauthorized" });
-
-      const result = await togglePublicationVisibility("pub-123", true);
-
-      expect(mockChain.from).not.toHaveBeenCalled();
-      expect(result).toEqual({ error: "unauthorized" });
+    it("calls safeRevalidateTag('publications') on success", async () => {
+      // safeRevalidateTag wraps revalidateTag from next/cache
+      const { revalidateTag } = await import("next/cache");
+      await togglePublicationVisibility("123", true);
+      expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("publications");
     });
 
-    it("returns {error: message} when DB update fails", async () => {
-      mockChain.eq.mockResolvedValue({
-        data: null,
-        error: { message: "DB error" },
-      });
+    it("returns { error: 'Unauthorized' } when requireRole throws", async () => {
+      vi.mocked(requireRole).mockRejectedValue(new Error("unauthorized"));
+      const result = await togglePublicationVisibility("123", true);
+      expect(result).toEqual({ error: "Unauthorized" });
+      expect(mockUpdate).not.toHaveBeenCalled();
+    });
 
-      const result = await togglePublicationVisibility("pub-123", true);
+    it("returns { error: 'Invalid publication ID' } for non-numeric ID", async () => {
+      const result = await togglePublicationVisibility("pub-abc", true);
+      expect(result).toEqual({ error: "Invalid publication ID" });
+      expect(mockUpdate).not.toHaveBeenCalled();
+    });
 
-      expect(result).toEqual({ error: "DB error" });
-      expect(revalidateTag).not.toHaveBeenCalled();
+    it("returns { error: message } and skips revalidate when DB throws", async () => {
+      mockWhere.mockRejectedValueOnce(new Error("DB connection error"));
+      const { revalidateTag } = await import("next/cache");
+      const result = await togglePublicationVisibility("123", true);
+      expect(result).toEqual({ error: "DB connection error" });
+      expect(vi.mocked(revalidateTag)).not.toHaveBeenCalled();
     });
   });
 
+  // ─── toggleProjectVisibility ─────────────────────────────────────────────
   describe("toggleProjectVisibility", () => {
-    it("calls supabase update with is_public: true on projects table", async () => {
-      const result = await toggleProjectVisibility("proj-123", true);
-
-      expect(mockChain.from).toHaveBeenCalledWith("projects");
-      expect(mockChain.update).toHaveBeenCalledWith({ is_public: true });
-      expect(mockChain.eq).toHaveBeenCalledWith("id", "proj-123");
+    it("returns { success: true } when update succeeds with isPublic: true", async () => {
+      const result = await toggleProjectVisibility("123", true);
       expect(result).toEqual({ success: true });
     });
 
-    it("calls revalidateTag('projects') on success", async () => {
-      await toggleProjectVisibility("proj-123", true);
-      expect(revalidateTag).toHaveBeenCalledWith("projects");
+    it("calls db.update on projects table", async () => {
+      await toggleProjectVisibility("123", true);
+      expect(mockUpdate).toHaveBeenCalledTimes(1);
+      expect(mockSet).toHaveBeenCalledWith({ isPublic: true });
     });
 
-    it("returns error without touching DB when assertRole returns error", async () => {
-      vi.mocked(assertRole).mockResolvedValue({ error: "unauthorized" });
-
-      const result = await toggleProjectVisibility("proj-123", true);
-
-      expect(mockChain.from).not.toHaveBeenCalled();
-      expect(result).toEqual({ error: "unauthorized" });
+    it("calls safeRevalidateTag('projects') on success", async () => {
+      const { revalidateTag } = await import("next/cache");
+      await toggleProjectVisibility("123", true);
+      expect(vi.mocked(revalidateTag)).toHaveBeenCalledWith("projects");
     });
 
-    it("returns {error: message} when DB update fails", async () => {
-      mockChain.eq.mockResolvedValue({
-        data: null,
-        error: { message: "project DB error" },
-      });
+    it("returns { error: 'Unauthorized' } when requireRole throws", async () => {
+      vi.mocked(requireRole).mockRejectedValue(new Error("unauthorized"));
+      const result = await toggleProjectVisibility("123", true);
+      expect(result).toEqual({ error: "Unauthorized" });
+      expect(mockUpdate).not.toHaveBeenCalled();
+    });
 
-      const result = await toggleProjectVisibility("proj-123", true);
+    it("returns { error: 'Invalid project ID' } for non-numeric ID", async () => {
+      const result = await toggleProjectVisibility("proj-abc", true);
+      expect(result).toEqual({ error: "Invalid project ID" });
+      expect(mockUpdate).not.toHaveBeenCalled();
+    });
 
+    it("returns { error: message } and skips revalidate when DB throws", async () => {
+      mockWhere.mockRejectedValueOnce(new Error("project DB error"));
+      const { revalidateTag } = await import("next/cache");
+      const result = await toggleProjectVisibility("123", true);
       expect(result).toEqual({ error: "project DB error" });
-      expect(revalidateTag).not.toHaveBeenCalled();
+      expect(vi.mocked(revalidateTag)).not.toHaveBeenCalled();
     });
   });
 });

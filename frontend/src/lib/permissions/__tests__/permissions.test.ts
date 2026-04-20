@@ -1,86 +1,99 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-// Mock the supabase server client
-vi.mock("@/lib/db/supabase-server", () => ({
-  createClient: vi.fn(),
+// Mock Auth.js v5 auth() — controls what session is returned
+vi.mock("@/lib/auth/auth", () => ({
+  auth: vi.fn(),
 }));
 
-import { createClient } from "@/lib/db/supabase-server";
+// Mock next/navigation redirect — makes it throw so we can assert it was called
+vi.mock("next/navigation", () => ({
+  redirect: vi.fn().mockImplementation((url: string) => {
+    throw Object.assign(new Error("NEXT_REDIRECT"), {
+      digest: `NEXT_REDIRECT;replace;${url};303;`,
+    });
+  }),
+}));
+
+import { auth } from "@/lib/auth/auth";
+import { redirect } from "next/navigation";
 import { assertRole, requireRole } from "@/lib/permissions";
 
-const mockCreateClient = vi.mocked(createClient);
+const mockAuth = vi.mocked(auth);
+const mockRedirect = vi.mocked(redirect);
 
-function makeClient(userId: string | null, role: string | null) {
+function makeSession(role: string | null) {
+  if (!role) return null;
   return {
-    auth: {
-      getUser: vi.fn().mockResolvedValue({
-        data: { user: userId ? { id: userId } : null },
-        error: null,
-      }),
-    },
-    from: vi.fn().mockReturnValue({
-      select: vi.fn().mockReturnValue({
-        eq: vi.fn().mockReturnValue({
-          single: vi.fn().mockResolvedValue({
-            data: role ? { role } : null,
-            error: role ? null : { message: "not found" },
-          }),
-        }),
-      }),
-    }),
+    user: { id: "user-1", email: "test@test.com", role, memberId: null },
+    expires: "2099-01-01",
   };
 }
 
 beforeEach(() => {
   vi.clearAllMocks();
+  // Re-apply throw behaviour after clearAllMocks resets implementations
+  mockRedirect.mockImplementation((url: string) => {
+    throw Object.assign(new Error("NEXT_REDIRECT"), {
+      digest: `NEXT_REDIRECT;replace;${url};303;`,
+    });
+  });
 });
 
+// ─── assertRole ────────────────────────────────────────────────────────────
 describe("assertRole", () => {
-  it("returns { error: unauthorized } when user has member role and professor is required", async () => {
-    mockCreateClient.mockResolvedValue(makeClient("user-1", "member") as any);
-    const result = await assertRole("professor");
-    expect(result).toEqual({ error: "unauthorized" });
+  it("redirects to '/' when member role is present and professor is required", async () => {
+    mockAuth.mockResolvedValue(makeSession("member") as never);
+    await expect(assertRole("professor")).rejects.toThrow("NEXT_REDIRECT");
+    expect(mockRedirect).toHaveBeenCalledWith("/");
   });
 
-  it("returns null when user has professor role and professor is required", async () => {
-    mockCreateClient.mockResolvedValue(
-      makeClient("user-1", "professor") as any,
-    );
-    const result = await assertRole("professor");
-    expect(result).toBeNull();
+  it("resolves without throwing when professor role meets professor requirement", async () => {
+    mockAuth.mockResolvedValue(makeSession("professor") as never);
+    await expect(assertRole("professor")).resolves.toBeUndefined();
   });
 
-  it("returns null when user has admin role and professor is required (admin >= professor)", async () => {
-    mockCreateClient.mockResolvedValue(makeClient("user-1", "admin") as any);
-    const result = await assertRole("professor");
-    expect(result).toBeNull();
+  it("resolves without throwing when admin role meets professor requirement (admin >= professor)", async () => {
+    mockAuth.mockResolvedValue(makeSession("admin") as never);
+    await expect(assertRole("professor")).resolves.toBeUndefined();
   });
 
-  it("returns { error: unauthorized } when user has professor role and admin is required", async () => {
-    mockCreateClient.mockResolvedValue(
-      makeClient("user-1", "professor") as any,
-    );
-    const result = await assertRole("admin");
-    expect(result).toEqual({ error: "unauthorized" });
+  it("redirects to '/' when professor role is present but admin is required", async () => {
+    mockAuth.mockResolvedValue(makeSession("professor") as never);
+    await expect(assertRole("admin")).rejects.toThrow("NEXT_REDIRECT");
+    expect(mockRedirect).toHaveBeenCalledWith("/");
   });
 
-  it("returns { error: unauthorized } when no authenticated user", async () => {
-    mockCreateClient.mockResolvedValue(makeClient(null, null) as any);
-    const result = await assertRole("professor");
-    expect(result).toEqual({ error: "unauthorized" });
+  it("redirects to '/login' when no authenticated user", async () => {
+    mockAuth.mockResolvedValue(null as never);
+    await expect(assertRole("professor")).rejects.toThrow("NEXT_REDIRECT");
+    expect(mockRedirect).toHaveBeenCalledWith("/login");
   });
 });
 
+// ─── requireRole ───────────────────────────────────────────────────────────
 describe("requireRole", () => {
-  it('throws Error("unauthorized") when user has member role and professor is required', async () => {
-    mockCreateClient.mockResolvedValue(makeClient("user-1", "member") as any);
+  it('throws Error("unauthorized") when member role is present and professor is required', async () => {
+    mockAuth.mockResolvedValue(makeSession("member") as never);
     await expect(requireRole("professor")).rejects.toThrow("unauthorized");
   });
 
-  it("resolves without throwing when user has professor role and professor is required", async () => {
-    mockCreateClient.mockResolvedValue(
-      makeClient("user-1", "professor") as any,
-    );
+  it("resolves without throwing when professor role meets professor requirement", async () => {
+    mockAuth.mockResolvedValue(makeSession("professor") as never);
     await expect(requireRole("professor")).resolves.toBeUndefined();
+  });
+
+  it('throws Error("unauthorized") when no authenticated user', async () => {
+    mockAuth.mockResolvedValue(null as never);
+    await expect(requireRole("professor")).rejects.toThrow("unauthorized");
+  });
+
+  it("resolves without throwing when admin role meets professor requirement", async () => {
+    mockAuth.mockResolvedValue(makeSession("admin") as never);
+    await expect(requireRole("professor")).resolves.toBeUndefined();
+  });
+
+  it('throws Error("unauthorized") when member role is present and admin is required', async () => {
+    mockAuth.mockResolvedValue(makeSession("member") as never);
+    await expect(requireRole("admin")).rejects.toThrow("unauthorized");
   });
 });

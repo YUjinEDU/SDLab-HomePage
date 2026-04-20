@@ -1,24 +1,29 @@
 "use server";
 
-import { createClient } from "@/lib/db/supabase-server";
+import { db } from "@/lib/db/drizzle";
+import { publications, projects } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 import { safeRevalidateTag } from "@/lib/utils/revalidate";
-import { assertRole } from "@/lib/permissions";
+import { requireRole } from "@/lib/permissions";
 import type { ActionResult } from "@/types/action";
 
 export async function togglePublicationVisibility(
   id: string,
   isPublic: boolean,
 ): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
+  try { await requireRole("professor"); } catch { return { error: "Unauthorized" }; }
 
-  const supabase = await createClient();
-  const { error } = await supabase
-    .from("publications")
-    .update({ is_public: isPublic })
-    .eq("id", id);
+  const pubId = parseInt(id, 10);
+  if (isNaN(pubId)) return { error: "Invalid publication ID" };
 
-  if (error) return { error: error.message };
+  try {
+    await db
+      .update(publications)
+      .set({ isPublic })
+      .where(eq(publications.id, pubId));
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Update failed" };
+  }
 
   safeRevalidateTag("publications");
   return { success: true };
@@ -28,16 +33,19 @@ export async function toggleProjectVisibility(
   id: string,
   isPublic: boolean,
 ): Promise<ActionResult> {
-  const authError = await assertRole("professor");
-  if (authError) return authError;
+  try { await requireRole("professor"); } catch { return { error: "Unauthorized" }; }
 
-  const supabase = await createClient();
-  const { error } = await supabase
-    .from("projects")
-    .update({ is_public: isPublic })
-    .eq("id", id);
+  const projId = parseInt(id, 10);
+  if (isNaN(projId)) return { error: "Invalid project ID" };
 
-  if (error) return { error: error.message };
+  try {
+    await db
+      .update(projects)
+      .set({ isPublic })
+      .where(eq(projects.id, projId));
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Update failed" };
+  }
 
   safeRevalidateTag("projects");
   return { success: true };

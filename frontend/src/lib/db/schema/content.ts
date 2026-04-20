@@ -32,6 +32,7 @@ export const members = pgTable("members", {
   education: jsonb("education"),
   career: jsonb("career"),
   displayOrder: integer("display_order").default(0),
+  nasFolderName: text("nas_folder_name"),  // NAS 개인 폴더 이름 (예: "김민건")
 });
 
 export const projects = pgTable("projects", {
@@ -90,8 +91,12 @@ export const contactInfo = pgTable("contact_info", {
   labNameKo: text("lab_name_ko"),
   labNameEn: text("lab_name_en"),
   professorName: text("professor_name"),
+  professorTitle: text("professor_title"),
   professorEmail: text("professor_email"),
   professorPhone: text("professor_phone"),
+  professorOffice: text("professor_office"),
+  labRoom: text("lab_room"),
+  labPhone: text("lab_phone"),
   building: text("building"),
   department: text("department"),
   university: text("university"),

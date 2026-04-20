@@ -12,15 +12,22 @@ if (!email || !password) {
   process.exit(1);
 }
 
-const client = postgres(process.env.DATABASE_URL!);
-const db = drizzle(client);
+async function main() {
+  const client = postgres(process.env.DATABASE_URL!);
+  const db = drizzle(client);
 
-const hashedPassword = await bcrypt.hash(password, 12);
-await db.insert(users).values({
-  email,
-  hashedPassword,
-  role: "admin",
+  const hashedPassword = await bcrypt.hash(password, 12);
+  await db.insert(users).values({
+    email,
+    hashedPassword,
+    role: "admin",
+  });
+
+  console.log(`✅ Admin created: ${email}`);
+  await client.end();
+}
+
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
 });
-
-console.log(`Admin created: ${email}`);
-await client.end();

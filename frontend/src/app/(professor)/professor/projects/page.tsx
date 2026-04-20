@@ -84,8 +84,8 @@ export default async function ProjectsListPage() {
                     {proj.organization}
                   </td>
                   <td className="whitespace-nowrap px-2 sm:px-4 py-2 sm:py-3 text-sm text-gray-600">
-                    {proj.startDate}
-                    {proj.endDate ? ` ~ ${proj.endDate}` : " ~"}
+                    {proj.startDate ? new Date(proj.startDate).toLocaleDateString("ko-KR") : ""}
+                    {proj.endDate ? ` ~ ${new Date(proj.endDate).toLocaleDateString("ko-KR")}` : " ~"}
                   </td>
                   <td className="whitespace-nowrap px-2 sm:px-4 py-2 sm:py-3 text-right text-sm">
                     <VisibilityToggleButton

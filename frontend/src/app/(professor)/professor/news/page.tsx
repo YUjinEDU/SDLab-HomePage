@@ -69,7 +69,7 @@ export default async function NewsListPage() {
                     {CATEGORY_LABELS[item.category] ?? item.category}
                   </td>
                   <td className="whitespace-nowrap px-2 sm:px-4 py-2 sm:py-3 text-sm text-gray-600 hidden md:table-cell">
-                    {item.date}
+                    {new Date(item.date).toLocaleDateString("ko-KR")}
                   </td>
                   <td className="whitespace-nowrap px-2 sm:px-4 py-2 sm:py-3 text-sm text-gray-600">
                     {item.isPinned ? "Y" : ""}

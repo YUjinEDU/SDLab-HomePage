@@ -10,12 +10,12 @@ export default auth((req) => {
 
   if (isProtectedInternal && !isLoggedIn) {
     return NextResponse.redirect(
-      new URL(`/login?redirect=${nextUrl.pathname}`, nextUrl)
+      new URL(`/login?redirect=${encodeURIComponent(nextUrl.pathname)}`, nextUrl)
     );
   }
 
   if (isProfessorOnly) {
-    const role = (session?.user as any)?.role;
+    const role = session?.user?.role;
     if (!isLoggedIn || (role !== "professor" && role !== "admin")) {
       return NextResponse.redirect(new URL("/login", nextUrl));
     }

@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { db } from "@/lib/db/drizzle";
-import { users } from "@/lib/db/schema";
+import { users, members } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -29,11 +29,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         );
         if (!isValid) return null;
 
+        let nasFolderName: string | null = null;
+        if (user.memberId) {
+          const [member] = await db
+            .select({ nasFolderName: members.nasFolderName })
+            .from(members)
+            .where(eq(members.id, user.memberId))
+            .limit(1);
+          nasFolderName = member?.nasFolderName ?? null;
+        }
+
         return {
           id: user.id,
           email: user.email,
           role: user.role,
           memberId: user.memberId,
+          nasFolderName,
         };
       },
     }),
@@ -41,9 +52,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     jwt({ token, user }) {
       if (user) {
-        const u = user as { role: "member" | "professor" | "admin"; memberId: number | null };
+        const u = user as { role: "member" | "professor" | "admin"; memberId: number | null; nasFolderName: string | null };
         token.role = u.role;
         token.memberId = u.memberId;
+        token.nasFolderName = u.nasFolderName;
       }
       return token;
     },
@@ -51,6 +63,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       session.user.id = token.sub ?? "";
       session.user.role = token.role;
       session.user.memberId = token.memberId;
+      session.user.nasFolderName = token.nasFolderName;
       return session;
     },
   },
@@ -58,4 +71,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: "/login",
   },
   session: { strategy: "jwt" },
+  trustHost: true,
 });

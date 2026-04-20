@@ -5,10 +5,19 @@ import { updateContact } from "@/actions/contact";
 import type { ContactInfo } from "@/types";
 
 type ContactFormProps = {
-  contact: ContactInfo;
+  contact?: ContactInfo;
 };
 
-export default function ContactForm({ contact }: ContactFormProps) {
+export default function ContactForm({ contact: c }: ContactFormProps) {
+  const contact = c ?? {
+    labName: { ko: "", en: "" },
+    professor: { name: "", title: "", email: "" },
+    location: { building: "", professorOffice: "", lab: "", professorPhone: "", labPhone: "" },
+    department: "",
+    university: "",
+    address: "",
+    mapEmbedUrl: null,
+  };
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);

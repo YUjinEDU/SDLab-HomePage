@@ -3,8 +3,8 @@
 import { db } from "@/lib/db/drizzle";
 import { members } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
-import { assertRole } from "@/lib/permissions";
+import { safeRevalidateTag } from "@/lib/utils/revalidate";
+import { requireRole } from "@/lib/permissions";
 import type { ActionResult } from "@/types/action";
 
 function requireString(formData: FormData, key: string): string {
@@ -53,7 +53,7 @@ function generateSlug(nameEn: string): string {
 }
 
 export async function createMember(formData: FormData): Promise<ActionResult> {
-  await assertRole("professor");
+  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
 
   let nameKo: string;
   let nameEn: string;
@@ -73,17 +73,13 @@ export async function createMember(formData: FormData): Promise<ActionResult> {
   const email = (formData.get("email") as string) || null;
   const image = (formData.get("image") as string) || null;
   const bio = (formData.get("bio") as string) || null;
-  const displayOrder = parseInt(
-    (formData.get("displayOrder") as string) || "0",
-    10,
-  );
+  const displayOrderParsed = parseInt((formData.get("displayOrder") as string) || "0", 10);
+  const displayOrder = isNaN(displayOrderParsed) ? 0 : displayOrderParsed;
+  const nasFolderName = ((formData.get("nasFolderName") as string) || "").trim() || null;
 
   const keywordsRaw = formData.get("researchKeywords") as string;
   const researchKeywords = keywordsRaw
-    ? keywordsRaw
-        .split(",")
-        .map((k) => k.trim())
-        .filter(Boolean)
+    ? keywordsRaw.split(",").map((k) => k.trim()).filter(Boolean)
     : [];
 
   const links = extractLinks(formData);
@@ -94,27 +90,14 @@ export async function createMember(formData: FormData): Promise<ActionResult> {
 
   try {
     await db.insert(members).values({
-      slug,
-      nameKo,
-      nameEn,
-      group,
-      position,
-      department,
-      email,
-      image,
-      bio,
-      displayOrder,
-      researchKeywords,
-      links,
-      education,
-      career,
+      slug, nameKo, nameEn, group, position, department,
+      email, image, bio, displayOrder, researchKeywords, links, education, career, nasFolderName,
     });
   } catch (e) {
     return { error: (e as Error).message };
   }
 
-  revalidatePath("/professor/members");
-  revalidatePath("/members");
+  safeRevalidateTag("members");
   return { success: true };
 }
 
@@ -122,7 +105,7 @@ export async function updateMember(
   id: string,
   formData: FormData,
 ): Promise<ActionResult> {
-  await assertRole("professor");
+  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
 
   let nameKo: string;
   let nameEn: string;
@@ -139,20 +122,19 @@ export async function updateMember(
     return { error: (e as Error).message };
   }
 
+  const numId = parseInt(id, 10);
+  if (isNaN(numId)) return { error: "Invalid member ID" };
+
   const email = (formData.get("email") as string) || null;
   const image = (formData.get("image") as string) || null;
   const bio = (formData.get("bio") as string) || null;
-  const displayOrder = parseInt(
-    (formData.get("displayOrder") as string) || "0",
-    10,
-  );
+  const displayOrderParsed = parseInt((formData.get("displayOrder") as string) || "0", 10);
+  const displayOrder = isNaN(displayOrderParsed) ? 0 : displayOrderParsed;
+  const nasFolderName = ((formData.get("nasFolderName") as string) || "").trim() || null;
 
   const keywordsRaw = formData.get("researchKeywords") as string;
   const researchKeywords = keywordsRaw
-    ? keywordsRaw
-        .split(",")
-        .map((k) => k.trim())
-        .filter(Boolean)
+    ? keywordsRaw.split(",").map((k) => k.trim()).filter(Boolean)
     : [];
 
   const links = extractLinks(formData);
@@ -160,43 +142,30 @@ export async function updateMember(
   const career = parseJsonField(formData.get("career") as string);
 
   try {
-    await db
-      .update(members)
-      .set({
-        nameKo,
-        nameEn,
-        group,
-        position,
-        department,
-        email,
-        image,
-        bio,
-        displayOrder,
-        researchKeywords,
-        links,
-        education,
-        career,
-      })
-      .where(eq(members.id, parseInt(id, 10)));
+    await db.update(members).set({
+      nameKo, nameEn, group, position, department,
+      email, image, bio, displayOrder, researchKeywords, links, education, career, nasFolderName,
+    }).where(eq(members.id, numId));
   } catch (e) {
     return { error: (e as Error).message };
   }
 
-  revalidatePath("/professor/members");
-  revalidatePath("/members");
+  safeRevalidateTag("members");
   return { success: true };
 }
 
 export async function deleteMember(id: string): Promise<ActionResult> {
-  await assertRole("professor");
+  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
+
+  const numId = parseInt(id, 10);
+  if (isNaN(numId)) return { error: "Invalid member ID" };
 
   try {
-    await db.delete(members).where(eq(members.id, parseInt(id, 10)));
+    await db.delete(members).where(eq(members.id, numId));
   } catch (e) {
     return { error: (e as Error).message };
   }
 
-  revalidatePath("/professor/members");
-  revalidatePath("/members");
+  safeRevalidateTag("members");
   return { success: true };
 }

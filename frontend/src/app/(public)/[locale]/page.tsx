@@ -75,9 +75,11 @@ export default async function HomePage() {
       <AnimateOnScroll>
         <MembersSnapshotSection members={members} />
       </AnimateOnScroll>
-      <AnimateOnScroll>
-        <ContactSummarySection contactInfo={contactInfo} />
-      </AnimateOnScroll>
+      {contactInfo && (
+        <AnimateOnScroll>
+          <ContactSummarySection contactInfo={contactInfo} />
+        </AnimateOnScroll>
+      )}
     </main>
   );
 }

@@ -248,7 +248,7 @@ describe("VIS-01 — publications query is_public filter", () => {
 
   it("getPublicationBySlug() returns matching public publication", async () => {
     const row = makePubRow({ slug: "some-slug", isPublic: true });
-    setupMainQuery([row], { terminal: "limit" });
+    setupMainQuery([row]);
     const result = await getPublicationBySlug("some-slug");
     expect(result).not.toBeNull();
     expect(result?.slug).toBe("some-slug");

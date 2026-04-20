@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { db } from "@/lib/db/drizzle";
 import { researchAreas } from "@/lib/db/schema";
 import { asc } from "drizzle-orm";
@@ -20,10 +21,14 @@ function toResearchArea(row: ResearchAreaRow): ResearchArea {
   };
 }
 
-export async function getResearchAreas(): Promise<ResearchArea[]> {
-  const rows = await db
-    .select()
-    .from(researchAreas)
-    .orderBy(asc(researchAreas.displayOrder));
-  return rows.map(toResearchArea);
-}
+export const getResearchAreas = unstable_cache(
+  async (): Promise<ResearchArea[]> => {
+    const rows = await db
+      .select()
+      .from(researchAreas)
+      .orderBy(asc(researchAreas.displayOrder));
+    return rows.map(toResearchArea);
+  },
+  ["research-areas"],
+  { tags: ["research-areas"] },
+);

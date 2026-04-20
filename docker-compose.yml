@@ -4,15 +4,17 @@ services:
     container_name: sdlab_db
     restart: unless-stopped
     environment:
-      POSTGRES_USER: sdlab
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: sdlab_homepage
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./docker/seed.sql:/docker-entrypoint-initdb.d/seed.sql
     ports:
       - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U sdlab -d sdlab_homepage"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -30,12 +32,17 @@ services:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://sdlab:${DB_PASSWORD}@db:5432/sdlab_homepage
+      DATABASE_URL: ${DATABASE_URL}
       AUTH_SECRET: ${AUTH_SECRET}
       AUTH_URL: ${AUTH_URL}
       NODE_ENV: production
+      NAS_SHARED_PATH: /nas/공용
+      NAS_PRIVATE_PATH: /nas/개인
+    volumes:
+      - /volume1/SDLab/공용:/nas/공용:rw
+      - /volume1/SDLab/개인:/nas/개인:rw
     ports:
-      - "3000:3000"
+      - "8888:3000"
 
 volumes:
   postgres_data:

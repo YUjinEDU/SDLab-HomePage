@@ -11,7 +11,7 @@ import { eq } from "drizzle-orm";
 import { generateSlug } from "@/lib/utils/slug";
 import { revalidatePath } from "next/cache";
 import { safeRevalidateTag } from "@/lib/utils/revalidate";
-import { assertRole } from "@/lib/permissions";
+import { requireRole } from "@/lib/permissions";
 import type { ActionResult } from "@/types/action";
 
 function requireString(formData: FormData, key: string): string {
@@ -25,7 +25,7 @@ function requireString(formData: FormData, key: string): string {
 export async function createPublication(
   formData: FormData,
 ): Promise<ActionResult> {
-  await assertRole("professor");
+  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
 
   let title: string;
   let authorsRaw: string;
@@ -40,7 +40,8 @@ export async function createPublication(
     return { error: (e as Error).message };
   }
 
-  const year = Number(formData.get("year"));
+  const year = parseInt(formData.get("year") as string, 10);
+  if (isNaN(year)) return { error: "year is required" };
   const monthRaw = formData.get("month") as string;
   const doi = (formData.get("doi") as string) || null;
   const pdfUrl = (formData.get("pdfUrl") as string) || null;
@@ -85,6 +86,7 @@ export async function createPublication(
         isFeatured,
       })
       .returning({ id: publications.id });
+    if (!inserted) return { error: "논문 생성에 실패했습니다." };
     newId = inserted.id;
   } catch (e) {
     return { error: (e as Error).message };
@@ -133,7 +135,7 @@ export async function updatePublication(
   id: string,
   formData: FormData,
 ): Promise<ActionResult> {
-  await assertRole("professor");
+  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
 
   let title: string;
   let authorsRaw: string;
@@ -148,7 +150,8 @@ export async function updatePublication(
     return { error: (e as Error).message };
   }
 
-  const year = Number(formData.get("year"));
+  const year = parseInt(formData.get("year") as string, 10);
+  if (isNaN(year)) return { error: "year is required" };
   const monthRaw = formData.get("month") as string;
   const doi = (formData.get("doi") as string) || null;
   const pdfUrl = (formData.get("pdfUrl") as string) || null;
@@ -171,6 +174,7 @@ export async function updatePublication(
   const projectIds = formData.getAll("projectIds") as string[];
 
   const numId = parseInt(id, 10);
+  if (isNaN(numId)) return { error: "Invalid publication ID" };
 
   try {
     await db
@@ -244,9 +248,10 @@ export async function updatePublication(
 }
 
 export async function deletePublication(id: string): Promise<ActionResult> {
-  await assertRole("professor");
+  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
 
   const numId = parseInt(id, 10);
+  if (isNaN(numId)) return { error: "Invalid publication ID" };
 
   try {
     await db

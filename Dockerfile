@@ -1,14 +1,12 @@
-FROM node:20-alpine AS base
+FROM node:20-alpine3.21 AS base
 RUN corepack enable pnpm
-
-FROM base AS deps
-WORKDIR /app
-COPY frontend/package.json frontend/pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
 
 FROM base AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+# .npmrc must be copied BEFORE pnpm install to apply node-linker=hoisted
+COPY frontend/.npmrc ./
+COPY frontend/package.json frontend/pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 COPY frontend/ .
 ARG DATABASE_URL
 ARG AUTH_SECRET
@@ -21,6 +19,14 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+# ── LibreOffice for Office document → PDF conversion ─────────────────────────
+RUN apk add --no-cache libreoffice font-noto font-noto-cjk ttf-freefont \
+  && mkdir -p /tmp/nas-preview-cache \
+  && chown nextjs:nodejs /tmp/nas-preview-cache
+
+# LibreOffice needs a writable HOME
+ENV HOME=/tmp
+
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
@@ -29,4 +35,5 @@ USER nextjs
 EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
+ENTRYPOINT []
 CMD ["node", "server.js"]

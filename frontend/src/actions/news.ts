@@ -4,8 +4,8 @@ import { db } from "@/lib/db/drizzle";
 import { news, newsProjects, newsPublications } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { generateSlug } from "@/lib/utils/slug";
-import { revalidatePath } from "next/cache";
-import { assertRole } from "@/lib/permissions";
+import { safeRevalidateTag } from "@/lib/utils/revalidate";
+import { requireRole } from "@/lib/permissions";
 import type { ActionResult } from "@/types/action";
 
 function requireString(formData: FormData, key: string): string {
@@ -17,7 +17,7 @@ function requireString(formData: FormData, key: string): string {
 }
 
 export async function createNews(formData: FormData): Promise<ActionResult> {
-  await assertRole("professor");
+  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
 
   let title: string;
   let category: string;
@@ -51,6 +51,7 @@ export async function createNews(formData: FormData): Promise<ActionResult> {
         isPinned,
       })
       .returning({ id: news.id });
+    if (!inserted) return { error: "뉴스 생성에 실패했습니다." };
     newId = inserted.id;
   } catch (e) {
     return { error: (e as Error).message };
@@ -78,8 +79,7 @@ export async function createNews(formData: FormData): Promise<ActionResult> {
     return { error: (e as Error).message };
   }
 
-  revalidatePath("/professor/news");
-  revalidatePath("/");
+  safeRevalidateTag("news");
   return { success: true };
 }
 
@@ -87,7 +87,7 @@ export async function updateNews(
   id: string,
   formData: FormData,
 ): Promise<ActionResult> {
-  await assertRole("professor");
+  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
 
   let title: string;
   let category: string;
@@ -107,6 +107,7 @@ export async function updateNews(
   const publicationIds = formData.getAll("publicationIds") as string[];
 
   const numId = parseInt(id, 10);
+  if (isNaN(numId)) return { error: "Invalid news ID" };
 
   try {
     await db
@@ -147,15 +148,15 @@ export async function updateNews(
     return { error: (e as Error).message };
   }
 
-  revalidatePath("/professor/news");
-  revalidatePath("/");
+  safeRevalidateTag("news");
   return { success: true };
 }
 
 export async function deleteNews(id: string): Promise<ActionResult> {
-  await assertRole("professor");
+  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
 
   const numId = parseInt(id, 10);
+  if (isNaN(numId)) return { error: "Invalid news ID" };
 
   try {
     // Join tables use ON DELETE CASCADE — no manual deletion needed
@@ -164,7 +165,6 @@ export async function deleteNews(id: string): Promise<ActionResult> {
     return { error: (e as Error).message };
   }
 
-  revalidatePath("/professor/news");
-  revalidatePath("/");
+  safeRevalidateTag("news");
   return { success: true };
 }

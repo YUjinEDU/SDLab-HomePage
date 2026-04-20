@@ -209,6 +209,26 @@ export function MemberForm({ member, action, title }: Props) {
             />
           </div>
 
+          <div>
+            <label
+              htmlFor="nasFolderName"
+              className="block text-sm font-medium text-text-secondary mb-1"
+            >
+              NAS 개인 폴더명
+            </label>
+            <input
+              id="nasFolderName"
+              name="nasFolderName"
+              type="text"
+              placeholder="예: 김민건 (개인 NAS 폴더 접근 허용 시 입력)"
+              defaultValue={(member as (typeof member & { nasFolderName?: string | null }))?.nasFolderName ?? ""}
+              className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+            />
+            <p className="mt-1 text-xs text-text-secondary">
+              비워두면 개인 NAS 접근이 비활성화됩니다.
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label

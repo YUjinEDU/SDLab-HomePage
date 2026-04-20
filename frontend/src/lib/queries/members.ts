@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { db } from "@/lib/db/drizzle";
 import { members } from "@/lib/db/schema";
 import { eq, asc, ne, count } from "drizzle-orm";
@@ -23,23 +24,35 @@ function toMember(row: typeof members.$inferSelect): Member {
   };
 }
 
-export async function getMembers(): Promise<Member[]> {
-  const rows = await db
-    .select()
-    .from(members)
-    .orderBy(asc(members.displayOrder));
-  return rows.map(toMember);
+export const getMembers = unstable_cache(
+  async (): Promise<Member[]> => {
+    const rows = await db
+      .select()
+      .from(members)
+      .orderBy(asc(members.displayOrder));
+    return rows.map(toMember);
+  },
+  ["members-all"],
+  { tags: ["members"] },
+);
+
+/** Per-slug cache: each slug gets its own cache entry. */
+export function getMemberBySlug(slug: string): Promise<Member | null> {
+  return unstable_cache(
+    async (): Promise<Member | null> => {
+      const [row] = await db
+        .select()
+        .from(members)
+        .where(eq(members.slug, slug))
+        .limit(1);
+      return row ? toMember(row) : null;
+    },
+    ["member-by-slug", slug],
+    { tags: ["members"] },
+  )();
 }
 
-export async function getMemberBySlug(slug: string): Promise<Member | null> {
-  const [row] = await db
-    .select()
-    .from(members)
-    .where(eq(members.slug, slug))
-    .limit(1);
-  return row ? toMember(row) : null;
-}
-
+/** Not cached — used in professor admin pages where freshness is required. */
 export async function getMemberById(id: string): Promise<Member | null> {
   const [row] = await db
     .select()
@@ -49,49 +62,63 @@ export async function getMemberById(id: string): Promise<Member | null> {
   return row ? toMember(row) : null;
 }
 
-export async function getProfessor(): Promise<Member | null> {
-  const [row] = await db
-    .select()
-    .from(members)
-    .where(eq(members.group, "professor"))
-    .orderBy(asc(members.displayOrder))
-    .limit(1);
-  return row ? toMember(row) : null;
-}
+export const getProfessor = unstable_cache(
+  async (): Promise<Member | null> => {
+    const [row] = await db
+      .select()
+      .from(members)
+      .where(eq(members.group, "professor"))
+      .orderBy(asc(members.displayOrder))
+      .limit(1);
+    return row ? toMember(row) : null;
+  },
+  ["members-professor"],
+  { tags: ["members"] },
+);
 
-export async function getAlumniCount(): Promise<number> {
-  const [result] = await db
-    .select({ count: count() })
-    .from(members)
-    .where(eq(members.group, "alumni"));
-  return result?.count ?? 0;
-}
+export const getAlumniCount = unstable_cache(
+  async (): Promise<number> => {
+    const [result] = await db
+      .select({ count: count() })
+      .from(members)
+      .where(eq(members.group, "alumni"));
+    return result?.count ?? 0;
+  },
+  ["members-alumni-count"],
+  { tags: ["members"] },
+);
 
-export async function getMemberStubs(): Promise<
-  Pick<Member, "id" | "nameKo" | "nameEn" | "slug">[]
-> {
-  const rows = await db
-    .select({
-      id: members.id,
-      nameKo: members.nameKo,
-      nameEn: members.nameEn,
-      slug: members.slug,
-    })
-    .from(members)
-    .orderBy(asc(members.displayOrder));
-  return rows.map((r) => ({
-    id: String(r.id),
-    nameKo: r.nameKo,
-    nameEn: r.nameEn ?? "",
-    slug: r.slug,
-  }));
-}
+export const getMemberStubs = unstable_cache(
+  async (): Promise<Pick<Member, "id" | "nameKo" | "nameEn" | "slug">[]> => {
+    const rows = await db
+      .select({
+        id: members.id,
+        nameKo: members.nameKo,
+        nameEn: members.nameEn,
+        slug: members.slug,
+      })
+      .from(members)
+      .orderBy(asc(members.displayOrder));
+    return rows.map((r) => ({
+      id: String(r.id),
+      nameKo: r.nameKo,
+      nameEn: r.nameEn ?? "",
+      slug: r.slug,
+    }));
+  },
+  ["members-stubs"],
+  { tags: ["members"] },
+);
 
-export async function getStudents(): Promise<Member[]> {
-  const rows = await db
-    .select()
-    .from(members)
-    .where(ne(members.group, "professor"))
-    .orderBy(asc(members.displayOrder));
-  return rows.map(toMember);
-}
+export const getStudents = unstable_cache(
+  async (): Promise<Member[]> => {
+    const rows = await db
+      .select()
+      .from(members)
+      .where(ne(members.group, "professor"))
+      .orderBy(asc(members.displayOrder));
+    return rows.map(toMember);
+  },
+  ["members-students"],
+  { tags: ["members"] },
+);
