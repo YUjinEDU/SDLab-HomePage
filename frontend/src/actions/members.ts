@@ -1,8 +1,9 @@
 "use server";
 
 import { db } from "@/lib/db/drizzle";
-import { members } from "@/lib/db/schema";
+import { members, users } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
+import bcrypt from "bcryptjs";
 import { safeRevalidateTag } from "@/lib/utils/revalidate";
 import { requireRole } from "@/lib/permissions";
 import type { ActionResult } from "@/types/action";
@@ -92,13 +93,36 @@ export async function createMember(formData: FormData): Promise<ActionResult> {
 
   const slug = generateSlug(nameEn);
 
+  let newMemberId: number;
   try {
-    await db.insert(members).values({
+    const [inserted] = await db.insert(members).values({
       slug, nameKo, nameEn, group, position, department,
       email, image, bio, displayOrder, researchKeywords, links, education, career, nasFolderName,
-    });
+    }).returning({ id: members.id });
+    if (!inserted) return { error: "멤버 생성에 실패했습니다." };
+    newMemberId = inserted.id;
   } catch (e) {
     return { error: (e as Error).message };
+  }
+
+  // ── Optional login account creation ───────────────────────────────────────
+  const loginPassword = ((formData.get("loginPassword") as string) || "").trim();
+  if (loginPassword) {
+    const loginPasswordConfirm = ((formData.get("loginPasswordConfirm") as string) || "").trim();
+    const loginRole = ((formData.get("loginRole") as string) || "member") as "member" | "professor" | "admin";
+    const loginEmailRaw = ((formData.get("loginEmail") as string) || "").trim();
+    const loginEmail = loginEmailRaw || email;
+
+    if (!loginEmail) return { error: "로그인 계정 생성을 위해 이메일을 입력해주세요." };
+    if (loginPassword.length < 6) return { error: "비밀번호는 6자 이상이어야 합니다." };
+    if (loginPassword !== loginPasswordConfirm) return { error: "비밀번호가 일치하지 않습니다." };
+
+    const hashedPassword = await bcrypt.hash(loginPassword, 12);
+    try {
+      await db.insert(users).values({ email: loginEmail, hashedPassword, role: loginRole, memberId: newMemberId });
+    } catch (e) {
+      return { error: `멤버는 생성됐지만 계정 생성 실패: ${(e as Error).message}` };
+    }
   }
 
   safeRevalidateTag("members");
@@ -156,6 +180,36 @@ export async function updateMember(
     }).where(eq(members.id, numId));
   } catch (e) {
     return { error: (e as Error).message };
+  }
+
+  // ── Optional login account create / update ────────────────────────────────
+  const loginPassword = ((formData.get("loginPassword") as string) || "").trim();
+  if (loginPassword) {
+    const loginPasswordConfirm = ((formData.get("loginPasswordConfirm") as string) || "").trim();
+    const loginRole = ((formData.get("loginRole") as string) || "member") as "member" | "professor" | "admin";
+
+    if (loginPassword.length < 6) return { error: "비밀번호는 6자 이상이어야 합니다." };
+    if (loginPassword !== loginPasswordConfirm) return { error: "비밀번호가 일치하지 않습니다." };
+
+    const hashedPassword = await bcrypt.hash(loginPassword, 12);
+    const [existingUser] = await db
+      .select({ id: users.id, email: users.email })
+      .from(users)
+      .where(eq(users.memberId, numId))
+      .limit(1);
+
+    try {
+      if (existingUser) {
+        const patch: { hashedPassword: string; email?: string } = { hashedPassword };
+        if (email && email !== existingUser.email) patch.email = email;
+        await db.update(users).set(patch).where(eq(users.id, existingUser.id));
+      } else {
+        if (!email) return { error: "계정 생성을 위해 이메일을 입력해주세요." };
+        await db.insert(users).values({ email, hashedPassword, role: loginRole, memberId: numId });
+      }
+    } catch (e) {
+      return { error: `계정 업데이트 실패: ${(e as Error).message}` };
+    }
   }
 
   safeRevalidateTag("members");

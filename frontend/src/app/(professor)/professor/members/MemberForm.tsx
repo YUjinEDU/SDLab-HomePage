@@ -10,6 +10,8 @@ type Props = {
     formData: FormData,
   ) => Promise<{ error?: string; success?: boolean }>;
   title: string;
+  hasAccount?: boolean;
+  accountEmail?: string | null;
 };
 
 const GROUP_OPTIONS: { value: MemberGroup; label: string }[] = [
@@ -23,11 +25,12 @@ const GROUP_OPTIONS: { value: MemberGroup; label: string }[] = [
 type EducationEntry = Member["education"][number];
 type CareerEntry = Member["career"][number];
 
-export function MemberForm({ member, action, title }: Props) {
+export function MemberForm({ member, action, title, hasAccount = false, accountEmail }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [imageUrl, setImageUrl] = useState<string>(member?.image ?? "");
+  const [showPasswordFields, setShowPasswordFields] = useState(!hasAccount);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [educationList, setEducationList] = useState<EducationEntry[]>(
@@ -650,6 +653,100 @@ export function MemberForm({ member, action, title }: Props) {
             </svg>
             경력 추가
           </button>
+        </fieldset>
+
+        {/* Login Account */}
+        <fieldset className="rounded-xl border border-border bg-white p-6 space-y-4">
+          <legend className="text-sm font-semibold text-text-secondary px-2">
+            로그인 계정
+          </legend>
+
+          {hasAccount ? (
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-1 text-sm font-medium text-emerald-700">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  계정 있음
+                </span>
+                {accountEmail && <span className="text-sm text-text-secondary">({accountEmail})</span>}
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowPasswordFields(!showPasswordFields)}
+                className="text-sm text-primary hover:text-primary-dark font-medium transition-colors"
+              >
+                {showPasswordFields ? "취소" : "비밀번호 변경"}
+              </button>
+            </div>
+          ) : (
+            <p className="text-sm text-text-secondary">아직 로그인 계정이 없습니다. 비밀번호를 설정하면 계정이 생성됩니다.</p>
+          )}
+
+          {showPasswordFields && (
+            <div className="space-y-4 pt-2 border-t border-border">
+              {!hasAccount && (
+                <>
+                  <div>
+                    <label htmlFor="loginEmail" className="block text-sm font-medium text-text-secondary mb-1">
+                      로그인 이메일
+                    </label>
+                    <input
+                      id="loginEmail"
+                      name="loginEmail"
+                      type="email"
+                      placeholder="비워두면 위의 이메일 사용"
+                      className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+                    />
+                    <p className="mt-1 text-xs text-text-secondary">비워두면 이메일 필드의 주소를 사용합니다.</p>
+                  </div>
+                  <div>
+                    <label htmlFor="loginRole" className="block text-sm font-medium text-text-secondary mb-1">
+                      역할
+                    </label>
+                    <select
+                      id="loginRole"
+                      name="loginRole"
+                      defaultValue="member"
+                      className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-white"
+                    >
+                      <option value="member">일반 멤버</option>
+                      <option value="professor">교수</option>
+                      <option value="admin">관리자</option>
+                    </select>
+                  </div>
+                </>
+              )}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="loginPassword" className="block text-sm font-medium text-text-secondary mb-1">
+                    {hasAccount ? "새 비밀번호" : "초기 비밀번호"} <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="loginPassword"
+                    name="loginPassword"
+                    type="password"
+                    minLength={6}
+                    placeholder="6자 이상"
+                    className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="loginPasswordConfirm" className="block text-sm font-medium text-text-secondary mb-1">
+                    비밀번호 확인 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    id="loginPasswordConfirm"
+                    name="loginPasswordConfirm"
+                    type="password"
+                    placeholder="비밀번호 재입력"
+                    className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
         </fieldset>
 
         {/* Actions */}
