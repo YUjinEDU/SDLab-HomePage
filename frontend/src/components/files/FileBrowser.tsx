@@ -261,8 +261,16 @@ export function FileBrowser({ defaultZone = "공용", memberFolder, isPrivileged
 
   // Upload allowed: 공용 → professor/admin; 개인 → anyone with an assigned folder
   const canUpload = zone === "개인" ? (isPrivileged || !!memberFolder) : isPrivileged;
-  // Manage (delete / rename) follows same rule as upload
-  const canManage = canUpload;
+
+  // Per-entry manage check: privileged users can manage anything in their zone.
+  // Regular members can only manage entries strictly inside their own folder.
+  function canManageEntry(entry: NasEntry): boolean {
+    if (isPrivileged) return true;
+    if (zone === "개인" && memberFolder) {
+      return entry.path.startsWith(memberFolder + "/");
+    }
+    return false;
+  }
 
   const fetchDir = useCallback(async (z: Zone, p: string) => {
     setLoading(true);
@@ -343,13 +351,18 @@ export function FileBrowser({ defaultZone = "공용", memberFolder, isPrivileged
       }
 
       setUploading(false);
+      // Always refresh — even partial success may have uploaded some files
+      fetchDir(zone, currentPath);
       if (failed > 0) {
-        setUploadError(lastError);
+        setUploadError(
+          failed === fileArr.length
+            ? lastError
+            : `${fileArr.length - failed}개 완료, ${failed}개 실패: ${lastError}`,
+        );
       } else {
         const label = fileArr.length === 1 ? fileArr[0].name : `${fileArr.length}개 파일`;
         setUploadSuccess(`${label} 업로드 완료`);
         setTimeout(() => setUploadSuccess(null), 3000);
-        fetchDir(zone, currentPath);
       }
     },
     [zone, currentPath, fetchDir],
@@ -752,7 +765,7 @@ export function FileBrowser({ defaultZone = "공용", memberFolder, isPrivileged
                           </a>
                         )}
                         {/* Rename */}
-                        {canManage && !isRenaming && (
+                        {canManageEntry(entry) && !isRenaming && (
                           <button
                             onClick={(e) => { e.stopPropagation(); startRename(entry); }}
                             title="이름 바꾸기"
@@ -764,7 +777,7 @@ export function FileBrowser({ defaultZone = "공용", memberFolder, isPrivileged
                           </button>
                         )}
                         {/* Delete */}
-                        {canManage && (
+                        {canManageEntry(entry) && (
                           <button
                             onClick={(e) => { e.stopPropagation(); handleDelete(entry); }}
                             title="삭제"

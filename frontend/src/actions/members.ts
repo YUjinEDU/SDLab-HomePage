@@ -53,7 +53,7 @@ function generateSlug(nameEn: string): string {
 }
 
 export async function createMember(formData: FormData): Promise<ActionResult> {
-  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
 
   let nameKo: string;
   let nameEn: string;
@@ -75,7 +75,11 @@ export async function createMember(formData: FormData): Promise<ActionResult> {
   const bio = (formData.get("bio") as string) || null;
   const displayOrderParsed = parseInt((formData.get("displayOrder") as string) || "0", 10);
   const displayOrder = isNaN(displayOrderParsed) ? 0 : displayOrderParsed;
-  const nasFolderName = ((formData.get("nasFolderName") as string) || "").trim() || null;
+  const nasFolderNameRaw = ((formData.get("nasFolderName") as string) || "").trim();
+  if (nasFolderNameRaw && !/^[a-zA-Z0-9가-힣_\- ]+$/.test(nasFolderNameRaw)) {
+    return { error: "NAS 폴더명에 허용되지 않는 문자가 포함되어 있습니다. (허용: 한글, 영문, 숫자, _, -, 공백)" };
+  }
+  const nasFolderName = nasFolderNameRaw || null;
 
   const keywordsRaw = formData.get("researchKeywords") as string;
   const researchKeywords = keywordsRaw
@@ -105,7 +109,7 @@ export async function updateMember(
   id: string,
   formData: FormData,
 ): Promise<ActionResult> {
-  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
 
   let nameKo: string;
   let nameEn: string;
@@ -130,7 +134,11 @@ export async function updateMember(
   const bio = (formData.get("bio") as string) || null;
   const displayOrderParsed = parseInt((formData.get("displayOrder") as string) || "0", 10);
   const displayOrder = isNaN(displayOrderParsed) ? 0 : displayOrderParsed;
-  const nasFolderName = ((formData.get("nasFolderName") as string) || "").trim() || null;
+  const nasFolderNameRaw2 = ((formData.get("nasFolderName") as string) || "").trim();
+  if (nasFolderNameRaw2 && !/^[a-zA-Z0-9가-힣_\- ]+$/.test(nasFolderNameRaw2)) {
+    return { error: "NAS 폴더명에 허용되지 않는 문자가 포함되어 있습니다. (허용: 한글, 영문, 숫자, _, -, 공백)" };
+  }
+  const nasFolderName = nasFolderNameRaw2 || null;
 
   const keywordsRaw = formData.get("researchKeywords") as string;
   const researchKeywords = keywordsRaw
@@ -155,7 +163,7 @@ export async function updateMember(
 }
 
 export async function deleteMember(id: string): Promise<ActionResult> {
-  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
 
   const numId = parseInt(id, 10);
   if (isNaN(numId)) return { error: "Invalid member ID" };

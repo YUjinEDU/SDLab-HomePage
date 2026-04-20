@@ -25,7 +25,7 @@ function requireString(formData: FormData, key: string): string {
 export async function createPublication(
   formData: FormData,
 ): Promise<ActionResult> {
-  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
 
   let title: string;
   let authorsRaw: string;
@@ -135,7 +135,7 @@ export async function updatePublication(
   id: string,
   formData: FormData,
 ): Promise<ActionResult> {
-  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
 
   let title: string;
   let authorsRaw: string;
@@ -248,7 +248,7 @@ export async function updatePublication(
 }
 
 export async function deletePublication(id: string): Promise<ActionResult> {
-  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
 
   const numId = parseInt(id, 10);
   if (isNaN(numId)) return { error: "Invalid publication ID" };

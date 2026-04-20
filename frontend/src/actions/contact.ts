@@ -17,7 +17,7 @@ function requireString(formData: FormData, key: string): string {
 }
 
 export async function updateContact(formData: FormData): Promise<ActionResult> {
-  try { await requireRole("professor"); } catch { return { error: "권한이 없습니다." }; }
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
 
   let labNameKo: string;
   let labNameEn: string;

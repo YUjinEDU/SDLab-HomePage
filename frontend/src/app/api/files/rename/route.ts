@@ -46,9 +46,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "NAS 개인 폴더가 할당되지 않았습니다." }, { status: 403 });
     }
     const normalized = subpath.replace(/\\/g, "/").replace(/^\/+/, "");
-    const isOwnFolder = normalized === nasFolderName || normalized.startsWith(nasFolderName + "/");
-    if (!isOwnFolder) {
-      return NextResponse.json({ error: "본인 폴더만 수정할 수 있습니다." }, { status: 403 });
+    // Only allow paths strictly inside the member's folder (not the root itself)
+    const isInsideOwnFolder = normalized.startsWith(nasFolderName + "/");
+    if (!isInsideOwnFolder) {
+      return NextResponse.json({ error: "본인 폴더 내부만 수정할 수 있습니다." }, { status: 403 });
     }
   }
 
