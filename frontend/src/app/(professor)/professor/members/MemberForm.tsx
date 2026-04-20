@@ -27,12 +27,40 @@ export function MemberForm({ member, action, title }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string>(member?.image ?? "");
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
   const [educationList, setEducationList] = useState<EducationEntry[]>(
     member?.education?.length ? member.education : [],
   );
   const [careerList, setCareerList] = useState<CareerEntry[]>(
     member?.career?.length ? member.career : [],
   );
+
+  async function handlePhotoUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadError(null);
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      if (member?.id) fd.append("memberId", member.id);
+      const res = await fetch("/api/files/profile-photo", { method: "POST", body: fd });
+      const json = await res.json();
+      if (!res.ok) {
+        setUploadError(json.error ?? "업로드에 실패했습니다.");
+      } else {
+        setImageUrl(json.url as string);
+      }
+    } catch {
+      setUploadError("업로드 중 오류가 발생했습니다.");
+    } finally {
+      setUploading(false);
+      // Reset file input so the same file can be re-selected
+      e.target.value = "";
+    }
+  }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -183,14 +211,37 @@ export function MemberForm({ member, action, title }: Props) {
             >
               프로필 이미지 URL
             </label>
-            <input
-              id="image"
-              name="image"
-              type="url"
-              placeholder="https://example.com/photo.jpg"
-              defaultValue={member?.image ?? ""}
-              className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
-            />
+            <div className="flex gap-2 items-center">
+              <input
+                id="image"
+                name="image"
+                type="text"
+                placeholder="https://example.com/photo.jpg 또는 /api/public/profiles/..."
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                className="flex-1 rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+              />
+              <label
+                className={`shrink-0 cursor-pointer rounded-lg border border-border bg-white px-3 py-2 text-sm font-medium text-text-secondary hover:bg-surface transition-colors ${uploading ? "opacity-50 pointer-events-none" : ""}`}
+              >
+                {uploading ? "업로드 중..." : "사진 업로드"}
+                <input
+                  type="file"
+                  accept=".jpg,.jpeg,.png,.webp,.gif"
+                  className="sr-only"
+                  onChange={handlePhotoUpload}
+                  disabled={uploading}
+                />
+              </label>
+            </div>
+            {uploadError && (
+              <p className="mt-1 text-xs text-red-600">{uploadError}</p>
+            )}
+            {imageUrl && imageUrl.startsWith("/api/public/profiles/") && (
+              <p className="mt-1 text-xs text-text-secondary">
+                NAS 업로드 파일이 사용됩니다.
+              </p>
+            )}
           </div>
 
           <div>

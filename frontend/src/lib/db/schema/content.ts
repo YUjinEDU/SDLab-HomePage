@@ -140,3 +140,13 @@ export const newsPublications = pgTable("news_publications", {
   newsId: integer("news_id").notNull().references(() => news.id),
   publicationId: integer("publication_id").notNull().references(() => publications.id),
 });
+
+export const announcements = pgTable("announcements", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  content: text("content").notNull(),
+  isPinned: boolean("is_pinned").default(false).notNull(),
+  authorId: integer("author_id"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});

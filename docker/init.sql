@@ -248,6 +248,16 @@ CREATE TABLE IF NOT EXISTS gpu_usage_log (
   recorded_at TIMESTAMP DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS announcements (
+  id         SERIAL PRIMARY KEY,
+  title      TEXT NOT NULL,
+  content    TEXT NOT NULL,
+  is_pinned  BOOLEAN NOT NULL DEFAULT false,
+  author_id  INTEGER REFERENCES members(id) ON DELETE SET NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 -- ─── Seed Data ──────────────────────────────────────────────────
 
 INSERT INTO contact_info (lab_name_ko, lab_name_en, professor_name, professor_title, professor_email, professor_phone, professor_office, lab_room, lab_phone, building, department, university, address)

@@ -36,3 +36,6 @@ export { getNews, getNewsById, getNewsBySlug, getLatestNews } from "./news";
 export { getContactInfo } from "./contact";
 
 export { getServerMonitorData } from "./server-monitor";
+
+export { getAnnouncements, getAnnouncementById } from "./announcements";
+export type { AnnouncementRow } from "./announcements";
