@@ -11,8 +11,8 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./docker/seed.sql:/docker-entrypoint-initdb.d/seed.sql
-    ports:
-      - "5432:5432"
+    # 포트 노출 불필요 — web이 Docker 내부 네트워크(db:5432)로만 접속
+    # NAS에 PostgreSQL이 이미 5432를 사용 중일 경우 충돌 방지
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s
