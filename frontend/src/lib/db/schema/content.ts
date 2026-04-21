@@ -161,3 +161,15 @@ export const announcementAttachments = pgTable("announcement_attachments", {
   mimeType: text("mime_type"),
   uploadedAt: timestamp("uploaded_at").defaultNow().notNull(),
 });
+
+export const calendarEvents = pgTable("calendar_events", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  start: timestamp("start", { withTimezone: true }).notNull(),
+  end: timestamp("end", { withTimezone: true }),
+  allDay: boolean("all_day").default(false).notNull(),
+  color: text("color").default("#059669").notNull(),
+  description: text("description"),
+  authorId: integer("author_id").references(() => members.id, { onDelete: "set null" }),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});
