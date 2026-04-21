@@ -134,9 +134,8 @@ export default async function InternalHome() {
         </div>
       </div>
 
-      {/* 바로가기 */}
       <div>
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">바로가기</h2>
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">빠른 메뉴</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {quickLinks.map((link) => (
             <Link
