@@ -115,7 +115,7 @@ export function MainNavigation() {
                 className={`relative h-full flex items-center gap-1 px-3 lg:px-4 text-[18px] font-semibold transition-colors ${
                   isActive
                     ? "text-primary"
-                    : "text-gray-900 hover:text-primary"
+                    : "text-emerald-950 hover:text-primary"
                 }`}
               >
                 {item.category}

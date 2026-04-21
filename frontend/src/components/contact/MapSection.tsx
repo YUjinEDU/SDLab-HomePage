@@ -20,7 +20,7 @@ export async function MapSection({ address, embedUrl }: Props) {
           className="block border-0 h-64 sm:h-80 md:h-[400px]"
         />
       ) : (
-        <div className="flex flex-col items-center justify-center gap-4 py-16 px-6 text-center bg-primary-muted/10">
+        <div className="flex flex-col items-center justify-center gap-4 py-10 px-6 text-center bg-primary-muted/10">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="48"
