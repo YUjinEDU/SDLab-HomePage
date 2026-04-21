@@ -22,27 +22,32 @@ function stripLocale(pathname: string): string {
 export default auth((req) => {
   // CVE-2025-29927 mitigation
   if (req.headers.has("x-middleware-subrequest")) {
-    return NextResponse.redirect(new URL(`/${defaultLocale}/login`, req.url));
+    return NextResponse.redirect(new URL("/login", req.url));
   }
 
   const { pathname } = req.nextUrl;
   const localeFree = stripLocale(pathname);
   const isLoggedIn = !!req.auth?.user;
 
-  if (
-    (localeFree.startsWith("/internal") ||
-      localeFree.startsWith("/professor")) &&
-    !isLoggedIn
-  ) {
-    const loginUrl = new URL(`/${defaultLocale}/login`, req.url);
-    loginUrl.searchParams.set("redirect", pathname);
-    return NextResponse.redirect(loginUrl);
+  // /login은 locale 라우팅 없이 직접 처리 (auth route group)
+  if (pathname === "/login" || localeFree === "/login") {
+    if (isLoggedIn) {
+      return NextResponse.redirect(new URL("/internal", req.url));
+    }
+    return NextResponse.next();
   }
 
-  if (localeFree === "/login" && isLoggedIn) {
-    return NextResponse.redirect(
-      new URL(`/${defaultLocale}/internal`, req.url),
-    );
+  // /internal, /professor는 locale 라우팅 없이 직접 처리
+  if (
+    localeFree.startsWith("/internal") ||
+    localeFree.startsWith("/professor")
+  ) {
+    if (!isLoggedIn) {
+      const loginUrl = new URL("/login", req.url);
+      loginUrl.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+    return NextResponse.next();
   }
 
   return intlMiddleware(req);
