@@ -112,10 +112,10 @@ export function MainNavigation() {
             >
               <Link
                 href={item.href}
-                className={`relative h-full flex items-center gap-1 px-3 lg:px-4 text-[16px] font-medium transition-colors ${
+                className={`relative h-full flex items-center gap-1 px-3 lg:px-4 text-[18px] font-semibold transition-colors ${
                   isActive
-                    ? "text-primary font-semibold"
-                    : "text-gray-700 hover:text-foreground"
+                    ? "text-primary"
+                    : "text-gray-900 hover:text-primary"
                 }`}
               >
                 {item.category}
