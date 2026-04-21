@@ -1,11 +1,20 @@
+import createIntlMiddleware from "next-intl/middleware";
 import NextAuth from "next-auth";
 import { authConfig } from "@/lib/auth/auth.config";
-import { NextResponse } from "next/server";
+import { locales, defaultLocale } from "@/i18n/config";
+import { NextResponse, type NextRequest } from "next/server";
+
+const intlMiddleware = createIntlMiddleware({
+  locales,
+  defaultLocale,
+  localePrefix: "always",
+});
 
 const { auth } = NextAuth(authConfig);
 
-export default auth((req) => {
-  const { nextUrl, auth: session } = req;
+export default auth((req: NextRequest & { auth?: { user?: { role?: string } } | null }) => {
+  const { nextUrl } = req;
+  const session = (req as { auth?: { user?: { role?: string } } | null }).auth;
   const isLoggedIn = !!session?.user;
 
   const isProtectedInternal = nextUrl.pathname.startsWith("/internal");
@@ -24,9 +33,10 @@ export default auth((req) => {
     }
   }
 
-  return NextResponse.next();
+  return intlMiddleware(req);
 });
 
 export const config = {
-  matcher: ["/internal/:path*", "/professor/:path*"],
+  // next-intl이 필요한 모든 경로 포함, API/static 제외
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|images|.*\\..*).*)"],
 };
