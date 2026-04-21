@@ -39,10 +39,7 @@ export default async function ContactPage({ params }: PageProps) {
                   address={contactInfo.address}
                   embedUrl={contactInfo.mapEmbedUrl}
                 />
-                <DirectionsSection
-                  address={contactInfo.address}
-                  building={contactInfo.location.building}
-                />
+                <DirectionsSection />
               </>
             ) : (
               <p className="text-center text-gray-500 py-16">연락처 정보를 준비 중입니다.</p>

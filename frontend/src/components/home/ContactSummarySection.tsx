@@ -21,10 +21,6 @@ export async function ContactSummarySection({
               {t("snapshotHeadingHighlight")}
             </span>
           </h2>
-          <p className="text-sm text-white/50">
-            {contactInfo.location.building} {contactInfo.location.lab}{" "}
-            (연구실) / {contactInfo.location.professorOffice} (교수 연구실)
-          </p>
           <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-white/50">
             <a
               href={`mailto:${contactInfo.professor.email}`}

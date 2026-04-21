@@ -39,10 +39,10 @@ export function PublicationStatsPanel({
 
   const stats = [
     { label: t("statsTotal"), value: total },
-    { label: `${t("statsJournal")} (Intl.)`, value: intlJournal },
-    { label: `${t("statsJournal")} (Dom.)`, value: domJournal },
-    { label: `${t("statsConference")} (Intl.)`, value: intlConf },
-    { label: `${t("statsConference")} (Dom.)`, value: domConf },
+    { label: `${t("statsIntl")} ${t("statsJournal")}`, value: intlJournal },
+    { label: `${t("statsDom")} ${t("statsJournal")}`, value: domJournal },
+    { label: `${t("statsIntl")} ${t("statsConference")}`, value: intlConf },
+    { label: `${t("statsDom")} ${t("statsConference")}`, value: domConf },
     { label: t("typeSW"), value: swReg },
     { label: t("statsRecent"), value: yearRange },
   ];

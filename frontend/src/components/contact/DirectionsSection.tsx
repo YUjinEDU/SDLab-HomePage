@@ -1,8 +1,3 @@
-type Props = {
-  address: string;
-  building: string;
-};
-
 type Direction = {
   icon: string;
   label: string;
@@ -29,13 +24,10 @@ const directions: Direction[] = [
   },
 ];
 
-export function DirectionsSection({ address, building }: Props) {
+export function DirectionsSection() {
   return (
     <div className="rounded-xl border border-border bg-surface p-6">
-      <h2 className="text-xl font-bold text-foreground mb-2">오시는 길</h2>
-      <p className="text-sm text-text-secondary mb-6">
-        {address} ({building})
-      </p>
+      <h2 className="text-xl font-bold text-foreground mb-6">오시는 길</h2>
 
       <div className="flex flex-col gap-4">
         {directions.map((d) => (

@@ -52,12 +52,12 @@ export function PublicationCard({
   function getTypeLabel(pubType: string, intl: boolean): string {
     if (pubType === "journal")
       return intl
-        ? `${t("typeJournal")} (Intl.)`
-        : `${t("typeJournal")} (Dom.)`;
+        ? `${t("statsIntl")} ${t("typeJournal")}`
+        : `${t("statsDom")} ${t("typeJournal")}`;
     if (pubType === "conference")
       return intl
-        ? `${t("typeConference")} (Intl.)`
-        : `${t("typeConference")} (Dom.)`;
+        ? `${t("statsIntl")} ${t("typeConference")}`
+        : `${t("statsDom")} ${t("typeConference")}`;
     const map: Record<string, string> = {
       patent: t("typePatent"),
       sw_registration: t("typeSW"),

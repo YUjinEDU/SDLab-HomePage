@@ -16,12 +16,12 @@ export function PageHero({ title, description, breadcrumb }: PageHeroProps) {
     <section className="relative bg-hero-bg border-b border-border py-12 sm:py-16">
       <Container className="relative z-10">
         {breadcrumb && (
-          <div className="flex items-center gap-1.5 text-xs text-text-secondary mb-4 font-mono tracking-wide uppercase">
+          <div className="flex items-center gap-1.5 text-[13px] font-semibold text-emerald-950 mb-4 tracking-wide uppercase">
             <Link href="/" className="hover:text-primary transition-colors">
               HOME
             </Link>
             <span className="opacity-50">/</span>
-            <span className="text-foreground uppercase">{breadcrumb}</span>
+            <span className="uppercase">{breadcrumb}</span>
           </div>
         )}
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-foreground">

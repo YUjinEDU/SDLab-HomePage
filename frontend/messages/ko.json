@@ -146,6 +146,8 @@
     "empty": "등록된 논문이 없습니다.",
     "emptyFiltered": "검색 조건에 맞는 논문이 없습니다.",
     "statsTotal": "전체",
+    "statsIntl": "해외",
+    "statsDom": "국내",
     "statsJournal": "저널",
     "statsConference": "학술대회",
     "statsRecent": "최근 5년",

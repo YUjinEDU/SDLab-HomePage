@@ -146,6 +146,8 @@
     "empty": "No publications registered.",
     "emptyFiltered": "No publications match the search criteria.",
     "statsTotal": "Total",
+    "statsIntl": "International",
+    "statsDom": "Domestic",
     "statsJournal": "Journal",
     "statsConference": "Conference",
     "statsRecent": "Last 5 Years",
