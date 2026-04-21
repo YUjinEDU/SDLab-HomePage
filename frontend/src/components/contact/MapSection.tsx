@@ -20,11 +20,11 @@ export async function MapSection({ address, embedUrl }: Props) {
           className="block border-0 h-64 sm:h-80 md:h-[400px]"
         />
       ) : (
-        <div className="flex flex-col items-center justify-center gap-4 py-10 px-6 text-center bg-primary-muted/10">
+        <div className="flex flex-col items-center justify-center gap-3 py-6 px-6 text-center bg-primary-muted/10">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="48"
-            height="48"
+            width="32"
+            height="32"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -42,15 +42,6 @@ export async function MapSection({ address, embedUrl }: Props) {
             </p>
             <p className="mt-1 text-text-secondary text-sm">{address}</p>
           </div>
-          <a
-            href={`https://map.naver.com/v5/search/${encodeURIComponent(address)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface px-4 py-2 text-sm font-medium text-foreground hover:bg-primary-muted/30 transition-colors"
-          >
-            {t("directionsHeading")}
-            <span aria-hidden="true">↗</span>
-          </a>
         </div>
       )}
     </div>
