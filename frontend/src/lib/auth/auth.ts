@@ -4,8 +4,10 @@ import bcrypt from "bcryptjs";
 import { db } from "@/lib/db/drizzle";
 import { users, members } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
+import { authConfig } from "./auth.config";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  ...authConfig,
   providers: [
     Credentials({
       credentials: {
@@ -49,27 +51,4 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
-  callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        const u = user as { role: "member" | "professor" | "admin"; memberId: number | null; nasFolderName: string | null };
-        token.role = u.role;
-        token.memberId = u.memberId;
-        token.nasFolderName = u.nasFolderName;
-      }
-      return token;
-    },
-    session({ session, token }) {
-      session.user.id = token.sub ?? "";
-      session.user.role = token.role;
-      session.user.memberId = token.memberId;
-      session.user.nasFolderName = token.nasFolderName;
-      return session;
-    },
-  },
-  pages: {
-    signIn: "/login",
-  },
-  session: { strategy: "jwt" },
-  trustHost: true,
 });
