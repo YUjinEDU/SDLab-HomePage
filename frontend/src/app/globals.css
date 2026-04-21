@@ -47,6 +47,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   word-break: keep-all;
   overflow-wrap: break-word;
+  line-height: 1.75; /* 기본 1.5 → 1.75: 본문 가독성 향상 */
 }
 
 h1,
@@ -58,6 +59,7 @@ h4 {
 
 html {
   scroll-behavior: smooth;
+  font-size: 18px; /* 기본 16px → 18px: 모든 rem 단위가 비례 확대 */
 }
 
 ::selection {
