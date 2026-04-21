@@ -3,6 +3,9 @@ import Link from "next/link";
 import { getAnnouncementById } from "@/lib/queries/announcements";
 import { auth } from "@/lib/auth/auth";
 import DeleteAnnouncementButton from "./DeleteAnnouncementButton";
+import { TiptapViewer } from "@/components/board/TiptapViewer";
+import { AttachmentList } from "@/components/board/AttachmentList";
+import { ViewCountIncrementer } from "@/components/board/ViewCountIncrementer";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -75,11 +78,16 @@ export default async function BoardDetailPage({ params }: Props) {
               month: "long",
               day: "numeric",
             })}
+            · 조회 {announcement.viewCount}
           </p>
 
-          <div className="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap leading-relaxed">
-            {announcement.content}
+          <div className="leading-relaxed">
+            <TiptapViewer content={announcement.content} />
           </div>
+
+          <AttachmentList attachments={announcement.attachments ?? []} />
+
+          <ViewCountIncrementer id={announcement.id} />
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { db } from "@/lib/db/drizzle";
-import { announcements, members } from "@/lib/db/schema";
+import { announcements, announcementAttachments, members } from "@/lib/db/schema";
 import { eq, desc, sql } from "drizzle-orm";
 
 export type AnnouncementRow = {
@@ -10,8 +10,21 @@ export type AnnouncementRow = {
   isPinned: boolean;
   authorId: number | null;
   authorName: string | null;
+  viewCount: number;
   createdAt: Date;
   updatedAt: Date;
+};
+
+export type AnnouncementWithAttachments = AnnouncementRow & {
+  attachments: Array<{
+    id: number;
+    announcementId: number;
+    fileName: string;
+    filePath: string;
+    fileSize: number | null;
+    mimeType: string | null;
+    uploadedAt: Date;
+  }>;
 };
 
 function toRow(
@@ -25,6 +38,7 @@ function toRow(
     isPinned: a.isPinned,
     authorId: a.authorId,
     authorName,
+    viewCount: a.viewCount,
     createdAt: a.createdAt,
     updatedAt: a.updatedAt,
   };
@@ -49,9 +63,9 @@ export const getAnnouncements = unstable_cache(
   { tags: ["announcements"] },
 );
 
-export function getAnnouncementById(id: number): Promise<AnnouncementRow | null> {
+export function getAnnouncementById(id: number): Promise<AnnouncementWithAttachments | null> {
   return unstable_cache(
-    async (): Promise<AnnouncementRow | null> => {
+    async (): Promise<AnnouncementWithAttachments | null> => {
       const [row] = await db
         .select({
           announcement: announcements,
@@ -62,7 +76,12 @@ export function getAnnouncementById(id: number): Promise<AnnouncementRow | null>
         .where(eq(announcements.id, id))
         .limit(1);
       if (!row) return null;
-      return toRow(row.announcement, row.authorName ?? null);
+      const attachments = await db
+        .select()
+        .from(announcementAttachments)
+        .where(eq(announcementAttachments.announcementId, id))
+        .orderBy(announcementAttachments.uploadedAt);
+      return { ...toRow(row.announcement, row.authorName ?? null), attachments };
     },
     ["announcement-by-id", String(id)],
     { tags: ["announcements"] },

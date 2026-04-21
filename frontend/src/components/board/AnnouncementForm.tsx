@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import type { AnnouncementRow } from "@/lib/queries/announcements";
+import { TiptapEditor } from "./TiptapEditor";
 
 type Props = {
   announcement?: AnnouncementRow;
@@ -15,10 +16,12 @@ export function AnnouncementForm({ announcement, action, title, backHref }: Prop
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const [content, setContent] = useState(announcement?.content ?? "");
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    formData.set("content", content);
     startTransition(async () => {
       setError(null);
       const result = await action(formData);
@@ -62,13 +65,11 @@ export function AnnouncementForm({ announcement, action, title, backHref }: Prop
             <label htmlFor="content" className="block text-sm font-medium text-text-secondary mb-1">
               내용 <span className="text-red-500">*</span>
             </label>
-            <textarea
-              id="content"
-              name="content"
-              rows={12}
-              required
-              defaultValue={announcement?.content ?? ""}
-              className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-y"
+            <input type="hidden" name="content" value={content} />
+            <TiptapEditor
+              content={content}
+              onChange={setContent}
+              placeholder="내용을 입력하세요..."
             />
           </div>
 

@@ -1,8 +1,8 @@
 "use server";
 
 import { db } from "@/lib/db/drizzle";
-import { announcements, members } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
+import { announcements, announcementAttachments, members } from "@/lib/db/schema";
+import { eq, sql } from "drizzle-orm";
 import { safeRevalidateTag } from "@/lib/utils/revalidate";
 import { revalidatePath } from "next/cache";
 import { requireRole } from "@/lib/permissions";
@@ -84,5 +84,35 @@ export async function deleteAnnouncement(id: number): Promise<ActionResult> {
   safeRevalidateTag("announcements");
   revalidatePath("/internal/board");
   revalidatePath("/professor/board");
+  return { success: true };
+}
+
+export async function incrementViewCount(id: number): Promise<void> {
+  await db.update(announcements)
+    .set({ viewCount: sql`${announcements.viewCount} + 1` })
+    .where(eq(announcements.id, id));
+}
+
+export async function addAttachment(
+  announcementId: number,
+  data: { fileName: string; filePath: string; fileSize?: number; mimeType?: string }
+): Promise<ActionResult> {
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
+  try {
+    await db.insert(announcementAttachments).values({ announcementId, ...data });
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
+  revalidatePath(`/internal/board/${announcementId}`);
+  return { success: true };
+}
+
+export async function deleteAttachment(id: number): Promise<ActionResult> {
+  try { await requireRole("professor"); } catch (e) { if ((e as Error).message === "unauthorized") return { error: "권한이 없습니다." }; throw e; }
+  try {
+    await db.delete(announcementAttachments).where(eq(announcementAttachments.id, id));
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
   return { success: true };
 }

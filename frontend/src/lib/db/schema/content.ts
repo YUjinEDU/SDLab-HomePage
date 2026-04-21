@@ -147,6 +147,17 @@ export const announcements = pgTable("announcements", {
   content: text("content").notNull(),
   isPinned: boolean("is_pinned").default(false).notNull(),
   authorId: integer("author_id"),
+  viewCount: integer("view_count").default(0).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const announcementAttachments = pgTable("announcement_attachments", {
+  id: serial("id").primaryKey(),
+  announcementId: integer("announcement_id").notNull().references(() => announcements.id, { onDelete: "cascade" }),
+  fileName: text("file_name").notNull(),
+  filePath: text("file_path").notNull(),
+  fileSize: integer("file_size"),
+  mimeType: text("mime_type"),
+  uploadedAt: timestamp("uploaded_at").defaultNow().notNull(),
 });
