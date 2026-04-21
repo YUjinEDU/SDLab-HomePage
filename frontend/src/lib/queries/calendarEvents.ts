@@ -1,6 +1,5 @@
 import { db } from "@/lib/db/drizzle";
-import { calendarEvents, members } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
+import { calendarEvents } from "@/lib/db/schema/content";
 
 export type CalendarEventRow = {
   id: number;
@@ -15,23 +14,18 @@ export type CalendarEventRow = {
 
 export async function getCalendarEvents(): Promise<CalendarEventRow[]> {
   const rows = await db
-    .select({
-      id: calendarEvents.id,
-      title: calendarEvents.title,
-      start: calendarEvents.start,
-      end: calendarEvents.end,
-      allDay: calendarEvents.allDay,
-      color: calendarEvents.color,
-      description: calendarEvents.description,
-      authorName: members.name,
-    })
+    .select()
     .from(calendarEvents)
-    .leftJoin(members, eq(calendarEvents.authorId, members.id))
     .orderBy(calendarEvents.start);
 
   return rows.map((r) => ({
-    ...r,
+    id: r.id,
+    title: r.title,
     start: r.start.toISOString(),
     end: r.end ? r.end.toISOString() : null,
+    allDay: r.allDay,
+    color: r.color,
+    description: r.description ?? null,
+    authorName: null,
   }));
 }

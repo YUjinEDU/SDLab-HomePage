@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db/drizzle";
-import { calendarEvents, members } from "@/lib/db/schema";
+import { calendarEvents, members } from "@/lib/db/schema/content";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { auth } from "@/lib/auth/auth";
