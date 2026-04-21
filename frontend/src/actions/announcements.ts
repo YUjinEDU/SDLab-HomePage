@@ -32,8 +32,10 @@ export async function createAnnouncement(formData: FormData): Promise<ActionResu
 
   const authorId = await getAuthorId();
 
+  let newId: number;
   try {
-    await db.insert(announcements).values({ title, content, isPinned, authorId });
+    const [row] = await db.insert(announcements).values({ title, content, isPinned, authorId }).returning({ id: announcements.id });
+    newId = row.id;
   } catch (e) {
     return { error: (e as Error).message };
   }
@@ -41,7 +43,7 @@ export async function createAnnouncement(formData: FormData): Promise<ActionResu
   safeRevalidateTag("announcements");
   revalidatePath("/internal/board");
   revalidatePath("/professor/board");
-  return { success: true };
+  return { success: true, id: newId };
 }
 
 export async function updateAnnouncement(id: number, formData: FormData): Promise<ActionResult> {
@@ -69,7 +71,7 @@ export async function updateAnnouncement(id: number, formData: FormData): Promis
   revalidatePath("/internal/board");
   revalidatePath(`/internal/board/${id}`);
   revalidatePath("/professor/board");
-  return { success: true };
+  return { success: true, id };
 }
 
 export async function deleteAnnouncement(id: number): Promise<ActionResult> {

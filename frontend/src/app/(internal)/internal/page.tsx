@@ -7,8 +7,7 @@ export default async function InternalHome() {
   const quickLinks = [
     { href: "/internal/calendar", label: "일정" },
     { href: "/internal/gpu", label: "GPU 모니터" },
-    { href: "/internal/resources", label: "자료실" },
-    { href: "/internal/projects", label: "내부 프로젝트" },
+{ href: "/internal/projects", label: "내부 프로젝트" },
   ];
 
   const servers = [
