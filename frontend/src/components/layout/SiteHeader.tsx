@@ -26,7 +26,7 @@ export function SiteHeader() {
               height={40}
               className="object-contain"
             />
-            <span className="hidden sm:block text-[11px] text-text-secondary leading-tight border-l border-border pl-3 font-medium">
+            <span className="hidden sm:block text-[12px] text-gray-600 leading-tight border-l border-border pl-3 font-medium">
               {t("header.university")}
               <br />
               {t("header.department")}
