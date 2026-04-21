@@ -38,7 +38,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/~ykim",
-        destination: "/ko/members/~ykim",
+        destination: "/ko/members/young-kuk-kim",
         permanent: true,
       },
     ];
