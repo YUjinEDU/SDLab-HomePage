@@ -29,7 +29,6 @@ services:
         AUTH_URL: ${AUTH_URL}
     container_name: sdlab_web
     restart: unless-stopped
-    user: root
     depends_on:
       db:
         condition: service_healthy
