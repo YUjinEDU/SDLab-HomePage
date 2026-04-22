@@ -223,6 +223,7 @@ export async function deleteMember(id: string): Promise<ActionResult> {
   if (isNaN(numId)) return { error: "Invalid member ID" };
 
   try {
+    await db.delete(users).where(eq(users.memberId, numId));
     await db.delete(members).where(eq(members.id, numId));
   } catch (e) {
     return { error: (e as Error).message };
